@@ -1,0 +1,608 @@
+{
+  "nodes": [
+    {
+      "id": "app_agents_ponytail_philosophy",
+      "type": "concept",
+      "name": "Ponytail Development Philosophy",
+      "description": "Lazy senior dev mode emphasizing efficient, minimal code with a ladder of checks before writing code",
+      "source_file": "E:\\Jobs\\Taxi2\\App\\AGENTS.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "development-philosophy", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "app_agents_yagni",
+      "type": "concept",
+      "name": "YAGNI Principle",
+      "description": "You Ain't Gonna Need It - question if something needs to be built at all",
+      "source_file": "E:\\Jobs\\Taxi2\\App\\AGENTS.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "principle", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "cron_skill_scheduled_tasks",
+      "type": "concept",
+      "name": "Scheduled Task Management",
+      "description": "Create, query, update scheduled tasks to automatically execute operations at specified times",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\cron\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "automation", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "cron_skill_cron_expressions",
+      "type": "concept",
+      "name": "Cron Expressions",
+      "description": "Format: minute hour day-of-month month day-of-week for scheduling tasks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\cron\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "scheduling", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "officecli_skill_document_cli",
+      "type": "concept",
+      "name": "Office Document CLI",
+      "description": "AI-friendly CLI for .docx, .xlsx, .pptx - single binary, no dependencies, no Office installation needed",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\officecli\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "tool", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "officecli_dom_operations",
+      "type": "concept",
+      "name": "DOM Operations for Office Documents",
+      "description": "L2 operations: set properties, find/replace text, add elements, move/swap/remove",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\officecli\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "operations", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "officecli_raw_xml",
+      "type": "concept",
+      "name": "Raw XML Operations",
+      "description": "L3 operations: view raw XML, raw-set with xpath, add-part for document parts",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\officecli\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "operations", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "skill_creator_license",
+      "type": "document",
+      "name": "Apache License 2.0",
+      "description": "Open source license for skill-creator",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\LICENSE.txt",
+      "confidence_score": 1.0,
+      "metadata": {"category": "license", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "skill_creator_process",
+      "type": "concept",
+      "name": "Skill Creation Process",
+      "description": "6-step process: understand with examples, plan contents, initialize, edit, package, iterate",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "workflow", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "skill_creator_anatomy",
+      "type": "concept",
+      "name": "Skill Anatomy",
+      "description": "SKILL.md (required) + bundled resources: scripts/, references/, assets/",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "structure", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "skill_creator_progressive_disclosure",
+      "type": "concept",
+      "name": "Progressive Disclosure Design",
+      "description": "Three-level loading: metadata (always), SKILL.md body (when triggered), bundled resources (as needed)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "design-principle", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "output_patterns_template",
+      "type": "concept",
+      "name": "Template Pattern",
+      "description": "Provide templates for output format with strict or flexible guidance",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\output-patterns.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "pattern", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "output_patterns_examples",
+      "type": "concept",
+      "name": "Examples Pattern",
+      "description": "Provide input/output pairs for skills where output quality depends on seeing examples",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\output-patterns.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "pattern", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "workflows_sequential",
+      "type": "concept",
+      "name": "Sequential Workflows",
+      "description": "Break complex tasks into clear, sequential steps",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\workflows.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "workflow-pattern", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "workflows_conditional",
+      "type": "concept",
+      "name": "Conditional Workflows",
+      "description": "Guide through decision points with branching logic",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\workflows.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "workflow-pattern", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "backend_nodejs_stack",
+      "type": "concept",
+      "name": "Node.js Backend Stack",
+      "description": "Modern stack: NestJS/Hono, Drizzle ORM, Vitest, TypeScript",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "technology-stack", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "backend_hono_framework",
+      "type": "concept",
+      "name": "Hono Web Framework",
+      "description": "Fast, lightweight, edge-ready web framework for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "framework", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "backend_nestjs_framework",
+      "type": "concept",
+      "name": "NestJS Framework",
+      "description": "Enterprise Node.js framework with DI and structured architecture",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "framework", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "backend_drizzle_orm",
+      "type": "concept",
+      "name": "Drizzle ORM",
+      "description": "Type-safe, lightweight, SQL-like ORM for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "orm", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "backend_vitest_testing",
+      "type": "concept",
+      "name": "Vitest Testing Framework",
+      "description": "Fast, ESM native, Jest compatible testing framework",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "testing", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "backend_zod_validation",
+      "type": "concept",
+      "name": "Zod Validation",
+      "description": "Type inference, composable validation library",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "validation", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "testing_vitest_patterns",
+      "type": "concept",
+      "name": "Vitest Test Patterns",
+      "description": "Basic tests, API tests with Hono, test database setup, mocking, fixtures, snapshot testing",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\references\\testing.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "testing-patterns", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "vue_composable_adaptable",
+      "type": "concept",
+      "name": "Adaptable Vue Composable",
+      "description": "Reusable functions accepting both reactive and non-reactive inputs using MaybeRef/MaybeRefOrGetter",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\create-adaptable-composable\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "vue-pattern", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "vue_maybe_ref",
+      "type": "concept",
+      "name": "MaybeRef Type",
+      "description": "Type for value or writable ref (value/ref/shallowRef/writable computed)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\create-adaptable-composable\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "type-utility", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "vue_maybe_ref_or_getter",
+      "type": "concept",
+      "name": "MaybeRefOrGetter Type",
+      "description": "MaybeRef + ComputedRef + () => T for read-only, computed-friendly input",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\create-adaptable-composable\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "type-utility", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "find_skills_cli",
+      "type": "concept",
+      "name": "Skills CLI",
+      "description": "Package manager for open agent skills ecosystem - find, add, check, update skills",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\find-skills\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "tool", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "find_skills_discovery",
+      "type": "concept",
+      "name": "Skill Discovery Process",
+      "description": "Understand needs, search for skills, present options, install with confirmation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\find-skills\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "workflow", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "frontend_design_principles",
+      "type": "concept",
+      "name": "Frontend Design Principles",
+      "description": "Distinctive, intentional visual design with deliberate palette, typography, and layout choices",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-design\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "design-principle", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "frontend_design_process",
+      "type": "concept",
+      "name": "Design Process",
+      "description": "Brainstorm, explore, plan, critique, build, critique again",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-design\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "workflow", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "frontend_development_skill",
+      "type": "concept",
+      "name": "Frontend Development Skill",
+      "description": "Atomic skill for frontend development: component creation, state management, build optimization",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "skill", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "frontend_component_types",
+      "type": "concept",
+      "name": "Component Types",
+      "description": "Presentational, container, compound, headless component patterns",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "pattern", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "frontend_config_yaml",
+      "type": "document",
+      "name": "Frontend Development Configuration",
+      "description": "YAML configuration for skill settings, validation, output, environments",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\assets\\config.yaml",
+      "confidence_score": 1.0,
+      "metadata": {"category": "configuration", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "frontend_guide",
+      "type": "document",
+      "name": "Frontend Development Guide",
+      "description": "Comprehensive documentation for frontend-development skill with quick start and core concepts",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\references\\GUIDE.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "documentation", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "frontend_patterns",
+      "type": "document",
+      "name": "Frontend Development Patterns",
+      "description": "Design patterns: input validation, error handling, configuration loading",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\references\\PATTERNS.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "patterns", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_core_internals",
+      "type": "concept",
+      "name": "Node.js Core Internals",
+      "description": "V8 engine, libuv event loop, native addons, build systems, performance debugging",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "internals", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_v8_engine",
+      "type": "concept",
+      "name": "V8 Engine",
+      "description": "JavaScript engine with garbage collection, hidden classes, JIT compilation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "engine", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_libuv",
+      "type": "concept",
+      "name": "libuv",
+      "description": "Event loop, thread pool, async I/O for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "library", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_native_addons",
+      "type": "concept",
+      "name": "Native Addons",
+      "description": "N-API, node-addon-api, NAN bindings for C++ extensions",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "native-development", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_build_workflow",
+      "type": "concept",
+      "name": "Edit-Build-Lint-Test Cycle",
+      "description": "Mandatory cycle: edit src/lib → make → lint → test for Node.js core development",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-and-test-workflow.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "workflow", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_rebuild_required",
+      "type": "concept",
+      "name": "Rebuild After Every Change",
+      "description": "Node.js embeds lib/ files into binary at compile time - must rebuild after any src/ or lib/ change",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-and-test-workflow.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "critical-rule", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_build_system",
+      "type": "concept",
+      "name": "Node.js Build System",
+      "description": "GYP, ninja, make, cross-platform compilation for building Node.js from source",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-system.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "build-system", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_gyp",
+      "type": "concept",
+      "name": "GYP (Generate Your Project)",
+      "description": "Build system that creates platform-specific build files from binding.gyp",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-system.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "build-tool", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_node_gyp",
+      "type": "concept",
+      "name": "node-gyp",
+      "description": "Tool for building native addon modules for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-system.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "build-tool", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_child_process",
+      "type": "concept",
+      "name": "Child Process Internals",
+      "description": "IPC, spawn, fork implementation in Node.js with libuv integration",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\child-process-internals.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "internals", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_ipc",
+      "type": "concept",
+      "name": "Inter-Process Communication",
+      "description": "IPC channel setup, message format, handle passing between processes",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\child-process-internals.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "communication", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_cli_options",
+      "type": "concept",
+      "name": "CLI Options",
+      "description": "Adding CLI flags and gating experimental modules in Node.js core",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\cli-options.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "configuration", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_experimental_modules",
+      "type": "concept",
+      "name": "Experimental Module Gating",
+      "description": "Using CLI flags to control access to experimental built-in modules",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\cli-options.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "module-system", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_option_classes",
+      "type": "concept",
+      "name": "Node.js Option Classes",
+      "description": "DebugOptions, EnvironmentOptions, PerIsolateOptions, PerProcessOptions for different scopes",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\cli-options.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "architecture", "origin": "EXTRACTED"}
+    },
+    {
+      "id": "nodejs_commit_messages",
+      "type": "concept",
+      "name": "Node.js Commit Messages",
+      "description": "Subsystem prefix format with Fixes/Refs footers, no AI signatures allowed",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\commit-messages.md",
+      "confidence_score": 1.0,
+      "metadata": {"category": "convention", "origin": "EXTRACTED"}
+    }
+  ],
+  "edges": [
+    {
+      "source": "app_agents_ponytail_philosophy",
+      "target": "app_agents_yagni",
+      "type": "includes",
+      "description": "Ponytail philosophy includes YAGNI as first check",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_process",
+      "target": "skill_creator_anatomy",
+      "type": "uses",
+      "description": "Skill creation process uses skill anatomy structure",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_progressive_disclosure",
+      "target": "skill_creator_anatomy",
+      "type": "implements",
+      "description": "Progressive disclosure implemented through skill anatomy",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_hono_framework",
+      "type": "includes",
+      "description": "Node.js backend stack includes Hono framework",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_nestjs_framework",
+      "type": "includes",
+      "description": "Node.js backend stack includes NestJS framework",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_drizzle_orm",
+      "type": "includes",
+      "description": "Node.js backend stack includes Drizzle ORM",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_vitest_testing",
+      "type": "includes",
+      "description": "Node.js backend stack includes Vitest testing",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_zod_validation",
+      "type": "includes",
+      "description": "Node.js backend stack includes Zod validation",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "testing_vitest_patterns",
+      "target": "backend_vitest_testing",
+      "type": "documents",
+      "description": "Testing patterns document Vitest usage",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_composable_adaptable",
+      "target": "vue_maybe_ref",
+      "type": "uses",
+      "description": "Adaptable composables use MaybeRef type",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_composable_adaptable",
+      "target": "vue_maybe_ref_or_getter",
+      "type": "uses",
+      "description": "Adaptable composables use MaybeRefOrGetter type",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "find_skills_discovery",
+      "target": "find_skills_cli",
+      "type": "uses",
+      "description": "Skill discovery process uses Skills CLI",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "frontend_development_skill",
+      "target": "frontend_component_types",
+      "type": "includes",
+      "description": "Frontend development skill includes component type patterns",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_core_internals",
+      "target": "nodejs_v8_engine",
+      "type": "includes",
+      "description": "Node.js core internals include V8 engine",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_core_internals",
+      "target": "nodejs_libuv",
+      "type": "includes",
+      "description": "Node.js core internals include libuv",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_core_internals",
+      "target": "nodejs_native_addons",
+      "type": "includes",
+      "description": "Node.js core internals include native addons",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_build_workflow",
+      "target": "nodejs_rebuild_required",
+      "type": "includes",
+      "description": "Build workflow includes mandatory rebuild rule",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_build_system",
+      "target": "nodejs_gyp",
+      "type": "includes",
+      "description": "Build system includes GYP",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_build_system",
+      "target": "nodejs_node_gyp",
+      "type": "includes",
+      "description": "Build system includes node-gyp",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_node_gyp",
+      "target": "nodejs_gyp",
+      "type": "uses",
+      "description": "node-gyp uses GYP build system",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_child_process",
+      "target": "nodejs_ipc",
+      "type": "implements",
+      "description": "Child process implements IPC",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_cli_options",
+      "target": "nodejs_experimental_modules",
+      "type": "enables",
+      "description": "CLI options enable experimental module gating",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_experimental_modules",
+      "target": "nodejs_option_classes",
+      "type": "uses",
+      "description": "Experimental modules use option classes for configuration",
+      "confidence_score": 1.0
+    }
+  ]
+}

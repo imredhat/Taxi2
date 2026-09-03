@@ -1,0 +1,16 @@
+{
+  "name": "taxi-admin",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev --port 3000",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "clean": "node -e \"const fs=require('fs');['localhost','127.0.0.1','.nuxt','.output'].forEach(d=>{try{fs.rmSync(d,{recursive:true,force:true});console.log('removed '+d)}catch(e){}})\""
+  },
+  "dependencies": {
+    "motion-v": "^2.3.0",
+    "nuxt": "3",
+    "vue3-persian-datetime-picker": "^1.2.2"
+  }
+}

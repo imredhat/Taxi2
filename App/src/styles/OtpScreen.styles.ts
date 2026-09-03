@@ -1,0 +1,91 @@
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: '#f8faf9' },
+  flex: { flex: 1 },
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    gap: 16,
+  },
+  backBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: '#e9efed',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  backText: {
+    fontSize: 20,
+    color: '#17212a',
+  },
+  header: {
+    marginTop: 24,
+    gap: 8,
+  },
+  heading: {
+    fontSize: 26,
+    fontFamily: 'Estedad-Black',
+    color: '#17212a',
+  },
+  desc: {
+    fontSize: 15,
+    fontFamily: 'Estedad-Regular',
+    color: '#6a7673',
+    lineHeight: 24,
+  },
+  otpRow: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'center',
+    gap: 10,
+    marginTop: 24,
+  },
+  otpInput: {
+    width: 48,
+    height: 56,
+    borderWidth: 1.5,
+    borderColor: '#dfe8e4',
+    borderRadius: 14,
+    backgroundColor: '#fff',
+    textAlign: 'center',
+    fontSize: 22,
+    fontFamily: 'Estedad-Bold',
+    color: '#17212a',
+  },
+  otpInputFilled: {
+    borderColor: '#07846c',
+    backgroundColor: '#e1f6f0',
+  },
+  primaryBtn: {
+    minHeight: 54,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#07846c',
+    marginTop: 24,
+  },
+  primaryBtnText: {
+    color: '#fff',
+    fontSize: 17,
+    fontFamily: 'Estedad-Bold',
+  },
+  disabledBtn: {
+    opacity: 0.6,
+  },
+  resendBtn: {
+    alignItems: 'center',
+    paddingVertical: 12,
+  },
+  resendDisabled: {
+    opacity: 0.5,
+  },
+  resendText: {
+    fontSize: 14,
+    fontFamily: 'Estedad-Bold',
+    color: '#07846c',
+  },
+});
+
+export default styles;

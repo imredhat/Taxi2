@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "پویش تاکسی - مسافر",
+    "slug": "userapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "platforms": ["ios", "android", "web"],
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#03151e"
+      }
+    },
+    "web": {}
+  }
+}

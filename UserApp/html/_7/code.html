@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="fa"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>پویش تاکسی | Pooyesh Taxi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Estedad';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/estedad-font@v4.0.2/dist/Estedad.woff2') format('woff2');
+        }
+        body {
+            font-family: 'Estedad', sans-serif;
+            background-color: #03151e;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(3, 21, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .rim-light {
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+        .journey-line-glow {
+            filter: drop-shadow(0 0 8px rgba(251, 188, 64, 0.4));
+        }
+        .cinematic-vignette {
+            background: radial-gradient(circle, transparent 20%, rgba(3, 21, 30, 0.8) 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#63ceff",
+                        "surface-tint": "#fbbc40",
+                        "surface-container-lowest": "#001019",
+                        "tertiary-fixed-dim": "#73d1ff",
+                        "on-error": "#690005",
+                        "outline-variant": "#504535",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "safety-teal": "#1E7A65",
+                        "on-secondary-container": "#87c0e1",
+                        "primary-container": "#f6b73c",
+                        "secondary-container": "#014f6c",
+                        "on-tertiary": "#003548",
+                        "primary-fixed": "#ffdeaa",
+                        "inverse-primary": "#7d5700",
+                        "surface-dim": "#03151e",
+                        "asphalt-surface": "#16252D",
+                        "mist-bg": "#F3F7F6",
+                        "on-primary-fixed": "#271900",
+                        "secondary": "#95cef0",
+                        "secondary-fixed-dim": "#95cef0",
+                        "tertiary": "#b6e5ff",
+                        "on-primary-container": "#6a4900",
+                        "on-tertiary-fixed": "#001e2b",
+                        "surface": "#03151e",
+                        "on-surface": "#d2e5f2",
+                        "surface-container-low": "#0b1e27",
+                        "on-surface-variant": "#d4c4ae",
+                        "on-tertiary-container": "#005673",
+                        "surface-container-high": "#1a2c36",
+                        "tertiary-fixed": "#c1e8ff",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-secondary": "#00354a",
+                        "inverse-on-surface": "#21333c",
+                        "error-red": "#C93C37",
+                        "on-background": "#d2e5f2",
+                        "error": "#ffb4ab",
+                        "background": "#03151e",
+                        "on-primary": "#422c00",
+                        "outline": "#9d8f7b",
+                        "surface-container-highest": "#253741",
+                        "surface-container": "#0f222b",
+                        "primary-fixed-dim": "#fbbc40",
+                        "inverse-surface": "#d2e5f2",
+                        "primary": "#ffd899",
+                        "on-primary-fixed-variant": "#5f4100",
+                        "surface-bright": "#2a3b45",
+                        "secondary-fixed": "#c4e7ff",
+                        "surface-variant": "#253741"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target": "44px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "stack-md": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Estedad"],
+                        "body-lg": ["Estedad"],
+                        "display-lg": ["Estedad"],
+                        "label-sm": ["Estedad"],
+                        "display-lg-mobile": ["Estedad"],
+                        "body-md": ["Estedad"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "32px", "fontWeight": "450"}],
+                        "display-lg": ["48px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "850"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "44px", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- Cinematic Background -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBPEZNFu1GEgNXlENusQltWLY9ZQJEViki89IlA_eFkNpTSLovWqE6aYQTmTFw-hLs4ghiB0-FQWpzbvish717K-lyVKrAaRGrsySmHW7eNj45cqufyRmpGVDjh72zJ4sHCQyuVHfuLImsOXYG_ZADHnPOzOakt0k8JNZ4GzLKl6PFMUrCEQIrp1Oa3oyXEOz-NIKayA3nGt3jZy1g2d8noXki2yHfEzUzDBkOLexv_SX_vg9rmK7IfQQ');"></div>
+<div class="absolute inset-0 cinematic-vignette"></div>
+</div>
+<!-- Navigation Drawer (Right Side) -->
+<div class="fixed inset-y-0 right-0 z-[60] flex flex-col rtl w-80 bg-surface-container border-l border-white/5 translate-x-full transition-transform duration-300 shadow-xl" id="drawer">
+<div class="p-stack-md flex flex-col h-full">
+<div class="flex items-center justify-between mb-stack-lg p-4">
+<div class="flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-full bg-asphalt-surface border border-white/10 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary" data-weight="fill">person</span>
+</div>
+<div>
+<h3 class="font-headline-md text-body-md font-bold text-on-surface">کاربر پویش</h3>
+<p class="text-label-sm text-on-surface-variant">عضویت طلایی</p>
+</div>
+</div>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors" onclick="toggleDrawer()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-md">کیف پول</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-body-md">پشتیبانی</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">تنظیمات</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-body-md">قوانین</span>
+</a>
+</nav>
+<button class="mt-auto flex items-center gap-4 px-4 py-3 text-error-red hover:bg-error-container/10 transition-colors rounded-lg">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">خروج</span>
+</button>
+</div>
+</div>
+<!-- Main Content Wrapper -->
+<main class="relative z-10 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 glass-header border-b border-white/5 h-16 flex flex-row-reverse justify-between items-center px-margin-mobile md:px-margin-desktop">
+<div class="flex items-center gap-stack-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" onclick="toggleDrawer()">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="text-primary font-headline-md text-headline-md font-bold tracking-tighter">
+                پویش تاکسی
+            </div>
+<div class="flex items-center gap-stack-md flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-[18px] text-on-primary-container" data-weight="fill">person</span>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error-red rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="flex-1 flex flex-col justify-center items-center px-margin-mobile text-center pt-24 pb-32">
+<div class="max-w-3xl animate-fade-in">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-stack-md leading-tight">
+                    مسیرت را بگو، <br class="md:hidden"/> تا رسیدن همراهت هستیم
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto opacity-80">
+                    سفری امن، آرام و حرفه‌ای در جاده‌های ایران با ناوگان اختصاصی پویش
+                </p>
+</div>
+<!-- Floating Decorative Element: The Journey Line -->
+<div class="mt-stack-lg w-full max-w-md h-px bg-gradient-to-l from-transparent via-primary to-transparent opacity-30 journey-line-glow"></div>
+</section>
+<!-- Trip Inquiry Card -->
+<section class="fixed bottom-24 md:bottom-28 left-0 right-0 z-40 px-margin-mobile flex justify-center">
+<div class="w-full max-w-2xl bg-asphalt-surface/90 backdrop-blur-xl rim-light rounded-xl p-6 border border-white/10 shadow-2xl transition-all duration-300 hover:scale-[1.01]">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<!-- Origin -->
+<div class="relative">
+<label class="absolute -top-2.5 right-3 px-1 bg-asphalt-surface text-label-sm text-primary font-medium">مبدا</label>
+<div class="flex items-center gap-2 bg-surface-container-low border-b-2 border-primary/40 focus-within:border-primary px-4 py-3 rounded-t-lg transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">location_on</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface w-full placeholder:text-on-surface-variant/40 font-body-md" placeholder="کجا هستید؟" type="text"/>
+</div>
+</div>
+<!-- Destination -->
+<div class="relative">
+<label class="absolute -top-2.5 right-3 px-1 bg-asphalt-surface text-label-sm text-primary font-medium">مقصد</label>
+<div class="flex items-center gap-2 bg-surface-container-low border-b-2 border-primary/40 focus-within:border-primary px-4 py-3 rounded-t-lg transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">flag</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface w-full placeholder:text-on-surface-variant/40 font-body-md" placeholder="کجا می‌روید؟" type="text"/>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-surface-tint text-on-primary font-headline-md py-4 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+<span>شروع سفر</span>
+<span class="material-symbols-outlined">trending_flat</span>
+</button>
+</div>
+</section>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex flex-row-reverse justify-around items-center h-20 px-gutter bg-asphalt-surface border-t border-white/5 shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-primary font-bold gap-1 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-weight="fill">home</span>
+<span class="font-label-sm text-label-sm">خانه</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">route</span>
+<span class="font-label-sm text-label-sm">سفرهای من</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">پروفایل</span>
+</a>
+</nav>
+</main>
+<!-- Overlay for Drawer -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] hidden transition-opacity duration-300" id="overlay" onclick="toggleDrawer()"></div>
+<script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+            const isOpen = drawer.classList.contains('translate-x-0');
+            
+            if (isOpen) {
+                drawer.classList.replace('translate-x-0', 'translate-x-full');
+                overlay.classList.replace('block', 'hidden');
+                overlay.classList.add('opacity-0');
+            } else {
+                drawer.classList.replace('translate-x-full', 'translate-x-0');
+                overlay.classList.replace('hidden', 'block');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            }
+        }
+
+        // Lightweight atmospheric parallax
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 10;
+            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+            document.querySelector('.bg-cover').style.transform = `scale(1.05) translate(${x}px, ${y}px)`;
+        });
+    </script>
+</body></html>

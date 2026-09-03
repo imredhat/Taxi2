@@ -1,0 +1,27 @@
+﻿{
+    "total_chunks":  27,
+    "chunk_path":  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\graphify-out\\.graphify_chunk_06.json",
+    "files":  [
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\orders_list.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\password_create_1.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\password_reset_1.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\phosphor.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\pie.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\placeholder.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\pricing.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\prismjs.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\privacy_policy.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\product.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\product_details.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\product_list.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\profile.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\progress.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\project_app.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\project_details.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\radar.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\radialbar.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\range_slider.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\ratings.html\r"
+              ],
+    "chunk_num":  6
+}

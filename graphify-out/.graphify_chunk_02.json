@@ -1,0 +1,1075 @@
+{
+  "nodes": [
+    {
+      "id": "configure_build_config",
+      "type": "concept",
+      "label": "Node.js Build Configuration",
+      "description": "The ./configure script and its flags for building Node.js from source",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "configure_debug_build",
+      "type": "concept",
+      "label": "Debug Build",
+      "description": "Building Node.js with --debug flag produces node_g binary with DCHECKs enabled",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "configure_asan_flag",
+      "type": "concept",
+      "label": "AddressSanitizer Build",
+      "description": "Building Node.js with --enable-asan for memory error detection",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "configure_ninja_flag",
+      "type": "concept",
+      "label": "Ninja Build System",
+      "description": "Using --ninja flag with configure for faster incremental builds",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "contributing_repo_structure",
+      "type": "document",
+      "label": "Node.js Repository Structure",
+      "description": "Standard layout: src/ (C++), lib/ (JS), deps/ (V8, libuv, openssl), test/, doc/, tools/, benchmark/",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\contributing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "contributing_pr_process",
+      "type": "document",
+      "label": "Pull Request Process",
+      "description": "Contributing to Node.js: fork, branch, commit format 'subsystem: description', PR with tests",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\contributing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "contributing_semver_labels",
+      "type": "concept",
+      "label": "Semver Labels",
+      "description": "semver-major (breaking), semver-minor (feature), semver-patch (fix) labels for PRs",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\contributing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_internals_arch",
+      "type": "concept",
+      "label": "Crypto Module Architecture",
+      "description": "Three-layer architecture: JS (lib/crypto.js) -> C++ bindings (src/crypto/) -> OpenSSL (EVP_*, RAND_*, X509_*)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_thread_pool_ops",
+      "type": "concept",
+      "label": "Crypto Thread Pool Operations",
+      "description": "pbkdf2, scrypt, randomBytes (async), generateKeyPair use libuv thread pool; createHash, createCipher run on main thread",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_hash_implementation",
+      "type": "document",
+      "label": "Crypto Hash C++ Implementation",
+      "description": "Hash operations wrap OpenSSL EVP_DigestUpdate/EVP_DigestFinal_ex via src/crypto/crypto_hash.cc",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_cipher_implementation",
+      "type": "document",
+      "label": "Crypto Cipher C++ Implementation",
+      "description": "Cipher operations wrap EVP_CipherUpdate via src/crypto/crypto_cipher.cc, supports AEAD modes with auth tags",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "debugging_native_tools",
+      "type": "document",
+      "label": "Native Debugging Tools",
+      "description": "GDB and LLDB for debugging Node.js C++ addons and core, with V8-specific helper commands",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\debugging-native.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "debugging_core_dumps",
+      "type": "concept",
+      "label": "Core Dump Debugging",
+      "description": "Enabling and analyzing core dumps with GDB/LLDB for crash investigation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\debugging-native.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "debugging_remote_gdb",
+      "type": "concept",
+      "label": "Remote Debugging",
+      "description": "Remote debugging with gdbserver and lldb-server for remote target machines",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\debugging-native.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "documentation_api_docs",
+      "type": "document",
+      "label": "API Documentation Conventions",
+      "description": "Rules for doc/api/*.md files: YAML metadata blocks, stability indicators, link reference ordering, dual CJS/ESM examples",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\documentation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "documentation_link_ordering",
+      "type": "concept",
+      "label": "Link Reference Ordering",
+      "description": "Strict ASCII lexical ordering for link references at bottom of markdown files, enforced by make lint-md",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\documentation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "documentation_error_docs",
+      "type": "concept",
+      "label": "Error Documentation",
+      "description": "New error codes require alphabetical entries in both lib/internal/errors.js and doc/api/errors.md",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\documentation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "fs_internals_arch",
+      "type": "concept",
+      "label": "FS Module Architecture",
+      "description": "Three-layer architecture: JS (lib/fs.js) -> C++ bindings (src/node_file.cc) -> libuv thread pool -> system calls",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\fs-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "fs_async_vs_sync",
+      "type": "concept",
+      "label": "FS Async vs Sync Operations",
+      "description": "Async fs operations use thread pool via FSReqCallback/FSReqPromise; sync operations block the event loop",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\fs-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "fs_file_descriptors",
+      "type": "concept",
+      "label": "File Descriptors",
+      "description": "fs.open returns integer file descriptors; must be closed to prevent leaks; used for read/write at offset",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\fs-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_async_io",
+      "type": "concept",
+      "label": "libuv Async I/O",
+      "description": "Cross-platform async I/O using epoll (Linux), kqueue (macOS), IOCP (Windows), event ports (SunOS)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_handles_requests",
+      "type": "concept",
+      "label": "libuv Handles and Requests",
+      "description": "Handles are long-lived resource representations (TCP, UDP, Timer, etc.); Requests are short-lived operations (connect, write, FS, DNS)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_stream_backpressure",
+      "type": "concept",
+      "label": "libuv Stream Backpressure",
+      "description": "Backpressure via socket.pause()/resume() mapping to uv_read_stop()/uv_read_start(); write drain events for write backpressure",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_async_notification",
+      "type": "concept",
+      "label": "libuv Async Notification",
+      "description": "uv_async_t for cross-thread signaling; used for worker thread communication and N-API async callbacks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_event_loop_phases",
+      "type": "concept",
+      "label": "Event Loop Phases",
+      "description": "Six phases: timers -> pending callbacks -> idle/prepare -> poll -> check -> close callbacks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-event-loop.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_microtasks_nexttick",
+      "type": "concept",
+      "label": "Microtasks and nextTick",
+      "description": "process.nextTick() and Promise callbacks execute between phases; recursive nextTick starves I/O",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-event-loop.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_nexttick_starvation",
+      "type": "concept",
+      "label": "nextTick Starvation",
+      "description": "Recursive process.nextTick prevents I/O callbacks from executing; use setImmediate for recursion instead",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-event-loop.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_thread_pool_size",
+      "type": "concept",
+      "label": "Thread Pool Configuration",
+      "description": "Default 4 threads, configurable via UV_THREADPOOL_SIZE env var (max 1024), must be set before Node.js starts",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-thread-pool.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_thread_pool_ops",
+      "type": "concept",
+      "label": "Thread Pool Operations",
+      "description": "fs operations (except fs.watch), dns.lookup (not dns.resolve), some crypto ops, zlib, custom addons via uv_queue_work",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-thread-pool.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_thread_pool_starvation",
+      "type": "concept",
+      "label": "Thread Pool Starvation",
+      "description": "When all 4 default threads are busy, new operations queue; dns.lookup is a canary for saturation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-thread-pool.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "memory_debugging_heap",
+      "type": "concept",
+      "label": "V8 Heap Memory Layout",
+      "description": "Process memory: V8 Heap (New/Old/Large Object/Code spaces), V8 External Memory, Native Memory, Stack",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\memory-debugging.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "memory_debugging_snapshots",
+      "type": "document",
+      "label": "Heap Snapshots",
+      "description": "Taking and comparing heap snapshots via v8.writeHeapSnapshot() or inspector API; key terms: shallow size, retained size, distance, retainers",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\memory-debugging.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "memory_debugging_leaks",
+      "type": "concept",
+      "label": "Memory Leak Detection",
+      "description": "Monitoring heap growth over time, using async_hooks to track thread pool operations, comparing heap snapshots",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\memory-debugging.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_abi_stability",
+      "type": "concept",
+      "label": "N-API ABI Stability",
+      "description": "N-API provides ABI-stable API for native addons; code compatible across Node.js versions without recompilation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_versions",
+      "type": "document",
+      "label": "N-API Versions",
+      "description": "Versioned features: v1 (8.0.0 core), v3 (BigInt), v5 (Date/finalization), v8 (type tagging), v9 (extended Buffer)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_async_worker",
+      "type": "concept",
+      "label": "N-API AsyncWorker Pattern",
+      "description": "AsyncWorker for blocking operations on thread pool with Execute() and Complete() callbacks, returns Promise",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_threadsafe_function",
+      "type": "concept",
+      "label": "N-API ThreadSafeFunction",
+      "description": "Calling JavaScript from any thread via napi_threadsafe_function; queues JS callbacks on main thread",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_object_wrapping",
+      "type": "concept",
+      "label": "N-API Object Wrapping",
+      "description": "Wrapping C/C++ objects as JavaScript objects using napi_wrap/napi_unwrap with destructor callbacks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_instance_data",
+      "type": "concept",
+      "label": "N-API Instance Data",
+      "description": "Per-addon-instance data storage for worker thread safety via napi_set_instance_data/napi_get_instance_data",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_management",
+      "type": "concept",
+      "label": "Native Memory Management",
+      "description": "Memory strategies: stack vs heap allocation, smart pointers (unique_ptr, shared_ptr), RAII patterns for native addons",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_buffer_handling",
+      "type": "document",
+      "label": "Native Buffer Handling",
+      "description": "Creating buffers: Node.js allocated (Buffer::New), copied (Buffer::Copy), external with finalizer; must keep references to prevent GC",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_adjust_external",
+      "type": "concept",
+      "label": "External Memory Tracking",
+      "description": "Napi::MemoryManagement::AdjustExternalMemory to tell V8 about native allocations; prevents GC starvation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_leak_prevention",
+      "type": "concept",
+      "label": "Native Memory Leak Prevention",
+      "description": "Common leaks: forgotten delete, exception paths, reference cycles, ThreadSafeFunction not released, AsyncWorker raw pointers",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "net_internals_arch",
+      "type": "concept",
+      "label": "Net Module Architecture",
+      "description": "Three-layer architecture: JS (lib/net.js, lib/dgram.js) -> C++ (TCPWrap, UDPWrap, PipeWrap) -> libuv (uv_tcp_t, uv_udp_t) -> system calls",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\net-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "net_tcp_server_impl",
+      "type": "document",
+      "label": "TCP Server Implementation",
+      "description": "Server creates TCP handle, binds, listens; onconnection callback creates Socket wrapper; C++ TCPWrap::OnConnection calls uv_accept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\net-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "net_tcp_client_connect",
+      "type": "concept",
+      "label": "TCP Client Connection",
+      "description": "Connect flow: create TCP handle, DNS lookup if needed, TCPConnectWrap request, afterConnect callback sets readable/writable",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\net-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "node_addon_api_wrapper",
+      "type": "concept",
+      "label": "node-addon-api C++ Wrapper",
+      "description": "C++ wrapper around N-API providing idiomatic C++: type conversions, error handling, ObjectWrap, AsyncWorker, ThreadSafeFunction",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\node-addon-api.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "node_addon_api_error_handling",
+      "type": "concept",
+      "label": "node-addon-api Error Handling",
+      "description": "Two modes: NAPI_CPP_EXCEPTIONS (C++ exceptions) or non-exception mode with env.IsExceptionPending() checks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\node-addon-api.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "node_addon_api_async_worker",
+      "type": "concept",
+      "label": "node-addon-api AsyncWorker",
+      "description": "AsyncWorker with Execute() on thread pool, OnOK()/OnError() on main thread; AsyncProgressWorker for progress reporting",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\node-addon-api.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_concept",
+      "type": "concept",
+      "label": "Primordials",
+      "description": "Frozen copies of JS built-in objects captured before user code runs; protects internal modules from prototype pollution",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_uncurry_this",
+      "type": "concept",
+      "label": "uncurryThis Pattern",
+      "description": "Prototype methods converted to standalone functions where this becomes first argument: arr.push(item) -> ArrayPrototypePush(arr, item)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_safe_classes",
+      "type": "concept",
+      "label": "Safe Classes",
+      "description": "SafeMap, SafeSet, SafeWeakMap etc. with frozen/null-prototype chains; SafePromiseAllReturnVoid and SafePromiseAllReturnArrayLike",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_unsafe_patterns",
+      "type": "concept",
+      "label": "Unsafe Patterns in Core",
+      "description": "for-of iteration, array destructuring, spread operator, RegExp.test, instanceof, generators are unsafe in core code",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "profiling_v8_cpu",
+      "type": "document",
+      "label": "V8 CPU Profiling",
+      "description": "Using --prof flag, processing with --prof-process; * = optimized, ~ = interpreted; flame graphs via 0x, perf, dtrace",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\profiling-v8.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "profiling_v8_optimization_tracing",
+      "type": "concept",
+      "label": "V8 Optimization Tracing",
+      "description": "--trace-opt for optimization events, --trace-deopt for deoptimization with reasons (not a Smi, wrong map, minus zero, etc.)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\profiling-v8.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "profiling_flame_graphs",
+      "type": "concept",
+      "label": "Flame Graph Generation",
+      "description": "Using 0x tool, Linux perf, or macOS dtrace to generate flame graphs; wide boxes = CPU consumers, plateaus = slow children",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\profiling-v8.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "reviewing_prs_checklist",
+      "type": "document",
+      "label": "PR Review Checklist",
+      "description": "Technical review: commit message, scope, tests, documentation, code quality (primordials, validators, errors), build/CI",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\reviewing-prs.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "reviewing_prs_ai_flags",
+      "type": "concept",
+      "label": "AI-Generated PR Red Flags",
+      "description": "Hallucinated APIs, inconsistent convention adherence, over-engineering, tests testing implementation not behavior, boilerplate responses",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\reviewing-prs.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "streams_internals_arch",
+      "type": "concept",
+      "label": "Streams Architecture",
+      "description": "Four-layer architecture: JS (Readable/Writable/Duplex/Transform) -> C++ (StreamBase, StreamReq) -> libuv streams (uv_stream_t) -> system",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\streams-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "streams_streambase",
+      "type": "document",
+      "label": "StreamBase C++ Interface",
+      "description": "StreamBase abstract class: ReadStart/ReadStop/DoWrite/DoShutdown; WriteWrap/ShutdownWrap for operation tracking",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\streams-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "streams_readable_flow",
+      "type": "concept",
+      "label": "Readable Stream Flow",
+      "description": "read() -> _read(n) -> C++ ReadStart -> uv_read_start -> epoll/kqueue -> alloc_cb -> read_cb -> OnRead -> Buffer -> push(chunk) -> data event",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\streams-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_architecture",
+      "type": "concept",
+      "label": "V8 Generational GC",
+      "description": "Generational GC: Scavenger (young gen, semi-space copying) + Mark-Sweep/Mark-Compact (old gen); based on generational hypothesis",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_scavenger",
+      "type": "concept",
+      "label": "V8 Scavenger (Minor GC)",
+      "description": "Young generation collection: semi-space copying, objects surviving 2 collections promoted to old space; fast but requires 2x memory",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_mark_sweep",
+      "type": "concept",
+      "label": "Mark-Sweep (Major GC)",
+      "description": "Old generation: mark reachable objects from roots, sweep dead; incremental marking reduces pause times; write barriers track cross-gen refs",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_mark_compact",
+      "type": "concept",
+      "label": "Mark-Compact GC",
+      "description": "When heap fragmentation is high: mark + compact by moving live objects to eliminate gaps; expensive due to pointer updates",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_pitfalls",
+      "type": "concept",
+      "label": "GC Common Pitfalls",
+      "description": "Closure memory retention, unintentional global references, timer/event listener leaks; use object pooling for high-allocation scenarios",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_hidden_classes",
+      "type": "concept",
+      "label": "V8 Hidden Classes (Maps)",
+      "description": "V8 creates hidden classes describing object structure; transitions happen on property add/delete; maps describe property offsets",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_inline_caching",
+      "type": "concept",
+      "label": "Inline Caching (IC)",
+      "description": "V8 caches hidden class and offset for property access; states: uninitialized -> monomorphic -> polymorphic -> megamorphic (>4 maps)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_elements_kinds",
+      "type": "concept",
+      "label": "Array Elements Kinds",
+      "description": "V8 tracks array element types: PACKED_SMI_ELEMENTS (fastest) -> PACKED_DOUBLE_ELEMENTS -> PACKED_ELEMENTS -> HOLEY_ELEMENTS; transitions only downward",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_hidden_class_best_practices",
+      "type": "concept",
+      "label": "Hidden Class Best Practices",
+      "description": "Initialize properties in consistent order, use classes/constructors, avoid delete, keep type stability, avoid dynamic property names",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_pipeline",
+      "type": "concept",
+      "label": "V8 JIT Compilation Pipeline",
+      "description": "Parser -> AST -> Ignition (interpreter, bytecode) -> TurboFan (JIT compiler, machine code); profiling triggers tier-up",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_type_feedback",
+      "type": "concept",
+      "label": "Type Feedback and Speculation",
+      "description": "TurboFan uses type feedback to speculate on types; deoptimization occurs on type mismatch (not a Smi, wrong map, etc.)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_optimizable_code",
+      "type": "concept",
+      "label": "Writing Optimizable Code",
+      "description": "Type stability, avoid megamorphic call sites, loop optimization, avoid arguments object, prefer rest parameters, avoid object spread in hot loops",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_escape_analysis",
+      "type": "concept",
+      "label": "V8 Escape Analysis",
+      "description": "TurboFan eliminates heap allocations when objects don't escape the function; enables stack allocation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_architecture",
+      "type": "concept",
+      "label": "Worker Threads Architecture",
+      "description": "Each worker has its own V8 Isolate and event loop; communication via MessagePort/MessageChannel; shared memory via SharedArrayBuffer",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_creation",
+      "type": "document",
+      "label": "Worker Thread Creation",
+      "description": "JS Worker class creates C++ WorkerImpl, sets up MessageChannel, StartThread creates uv_thread with new V8 Isolate and Environment",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_structured_clone",
+      "type": "concept",
+      "label": "Structured Clone for Messaging",
+      "description": "Messages serialized via structured clone: supports numbers, strings, Date, RegExp, Array, Map, Set, Buffer, TypedArray, ArrayBuffer, Error; not functions/symbols",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_transfer",
+      "type": "concept",
+      "label": "Transfer List (Zero-Copy)",
+      "description": "Transfer ArrayBuffer/MessagePort ownership instead of copying; transferred buffer is detached (unusable) in sender",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "configure_build_config",
+      "target": "configure_debug_build",
+      "relation": "includes_option",
+      "description": "Debug build is one option of configure"
+    },
+    {
+      "source": "configure_build_config",
+      "target": "configure_asan_flag",
+      "relation": "includes_option",
+      "description": "ASAN build is one option of configure"
+    },
+    {
+      "source": "configure_build_config",
+      "target": "configure_ninja_flag",
+      "relation": "includes_option",
+      "description": "Ninja build system is one option of configure"
+    },
+    {
+      "source": "contributing_repo_structure",
+      "target": "contributing_pr_process",
+      "relation": "part_of",
+      "description": "Repository structure is part of the contributing guide"
+    },
+    {
+      "source": "contributing_pr_process",
+      "target": "contributing_semver_labels",
+      "relation": "uses",
+      "description": "PR process uses semver labels for classification"
+    },
+    {
+      "source": "crypto_internals_arch",
+      "target": "crypto_thread_pool_ops",
+      "relation": "defines",
+      "description": "Architecture defines which operations use thread pool vs main thread"
+    },
+    {
+      "source": "crypto_internals_arch",
+      "target": "crypto_hash_implementation",
+      "relation": "implements",
+      "description": "Architecture includes hash implementation via OpenSSL"
+    },
+    {
+      "source": "crypto_internals_arch",
+      "target": "crypto_cipher_implementation",
+      "relation": "implements",
+      "description": "Architecture includes cipher implementation via OpenSSL"
+    },
+    {
+      "source": "crypto_thread_pool_ops",
+      "target": "libuv_thread_pool_ops",
+      "relation": "uses",
+      "description": "Crypto async operations use the libuv thread pool"
+    },
+    {
+      "source": "debugging_native_tools",
+      "target": "debugging_core_dumps",
+      "relation": "includes_technique",
+      "description": "Native debugging tools include core dump analysis"
+    },
+    {
+      "source": "debugging_native_tools",
+      "target": "debugging_remote_gdb",
+      "relation": "includes_technique",
+      "description": "Native debugging tools include remote debugging"
+    },
+    {
+      "source": "documentation_api_docs",
+      "target": "documentation_link_ordering",
+      "relation": "requires",
+      "description": "API docs require strict link reference ordering"
+    },
+    {
+      "source": "documentation_api_docs",
+      "target": "documentation_error_docs",
+      "relation": "includes_section",
+      "description": "API docs include error documentation conventions"
+    },
+    {
+      "source": "documentation_error_docs",
+      "target": "contributing_pr_process",
+      "relation": "part_of",
+      "description": "Error documentation is part of the contributing process"
+    },
+    {
+      "source": "fs_internals_arch",
+      "target": "fs_async_vs_sync",
+      "relation": "defines",
+      "description": "Architecture defines async vs sync operation paths"
+    },
+    {
+      "source": "fs_internals_arch",
+      "target": "fs_file_descriptors",
+      "relation": "uses",
+      "description": "FS operations work with file descriptors"
+    },
+    {
+      "source": "fs_async_vs_sync",
+      "target": "libuv_thread_pool_ops",
+      "relation": "uses",
+      "description": "Async FS operations use the libuv thread pool"
+    },
+    {
+      "source": "libuv_async_io",
+      "target": "libuv_handles_requests",
+      "relation": "defines",
+      "description": "Async I/O defines handles and requests abstractions"
+    },
+    {
+      "source": "libuv_async_io",
+      "target": "libuv_stream_backpressure",
+      "relation": "implements",
+      "description": "Async I/O implements stream backpressure"
+    },
+    {
+      "source": "libuv_async_io",
+      "target": "libuv_async_notification",
+      "relation": "implements",
+      "description": "Async I/O implements cross-thread async notification"
+    },
+    {
+      "source": "libuv_event_loop_phases",
+      "target": "libuv_microtasks_nexttick",
+      "relation": "interleaves",
+      "description": "Microtasks and nextTick execute between event loop phases"
+    },
+    {
+      "source": "libuv_microtasks_nexttick",
+      "target": "libuv_nexttick_starvation",
+      "relation": "can_cause",
+      "description": "Recursive nextTick can cause starvation"
+    },
+    {
+      "source": "libuv_thread_pool_ops",
+      "target": "libuv_thread_pool_size",
+      "relation": "configured_by",
+      "description": "Thread pool operations are limited by pool size"
+    },
+    {
+      "source": "libuv_thread_pool_ops",
+      "target": "libuv_thread_pool_starvation",
+      "relation": "can_cause",
+      "description": "Thread pool operations can cause starvation when saturated"
+    },
+    {
+      "source": "memory_debugging_heap",
+      "target": "memory_debugging_snapshots",
+      "relation": "uses",
+      "description": "Memory debugging uses heap snapshots for analysis"
+    },
+    {
+      "source": "memory_debugging_heap",
+      "target": "memory_debugging_leaks",
+      "relation": "detects",
+      "description": "Memory debugging detects leaks via heap analysis"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_versions",
+      "relation": "versioned_by",
+      "description": "ABI stability is managed through N-API versions"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_async_worker",
+      "relation": "provides",
+      "description": "N-API provides AsyncWorker for thread pool operations"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_threadsafe_function",
+      "relation": "provides",
+      "description": "N-API provides ThreadSafeFunction for cross-thread JS calls"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_object_wrapping",
+      "relation": "provides",
+      "description": "N-API provides object wrapping for C++/JS interop"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_instance_data",
+      "relation": "provides",
+      "description": "N-API provides instance data for per-addon state"
+    },
+    {
+      "source": "native_memory_management",
+      "target": "native_memory_buffer_handling",
+      "relation": "includes",
+      "description": "Native memory management includes buffer handling patterns"
+    },
+    {
+      "source": "native_memory_management",
+      "target": "native_memory_adjust_external",
+      "relation": "uses",
+      "description": "Native memory management uses AdjustExternalMemory for V8 GC awareness"
+    },
+    {
+      "source": "native_memory_management",
+      "target": "native_memory_leak_prevention",
+      "relation": "addresses",
+      "description": "Native memory management addresses leak prevention patterns"
+    },
+    {
+      "source": "net_internals_arch",
+      "target": "net_tcp_server_impl",
+      "relation": "implements",
+      "description": "Net architecture implements TCP server via TCPWrap"
+    },
+    {
+      "source": "net_internals_arch",
+      "target": "net_tcp_client_connect",
+      "relation": "implements",
+      "description": "Net architecture implements TCP client connection"
+    },
+    {
+      "source": "node_addon_api_wrapper",
+      "target": "node_addon_api_error_handling",
+      "relation": "provides",
+      "description": "node-addon-api provides two error handling modes"
+    },
+    {
+      "source": "node_addon_api_wrapper",
+      "target": "node_addon_api_async_worker",
+      "relation": "provides",
+      "description": "node-addon-api provides AsyncWorker pattern"
+    },
+    {
+      "source": "node_addon_api_wrapper",
+      "target": "napi_abi_stability",
+      "relation": "wraps",
+      "description": "node-addon-api is a C++ wrapper around N-API"
+    },
+    {
+      "source": "node_addon_api_async_worker",
+      "target": "napi_async_worker",
+      "relation": "wraps",
+      "description": "node-addon-api AsyncWorker wraps N-API AsyncWorker"
+    },
+    {
+      "source": "primordials_concept",
+      "target": "primordials_uncurry_this",
+      "relation": "uses",
+      "description": "Primordials uses uncurryThis for prototype method capture"
+    },
+    {
+      "source": "primordials_concept",
+      "target": "primordials_safe_classes",
+      "relation": "provides",
+      "description": "Primordials provides safe collection classes"
+    },
+    {
+      "source": "primordials_concept",
+      "target": "primordials_unsafe_patterns",
+      "relation": "prevents",
+      "description": "Primordials prevents unsafe patterns in core code"
+    },
+    {
+      "source": "profiling_v8_cpu",
+      "target": "profiling_v8_optimization_tracing",
+      "relation": "includes",
+      "description": "CPU profiling includes optimization tracing"
+    },
+    {
+      "source": "profiling_v8_cpu",
+      "target": "profiling_flame_graphs",
+      "relation": "generates",
+      "description": "CPU profiling generates flame graphs"
+    },
+    {
+      "source": "profiling_v8_optimization_tracing",
+      "target": "v8_jit_type_feedback",
+      "relation": "monitors",
+      "description": "Optimization tracing monitors type feedback and deoptimization"
+    },
+    {
+      "source": "reviewing_prs_checklist",
+      "target": "reviewing_prs_ai_flags",
+      "relation": "includes",
+      "description": "PR review checklist includes AI-generated code detection"
+    },
+    {
+      "source": "reviewing_prs_checklist",
+      "target": "contributing_pr_process",
+      "relation": "complements",
+      "description": "PR review complements the contributing process"
+    },
+    {
+      "source": "streams_internals_arch",
+      "target": "streams_streambase",
+      "relation": "defines",
+      "description": "Streams architecture defines StreamBase C++ interface"
+    },
+    {
+      "source": "streams_internals_arch",
+      "target": "streams_readable_flow",
+      "relation": "implements",
+      "description": "Architecture implements readable stream data flow"
+    },
+    {
+      "source": "v8_gc_architecture",
+      "target": "v8_gc_scavenger",
+      "relation": "includes",
+      "description": "V8 GC architecture includes Scavenger for young generation"
+    },
+    {
+      "source": "v8_gc_architecture",
+      "target": "v8_gc_mark_sweep",
+      "relation": "includes",
+      "description": "V8 GC architecture includes Mark-Sweep for old generation"
+    },
+    {
+      "source": "v8_gc_mark_sweep",
+      "target": "v8_gc_mark_compact",
+      "relation": "extends",
+      "description": "Mark-Compact extends Mark-Sweep with compaction for fragmentation"
+    },
+    {
+      "source": "v8_gc_architecture",
+      "target": "v8_gc_pitfalls",
+      "relation": "has_pitfalls",
+      "description": "V8 GC has common pitfalls to avoid"
+    },
+    {
+      "source": "v8_hidden_classes",
+      "target": "v8_inline_caching",
+      "relation": "enables",
+      "description": "Hidden classes enable inline caching optimization"
+    },
+    {
+      "source": "v8_hidden_classes",
+      "target": "v8_elements_kinds",
+      "relation": "parallel_to",
+      "description": "Elements kinds are a parallel optimization concept to hidden classes for arrays"
+    },
+    {
+      "source": "v8_hidden_classes",
+      "target": "v8_hidden_class_best_practices",
+      "relation": "has_guidelines",
+      "description": "Hidden classes have best practices for optimization"
+    },
+    {
+      "source": "v8_jit_pipeline",
+      "target": "v8_jit_type_feedback",
+      "relation": "collects",
+      "description": "JIT pipeline collects type feedback for optimization"
+    },
+    {
+      "source": "v8_jit_pipeline",
+      "target": "v8_jit_optimizable_code",
+      "relation": "informs",
+      "description": "JIT pipeline informs how to write optimizable code"
+    },
+    {
+      "source": "v8_jit_pipeline",
+      "target": "v8_jit_escape_analysis",
+      "relation": "performs",
+      "description": "JIT pipeline performs escape analysis for allocation elimination"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "worker_threads_creation",
+      "relation": "implements",
+      "description": "Architecture implements worker creation with separate isolates"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "worker_threads_structured_clone",
+      "relation": "uses",
+      "description": "Architecture uses structured clone for message serialization"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "worker_threads_transfer",
+      "relation": "uses",
+      "description": "Architecture uses transfer list for zero-copy messaging"
+    },
+    {
+      "source": "worker_threads_structured_clone",
+      "target": "worker_threads_transfer",
+      "relation": "supplements",
+      "description": "Transfer list supplements structured clone with zero-copy"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "napi_threadsafe_function",
+      "relation": "uses",
+      "description": "Worker threads use ThreadSafeFunction for cross-thread JS calls"
+    },
+    {
+      "source": "v8_hidden_class_best_practices",
+      "target": "v8_jit_optimizable_code",
+      "relation": "overlaps_with",
+      "description": "Hidden class practices overlap with JIT optimization guidance"
+    },
+    {
+      "source": "v8_gc_pitfalls",
+      "target": "memory_debugging_leaks",
+      "relation": "helps_detect",
+      "description": "Understanding GC pitfalls helps detect memory leaks"
+    },
+    {
+      "source": "native_memory_leak_prevention",
+      "target": "memory_debugging_leaks",
+      "relation": "complements",
+      "description": "Native leak prevention complements memory debugging"
+    },
+    {
+      "source": "net_internals_arch",
+      "target": "libuv_async_io",
+      "relation": "built_on",
+      "description": "Net internals built on libuv async I/O"
+    },
+    {
+      "source": "streams_internals_arch",
+      "target": "libuv_handles_requests",
+      "relation": "built_on",
+      "description": "Streams built on libuv handles and requests"
+    },
+    {
+      "source": "fs_internals_arch",
+      "target": "libuv_thread_pool_ops",
+      "relation": "built_on",
+      "description": "FS internals built on libuv thread pool"
+    },
+    {
+      "source": "configure_debug_build",
+      "target": "debugging_native_tools",
+      "relation": "enables",
+      "description": "Debug build enables native debugging with GDB/LLDB"
+    },
+    {
+      "source": "configure_asan_flag",
+      "target": "native_memory_leak_prevention",
+      "relation": "helps_detect",
+      "description": "ASAN build helps detect native memory leaks"
+    }
+  ],
+  "metadata": {
+    "chunk": 2,
+    "total_chunks": 31,
+    "source_files_count": 22,
+    "nodes_count": 77,
+    "edges_count": 71
+  }
+}

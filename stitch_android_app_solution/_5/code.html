@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="fa" dir="rtl" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><meta charset="utf-8"><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#b6e5ff",
+                        "inverse-on-surface": "#21333c",
+                        "error": "#ffb4ab",
+                        "safety-teal": "#1E7A65",
+                        "on-primary-container": "#6a4900",
+                        "secondary": "#95cef0",
+                        "secondary-container": "#014f6c",
+                        "surface": "#03151e",
+                        "background": "#03151e",
+                        "primary": "#ffd899",
+                        "on-surface": "#d2e5f2",
+                        "asphalt-surface": "#16252D",
+                        "on-surface-variant": "#d4c4ae",
+                        "surface-container": "#0f222b",
+                        "surface-variant": "#253741"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Estedad"],
+                        "display-lg-mobile": ["Estedad"],
+                        "body-md": ["Estedad"],
+                        "label-sm": ["Estedad"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "44px", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script></head><body class="min-h-screen flex flex-col justify-between overflow-hidden">
+<!-- Cinematic Background with Journey Line -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-[#03151e]"></div>
+<div class="absolute inset-0 opacity-20" data-alt="A cinematic, high-contrast night view of a modern Persian highway with long exposure light trails from passing vehicles. The scene is dominated by deep midnight blues and blacks, with sharp amber and white light streaks stretching into the horizon. The atmosphere is professional and sleek, reflecting a high-end transit service aesthetic with a slight film grain and misty air." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB15KVyMJFMr8W79nmqanmfoucTsNf7hXv5MWVfrVA1w4qm3WQx7ZQAg1LPu6LrVKk-UHTY8GOq7Lmm8aqWf-OXOfkHsDGH1PXWrzOFoQ6wefpYhLNieAX64kZCAqkeAQrkLKxGB4L9OhZSH7MzfIODRo0frVDnibpxu4OY1YdzRJ16PmF1yZih9JAP9NybZaS4v10_M77DYBIgNOVFif81ggkBX5dkeWUvlO33e5ma7BNOSUh1GO6-OA')"></div>
+<!-- Animated Journey Line (Visual Signature) -->
+<svg class="absolute top-1/2 left-0 w-full h-64 -translate-y-1/2 overflow-visible opacity-40" preserveAspectRatio="none" viewBox="0 0 400 100">
+<path class="journey-line-glow" d="M0,50 Q100,20 200,50 T400,50" fill="none" stroke="#ffd899" stroke-width="0.5">
+<animate attributeName="stroke-dasharray" dur="5s" from="0,1000" repeatCount="indefinite" to="1000,0"></animate>
+</path>
+</svg>
+</div>
+<!-- Top App Bar (Custom Implementation based on Shared Components) -->
+<header class="relative z-50 flex flex-row-reverse justify-between items-center px-margin-mobile h-16 w-full bg-surface/80 backdrop-blur-xl border-b border-white/5">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/50 transition-colors" onclick="history.back()">
+<span class="material-symbols-outlined text-primary" data-original-icon="arrow_forward">arrow_forward</span>
+</button>
+<span class="text-primary font-headline-md text-headline-md font-bold tracking-tighter">پویش تاکسی</span>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-1 flex flex-col items-center px-margin-mobile pt-12">
+<div class="w-full max-w-md text-center space-y-4 mb-12">
+<h1 class="font-headline-md text-headline-md text-on-surface">کد تایید را وارد کنید</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                کد ۵ رقمی به شماره <span class="font-bold text-on-surface" dir="ltr">0912 345 6789</span> ارسال شد
+            </p>
+</div>
+<!-- OTP Input Section -->
+<div class="w-full max-w-md flex flex-row-reverse justify-between gap-3 mb-8" id="otp-container">
+<input class="otp-input w-14 h-16 text-center text-2xl font-bold bg-asphalt-surface border-b-2 border-white/10 rounded-xl rim-light focus:outline-none focus:border-primary text-primary transition-all duration-300" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number">
+<input class="otp-input w-14 h-16 text-center text-2xl font-bold bg-asphalt-surface border-b-2 border-white/10 rounded-xl rim-light focus:outline-none focus:border-primary text-primary transition-all duration-300" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number">
+<input class="otp-input w-14 h-16 text-center text-2xl font-bold bg-asphalt-surface border-b-2 border-white/10 rounded-xl rim-light focus:outline-none focus:border-primary text-primary transition-all duration-300" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number">
+<input class="otp-input w-14 h-16 text-center text-2xl font-bold bg-asphalt-surface border-b-2 border-white/10 rounded-xl rim-light focus:outline-none focus:border-primary text-primary transition-all duration-300" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number">
+<input class="otp-input w-14 h-16 text-center text-2xl font-bold bg-asphalt-surface border-b-2 border-white/10 rounded-xl rim-light focus:outline-none focus:border-primary text-primary transition-all duration-300" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number">
+</div>
+<!-- Timer Section -->
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-label-sm text-label-sm" id="resend-label">ارسال مجدد کد تا</span>
+<span class="font-label-sm text-label-sm text-primary font-bold" id="timer">01:59</span>
+<button class="hidden font-label-sm text-label-sm text-primary font-bold hover:underline" id="resend-btn">ارسال مجدد</button>
+</div>
+</main>
+<!-- Footer Action -->
+<footer class="relative z-50 p-margin-mobile pb-10">
+<div class="max-w-md mx-auto">
+<button class="w-full h-14 bg-primary text-black font-headline-md text-headline-md rounded-xl active:scale-[0.98] transition-transform duration-200 shadow-xl shadow-primary/20 flex items-center justify-center gap-2" id="continue-btn">
+<span>تایید و ادامه</span>
+<span class="material-symbols-outlined" data-original-icon="chevron_left">chevron_left</span>
+</button>
+</div>
+</footer>
+<!-- Verification Success Overlay (Hidden) -->
+<div class="fixed inset-0 z-[100] bg-surface flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500" id="success-overlay">
+<div class="w-24 h-24 rounded-full bg-safety-teal/20 flex items-center justify-center mb-6 scale-0 transition-transform duration-700" id="success-icon">
+<span class="material-symbols-outlined text-safety-teal text-6xl" data-weight="fill" data-original-icon="check_circle">check_circle</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">ورود موفقیت‌آمیز</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">در حال انتقال به پنل کاربری...</p>
+</div>
+<script>
+        // OTP Focus Logic
+        const inputs = document.querySelectorAll('.otp-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Timer Logic
+        let timeLeft = 119; // 1:59
+        const timerDisplay = document.getElementById('timer');
+        const resendLabel = document.getElementById('resend-label');
+        const resendBtn = document.getElementById('resend-btn');
+
+        const timerInterval = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.classList.add('hidden');
+                resendLabel.classList.add('hidden');
+                resendBtn.classList.remove('hidden');
+            }
+            timeLeft--;
+        }, 1000);
+
+        // Verification Trigger
+        document.getElementById('continue-btn').addEventListener('click', () => {
+            const overlay = document.getElementById('success-overlay');
+            const icon = document.getElementById('success-icon');
+            
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            overlay.classList.add('opacity-100');
+            
+            setTimeout(() => {
+                icon.classList.remove('scale-0');
+                icon.classList.add('scale-100');
+            }, 300);
+        });
+
+        // Simple vibration simulation for input focus
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'translateY(-2px)';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

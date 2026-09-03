@@ -1,0 +1,27 @@
+﻿{
+    "total_chunks":  27,
+    "chunk_path":  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\graphify-out\\.graphify_chunk_03.json",
+    "files":  [
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\column.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\coming_soon.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\count_down.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\count_up.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\crypto_dashboard.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\data_table.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\date_picker.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\date_picker_Jalali.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\default_forms.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\divider.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\draggable.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\dropdown.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\dual_listboxes.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\ecommerce_dashboard.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\editor.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\education.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\email.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\error_400.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\error_403.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\error_404.html\r"
+              ],
+    "chunk_num":  3
+}

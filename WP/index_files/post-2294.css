@@ -1,0 +1,25 @@
+.elementor-2294 .elementor-element.elementor-element-55a729e > .elementor-widget-container{margin:0px 0px -21px 0px;padding:0px 0px 0px 0px;}.elementor-2294 .elementor-element.elementor-element-55a729e{width:100%;max-width:100%;}.elementor-2294 .elementor-element.elementor-element-ee19dee{width:100%;max-width:100%;}.elementor-2294 .elementor-element.elementor-element-ee19dee.elementor-element{--order:99999 /* order end hack */;}.elementor-2294 .elementor-element.elementor-element-d7111bb > .elementor-widget-container{margin:0px 0px -20px 0px;}.elementor-2294 .elementor-element.elementor-element-26f6675 > .elementor-widget-container{margin:0px 0px -21px 0px;}.elementor-2294 .elementor-element.elementor-element-6b13895{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;}.elementor-2294 .elementor-element.elementor-element-7e3eaad{width:100%;max-width:100%;}.elementor-2294 .elementor-element.elementor-element-97c4710{--display:flex;--min-height:0px;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;}.elementor-2294 .elementor-element.elementor-element-f2449aa .elementor-posts-container .elementor-post__thumbnail{padding-bottom:calc( 0.5 * 100% );}.elementor-2294 .elementor-element.elementor-element-f2449aa:after{content:"0.5";}.elementor-2294 .elementor-element.elementor-element-f2449aa .elementor-post__thumbnail__link{width:100%;}.elementor-2294 .elementor-element.elementor-element-f2449aa .elementor-post__meta-data span + span:before{content:"///";}.elementor-2294 .elementor-element.elementor-element-f2449aa{--grid-column-gap:30px;--grid-row-gap:35px;}.elementor-2294 .elementor-element.elementor-element-f2449aa.elementor-posts--thumbnail-left .elementor-post__thumbnail__link{margin-right:20px;}.elementor-2294 .elementor-element.elementor-element-f2449aa.elementor-posts--thumbnail-right .elementor-post__thumbnail__link{margin-left:20px;}.elementor-2294 .elementor-element.elementor-element-f2449aa.elementor-posts--thumbnail-top .elementor-post__thumbnail__link{margin-bottom:20px;}@media(max-width:767px){.elementor-2294 .elementor-element.elementor-element-f2449aa .elementor-posts-container .elementor-post__thumbnail{padding-bottom:calc( 0.5 * 100% );}.elementor-2294 .elementor-element.elementor-element-f2449aa:after{content:"0.5";}.elementor-2294 .elementor-element.elementor-element-f2449aa .elementor-post__thumbnail__link{width:100%;}}/* Start custom CSS for conexi_booking, class: .elementor-element-ee19dee */img.wpforms-submit-spinner{
+	display:none !important;
+}
+
+span.wpforms-captcha-equation span , label.wpforms-field-label{
+    color:white !important;
+}
+
+
+
+label.wpforms-field-label,span#wpforms-2601-field_19-question , legend ,.wpforms-field-label-inline {
+    color: white !important;
+}
+
+.wpforms-field-label-inline a{
+		font-family:IranSans !important
+
+}/* End custom CSS */
+/* Start custom CSS for conexi_taxi_fare, class: .elementor-element-bacb16d */.fare-btn{
+    display: none !important;
+}
+
+ul.features-list * {
+    text-align: right;
+}/* End custom CSS */

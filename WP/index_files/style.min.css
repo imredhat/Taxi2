@@ -1,0 +1,86 @@
+/*
+Theme Name: Conexi
+Theme URI: http://old3.commonsupport.com/wp/conexi/
+Author: tonatheme
+Author URI: https://themeforest.net/user/tonatheme/portfolio
+Description: This is Conexi Online Taxi Booking Service & Solution theme
+Version: 3.0.0
+License: copyright commercial
+License URI: https://themeforest.net/user/tonatheme/portfolio
+Text Domain: Conexi
+Tags: one-column, two-columns, right-sidebar, custom-header, custom-menu, editor-style, featured-images, rtl-language-support, sticky-post, translation-ready, microformats
+Tested up to: 6.0.2
+Requires PHP:7.0
+*/
+
+
+.wp-caption {
+	margin-bottom: 2px;
+}
+
+.wp-caption-text {
+	margin-bottom: 5px;
+}
+
+.screen-reader-text {
+	margin-bottom: 12px;
+}
+
+.gallery-caption {
+	margin-bottom: 2px;
+}
+
+.bypostauthor {
+	margin-bottom: 2px;
+}
+
+.alignleft {
+	float: left;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	max-width: 100%;
+	width: unset !important;
+}
+
+.alignright {
+	float: right !important;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	max-width: 100%;
+	width: unset !important;
+}
+
+.aligncenter {
+	display: block;
+	margin: 0 auto 20px;
+}
+
+.col-md-4 .funfact-meta > i {
+	right: 27px;
+}
+
+.mycustom-pricing {
+	background-color: #090909 !important;
+}
+
+.on-hover {
+	display: none;
+	animation: fadeOut 0.5s;
+}
+
+.hver:hover .on-hover {
+	display: block;
+	animation: fadeIn 0.5s;
+}
+
+.single-blog-style-one .image-block .inner-block img {
+    width: 100%;
+}
+
+.blog_right{
+	order:2!important;
+}
+
+.single-blog-style-two .text-block .meta-info a:not(.date-block) {
+    text-transform: uppercase;
+}

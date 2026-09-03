@@ -1,0 +1,27 @@
+﻿{
+    "total_chunks":  27,
+    "chunk_path":  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\graphify-out\\.graphify_chunk_08.json",
+    "files":  [
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\tabs.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\team.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\template.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\terms_condition.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\textarea.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\ticket.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\ticket_details.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\timeline.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\timeline_range_charts.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\to_do.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\tooltips_popovers.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\touchspin.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\tour.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\tree-view.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\treemap.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\two_step_verification.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\two_step_verification_1.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\typeahead.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\video_emaded.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\weather_icon.html\r"
+              ],
+    "chunk_num":  8
+}

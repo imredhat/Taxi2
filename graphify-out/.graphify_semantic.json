@@ -1,0 +1,2824 @@
+{
+  "nodes": [
+    {
+      "id": "app_agents_ponytail_philosophy",
+      "type": "concept",
+      "name": "Ponytail Development Philosophy",
+      "description": "Lazy senior dev mode emphasizing efficient, minimal code with a ladder of checks before writing code",
+      "source_file": "E:\\Jobs\\Taxi2\\App\\AGENTS.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "development-philosophy",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "app_agents_yagni",
+      "type": "concept",
+      "name": "YAGNI Principle",
+      "description": "You Ain't Gonna Need It - question if something needs to be built at all",
+      "source_file": "E:\\Jobs\\Taxi2\\App\\AGENTS.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "principle",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "cron_skill_scheduled_tasks",
+      "type": "concept",
+      "name": "Scheduled Task Management",
+      "description": "Create, query, update scheduled tasks to automatically execute operations at specified times",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\cron\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "automation",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "cron_skill_cron_expressions",
+      "type": "concept",
+      "name": "Cron Expressions",
+      "description": "Format: minute hour day-of-month month day-of-week for scheduling tasks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\cron\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "scheduling",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "officecli_skill_document_cli",
+      "type": "concept",
+      "name": "Office Document CLI",
+      "description": "AI-friendly CLI for .docx, .xlsx, .pptx - single binary, no dependencies, no Office installation needed",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\officecli\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "tool",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "officecli_dom_operations",
+      "type": "concept",
+      "name": "DOM Operations for Office Documents",
+      "description": "L2 operations: set properties, find/replace text, add elements, move/swap/remove",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\officecli\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "operations",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "officecli_raw_xml",
+      "type": "concept",
+      "name": "Raw XML Operations",
+      "description": "L3 operations: view raw XML, raw-set with xpath, add-part for document parts",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\officecli\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "operations",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "skill_creator_license",
+      "type": "document",
+      "name": "Apache License 2.0",
+      "description": "Open source license for skill-creator",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\LICENSE.txt",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "license",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "skill_creator_process",
+      "type": "concept",
+      "name": "Skill Creation Process",
+      "description": "6-step process: understand with examples, plan contents, initialize, edit, package, iterate",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "workflow",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "skill_creator_anatomy",
+      "type": "concept",
+      "name": "Skill Anatomy",
+      "description": "SKILL.md (required) + bundled resources: scripts/, references/, assets/",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "structure",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "skill_creator_progressive_disclosure",
+      "type": "concept",
+      "name": "Progressive Disclosure Design",
+      "description": "Three-level loading: metadata (always), SKILL.md body (when triggered), bundled resources (as needed)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "design-principle",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "output_patterns_template",
+      "type": "concept",
+      "name": "Template Pattern",
+      "description": "Provide templates for output format with strict or flexible guidance",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\output-patterns.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "pattern",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "output_patterns_examples",
+      "type": "concept",
+      "name": "Examples Pattern",
+      "description": "Provide input/output pairs for skills where output quality depends on seeing examples",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\output-patterns.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "pattern",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "workflows_sequential",
+      "type": "concept",
+      "name": "Sequential Workflows",
+      "description": "Break complex tasks into clear, sequential steps",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\workflows.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "workflow-pattern",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "workflows_conditional",
+      "type": "concept",
+      "name": "Conditional Workflows",
+      "description": "Guide through decision points with branching logic",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.aionrs\\skills\\skill-creator\\references\\workflows.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "workflow-pattern",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_nodejs_stack",
+      "type": "concept",
+      "name": "Node.js Backend Stack",
+      "description": "Modern stack: NestJS/Hono, Drizzle ORM, Vitest, TypeScript",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "technology-stack",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_hono_framework",
+      "type": "concept",
+      "name": "Hono Web Framework",
+      "description": "Fast, lightweight, edge-ready web framework for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "framework",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_nestjs_framework",
+      "type": "concept",
+      "name": "NestJS Framework",
+      "description": "Enterprise Node.js framework with DI and structured architecture",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "framework",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_drizzle_orm",
+      "type": "concept",
+      "name": "Drizzle ORM",
+      "description": "Type-safe, lightweight, SQL-like ORM for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "orm",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_vitest_testing",
+      "type": "concept",
+      "name": "Vitest Testing Framework",
+      "description": "Fast, ESM native, Jest compatible testing framework",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "testing",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_zod_validation",
+      "type": "concept",
+      "name": "Zod Validation",
+      "description": "Type inference, composable validation library",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "validation",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "testing_vitest_patterns",
+      "type": "concept",
+      "name": "Vitest Test Patterns",
+      "description": "Basic tests, API tests with Hono, test database setup, mocking, fixtures, snapshot testing",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\backend-nodejs\\references\\testing.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "testing-patterns",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "vue_composable_adaptable",
+      "type": "concept",
+      "name": "Adaptable Vue Composable",
+      "description": "Reusable functions accepting both reactive and non-reactive inputs using MaybeRef/MaybeRefOrGetter",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\create-adaptable-composable\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "vue-pattern",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "vue_maybe_ref",
+      "type": "concept",
+      "name": "MaybeRef Type",
+      "description": "Type for value or writable ref (value/ref/shallowRef/writable computed)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\create-adaptable-composable\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "type-utility",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "vue_maybe_ref_or_getter",
+      "type": "concept",
+      "name": "MaybeRefOrGetter Type",
+      "description": "MaybeRef + ComputedRef + () => T for read-only, computed-friendly input",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\create-adaptable-composable\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "type-utility",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "find_skills_cli",
+      "type": "concept",
+      "name": "Skills CLI",
+      "description": "Package manager for open agent skills ecosystem - find, add, check, update skills",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\find-skills\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "tool",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "find_skills_discovery",
+      "type": "concept",
+      "name": "Skill Discovery Process",
+      "description": "Understand needs, search for skills, present options, install with confirmation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\find-skills\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "workflow",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "frontend_design_principles",
+      "type": "concept",
+      "name": "Frontend Design Principles",
+      "description": "Distinctive, intentional visual design with deliberate palette, typography, and layout choices",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-design\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "design-principle",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "frontend_design_process",
+      "type": "concept",
+      "name": "Design Process",
+      "description": "Brainstorm, explore, plan, critique, build, critique again",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-design\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "workflow",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "frontend_development_skill",
+      "type": "concept",
+      "name": "Frontend Development Skill",
+      "description": "Atomic skill for frontend development: component creation, state management, build optimization",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "skill",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "frontend_component_types",
+      "type": "concept",
+      "name": "Component Types",
+      "description": "Presentational, container, compound, headless component patterns",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "pattern",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "frontend_config_yaml",
+      "type": "document",
+      "name": "Frontend Development Configuration",
+      "description": "YAML configuration for skill settings, validation, output, environments",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\assets\\config.yaml",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "configuration",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "frontend_guide",
+      "type": "document",
+      "name": "Frontend Development Guide",
+      "description": "Comprehensive documentation for frontend-development skill with quick start and core concepts",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\references\\GUIDE.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "documentation",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "frontend_patterns",
+      "type": "document",
+      "name": "Frontend Development Patterns",
+      "description": "Design patterns: input validation, error handling, configuration loading",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\frontend-development\\references\\PATTERNS.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "patterns",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_core_internals",
+      "type": "concept",
+      "name": "Node.js Core Internals",
+      "description": "V8 engine, libuv event loop, native addons, build systems, performance debugging",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "internals",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_v8_engine",
+      "type": "concept",
+      "name": "V8 Engine",
+      "description": "JavaScript engine with garbage collection, hidden classes, JIT compilation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "engine",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_libuv",
+      "type": "concept",
+      "name": "libuv",
+      "description": "Event loop, thread pool, async I/O for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "library",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_native_addons",
+      "type": "concept",
+      "name": "Native Addons",
+      "description": "N-API, node-addon-api, NAN bindings for C++ extensions",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\SKILL.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "native-development",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_build_workflow",
+      "type": "concept",
+      "name": "Edit-Build-Lint-Test Cycle",
+      "description": "Mandatory cycle: edit src/lib → make → lint → test for Node.js core development",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-and-test-workflow.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "workflow",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_rebuild_required",
+      "type": "concept",
+      "name": "Rebuild After Every Change",
+      "description": "Node.js embeds lib/ files into binary at compile time - must rebuild after any src/ or lib/ change",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-and-test-workflow.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "critical-rule",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_build_system",
+      "type": "concept",
+      "name": "Node.js Build System",
+      "description": "GYP, ninja, make, cross-platform compilation for building Node.js from source",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-system.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "build-system",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_gyp",
+      "type": "concept",
+      "name": "GYP (Generate Your Project)",
+      "description": "Build system that creates platform-specific build files from binding.gyp",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-system.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "build-tool",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_node_gyp",
+      "type": "concept",
+      "name": "node-gyp",
+      "description": "Tool for building native addon modules for Node.js",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\build-system.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "build-tool",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_child_process",
+      "type": "concept",
+      "name": "Child Process Internals",
+      "description": "IPC, spawn, fork implementation in Node.js with libuv integration",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\child-process-internals.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "internals",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_ipc",
+      "type": "concept",
+      "name": "Inter-Process Communication",
+      "description": "IPC channel setup, message format, handle passing between processes",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\child-process-internals.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "communication",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_cli_options",
+      "type": "concept",
+      "name": "CLI Options",
+      "description": "Adding CLI flags and gating experimental modules in Node.js core",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\cli-options.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "configuration",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_experimental_modules",
+      "type": "concept",
+      "name": "Experimental Module Gating",
+      "description": "Using CLI flags to control access to experimental built-in modules",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\cli-options.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "module-system",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_option_classes",
+      "type": "concept",
+      "name": "Node.js Option Classes",
+      "description": "DebugOptions, EnvironmentOptions, PerIsolateOptions, PerProcessOptions for different scopes",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\cli-options.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "architecture",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "nodejs_commit_messages",
+      "type": "concept",
+      "name": "Node.js Commit Messages",
+      "description": "Subsystem prefix format with Fixes/Refs footers, no AI signatures allowed",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\commit-messages.md",
+      "confidence_score": 1.0,
+      "metadata": {
+        "category": "convention",
+        "origin": "EXTRACTED"
+      }
+    },
+    {
+      "id": "configure_build_config",
+      "type": "concept",
+      "label": "Node.js Build Configuration",
+      "description": "The ./configure script and its flags for building Node.js from source",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "configure_debug_build",
+      "type": "concept",
+      "label": "Debug Build",
+      "description": "Building Node.js with --debug flag produces node_g binary with DCHECKs enabled",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "configure_asan_flag",
+      "type": "concept",
+      "label": "AddressSanitizer Build",
+      "description": "Building Node.js with --enable-asan for memory error detection",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "configure_ninja_flag",
+      "type": "concept",
+      "label": "Ninja Build System",
+      "description": "Using --ninja flag with configure for faster incremental builds",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\configure.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "contributing_repo_structure",
+      "type": "document",
+      "label": "Node.js Repository Structure",
+      "description": "Standard layout: src/ (C++), lib/ (JS), deps/ (V8, libuv, openssl), test/, doc/, tools/, benchmark/",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\contributing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "contributing_pr_process",
+      "type": "document",
+      "label": "Pull Request Process",
+      "description": "Contributing to Node.js: fork, branch, commit format 'subsystem: description', PR with tests",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\contributing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "contributing_semver_labels",
+      "type": "concept",
+      "label": "Semver Labels",
+      "description": "semver-major (breaking), semver-minor (feature), semver-patch (fix) labels for PRs",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\contributing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_internals_arch",
+      "type": "concept",
+      "label": "Crypto Module Architecture",
+      "description": "Three-layer architecture: JS (lib/crypto.js) -> C++ bindings (src/crypto/) -> OpenSSL (EVP_*, RAND_*, X509_*)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_thread_pool_ops",
+      "type": "concept",
+      "label": "Crypto Thread Pool Operations",
+      "description": "pbkdf2, scrypt, randomBytes (async), generateKeyPair use libuv thread pool; createHash, createCipher run on main thread",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_hash_implementation",
+      "type": "document",
+      "label": "Crypto Hash C++ Implementation",
+      "description": "Hash operations wrap OpenSSL EVP_DigestUpdate/EVP_DigestFinal_ex via src/crypto/crypto_hash.cc",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "crypto_cipher_implementation",
+      "type": "document",
+      "label": "Crypto Cipher C++ Implementation",
+      "description": "Cipher operations wrap EVP_CipherUpdate via src/crypto/crypto_cipher.cc, supports AEAD modes with auth tags",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\crypto-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "debugging_native_tools",
+      "type": "document",
+      "label": "Native Debugging Tools",
+      "description": "GDB and LLDB for debugging Node.js C++ addons and core, with V8-specific helper commands",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\debugging-native.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "debugging_core_dumps",
+      "type": "concept",
+      "label": "Core Dump Debugging",
+      "description": "Enabling and analyzing core dumps with GDB/LLDB for crash investigation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\debugging-native.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "debugging_remote_gdb",
+      "type": "concept",
+      "label": "Remote Debugging",
+      "description": "Remote debugging with gdbserver and lldb-server for remote target machines",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\debugging-native.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "documentation_api_docs",
+      "type": "document",
+      "label": "API Documentation Conventions",
+      "description": "Rules for doc/api/*.md files: YAML metadata blocks, stability indicators, link reference ordering, dual CJS/ESM examples",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\documentation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "documentation_link_ordering",
+      "type": "concept",
+      "label": "Link Reference Ordering",
+      "description": "Strict ASCII lexical ordering for link references at bottom of markdown files, enforced by make lint-md",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\documentation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "documentation_error_docs",
+      "type": "concept",
+      "label": "Error Documentation",
+      "description": "New error codes require alphabetical entries in both lib/internal/errors.js and doc/api/errors.md",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\documentation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "fs_internals_arch",
+      "type": "concept",
+      "label": "FS Module Architecture",
+      "description": "Three-layer architecture: JS (lib/fs.js) -> C++ bindings (src/node_file.cc) -> libuv thread pool -> system calls",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\fs-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "fs_async_vs_sync",
+      "type": "concept",
+      "label": "FS Async vs Sync Operations",
+      "description": "Async fs operations use thread pool via FSReqCallback/FSReqPromise; sync operations block the event loop",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\fs-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "fs_file_descriptors",
+      "type": "concept",
+      "label": "File Descriptors",
+      "description": "fs.open returns integer file descriptors; must be closed to prevent leaks; used for read/write at offset",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\fs-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_async_io",
+      "type": "concept",
+      "label": "libuv Async I/O",
+      "description": "Cross-platform async I/O using epoll (Linux), kqueue (macOS), IOCP (Windows), event ports (SunOS)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_handles_requests",
+      "type": "concept",
+      "label": "libuv Handles and Requests",
+      "description": "Handles are long-lived resource representations (TCP, UDP, Timer, etc.); Requests are short-lived operations (connect, write, FS, DNS)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_stream_backpressure",
+      "type": "concept",
+      "label": "libuv Stream Backpressure",
+      "description": "Backpressure via socket.pause()/resume() mapping to uv_read_stop()/uv_read_start(); write drain events for write backpressure",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_async_notification",
+      "type": "concept",
+      "label": "libuv Async Notification",
+      "description": "uv_async_t for cross-thread signaling; used for worker thread communication and N-API async callbacks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-async-io.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_event_loop_phases",
+      "type": "concept",
+      "label": "Event Loop Phases",
+      "description": "Six phases: timers -> pending callbacks -> idle/prepare -> poll -> check -> close callbacks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-event-loop.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_microtasks_nexttick",
+      "type": "concept",
+      "label": "Microtasks and nextTick",
+      "description": "process.nextTick() and Promise callbacks execute between phases; recursive nextTick starves I/O",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-event-loop.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_nexttick_starvation",
+      "type": "concept",
+      "label": "nextTick Starvation",
+      "description": "Recursive process.nextTick prevents I/O callbacks from executing; use setImmediate for recursion instead",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-event-loop.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_thread_pool_size",
+      "type": "concept",
+      "label": "Thread Pool Configuration",
+      "description": "Default 4 threads, configurable via UV_THREADPOOL_SIZE env var (max 1024), must be set before Node.js starts",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-thread-pool.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_thread_pool_ops",
+      "type": "concept",
+      "label": "Thread Pool Operations",
+      "description": "fs operations (except fs.watch), dns.lookup (not dns.resolve), some crypto ops, zlib, custom addons via uv_queue_work",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-thread-pool.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "libuv_thread_pool_starvation",
+      "type": "concept",
+      "label": "Thread Pool Starvation",
+      "description": "When all 4 default threads are busy, new operations queue; dns.lookup is a canary for saturation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\libuv-thread-pool.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "memory_debugging_heap",
+      "type": "concept",
+      "label": "V8 Heap Memory Layout",
+      "description": "Process memory: V8 Heap (New/Old/Large Object/Code spaces), V8 External Memory, Native Memory, Stack",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\memory-debugging.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "memory_debugging_snapshots",
+      "type": "document",
+      "label": "Heap Snapshots",
+      "description": "Taking and comparing heap snapshots via v8.writeHeapSnapshot() or inspector API; key terms: shallow size, retained size, distance, retainers",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\memory-debugging.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "memory_debugging_leaks",
+      "type": "concept",
+      "label": "Memory Leak Detection",
+      "description": "Monitoring heap growth over time, using async_hooks to track thread pool operations, comparing heap snapshots",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\memory-debugging.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_abi_stability",
+      "type": "concept",
+      "label": "N-API ABI Stability",
+      "description": "N-API provides ABI-stable API for native addons; code compatible across Node.js versions without recompilation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_versions",
+      "type": "document",
+      "label": "N-API Versions",
+      "description": "Versioned features: v1 (8.0.0 core), v3 (BigInt), v5 (Date/finalization), v8 (type tagging), v9 (extended Buffer)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_async_worker",
+      "type": "concept",
+      "label": "N-API AsyncWorker Pattern",
+      "description": "AsyncWorker for blocking operations on thread pool with Execute() and Complete() callbacks, returns Promise",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_threadsafe_function",
+      "type": "concept",
+      "label": "N-API ThreadSafeFunction",
+      "description": "Calling JavaScript from any thread via napi_threadsafe_function; queues JS callbacks on main thread",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_object_wrapping",
+      "type": "concept",
+      "label": "N-API Object Wrapping",
+      "description": "Wrapping C/C++ objects as JavaScript objects using napi_wrap/napi_unwrap with destructor callbacks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "napi_instance_data",
+      "type": "concept",
+      "label": "N-API Instance Data",
+      "description": "Per-addon-instance data storage for worker thread safety via napi_set_instance_data/napi_get_instance_data",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\napi.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_management",
+      "type": "concept",
+      "label": "Native Memory Management",
+      "description": "Memory strategies: stack vs heap allocation, smart pointers (unique_ptr, shared_ptr), RAII patterns for native addons",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_buffer_handling",
+      "type": "document",
+      "label": "Native Buffer Handling",
+      "description": "Creating buffers: Node.js allocated (Buffer::New), copied (Buffer::Copy), external with finalizer; must keep references to prevent GC",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_adjust_external",
+      "type": "concept",
+      "label": "External Memory Tracking",
+      "description": "Napi::MemoryManagement::AdjustExternalMemory to tell V8 about native allocations; prevents GC starvation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "native_memory_leak_prevention",
+      "type": "concept",
+      "label": "Native Memory Leak Prevention",
+      "description": "Common leaks: forgotten delete, exception paths, reference cycles, ThreadSafeFunction not released, AsyncWorker raw pointers",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\native-memory.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "net_internals_arch",
+      "type": "concept",
+      "label": "Net Module Architecture",
+      "description": "Three-layer architecture: JS (lib/net.js, lib/dgram.js) -> C++ (TCPWrap, UDPWrap, PipeWrap) -> libuv (uv_tcp_t, uv_udp_t) -> system calls",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\net-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "net_tcp_server_impl",
+      "type": "document",
+      "label": "TCP Server Implementation",
+      "description": "Server creates TCP handle, binds, listens; onconnection callback creates Socket wrapper; C++ TCPWrap::OnConnection calls uv_accept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\net-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "net_tcp_client_connect",
+      "type": "concept",
+      "label": "TCP Client Connection",
+      "description": "Connect flow: create TCP handle, DNS lookup if needed, TCPConnectWrap request, afterConnect callback sets readable/writable",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\net-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "node_addon_api_wrapper",
+      "type": "concept",
+      "label": "node-addon-api C++ Wrapper",
+      "description": "C++ wrapper around N-API providing idiomatic C++: type conversions, error handling, ObjectWrap, AsyncWorker, ThreadSafeFunction",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\node-addon-api.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "node_addon_api_error_handling",
+      "type": "concept",
+      "label": "node-addon-api Error Handling",
+      "description": "Two modes: NAPI_CPP_EXCEPTIONS (C++ exceptions) or non-exception mode with env.IsExceptionPending() checks",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\node-addon-api.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "node_addon_api_async_worker",
+      "type": "concept",
+      "label": "node-addon-api AsyncWorker",
+      "description": "AsyncWorker with Execute() on thread pool, OnOK()/OnError() on main thread; AsyncProgressWorker for progress reporting",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\node-addon-api.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_concept",
+      "type": "concept",
+      "label": "Primordials",
+      "description": "Frozen copies of JS built-in objects captured before user code runs; protects internal modules from prototype pollution",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_uncurry_this",
+      "type": "concept",
+      "label": "uncurryThis Pattern",
+      "description": "Prototype methods converted to standalone functions where this becomes first argument: arr.push(item) -> ArrayPrototypePush(arr, item)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_safe_classes",
+      "type": "concept",
+      "label": "Safe Classes",
+      "description": "SafeMap, SafeSet, SafeWeakMap etc. with frozen/null-prototype chains; SafePromiseAllReturnVoid and SafePromiseAllReturnArrayLike",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "primordials_unsafe_patterns",
+      "type": "concept",
+      "label": "Unsafe Patterns in Core",
+      "description": "for-of iteration, array destructuring, spread operator, RegExp.test, instanceof, generators are unsafe in core code",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\primordials.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "profiling_v8_cpu",
+      "type": "document",
+      "label": "V8 CPU Profiling",
+      "description": "Using --prof flag, processing with --prof-process; * = optimized, ~ = interpreted; flame graphs via 0x, perf, dtrace",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\profiling-v8.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "profiling_v8_optimization_tracing",
+      "type": "concept",
+      "label": "V8 Optimization Tracing",
+      "description": "--trace-opt for optimization events, --trace-deopt for deoptimization with reasons (not a Smi, wrong map, minus zero, etc.)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\profiling-v8.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "profiling_flame_graphs",
+      "type": "concept",
+      "label": "Flame Graph Generation",
+      "description": "Using 0x tool, Linux perf, or macOS dtrace to generate flame graphs; wide boxes = CPU consumers, plateaus = slow children",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\profiling-v8.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "reviewing_prs_checklist",
+      "type": "document",
+      "label": "PR Review Checklist",
+      "description": "Technical review: commit message, scope, tests, documentation, code quality (primordials, validators, errors), build/CI",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\reviewing-prs.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "reviewing_prs_ai_flags",
+      "type": "concept",
+      "label": "AI-Generated PR Red Flags",
+      "description": "Hallucinated APIs, inconsistent convention adherence, over-engineering, tests testing implementation not behavior, boilerplate responses",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\reviewing-prs.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "streams_internals_arch",
+      "type": "concept",
+      "label": "Streams Architecture",
+      "description": "Four-layer architecture: JS (Readable/Writable/Duplex/Transform) -> C++ (StreamBase, StreamReq) -> libuv streams (uv_stream_t) -> system",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\streams-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "streams_streambase",
+      "type": "document",
+      "label": "StreamBase C++ Interface",
+      "description": "StreamBase abstract class: ReadStart/ReadStop/DoWrite/DoShutdown; WriteWrap/ShutdownWrap for operation tracking",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\streams-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "streams_readable_flow",
+      "type": "concept",
+      "label": "Readable Stream Flow",
+      "description": "read() -> _read(n) -> C++ ReadStart -> uv_read_start -> epoll/kqueue -> alloc_cb -> read_cb -> OnRead -> Buffer -> push(chunk) -> data event",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\streams-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_architecture",
+      "type": "concept",
+      "label": "V8 Generational GC",
+      "description": "Generational GC: Scavenger (young gen, semi-space copying) + Mark-Sweep/Mark-Compact (old gen); based on generational hypothesis",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_scavenger",
+      "type": "concept",
+      "label": "V8 Scavenger (Minor GC)",
+      "description": "Young generation collection: semi-space copying, objects surviving 2 collections promoted to old space; fast but requires 2x memory",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_mark_sweep",
+      "type": "concept",
+      "label": "Mark-Sweep (Major GC)",
+      "description": "Old generation: mark reachable objects from roots, sweep dead; incremental marking reduces pause times; write barriers track cross-gen refs",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_mark_compact",
+      "type": "concept",
+      "label": "Mark-Compact GC",
+      "description": "When heap fragmentation is high: mark + compact by moving live objects to eliminate gaps; expensive due to pointer updates",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_gc_pitfalls",
+      "type": "concept",
+      "label": "GC Common Pitfalls",
+      "description": "Closure memory retention, unintentional global references, timer/event listener leaks; use object pooling for high-allocation scenarios",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-garbage-collection.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_hidden_classes",
+      "type": "concept",
+      "label": "V8 Hidden Classes (Maps)",
+      "description": "V8 creates hidden classes describing object structure; transitions happen on property add/delete; maps describe property offsets",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_inline_caching",
+      "type": "concept",
+      "label": "Inline Caching (IC)",
+      "description": "V8 caches hidden class and offset for property access; states: uninitialized -> monomorphic -> polymorphic -> megamorphic (>4 maps)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_elements_kinds",
+      "type": "concept",
+      "label": "Array Elements Kinds",
+      "description": "V8 tracks array element types: PACKED_SMI_ELEMENTS (fastest) -> PACKED_DOUBLE_ELEMENTS -> PACKED_ELEMENTS -> HOLEY_ELEMENTS; transitions only downward",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_hidden_class_best_practices",
+      "type": "concept",
+      "label": "Hidden Class Best Practices",
+      "description": "Initialize properties in consistent order, use classes/constructors, avoid delete, keep type stability, avoid dynamic property names",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-hidden-classes.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_pipeline",
+      "type": "concept",
+      "label": "V8 JIT Compilation Pipeline",
+      "description": "Parser -> AST -> Ignition (interpreter, bytecode) -> TurboFan (JIT compiler, machine code); profiling triggers tier-up",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_type_feedback",
+      "type": "concept",
+      "label": "Type Feedback and Speculation",
+      "description": "TurboFan uses type feedback to speculate on types; deoptimization occurs on type mismatch (not a Smi, wrong map, etc.)",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_optimizable_code",
+      "type": "concept",
+      "label": "Writing Optimizable Code",
+      "description": "Type stability, avoid megamorphic call sites, loop optimization, avoid arguments object, prefer rest parameters, avoid object spread in hot loops",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "v8_jit_escape_analysis",
+      "type": "concept",
+      "label": "V8 Escape Analysis",
+      "description": "TurboFan eliminates heap allocations when objects don't escape the function; enables stack allocation",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\v8-jit-compilation.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_architecture",
+      "type": "concept",
+      "label": "Worker Threads Architecture",
+      "description": "Each worker has its own V8 Isolate and event loop; communication via MessagePort/MessageChannel; shared memory via SharedArrayBuffer",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_creation",
+      "type": "document",
+      "label": "Worker Thread Creation",
+      "description": "JS Worker class creates C++ WorkerImpl, sets up MessageChannel, StartThread creates uv_thread with new V8 Isolate and Environment",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_structured_clone",
+      "type": "concept",
+      "label": "Structured Clone for Messaging",
+      "description": "Messages serialized via structured clone: supports numbers, strings, Date, RegExp, Array, Map, Set, Buffer, TypedArray, ArrayBuffer, Error; not functions/symbols",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "worker_threads_transfer",
+      "type": "concept",
+      "label": "Transfer List (Zero-Copy)",
+      "description": "Transfer ArrayBuffer/MessagePort ownership instead of copying; transferred buffer is detached (unusable) in sender",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\nodejs-core\\rules\\worker-threads-internals.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "senior_backend_agent_skill",
+      "type": "concept",
+      "label": "Senior Backend Agent Skill",
+      "description": "Comprehensive backend development skill covering NodeJS, Express, Go, Python, Postgres, GraphQL, REST APIs with API scaffolding, database optimization, security, and performance tuning.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_skill",
+      "type": "concept",
+      "label": "Skill Creator Skill",
+      "description": "Meta-skill for creating, evaluating, and iteratively improving Claude Code skills with quantitative benchmarks and human review loops.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_grader_agent",
+      "type": "concept",
+      "label": "Grader Agent",
+      "description": "Subagent that evaluates expectations against execution transcripts and outputs, grades pass/fail with evidence, and critiques eval quality.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\agents\\grader.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_comparator_agent",
+      "type": "concept",
+      "label": "Blind Comparator Agent",
+      "description": "Subagent that compares two outputs blind (without knowing which skill produced them) using a rubric-based scoring system to determine quality winner.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\agents\\comparator.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_analyzer_agent",
+      "type": "concept",
+      "label": "Post-hoc Analyzer Agent",
+      "description": "Subagent that analyzes blind comparison results and benchmark data to extract actionable insights about why a winner won and how to improve the loser.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\agents\\analyzer.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_schemas",
+      "type": "document",
+      "label": "Skill Creator JSON Schemas",
+      "description": "Defines JSON schemas for evals.json, grading.json, metrics.json, timing.json, benchmark.json, comparison.json, analysis.json, and history.json used in the skill evaluation pipeline.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\references\\schemas.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "ui_ux_pro_max_skill",
+      "type": "concept",
+      "label": "UI/UX Pro Max Skill",
+      "description": "Comprehensive UI/UX design intelligence skill with 50+ styles, 161 color palettes, 57 font pairings, 161 product types, 99 UX guidelines, and 25 chart types across 10 stacks.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\ui-ux-pro-max\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_skill",
+      "type": "concept",
+      "label": "Vue Expert JS Skill",
+      "description": "Senior Vue specialist skill for building Vue 3 applications with JavaScript and JSDoc typing (no TypeScript). Covers components, composables, state management, and testing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_component_architecture",
+      "type": "document",
+      "label": "Vue Component Architecture Reference",
+      "description": "Reference guide covering Vue 3 component patterns: props, emits, v-model, slots, provide/inject, and dynamic components with JSDoc annotations.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\component-architecture.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_composables",
+      "type": "document",
+      "label": "Vue Composables Patterns Reference",
+      "description": "Reference for Vue 3 composable patterns: ref vs reactive, lifecycle hooks, shared singleton state, async with cancellation, and basic composable structure.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\composables-patterns.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_jsdoc_typing",
+      "type": "document",
+      "label": "JSDoc Typing for Vue Reference",
+      "description": "Reference for JSDoc-based type annotations in Vue 3: typing refs, computed, reactive, props, emits, composables, Pinia stores, and shared type definitions.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\jsdoc-typing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_state_management",
+      "type": "document",
+      "label": "Vue State Management Reference",
+      "description": "Reference for Pinia state management in Vue 3: options store syntax, setup store syntax (Composition API), store composition, persistence, and testing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\state-management.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_testing",
+      "type": "document",
+      "label": "Vue Testing Patterns Reference",
+      "description": "Reference for testing Vue 3 components with Vitest and Vue Test Utils: component testing, v-model testing, async testing, mocking composables, Pinia testing, and provide/inject testing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\testing-patterns.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_json_render_skill",
+      "type": "concept",
+      "label": "Vue JSON Render Skill",
+      "description": "Vue 3 renderer for json-render that converts JSON specs into Vue component trees with data binding, visibility, and actions. Uses @json-render/vue and @json-render/core.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "server_agents_md",
+      "type": "document",
+      "label": "AGENTS.md (Ponytail Lazy Senior Dev Mode)",
+      "description": "Project coding philosophy document defining YAGNI-driven lazy senior developer approach: minimal code, reuse existing patterns, shortest working diff, root-cause bug fixing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\AGENTS.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "server_idea_md",
+      "type": "document",
+      "label": "IDEA.md (Pooyesh Taxi Platform Requirements)",
+      "description": "Requirements document for the Pooyesh Taxi (3V_Pooyesh) platform covering 4 portals (website, admin dashboard, passenger app, driver app), SSO, pricing algorithms, and tech stack.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "api_design_patterns_ref",
+      "type": "document",
+      "label": "API Design Patterns Reference",
+      "description": "Reference guide for API design patterns and practices covering code organization, performance considerations, security best practices, and anti-patterns.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\references\\api_design_patterns.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "backend_security_practices_ref",
+      "type": "document",
+      "label": "Backend Security Practices Reference",
+      "description": "Reference guide for backend security covering input validation, authentication, authorization, data protection, and performance considerations.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\references\\backend_security_practices.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "database_optimization_guide_ref",
+      "type": "document",
+      "label": "Database Optimization Guide Reference",
+      "description": "Reference guide for database optimization covering patterns, performance considerations, security best practices, and common anti-patterns.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\references\\database_optimization_guide.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "pooyesh_taxi_platform",
+      "type": "concept",
+      "label": "Pooyesh Taxi Platform",
+      "description": "Full taxi platform with website (Nuxt 3), admin dashboard (Nuxt 3), passenger app (React Native), driver app (React Native), backend (Node.js+Express+Prisma), PostgreSQL+Redis, Socket.io.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "ponytail_coding_philosophy",
+      "type": "concept",
+      "label": "Ponytail Coding Philosophy",
+      "description": "Lazy senior dev approach: YAGNI ladder, reuse before write, shortest working diff, root-cause bug fixing, no unnecessary abstractions, deletion over addition.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\AGENTS.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_eval_benchmark_system",
+      "type": "concept",
+      "label": "Skill Evaluation Benchmark System",
+      "description": "Multi-stage evaluation pipeline for skills: spawn parallel runs (with/without skill), draft assertions, grade outputs, aggregate benchmarks, analyze results, and iterate.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_description_optimization",
+      "type": "concept",
+      "label": "Skill Description Optimization",
+      "description": "Process to optimize skill triggering accuracy: generate trigger eval queries (should/should-not trigger), run optimization loop with train/test split, apply best_description.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "jsdoc_type_safety_system",
+      "type": "concept",
+      "label": "JSDoc Type Safety System",
+      "description": "Approach to type safety in Vue 3 without TypeScript: @typedef for object shapes, @param/@returns for functions, @type for reactive variables, shared type files with import() syntax.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "json_render_vue_system",
+      "type": "concept",
+      "label": "JSON Render Vue System",
+      "description": "Architecture for converting JSON specs into Vue component trees: defineCatalog, defineRegistry with h() render functions, StateProvider/ActionProvider/VisibilityProvider/ValidationProvider, composables for state/actions/visibility.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "taxi_pricing_algorithm",
+      "type": "concept",
+      "label": "Taxi Pricing Algorithm",
+      "description": "Dynamic pricing engine for intercity and intracity trips using base cost, distance rate, time rate, vehicle category coefficient, dynamic/weather coefficient, and surge pricing via Geohash.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "taxi_vehicle_categories",
+      "type": "concept",
+      "label": "Taxi Vehicle Categories",
+      "description": "Vehicle categories: Eco Urban (Pride, Tiba, 206, Quick), Eco (Samand, Peugeot, Pars), Eco+ (Ario, Brilliance), VIP (Prius, Fluence, Accent), VIP+ (Sonata, Camry, Krowal), SUV VIP (Santa Fe, Rav4), Van C (Hiace, Hyundai H350).",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "taxi2_project",
+      "label": "Taxi2 Project",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\README.md",
+      "description": "Taxi2 is an intercity taxi/ride-hailing platform with server backend, WordPress site, and Nuxt 3 frontend",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "server_database_readme",
+      "label": "Taxi2 Database Schema",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Database schema documentation covering 12 core tables for drivers, passengers, rides, payments with PostGIS geospatial support",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "taxi2_db_tables",
+      "label": "Database Core Tables",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "12 core tables: drivers, vehicles, driver_locations, passengers, passenger_locations, ride_requests, ride_request_offers, rides, ride_locations, ratings, payments, favorite_locations",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "taxi2_driver_status",
+      "label": "Driver Status Enum",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Driver states: offline, online, busy",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "taxi2_ride_request_status",
+      "label": "Ride Request Status Enum",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Ride request states: pending, accepted, expired, cancelled",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "taxi2_ride_status",
+      "label": "Ride Status Enum",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Ride states: accepted, arriving, in_progress, completed, cancelled",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "taxi2_db_features",
+      "label": "Database Design Features",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "PostGIS geospatial queries, UUID primary keys, automatic timestamps, soft deletion with is_active flags, CHECK constraint enums",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "pooyesh_taxi_wp",
+      "label": "Pooyesh Taxi WordPress Site",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\WP\\index.html",
+      "description": "Current WordPress website at pooyeshtak30.ir for Pooyesh Taxi intercity ride-hailing service, RTL Persian, Elementor-based",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "pooyesh_taxi_brand",
+      "label": "Pooyesh Taxi Brand",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\WP\\index.html",
+      "description": "Intercity taxi service (دربستی بین شهری) offering airport transfer, corporate service, VIP/Economy vehicles with online booking",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "web_agents_md",
+      "label": "Web AGENTS.md Coding Guidelines",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\AGENTS.md",
+      "description": "Ponytail lazy senior dev mode guidelines - YAGNI, reuse existing patterns, minimize code, understand before simplifying",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "web_readme",
+      "label": "Web Frontend README",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\README.md",
+      "description": "Nuxt 3 SPA setup with login page, meta tags in nuxt.config.ts, dev server on localhost:3000",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "web_nuxt3_frontend",
+      "label": "Nuxt 3 Frontend",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\README.md",
+      "description": "Nuxt 3 SPA with Vue 3, SSR/SEO, login page converted from old HTML, app.vue root component",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "web_design_doc",
+      "label": "Web Design Specification",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Comprehensive design spec for Pooyesh Taxi website redesign: Nuxt 3, RTL, cinematic journey narrative, design tokens, accessibility requirements, 8-phase implementation plan",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "design_color_tokens",
+      "label": "Design Color Tokens",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "road-950 #071A23, asphalt-800 #16252D, dawn-500 #6FA8C9, amber-500 #F6B73C, safe-600 #1E7A65, mist-50 #F3F7F6, error-600 #C93C37",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "design_journey_narrative",
+      "label": "Cinematic Journey Narrative",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "6-chapter homepage: before departure, journey forms, vehicle selection, visible security, road companionship, arrival - with journey line as identity element",
+      "confidence_score": 0.96
+    },
+    {
+      "id": "design_motion_system",
+      "label": "Design Motion System",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Micro 180-220ms, interface 240-320ms, chapter 600-900ms, ambient 8-16s. ease-out natural, reduced-motion support required",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "design_page_architecture",
+      "label": "Proposed Page Architecture",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Routes: /, /book-a-ride, /services/*, /fleet, /safety, /routes/[slug], /destinations/[slug], /magazine, /membership, /corporate, /drivers/join, /passenger-rights, /rules, /faq, /contact, /payment/[orderId]",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "design_vehicle_classes",
+      "label": "Vehicle Class Categories",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "ECO (Samand/Peugeot 405), ECO+ (Ario/Brilliance), VIP (Accent/Prius/Fluence), VIP+ (Camry/Corolla/Sonata), VIP SUV (Toyota RAV4)",
+      "confidence_score": 0.96
+    },
+    {
+      "id": "design_brand_problems",
+      "label": "Brand Problem Areas",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "No proper insurance coverage for intercity passengers, subjective pricing, mismatched vehicles, unreliable drivers, poor post-booking support",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "design_traveler_rights",
+      "label": "Traveler Rights",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Explicit traveler rights and legal documentation must be professionally rewritten while maintaining legal meaning",
+      "confidence_score": 0.9
+    },
+    {
+      "id": "customizer_component",
+      "label": "Admin Customizer Component",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\assets\\customizer.101.txt",
+      "description": "Offcanvas customizer for admin panel with sidebar options (vertical/horizontal/dark), layout (LTR/RTL/box), color themes, text sizes",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_admin_template",
+      "label": "Axelit Admin Dashboard Template",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Premium Bootstrap 5 admin template (Axelit) by la-themes, RTL Persian, multi-purpose with 100+ pages covering dashboard, apps, UI kits, charts, forms, tables, auth pages, error pages",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "template_accordion",
+      "label": "Accordion UI Pattern",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Collapsible accordion component for progressive content disclosure",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_add_blog",
+      "label": "Blog Post Creation Form",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\add_blog.html",
+      "description": "Admin page for creating blog posts with rich text editor (Trumbowyg), FilePond file upload, and Slick carousel",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_add_product",
+      "label": "Product Creation Form",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\add_product.html",
+      "description": "Admin e-commerce product creation form with FilePond uploads, Trumbowyg editor, Select2 dropdowns, DataTable integration",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_advance_table",
+      "label": "Advanced Data Table",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\advance_table.html",
+      "description": "Advanced data table with jQuery DataTables plugin, sortable columns, pagination, search functionality",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_alert",
+      "label": "Alert Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\alert.html",
+      "description": "Bootstrap alert/notification components with various styles and dismissible options, uses PrismJS for code highlighting",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_alignment",
+      "label": "Alignment Utilities",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\alignment.html",
+      "description": "Text and element alignment utility classes demonstration (left, right, center, justify)",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_animated_icon",
+      "label": "Animated Icon Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\animated_icon.html",
+      "description": "Animated icons using Animate.css, weather icons, Font Awesome, Iconoir, Phosphor icon sets with Toastify notifications",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_animation",
+      "label": "CSS Animation Examples",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\animation.html",
+      "description": "Animate.css based animation demonstrations with various entrance and attention effects",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_api",
+      "label": "API Management Page",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\api.html",
+      "description": "API endpoints management dashboard with ApexCharts visualization and DataTables for endpoint listing",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_area_chart",
+      "label": "Area Chart Component",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\area.html",
+      "description": "ApexCharts area chart demonstration for data visualization with gradient fills and multi-series support",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_avatar",
+      "label": "Avatar Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\avtar.html",
+      "description": "User avatar display components with various sizes, shapes, status indicators, and group arrangements",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_background",
+      "label": "Background Utilities",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\background.html",
+      "description": "Background color, gradient, image, and overlay utility classes for card and section styling",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_badges",
+      "label": "Badge Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\badges.html",
+      "description": "Badge/status indicator components with multiple color variants, sizes, and pill shapes using Animate.css",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_bar_chart",
+      "label": "Bar Chart Component",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\bar.html",
+      "description": "ApexCharts bar/column chart demonstration for categorical data visualization",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_base_inputs",
+      "label": "Base Form Input Fields",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\base_inputs.html",
+      "description": "Basic HTML form input field demonstrations including text, email, password, number, search, and textarea variants",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_basic_table",
+      "label": "Basic Table Component",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\basic_table.html",
+      "description": "Standard HTML table with jQuery DataTables plugin for sorting, searching, and pagination",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "axelit_ui_components",
+      "label": "Axelit UI Component Library",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Full UI kit: alerts, badges, buttons, cards, dropdowns, grid, avatars, tabs, accordions, progress bars, notifications, lists, backgrounds, dividers, ribbons, editors, collapse, shadows, placeholders, alignment",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_advanced_ui",
+      "label": "Advanced UI Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Modals, offcanvas, SweetAlert, scrollbar, spinners, animations, video embeds, tour, sliders (Slick/Bootstrap), scrollspy, tooltips, ratings, PrismJS, countdown, draggable, tree-view, block UI",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_chart_library",
+      "label": "Chart Library Integration",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Chart.js and ApexCharts with 15 chart types: line, area, column, bar, mixed, timeline, candlestick, boxplot, bubble, scatter, heatmap, treemap, pie, radialbar, radar",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_form_components",
+      "label": "Form Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Form validation, base inputs, checkbox/radio, input groups, masks, floating labels, date/time pickers, Jalali date picker, Select2, switches, range sliders, typeahead, textarea, clipboard, file upload, dual listboxes, form wizards",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_auth_pages",
+      "label": "Authentication Pages",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Sign in/up pages with and without background images, password reset, password create, lock screen, two-step verification - 12 auth page variants",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_icon_sets",
+      "label": "Icon Libraries",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Font Awesome, Flag Icons, Tabler Icons, Weather Icons, Animated Icons, Iconoir, Phosphor - 7 icon libraries",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_map_integration",
+      "label": "Map Integrations",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Three map providers: Neshan (Iranian), Google Maps, Leaflet",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_e_commerce",
+      "label": "E-commerce Module",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Complete e-commerce admin: cart, product management, add/list/detail products, orders management, checkout, wishlist",
+      "confidence_score": 0.97
+    }
+  ],
+  "edges": [
+    {
+      "source": "app_agents_ponytail_philosophy",
+      "target": "app_agents_yagni",
+      "type": "includes",
+      "description": "Ponytail philosophy includes YAGNI as first check",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_process",
+      "target": "skill_creator_anatomy",
+      "type": "uses",
+      "description": "Skill creation process uses skill anatomy structure",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_progressive_disclosure",
+      "target": "skill_creator_anatomy",
+      "type": "implements",
+      "description": "Progressive disclosure implemented through skill anatomy",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_hono_framework",
+      "type": "includes",
+      "description": "Node.js backend stack includes Hono framework",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_nestjs_framework",
+      "type": "includes",
+      "description": "Node.js backend stack includes NestJS framework",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_drizzle_orm",
+      "type": "includes",
+      "description": "Node.js backend stack includes Drizzle ORM",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_vitest_testing",
+      "type": "includes",
+      "description": "Node.js backend stack includes Vitest testing",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "backend_nodejs_stack",
+      "target": "backend_zod_validation",
+      "type": "includes",
+      "description": "Node.js backend stack includes Zod validation",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "testing_vitest_patterns",
+      "target": "backend_vitest_testing",
+      "type": "documents",
+      "description": "Testing patterns document Vitest usage",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_composable_adaptable",
+      "target": "vue_maybe_ref",
+      "type": "uses",
+      "description": "Adaptable composables use MaybeRef type",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_composable_adaptable",
+      "target": "vue_maybe_ref_or_getter",
+      "type": "uses",
+      "description": "Adaptable composables use MaybeRefOrGetter type",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "find_skills_discovery",
+      "target": "find_skills_cli",
+      "type": "uses",
+      "description": "Skill discovery process uses Skills CLI",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "frontend_development_skill",
+      "target": "frontend_component_types",
+      "type": "includes",
+      "description": "Frontend development skill includes component type patterns",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_core_internals",
+      "target": "nodejs_v8_engine",
+      "type": "includes",
+      "description": "Node.js core internals include V8 engine",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_core_internals",
+      "target": "nodejs_libuv",
+      "type": "includes",
+      "description": "Node.js core internals include libuv",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_core_internals",
+      "target": "nodejs_native_addons",
+      "type": "includes",
+      "description": "Node.js core internals include native addons",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_build_workflow",
+      "target": "nodejs_rebuild_required",
+      "type": "includes",
+      "description": "Build workflow includes mandatory rebuild rule",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_build_system",
+      "target": "nodejs_gyp",
+      "type": "includes",
+      "description": "Build system includes GYP",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_build_system",
+      "target": "nodejs_node_gyp",
+      "type": "includes",
+      "description": "Build system includes node-gyp",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_node_gyp",
+      "target": "nodejs_gyp",
+      "type": "uses",
+      "description": "node-gyp uses GYP build system",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_child_process",
+      "target": "nodejs_ipc",
+      "type": "implements",
+      "description": "Child process implements IPC",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_cli_options",
+      "target": "nodejs_experimental_modules",
+      "type": "enables",
+      "description": "CLI options enable experimental module gating",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "nodejs_experimental_modules",
+      "target": "nodejs_option_classes",
+      "type": "uses",
+      "description": "Experimental modules use option classes for configuration",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "configure_build_config",
+      "target": "configure_debug_build",
+      "relation": "includes_option",
+      "description": "Debug build is one option of configure"
+    },
+    {
+      "source": "configure_build_config",
+      "target": "configure_asan_flag",
+      "relation": "includes_option",
+      "description": "ASAN build is one option of configure"
+    },
+    {
+      "source": "configure_build_config",
+      "target": "configure_ninja_flag",
+      "relation": "includes_option",
+      "description": "Ninja build system is one option of configure"
+    },
+    {
+      "source": "contributing_repo_structure",
+      "target": "contributing_pr_process",
+      "relation": "part_of",
+      "description": "Repository structure is part of the contributing guide"
+    },
+    {
+      "source": "contributing_pr_process",
+      "target": "contributing_semver_labels",
+      "relation": "uses",
+      "description": "PR process uses semver labels for classification"
+    },
+    {
+      "source": "crypto_internals_arch",
+      "target": "crypto_thread_pool_ops",
+      "relation": "defines",
+      "description": "Architecture defines which operations use thread pool vs main thread"
+    },
+    {
+      "source": "crypto_internals_arch",
+      "target": "crypto_hash_implementation",
+      "relation": "implements",
+      "description": "Architecture includes hash implementation via OpenSSL"
+    },
+    {
+      "source": "crypto_internals_arch",
+      "target": "crypto_cipher_implementation",
+      "relation": "implements",
+      "description": "Architecture includes cipher implementation via OpenSSL"
+    },
+    {
+      "source": "crypto_thread_pool_ops",
+      "target": "libuv_thread_pool_ops",
+      "relation": "uses",
+      "description": "Crypto async operations use the libuv thread pool"
+    },
+    {
+      "source": "debugging_native_tools",
+      "target": "debugging_core_dumps",
+      "relation": "includes_technique",
+      "description": "Native debugging tools include core dump analysis"
+    },
+    {
+      "source": "debugging_native_tools",
+      "target": "debugging_remote_gdb",
+      "relation": "includes_technique",
+      "description": "Native debugging tools include remote debugging"
+    },
+    {
+      "source": "documentation_api_docs",
+      "target": "documentation_link_ordering",
+      "relation": "requires",
+      "description": "API docs require strict link reference ordering"
+    },
+    {
+      "source": "documentation_api_docs",
+      "target": "documentation_error_docs",
+      "relation": "includes_section",
+      "description": "API docs include error documentation conventions"
+    },
+    {
+      "source": "documentation_error_docs",
+      "target": "contributing_pr_process",
+      "relation": "part_of",
+      "description": "Error documentation is part of the contributing process"
+    },
+    {
+      "source": "fs_internals_arch",
+      "target": "fs_async_vs_sync",
+      "relation": "defines",
+      "description": "Architecture defines async vs sync operation paths"
+    },
+    {
+      "source": "fs_internals_arch",
+      "target": "fs_file_descriptors",
+      "relation": "uses",
+      "description": "FS operations work with file descriptors"
+    },
+    {
+      "source": "fs_async_vs_sync",
+      "target": "libuv_thread_pool_ops",
+      "relation": "uses",
+      "description": "Async FS operations use the libuv thread pool"
+    },
+    {
+      "source": "libuv_async_io",
+      "target": "libuv_handles_requests",
+      "relation": "defines",
+      "description": "Async I/O defines handles and requests abstractions"
+    },
+    {
+      "source": "libuv_async_io",
+      "target": "libuv_stream_backpressure",
+      "relation": "implements",
+      "description": "Async I/O implements stream backpressure"
+    },
+    {
+      "source": "libuv_async_io",
+      "target": "libuv_async_notification",
+      "relation": "implements",
+      "description": "Async I/O implements cross-thread async notification"
+    },
+    {
+      "source": "libuv_event_loop_phases",
+      "target": "libuv_microtasks_nexttick",
+      "relation": "interleaves",
+      "description": "Microtasks and nextTick execute between event loop phases"
+    },
+    {
+      "source": "libuv_microtasks_nexttick",
+      "target": "libuv_nexttick_starvation",
+      "relation": "can_cause",
+      "description": "Recursive nextTick can cause starvation"
+    },
+    {
+      "source": "libuv_thread_pool_ops",
+      "target": "libuv_thread_pool_size",
+      "relation": "configured_by",
+      "description": "Thread pool operations are limited by pool size"
+    },
+    {
+      "source": "libuv_thread_pool_ops",
+      "target": "libuv_thread_pool_starvation",
+      "relation": "can_cause",
+      "description": "Thread pool operations can cause starvation when saturated"
+    },
+    {
+      "source": "memory_debugging_heap",
+      "target": "memory_debugging_snapshots",
+      "relation": "uses",
+      "description": "Memory debugging uses heap snapshots for analysis"
+    },
+    {
+      "source": "memory_debugging_heap",
+      "target": "memory_debugging_leaks",
+      "relation": "detects",
+      "description": "Memory debugging detects leaks via heap analysis"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_versions",
+      "relation": "versioned_by",
+      "description": "ABI stability is managed through N-API versions"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_async_worker",
+      "relation": "provides",
+      "description": "N-API provides AsyncWorker for thread pool operations"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_threadsafe_function",
+      "relation": "provides",
+      "description": "N-API provides ThreadSafeFunction for cross-thread JS calls"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_object_wrapping",
+      "relation": "provides",
+      "description": "N-API provides object wrapping for C++/JS interop"
+    },
+    {
+      "source": "napi_abi_stability",
+      "target": "napi_instance_data",
+      "relation": "provides",
+      "description": "N-API provides instance data for per-addon state"
+    },
+    {
+      "source": "native_memory_management",
+      "target": "native_memory_buffer_handling",
+      "relation": "includes",
+      "description": "Native memory management includes buffer handling patterns"
+    },
+    {
+      "source": "native_memory_management",
+      "target": "native_memory_adjust_external",
+      "relation": "uses",
+      "description": "Native memory management uses AdjustExternalMemory for V8 GC awareness"
+    },
+    {
+      "source": "native_memory_management",
+      "target": "native_memory_leak_prevention",
+      "relation": "addresses",
+      "description": "Native memory management addresses leak prevention patterns"
+    },
+    {
+      "source": "net_internals_arch",
+      "target": "net_tcp_server_impl",
+      "relation": "implements",
+      "description": "Net architecture implements TCP server via TCPWrap"
+    },
+    {
+      "source": "net_internals_arch",
+      "target": "net_tcp_client_connect",
+      "relation": "implements",
+      "description": "Net architecture implements TCP client connection"
+    },
+    {
+      "source": "node_addon_api_wrapper",
+      "target": "node_addon_api_error_handling",
+      "relation": "provides",
+      "description": "node-addon-api provides two error handling modes"
+    },
+    {
+      "source": "node_addon_api_wrapper",
+      "target": "node_addon_api_async_worker",
+      "relation": "provides",
+      "description": "node-addon-api provides AsyncWorker pattern"
+    },
+    {
+      "source": "node_addon_api_wrapper",
+      "target": "napi_abi_stability",
+      "relation": "wraps",
+      "description": "node-addon-api is a C++ wrapper around N-API"
+    },
+    {
+      "source": "node_addon_api_async_worker",
+      "target": "napi_async_worker",
+      "relation": "wraps",
+      "description": "node-addon-api AsyncWorker wraps N-API AsyncWorker"
+    },
+    {
+      "source": "primordials_concept",
+      "target": "primordials_uncurry_this",
+      "relation": "uses",
+      "description": "Primordials uses uncurryThis for prototype method capture"
+    },
+    {
+      "source": "primordials_concept",
+      "target": "primordials_safe_classes",
+      "relation": "provides",
+      "description": "Primordials provides safe collection classes"
+    },
+    {
+      "source": "primordials_concept",
+      "target": "primordials_unsafe_patterns",
+      "relation": "prevents",
+      "description": "Primordials prevents unsafe patterns in core code"
+    },
+    {
+      "source": "profiling_v8_cpu",
+      "target": "profiling_v8_optimization_tracing",
+      "relation": "includes",
+      "description": "CPU profiling includes optimization tracing"
+    },
+    {
+      "source": "profiling_v8_cpu",
+      "target": "profiling_flame_graphs",
+      "relation": "generates",
+      "description": "CPU profiling generates flame graphs"
+    },
+    {
+      "source": "profiling_v8_optimization_tracing",
+      "target": "v8_jit_type_feedback",
+      "relation": "monitors",
+      "description": "Optimization tracing monitors type feedback and deoptimization"
+    },
+    {
+      "source": "reviewing_prs_checklist",
+      "target": "reviewing_prs_ai_flags",
+      "relation": "includes",
+      "description": "PR review checklist includes AI-generated code detection"
+    },
+    {
+      "source": "reviewing_prs_checklist",
+      "target": "contributing_pr_process",
+      "relation": "complements",
+      "description": "PR review complements the contributing process"
+    },
+    {
+      "source": "streams_internals_arch",
+      "target": "streams_streambase",
+      "relation": "defines",
+      "description": "Streams architecture defines StreamBase C++ interface"
+    },
+    {
+      "source": "streams_internals_arch",
+      "target": "streams_readable_flow",
+      "relation": "implements",
+      "description": "Architecture implements readable stream data flow"
+    },
+    {
+      "source": "v8_gc_architecture",
+      "target": "v8_gc_scavenger",
+      "relation": "includes",
+      "description": "V8 GC architecture includes Scavenger for young generation"
+    },
+    {
+      "source": "v8_gc_architecture",
+      "target": "v8_gc_mark_sweep",
+      "relation": "includes",
+      "description": "V8 GC architecture includes Mark-Sweep for old generation"
+    },
+    {
+      "source": "v8_gc_mark_sweep",
+      "target": "v8_gc_mark_compact",
+      "relation": "extends",
+      "description": "Mark-Compact extends Mark-Sweep with compaction for fragmentation"
+    },
+    {
+      "source": "v8_gc_architecture",
+      "target": "v8_gc_pitfalls",
+      "relation": "has_pitfalls",
+      "description": "V8 GC has common pitfalls to avoid"
+    },
+    {
+      "source": "v8_hidden_classes",
+      "target": "v8_inline_caching",
+      "relation": "enables",
+      "description": "Hidden classes enable inline caching optimization"
+    },
+    {
+      "source": "v8_hidden_classes",
+      "target": "v8_elements_kinds",
+      "relation": "parallel_to",
+      "description": "Elements kinds are a parallel optimization concept to hidden classes for arrays"
+    },
+    {
+      "source": "v8_hidden_classes",
+      "target": "v8_hidden_class_best_practices",
+      "relation": "has_guidelines",
+      "description": "Hidden classes have best practices for optimization"
+    },
+    {
+      "source": "v8_jit_pipeline",
+      "target": "v8_jit_type_feedback",
+      "relation": "collects",
+      "description": "JIT pipeline collects type feedback for optimization"
+    },
+    {
+      "source": "v8_jit_pipeline",
+      "target": "v8_jit_optimizable_code",
+      "relation": "informs",
+      "description": "JIT pipeline informs how to write optimizable code"
+    },
+    {
+      "source": "v8_jit_pipeline",
+      "target": "v8_jit_escape_analysis",
+      "relation": "performs",
+      "description": "JIT pipeline performs escape analysis for allocation elimination"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "worker_threads_creation",
+      "relation": "implements",
+      "description": "Architecture implements worker creation with separate isolates"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "worker_threads_structured_clone",
+      "relation": "uses",
+      "description": "Architecture uses structured clone for message serialization"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "worker_threads_transfer",
+      "relation": "uses",
+      "description": "Architecture uses transfer list for zero-copy messaging"
+    },
+    {
+      "source": "worker_threads_structured_clone",
+      "target": "worker_threads_transfer",
+      "relation": "supplements",
+      "description": "Transfer list supplements structured clone with zero-copy"
+    },
+    {
+      "source": "worker_threads_architecture",
+      "target": "napi_threadsafe_function",
+      "relation": "uses",
+      "description": "Worker threads use ThreadSafeFunction for cross-thread JS calls"
+    },
+    {
+      "source": "v8_hidden_class_best_practices",
+      "target": "v8_jit_optimizable_code",
+      "relation": "overlaps_with",
+      "description": "Hidden class practices overlap with JIT optimization guidance"
+    },
+    {
+      "source": "v8_gc_pitfalls",
+      "target": "memory_debugging_leaks",
+      "relation": "helps_detect",
+      "description": "Understanding GC pitfalls helps detect memory leaks"
+    },
+    {
+      "source": "native_memory_leak_prevention",
+      "target": "memory_debugging_leaks",
+      "relation": "complements",
+      "description": "Native leak prevention complements memory debugging"
+    },
+    {
+      "source": "net_internals_arch",
+      "target": "libuv_async_io",
+      "relation": "built_on",
+      "description": "Net internals built on libuv async I/O"
+    },
+    {
+      "source": "streams_internals_arch",
+      "target": "libuv_handles_requests",
+      "relation": "built_on",
+      "description": "Streams built on libuv handles and requests"
+    },
+    {
+      "source": "fs_internals_arch",
+      "target": "libuv_thread_pool_ops",
+      "relation": "built_on",
+      "description": "FS internals built on libuv thread pool"
+    },
+    {
+      "source": "configure_debug_build",
+      "target": "debugging_native_tools",
+      "relation": "enables",
+      "description": "Debug build enables native debugging with GDB/LLDB"
+    },
+    {
+      "source": "configure_asan_flag",
+      "target": "native_memory_leak_prevention",
+      "relation": "helps_detect",
+      "description": "ASAN build helps detect native memory leaks"
+    },
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "api_design_patterns_ref",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "backend_security_practices_ref",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "database_optimization_guide_ref",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_grader_agent",
+      "relation": "orchestrates",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_comparator_agent",
+      "relation": "orchestrates",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_analyzer_agent",
+      "relation": "orchestrates",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_schemas",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_eval_benchmark_system",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_description_optimization",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_comparator_agent",
+      "target": "skill_creator_analyzer_agent",
+      "relation": "feeds_into",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_grader_agent",
+      "target": "skill_eval_benchmark_system",
+      "relation": "part_of",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_component_architecture",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_composables",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_jsdoc_typing",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_state_management",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_testing",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "jsdoc_type_safety_system",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_json_render_skill",
+      "target": "json_render_vue_system",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "pooyesh_taxi_platform",
+      "target": "server_idea_md",
+      "relation": "defined_in",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "pooyesh_taxi_platform",
+      "target": "taxi_pricing_algorithm",
+      "relation": "includes",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "pooyesh_taxi_platform",
+      "target": "taxi_vehicle_categories",
+      "relation": "includes",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "ponytail_coding_philosophy",
+      "target": "server_agents_md",
+      "relation": "defined_in",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "server_agents_md",
+      "target": "pooyesh_taxi_platform",
+      "relation": "applies_to",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "pooyesh_taxi_platform",
+      "relation": "relevant_to",
+      "confidence_score": 0.8
+    },
+    {
+      "source": "ui_ux_pro_max_skill",
+      "target": "pooyesh_taxi_platform",
+      "relation": "relevant_to",
+      "confidence_score": 0.8
+    },
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "pooyesh_taxi_platform",
+      "relation": "relevant_to",
+      "confidence_score": 0.8
+    },
+    {
+      "source": "taxi2_project",
+      "target": "server_database_readme",
+      "relationship": "has_component",
+      "description": "Taxi2 project contains server with database schema"
+    },
+    {
+      "source": "taxi2_project",
+      "target": "pooyesh_taxi_wp",
+      "relationship": "has_component",
+      "description": "Taxi2 project has existing WordPress website"
+    },
+    {
+      "source": "taxi2_project",
+      "target": "web_nuxt3_frontend",
+      "relationship": "has_component",
+      "description": "Taxi2 project has Nuxt 3 frontend under development"
+    },
+    {
+      "source": "server_database_readme",
+      "target": "taxi2_db_tables",
+      "relationship": "documents",
+      "description": "README documents the 12 core database tables"
+    },
+    {
+      "source": "server_database_readme",
+      "target": "taxi2_db_features",
+      "relationship": "describes",
+      "description": "Database uses PostGIS, UUIDs, soft deletion, timestamps"
+    },
+    {
+      "source": "taxi2_db_tables",
+      "target": "taxi2_driver_status",
+      "relationship": "contains_enum",
+      "description": "Driver table has status enum: offline/online/busy"
+    },
+    {
+      "source": "taxi2_db_tables",
+      "target": "taxi2_ride_request_status",
+      "relationship": "contains_enum",
+      "description": "Ride requests have status: pending/accepted/expired/cancelled"
+    },
+    {
+      "source": "taxi2_db_tables",
+      "target": "taxi2_ride_status",
+      "relationship": "contains_enum",
+      "description": "Rides have status: accepted/arriving/in_progress/completed/cancelled"
+    },
+    {
+      "source": "pooyesh_taxi_wp",
+      "target": "pooyesh_taxi_brand",
+      "relationship": "represents",
+      "description": "WordPress site represents Pooyesh Taxi brand online"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_color_tokens",
+      "relationship": "defines",
+      "description": "Design spec defines 7 color tokens for the visual system"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_journey_narrative",
+      "relationship": "specifies",
+      "description": "Homepage follows 6-chapter cinematic journey narrative"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_motion_system",
+      "relationship": "defines",
+      "description": "Motion system with 4 tiers from micro to ambient animations"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_page_architecture",
+      "relationship": "proposes",
+      "description": "Proposed route structure for the redesigned website"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_vehicle_classes",
+      "relationship": "defines",
+      "description": "5 vehicle classes from ECO to VIP SUV with sample models"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_brand_problems",
+      "relationship": "identifies",
+      "description": "Design doc identifies brand pain points to address"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_traveler_rights",
+      "relationship": "requires",
+      "description": "Traveler rights legal documentation must be rewritten"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "pooyesh_taxi_brand",
+      "relationship": "redesigns_for",
+      "description": "Design specification is for redesigning Pooyesh Taxi website"
+    },
+    {
+      "source": "web_nuxt3_frontend",
+      "target": "web_design_doc",
+      "relationship": "implements",
+      "description": "Nuxt 3 frontend will implement the design specification"
+    },
+    {
+      "source": "web_agents_md",
+      "target": "web_nuxt3_frontend",
+      "relationship": "governs",
+      "description": "Coding guidelines govern how frontend code is written"
+    },
+    {
+      "source": "customizer_component",
+      "target": "axelit_admin_template",
+      "relationship": "part_of",
+      "description": "Customizer is part of the Axelit admin dashboard template"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_ui_components",
+      "relationship": "includes",
+      "description": "Admin template includes comprehensive UI component library"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_advanced_ui",
+      "relationship": "includes",
+      "description": "Admin template includes advanced UI component set"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_chart_library",
+      "relationship": "includes",
+      "description": "Admin template integrates Chart.js and ApexCharts"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_form_components",
+      "relationship": "includes",
+      "description": "Admin template has extensive form component library"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_auth_pages",
+      "relationship": "includes",
+      "description": "Admin template ships with 12 authentication page variants"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_icon_sets",
+      "relationship": "includes",
+      "description": "Admin template integrates 7 icon libraries"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_map_integration",
+      "relationship": "includes",
+      "description": "Admin template supports 3 map providers"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_e_commerce",
+      "relationship": "includes",
+      "description": "Admin template includes complete e-commerce management module"
+    },
+    {
+      "source": "template_accordion",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Accordions page demonstrates collapsible UI pattern"
+    },
+    {
+      "source": "template_add_blog",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "Add blog page is part of the admin template"
+    },
+    {
+      "source": "template_add_product",
+      "target": "axelit_e_commerce",
+      "relationship": "page_of",
+      "description": "Add product page is part of e-commerce module"
+    },
+    {
+      "source": "template_advance_table",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "Advance table page demonstrates advanced data tables"
+    },
+    {
+      "source": "template_alert",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Alert page demonstrates notification/alert components"
+    },
+    {
+      "source": "template_alignment",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Alignment page demonstrates utility classes"
+    },
+    {
+      "source": "template_animated_icon",
+      "target": "axelit_icon_sets",
+      "relationship": "demonstrates",
+      "description": "Animated icon page demonstrates icon animation capabilities"
+    },
+    {
+      "source": "template_animation",
+      "target": "axelit_advanced_ui",
+      "relationship": "demonstrates",
+      "description": "Animation page demonstrates CSS animation effects"
+    },
+    {
+      "source": "template_api",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "API management page for backend API endpoint tracking"
+    },
+    {
+      "source": "template_area_chart",
+      "target": "axelit_chart_library",
+      "relationship": "demonstrates",
+      "description": "Area chart page demonstrates ApexCharts area visualization"
+    },
+    {
+      "source": "template_avatar",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Avatar page demonstrates user avatar components"
+    },
+    {
+      "source": "template_background",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Background page demonstrates background utility classes"
+    },
+    {
+      "source": "template_badges",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Badges page demonstrates badge/status indicator components"
+    },
+    {
+      "source": "template_bar_chart",
+      "target": "axelit_chart_library",
+      "relationship": "demonstrates",
+      "description": "Bar chart page demonstrates ApexCharts bar visualization"
+    },
+    {
+      "source": "template_base_inputs",
+      "target": "axelit_form_components",
+      "relationship": "demonstrates",
+      "description": "Base inputs page demonstrates fundamental form field types"
+    },
+    {
+      "source": "template_basic_table",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "Basic table page demonstrates standard table component"
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="fa" dir="rtl" class="dark" style=""><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#001e2c",
+                      "on-surface": "#d2e5f2",
+                      "surface-container-low": "#0b1e27",
+                      "on-secondary-container": "#87c0e1",
+                      "surface-bright": "#2a3b45",
+                      "on-error": "#690005",
+                      "error": "#ffb4ab",
+                      "background": "#03151e",
+                      "on-primary-fixed": "#271900",
+                      "on-secondary-fixed-variant": "#004c69",
+                      "tertiary": "#b6e5ff",
+                      "on-tertiary-fixed-variant": "#004d67",
+                      "secondary-container": "#014f6c",
+                      "outline-variant": "#504535",
+                      "tertiary-container": "#63ceff",
+                      "outline": "#9d8f7b",
+                      "on-primary-fixed-variant": "#5f4100",
+                      "surface-tint": "#fbbc40",
+                      "primary-fixed-dim": "#fbbc40",
+                      "inverse-primary": "#7d5700",
+                      "primary-container": "#f6b73c",
+                      "on-background": "#d2e5f2",
+                      "on-error-container": "#ffdad6",
+                      "secondary": "#95cef0",
+                      "tertiary-fixed-dim": "#73d1ff",
+                      "surface-container": "#0f222b",
+                      "on-tertiary-fixed": "#001e2b",
+                      "tertiary-fixed": "#c1e8ff",
+                      "secondary-fixed": "#c4e7ff",
+                      "surface-container-high": "#1a2c36",
+                      "safety-teal": "#1E7A65",
+                      "on-primary": "#422c00",
+                      "on-tertiary-container": "#005673",
+                      "secondary-fixed-dim": "#95cef0",
+                      "mist-bg": "#F3F7F6",
+                      "error-container": "#93000a",
+                      "surface-dim": "#03151e",
+                      "surface-variant": "#253741",
+                      "on-tertiary": "#003548",
+                      "on-surface-variant": "#d4c4ae",
+                      "error-red": "#C93C37",
+                      "surface-container-highest": "#253741",
+                      "primary": "#ffd899",
+                      "on-primary-container": "#6a4900",
+                      "on-secondary": "#00354a",
+                      "surface": "#03151e",
+                      "inverse-on-surface": "#21333c",
+                      "inverse-surface": "#d2e5f2",
+                      "surface-container-lowest": "#001019",
+                      "primary-fixed": "#ffdeaa",
+                      "asphalt-surface": "#16252D"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "touch-target": "44px",
+                      "margin-desktop": "64px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "20px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Estedad"],
+                      "body-lg": ["Estedad"],
+                      "body-md": ["Estedad"],
+                      "display-lg": ["Estedad"],
+                      "display-lg-mobile": ["Estedad"],
+                      "headline-md": ["Estedad"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "32px", "fontWeight": "450"}],
+                      "body-md": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "850"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "44px", "fontWeight": "800"}],
+                      "headline-md": ["24px", {"lineHeight": "36px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    }catch(_e){}</script><meta charset="utf-8"></head><body class="bg-background text-on-surface">
+<!-- Top AppBar (from Shared Components) -->
+<header class="bg-surface/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-margin-mobile h-16 w-full z-50 fixed top-0 relative"><div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-white/10">
+<img class="w-full h-full object-cover" alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA7sLzpA3cWMwxv1L2nqSTvNkaa3TT9pbHUjP6bMzWnCfHnCyQduvMcNPE8Ym-FWnBKNPJNzX_xMJnVpecnSXkrD1fzMIvie9GKEZy9MSRYWDZwKVV_mwFNgfpqyrZs5gufHQljkAWU7aZq6e6nPlvp6I_dNijA4sHns1adt5YHpOA_rgq2fjgIx6jY4lUGDSUBNk0XCYSETdY9N6TQG87oy8dImCdiu33dq_EAfFMHmnsbv-8aKoG-w">
+</div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity p-2">notifications</button>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+<h1 class="text-primary font-headline-md text-headline-md font-bold">پویش تاکسی</h1>
+</div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity p-2">menu</button></header>
+<main class="pt-20 pb-32 px-margin-mobile max-w-2xl mx-auto">
+<!-- Journey Line Section -->
+<section class="mb-stack-lg">
+<div class="bg-asphalt-surface rim-light rounded-xl p-6 flex flex-col gap-4">
+<div class="flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
+<span class="">مبدأ: تهران، ونک</span>
+<span class="">مقصد: اصفهان، میدان نقش جهان</span>
+</div>
+<div class="relative h-2 w-full bg-surface-variant rounded-full flex items-center mt-2">
+<!-- Progress Line -->
+<div class="absolute right-0 top-0 h-full bg-primary rounded-full journey-line-glow" style="width: 35%;"></div>
+<!-- Origin Point -->
+<div class="absolute right-0 w-4 h-4 rounded-full bg-primary border-2 border-background z-10"></div>
+<!-- Current Position Pulse -->
+<div class="absolute right-[35%] w-5 h-5 rounded-full bg-primary border-4 border-background z-20 animate-pulse"></div>
+<!-- Destination Point -->
+<div class="absolute left-0 w-4 h-4 rounded-full bg-surface-variant border-2 border-background z-10"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-body-md text-body-md">۴ ساعت و ۳۰ دقیقه</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">distance</span>
+<span class="font-body-md text-body-md">۴۴۰ کیلومتر</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Fleet Selection Section -->
+<section class="mb-stack-lg">
+<div class="flex justify-between items-end mb-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">انتخاب ناوگان</h2>
+<span class="text-on-surface-variant font-label-sm text-label-sm">واحد: تومان</span>
+</div>
+<div class="flex overflow-x-auto hide-scrollbar gap-4 pb-4 px-1">
+<!-- Vehicle Card ECO -->
+<div class="min-w-[160px] bg-asphalt-surface rim-light rounded-xl p-4 flex flex-col gap-3 cursor-pointer transition-all active-card" onclick="selectVehicle(this)">
+<img class="h-24 object-contain" data-alt="A side view of a clean, white modern sedan in a minimalist studio setting with moody lighting. The car's metallic finish reflects soft amber lights, fitting the premium cinematic aesthetic of Pooyesh Taxi. The background is dark and textured asphalt." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVpTSbAhhyKSVDZmztAvPo50BKNznwW2uMtwYsr7j5u6vaQAiXALUxoCfhZmwDJ2loYspd_SEbK1HKUYmaMZwizTAJzfVBdShcrE0RRK1WaZ-0eV4jtlYbyJZ8WPAdmyjpjnuAUg3pAfSdNV22bU6xButZ284yfZwI67RwljMePSBqziwZ3u5aRAFZZmH048nvbove0YVwS6vgcK5o8BlRx05SeoThe4C1anH2VQiDbwqyeiW4do2jPQ">
+<div>
+<h3 class="font-bold text-on-surface">ECO</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-xs mt-1">
+<span class="material-symbols-outlined text-[14px]">person</span> ۴
+                            <span class="material-symbols-outlined text-[14px]">luggage</span> ۲
+                        </div>
+</div>
+<div class="text-primary font-bold">۱,۲۵۰,۰۰۰</div>
+</div>
+<!-- Vehicle Card ECO+ -->
+<div class="min-w-[160px] bg-asphalt-surface rim-light rounded-xl p-4 flex flex-col gap-3 cursor-pointer transition-all border border-transparent" onclick="selectVehicle(this)">
+<img class="h-24 object-contain" data-alt="A modern dark grey family sedan parked in a high-contrast industrial warehouse setting. The lighting is cinematic with golden hour reflections hitting the curves of the car. Minimalist and clean presentation, emphasizing reliability and comfort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArrS5ruMhnkdgBKVqTmuPhfvNsSZi2LhMGLJwT33u9pYbpzQL6d4K8GHcSJvxvRX5GtrWvlSHNv8QL8l2NpXT1hWxUsRmIqpavWD3X7av55dowQd5axMtKRIQjPDcvlsbsiw0c2Ud7-olVjdGk-gqisriyYJ2YF6_6lnBACkPtQQTxzl8CH2TJR9HQDOhy2wFrPk9J_RRKQshVQVRKTcPfs27uNCKSX4ANGILYpdNvvyxVc8MVDKD25Q">
+<div>
+<h3 class="font-bold text-on-surface">ECO+</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-xs mt-1">
+<span class="material-symbols-outlined text-[14px]">person</span> ۴
+                            <span class="material-symbols-outlined text-[14px]">luggage</span> ۳
+                        </div>
+</div>
+<div class="text-primary font-bold">۱,۴۸۰,۰۰۰</div>
+</div>
+<!-- Vehicle Card VIP -->
+<div class="min-w-[160px] bg-asphalt-surface rim-light rounded-xl p-4 flex flex-col gap-3 cursor-pointer transition-all border border-transparent" onclick="selectVehicle(this)">
+<img class="h-24 object-contain" data-alt="A luxury black sedan, like a Mercedes or BMW, captured in a profile shot under dramatic lighting. Highlights trace the car's aerodynamic lines. The mood is sophisticated and expensive, perfectly aligning with the VIP transit service identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8TeK__1xKSVmDmuXeKUSctG99WmcrlWSu0ALuqPr9-mdCgGp8md6s35zCitwtxf6N9E4aqYlr82NjrylxaElOPvxdh1KSSiQnf87R524PZDwQNkXATZ8suJZWBJNAYwg6zDE09fcYViSTcVdgCddJZ--X3ud58jzx0OO1fXnvYVVyMePH0-zplWx1MCmpIFjfRr16F2lcYv1xdz-QlF1VYTJuC_XHwZXnELD8i_lFfYYxOU55BekMNA">
+<div>
+<h3 class="font-bold text-on-surface">VIP</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-xs mt-1">
+<span class="material-symbols-outlined text-[14px]">person</span> ۳
+                            <span class="material-symbols-outlined text-[14px]">luggage</span> ۳
+                        </div>
+</div>
+<div class="text-primary font-bold">۲,۱۰۰,۰۰۰</div>
+</div>
+<!-- Vehicle Card VIP SUV -->
+<div class="min-w-[160px] bg-asphalt-surface rim-light rounded-xl p-4 flex flex-col gap-3 cursor-pointer transition-all border border-transparent" onclick="selectVehicle(this)">
+<img class="h-24 object-contain" data-alt="A powerful black luxury SUV in a sleek, cinematic night-time setting. Headlights are glowing slightly, reflecting on wet asphalt. The image exudes safety, strength, and comfort for long-distance travel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzWZ5iqkSMYD8doB0ElymGt88ogJZi1F7nKhAiIVLxKcbvj_CXqDMvXG9hlHYB2zJ4QmyLDu8oaoCGJ6Xc5tRFhWlWt-wPahFn8xMxbwdtJucjh-_iE-bhs5Uoc2xVNe5k2UKCm8MkK6IQMhGlTGx77G4Bf486hACkp786B6MZdtLwKj18XXWlmkBnsw0nFIT-EYr5XU5yAVzzCKznomACo3jRCiKOtrkaQX9-jRM9fnhfyDozB_bcYA">
+<div>
+<h3 class="font-bold text-on-surface">VIP SUV</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-xs mt-1">
+<span class="material-symbols-outlined text-[14px]">person</span> ۶
+                            <span class="material-symbols-outlined text-[14px]">luggage</span> ۵
+                        </div>
+</div>
+<div class="text-primary font-bold">۳,۵۰۰,۰۰۰</div>
+</div>
+</div>
+</section>
+<!-- Details & Pickers -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-stack-lg">
+<div class="bg-asphalt-surface rim-light rounded-xl p-4">
+<label class="text-on-surface-variant font-label-sm text-label-sm mb-2 block">تاریخ و ساعت حرکت</label>
+<div class="flex items-center justify-between text-on-surface font-body-md text-body-md border-b border-primary/30 pb-2 cursor-pointer">
+<span class="">۱۴ آذر - ساعت ۰۹:۳۰</span>
+<span class="material-symbols-outlined text-primary" data-original-icon="calendar_month">calendar_month</span>
+</div>
+</div>
+<div class="bg-asphalt-surface rim-light rounded-xl p-4">
+<label class="text-on-surface-variant font-label-sm text-label-sm mb-2 block">تعداد مسافران</label>
+<div class="flex items-center justify-between">
+<button class="w-8 h-8 rounded-full border border-outline flex items-center justify-center text-primary" onclick="changeCount(-1)">-</button>
+<span class="font-headline-md text-headline-md" id="passenger-count">۲</span>
+<button class="w-8 h-8 rounded-full border border-outline flex items-center justify-center text-primary" onclick="changeCount(1)">+</button>
+</div>
+</div>
+</section>
+<!-- Safety Banner -->
+<section class="mb-stack-lg">
+<div class="bg-safety-teal/10 border border-safety-teal/30 rounded-xl p-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-safety-teal flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-original-icon="verified_user">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface font-bold text-body-md">امنیت شما اولویت ماست</span>
+<span class="text-on-surface-variant text-label-sm">تمامی رانندگان احراز هویت شده و خودروها دارای بیمه کامل سفر هستند.</span>
+</div>
+</div>
+</section>
+</main>
+<!-- -->
+<footer class="fixed bottom-0 left-0 right-0 h-24 bg-asphalt-surface rim-light px-margin-mobile flex items-center justify-between z-50">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-sm text-label-sm">مبلغ نهایی</span>
+<div class="flex items-baseline gap-1">
+<span class="text-primary font-headline-md text-headline-md font-bold">۱,۲۵۰,۰۰۰</span>
+<span class="text-primary-fixed-dim text-xs">تومان</span>
+</div>
+</div>
+<button class="bg-primary hover:scale-[1.02] active:scale-[0.98] transition-all px-8 py-3 rounded-full text-on-primary font-bold text-body-lg flex items-center gap-2">
+            تایید و رزرو
+            <span class="material-symbols-outlined" data-original-icon="chevron_left">chevron_left</span>
+</button>
+</footer>
+<!-- Bottom Nav Bar (Mobile Shell Logic) -->
+<nav class="fixed bottom-0 w-full z-[60] flex flex-row-reverse justify-around items-center h-20 px-gutter bg-asphalt-surface border-t border-white/5 md:hidden hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant gap-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">خانه</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold gap-1" href="#">
+<span class="material-symbols-outlined">route</span>
+<span class="font-label-sm text-label-sm">سفرهای من</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant gap-1" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">پروفایل</span>
+</a>
+</nav>
+<script>
+        function selectVehicle(element) {
+            // Remove active class from all
+            document.querySelectorAll('.min-w-\\[160px\\]').forEach(card => {
+                card.classList.remove('active-card');
+                card.classList.add('border-transparent');
+            });
+            // Add active class to clicked
+            element.classList.add('active-card');
+            element.classList.remove('border-transparent');
+            
+            // Update total price in footer (mock)
+            const price = element.querySelector('.text-primary.font-bold').innerText;
+            document.querySelector('footer .text-headline-md').innerText = price;
+        }
+
+        function changeCount(delta) {
+            const countEl = document.getElementById('passenger-count');
+            let current = parseInt(countEl.innerText);
+            current = Math.max(1, Math.min(8, current + delta));
+            countEl.innerText = current;
+        }
+    </script>
+
+
+</body></html>

@@ -1,0 +1,378 @@
+{
+  "nodes": [
+    {
+      "id": "senior_backend_agent_skill",
+      "type": "concept",
+      "label": "Senior Backend Agent Skill",
+      "description": "Comprehensive backend development skill covering NodeJS, Express, Go, Python, Postgres, GraphQL, REST APIs with API scaffolding, database optimization, security, and performance tuning.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_skill",
+      "type": "concept",
+      "label": "Skill Creator Skill",
+      "description": "Meta-skill for creating, evaluating, and iteratively improving Claude Code skills with quantitative benchmarks and human review loops.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_grader_agent",
+      "type": "concept",
+      "label": "Grader Agent",
+      "description": "Subagent that evaluates expectations against execution transcripts and outputs, grades pass/fail with evidence, and critiques eval quality.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\agents\\grader.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_comparator_agent",
+      "type": "concept",
+      "label": "Blind Comparator Agent",
+      "description": "Subagent that compares two outputs blind (without knowing which skill produced them) using a rubric-based scoring system to determine quality winner.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\agents\\comparator.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_analyzer_agent",
+      "type": "concept",
+      "label": "Post-hoc Analyzer Agent",
+      "description": "Subagent that analyzes blind comparison results and benchmark data to extract actionable insights about why a winner won and how to improve the loser.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\agents\\analyzer.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_creator_schemas",
+      "type": "document",
+      "label": "Skill Creator JSON Schemas",
+      "description": "Defines JSON schemas for evals.json, grading.json, metrics.json, timing.json, benchmark.json, comparison.json, analysis.json, and history.json used in the skill evaluation pipeline.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\references\\schemas.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "ui_ux_pro_max_skill",
+      "type": "concept",
+      "label": "UI/UX Pro Max Skill",
+      "description": "Comprehensive UI/UX design intelligence skill with 50+ styles, 161 color palettes, 57 font pairings, 161 product types, 99 UX guidelines, and 25 chart types across 10 stacks.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\ui-ux-pro-max\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_skill",
+      "type": "concept",
+      "label": "Vue Expert JS Skill",
+      "description": "Senior Vue specialist skill for building Vue 3 applications with JavaScript and JSDoc typing (no TypeScript). Covers components, composables, state management, and testing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_component_architecture",
+      "type": "document",
+      "label": "Vue Component Architecture Reference",
+      "description": "Reference guide covering Vue 3 component patterns: props, emits, v-model, slots, provide/inject, and dynamic components with JSDoc annotations.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\component-architecture.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_composables",
+      "type": "document",
+      "label": "Vue Composables Patterns Reference",
+      "description": "Reference for Vue 3 composable patterns: ref vs reactive, lifecycle hooks, shared singleton state, async with cancellation, and basic composable structure.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\composables-patterns.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_jsdoc_typing",
+      "type": "document",
+      "label": "JSDoc Typing for Vue Reference",
+      "description": "Reference for JSDoc-based type annotations in Vue 3: typing refs, computed, reactive, props, emits, composables, Pinia stores, and shared type definitions.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\jsdoc-typing.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_state_management",
+      "type": "document",
+      "label": "Vue State Management Reference",
+      "description": "Reference for Pinia state management in Vue 3: options store syntax, setup store syntax (Composition API), store composition, persistence, and testing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\state-management.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_expert_js_testing",
+      "type": "document",
+      "label": "Vue Testing Patterns Reference",
+      "description": "Reference for testing Vue 3 components with Vitest and Vue Test Utils: component testing, v-model testing, async testing, mocking composables, Pinia testing, and provide/inject testing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\references\\testing-patterns.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "vue_json_render_skill",
+      "type": "concept",
+      "label": "Vue JSON Render Skill",
+      "description": "Vue 3 renderer for json-render that converts JSON specs into Vue component trees with data binding, visibility, and actions. Uses @json-render/vue and @json-render/core.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "server_agents_md",
+      "type": "document",
+      "label": "AGENTS.md (Ponytail Lazy Senior Dev Mode)",
+      "description": "Project coding philosophy document defining YAGNI-driven lazy senior developer approach: minimal code, reuse existing patterns, shortest working diff, root-cause bug fixing.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\AGENTS.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "server_idea_md",
+      "type": "document",
+      "label": "IDEA.md (Pooyesh Taxi Platform Requirements)",
+      "description": "Requirements document for the Pooyesh Taxi (3V_Pooyesh) platform covering 4 portals (website, admin dashboard, passenger app, driver app), SSO, pricing algorithms, and tech stack.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "api_design_patterns_ref",
+      "type": "document",
+      "label": "API Design Patterns Reference",
+      "description": "Reference guide for API design patterns and practices covering code organization, performance considerations, security best practices, and anti-patterns.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\references\\api_design_patterns.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "backend_security_practices_ref",
+      "type": "document",
+      "label": "Backend Security Practices Reference",
+      "description": "Reference guide for backend security covering input validation, authentication, authorization, data protection, and performance considerations.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\references\\backend_security_practices.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "database_optimization_guide_ref",
+      "type": "document",
+      "label": "Database Optimization Guide Reference",
+      "description": "Reference guide for database optimization covering patterns, performance considerations, security best practices, and common anti-patterns.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\senior-backend-agent\\references\\database_optimization_guide.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "pooyesh_taxi_platform",
+      "type": "concept",
+      "label": "Pooyesh Taxi Platform",
+      "description": "Full taxi platform with website (Nuxt 3), admin dashboard (Nuxt 3), passenger app (React Native), driver app (React Native), backend (Node.js+Express+Prisma), PostgreSQL+Redis, Socket.io.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "ponytail_coding_philosophy",
+      "type": "concept",
+      "label": "Ponytail Coding Philosophy",
+      "description": "Lazy senior dev approach: YAGNI ladder, reuse before write, shortest working diff, root-cause bug fixing, no unnecessary abstractions, deletion over addition.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\AGENTS.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_eval_benchmark_system",
+      "type": "concept",
+      "label": "Skill Evaluation Benchmark System",
+      "description": "Multi-stage evaluation pipeline for skills: spawn parallel runs (with/without skill), draft assertions, grade outputs, aggregate benchmarks, analyze results, and iterate.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "skill_description_optimization",
+      "type": "concept",
+      "label": "Skill Description Optimization",
+      "description": "Process to optimize skill triggering accuracy: generate trigger eval queries (should/should-not trigger), run optimization loop with train/test split, apply best_description.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\skill-creator\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "jsdoc_type_safety_system",
+      "type": "concept",
+      "label": "JSDoc Type Safety System",
+      "description": "Approach to type safety in Vue 3 without TypeScript: @typedef for object shapes, @param/@returns for functions, @type for reactive variables, shared type files with import() syntax.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue-expert-js\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "json_render_vue_system",
+      "type": "concept",
+      "label": "JSON Render Vue System",
+      "description": "Architecture for converting JSON specs into Vue component trees: defineCatalog, defineRegistry with h() render functions, StateProvider/ActionProvider/VisibilityProvider/ValidationProvider, composables for state/actions/visibility.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\.claude\\skills\\vue\\SKILL.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "taxi_pricing_algorithm",
+      "type": "concept",
+      "label": "Taxi Pricing Algorithm",
+      "description": "Dynamic pricing engine for intercity and intracity trips using base cost, distance rate, time rate, vehicle category coefficient, dynamic/weather coefficient, and surge pricing via Geohash.",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "taxi_vehicle_categories",
+      "type": "concept",
+      "label": "Taxi Vehicle Categories",
+      "description": "Vehicle categories: Eco Urban (Pride, Tiba, 206, Quick), Eco (Samand, Peugeot, Pars), Eco+ (Ario, Brilliance), VIP (Prius, Fluence, Accent), VIP+ (Sonata, Camry, Krowal), SUV VIP (Santa Fe, Rav4), Van C (Hiace, Hyundai H350).",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\IDEA.md",
+      "confidence_score": 1.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "api_design_patterns_ref",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "backend_security_practices_ref",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "database_optimization_guide_ref",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_grader_agent",
+      "relation": "orchestrates",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_comparator_agent",
+      "relation": "orchestrates",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_analyzer_agent",
+      "relation": "orchestrates",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_creator_schemas",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_eval_benchmark_system",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_skill",
+      "target": "skill_description_optimization",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_comparator_agent",
+      "target": "skill_creator_analyzer_agent",
+      "relation": "feeds_into",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "skill_creator_grader_agent",
+      "target": "skill_eval_benchmark_system",
+      "relation": "part_of",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_component_architecture",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_composables",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_jsdoc_typing",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_state_management",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "vue_expert_js_testing",
+      "relation": "references",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "jsdoc_type_safety_system",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_json_render_skill",
+      "target": "json_render_vue_system",
+      "relation": "implements",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "pooyesh_taxi_platform",
+      "target": "server_idea_md",
+      "relation": "defined_in",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "pooyesh_taxi_platform",
+      "target": "taxi_pricing_algorithm",
+      "relation": "includes",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "pooyesh_taxi_platform",
+      "target": "taxi_vehicle_categories",
+      "relation": "includes",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "ponytail_coding_philosophy",
+      "target": "server_agents_md",
+      "relation": "defined_in",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "server_agents_md",
+      "target": "pooyesh_taxi_platform",
+      "relation": "applies_to",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "vue_expert_js_skill",
+      "target": "pooyesh_taxi_platform",
+      "relation": "relevant_to",
+      "confidence_score": 0.8
+    },
+    {
+      "source": "ui_ux_pro_max_skill",
+      "target": "pooyesh_taxi_platform",
+      "relation": "relevant_to",
+      "confidence_score": 0.8
+    },
+    {
+      "source": "senior_backend_agent_skill",
+      "target": "pooyesh_taxi_platform",
+      "relation": "relevant_to",
+      "confidence_score": 0.8
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="fa" dir="rtl" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffd899",
+                        "on-primary": "#422c00",
+                        "primary-container": "#f6b73c",
+                        "on-primary-container": "#6a4900",
+                        "surface": "#03151e",
+                        "asphalt-surface": "#16252D",
+                        "on-surface": "#d2e5f2",
+                        "on-surface-variant": "#d4c4ae",
+                        "outline": "#9d8f7b",
+                        "safety-teal": "#1E7A65",
+                        "midnight-road": "#071A23"
+                    },
+                    spacing: {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "touch-target": "44px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Estedad"],
+                        "body-md": ["Estedad"],
+                        "label-sm": ["Estedad"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script><meta charset="utf-8"></head><body class="bg-surface text-on-surface flex flex-col min-h-screen">
+<!-- Cinematic Background -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-midnight-road/60 to-surface z-10"></div>
+<div class="w-full h-full bg-midnight-road overflow-hidden relative" data-alt="A cinematic long-exposure photograph of a winding mountain road at dawn in Iran. The sky is a deep midnight blue transitioning into a soft amber glow at the horizon. The road surface is dark asphalt with a hint of morning mist. The lighting is low-key and atmospheric, creating a sense of professional reliability and a journey about to begin. High-contrast shadows and sharp edges define the landscape." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrPnFxCPWTFJ3aAkuWGHR57egnTjwvOlW94Q5ZF28C9rqSv2kxyy8WZbBLb_4OB_dqx-q_RnFBBmWJHkbgjgWzDaCpjyBjL8dKIi2oVWeqapPEldC5gHNN2HrGNXP_MKpSxq25HiXFdBngq6T32Cgk-8i7xvtCb-ocKHMEbfSKbhvT52dKtqUW41SDpSmlZHw6rFUWyqTaG5WLU3d1Gf4UpEq7ayB0skAaRr2HLAci2q649DsRkK4Zsg')">
+</div>
+</div>
+<!-- Background Journey Line (Visual Signature) -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-30">
+<svg class="w-full h-full" fill="none" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 800">
+<path class="journey-line-path" d="M200,800 C200,600 350,500 350,300 C350,100 150,50 50,0" stroke="#f6b73c" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<!-- Header / Logo Area -->
+<header class="relative z-20 flex flex-col items-center pt-16 pb-12">
+<div class="text-primary-container mb-4 flex items-center justify-center">
+<span class="material-symbols-outlined text-[48px] glow-amber" data-icon="local_taxi" data-original-icon="local_taxi">local_taxi</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tighter">پویش تاکسی</h1>
+<p class="font-body-md text-body-md text-on-surface-variant/80 mt-1">سفرهای امن و حرفه‌ای بین شهری</p>
+</header>
+<!-- Main Content (Login Form) -->
+<main class="relative z-20 flex-grow px-margin-mobile flex flex-col justify-center max-w-md mx-auto w-full">
+<div class="bg-asphalt-surface/80 backdrop-blur-xl rim-light p-8 rounded-3xl space-y-8 border border-white/5 shadow-2xl">
+<!-- Headline for the form -->
+<div class="space-y-2">
+<h2 class="font-headline-md text-headline-md text-on-surface">خوش آمدید</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">برای ورود یا ثبت‌نام شماره همراه خود را وارد کنید</p>
+</div>
+<!-- Input Field -->
+<div class="relative group">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2 mr-1 transition-all group-focus-within:text-primary-container" for="mobile">
+                    شماره موبایل
+                </label>
+<div class="relative flex items-center bg-midnight-road/50 rounded-xl border-b-2 border-outline/30 focus-within:border-primary-container transition-all overflow-hidden h-14">
+<span class="material-symbols-outlined text-on-surface-variant px-4" data-icon="smartphone" data-original-icon="smartphone">smartphone</span>
+<input class="bg-transparent border-none text-on-surface placeholder:text-on-surface-variant/40 w-full focus:ring-0 font-headline-md text-left pr-4" dir="ltr" id="mobile" placeholder="۰۹۱۲۳۴۵۶۷۸۹" type="tel">
+</div>
+</div>
+<!-- CTA Button -->
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary-container h-14 rounded-xl font-headline-md text-[18px] transition-all transform active:scale-[0.98] shadow-lg flex items-center justify-center gap-3">
+<span>درخواست کد تایید</span>
+<span class="material-symbols-outlined" data-icon="arrow_back" data-original-icon="arrow_back">arrow_back</span>
+</button>
+<!-- Footer links within form -->
+<div class="flex justify-center pt-2">
+<a class="text-on-surface-variant hover:text-primary font-label-sm text-label-sm transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]" data-icon="gavel">gavel</span>
+                    قوانین و مقررات را می‌پذیرم
+                </a>
+</div>
+</div>
+</main>
+<!-- Bottom Decorative / Visual Anchor -->
+<footer class="relative z-20 pb-12 flex justify-center opacity-40">
+<div class="flex items-center gap-8">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="verified_user" data-original-icon="verified_user">verified_user</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">امنیت تضمین شده</span>
+</div>
+<div class="w-px h-8 bg-outline/20"></div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="history_edu" data-original-icon="history_edu">history_edu</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">پشتیبانی ۲۴ ساعته</span>
+</div>
+</div>
+</footer>
+<!-- Interactive Layer for Atmospheric-->
+<canvas class="fixed inset-0 z-10 pointer-events-none" id="particleCanvas"></canvas>
+<script>
+        // Micro-interaction for input glow and atmospheric particles
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(246, 183, 60, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        init();
+        animate();
+
+        // Button scale interaction
+        const btn = document.querySelector('button');
+        btn.addEventListener('mousedown', () => btn.style.transform = 'scale(0.96)');
+        btn.addEventListener('mouseup', () => btn.style.transform = 'scale(1.02)');
+        btn.addEventListener('mouseenter', () => btn.style.transform = 'scale(1.02)');
+        btn.addEventListener('mouseleave', () => btn.style.transform = 'scale(1)');
+    </script>
+</body></html>

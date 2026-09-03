@@ -1,0 +1,51 @@
+/* Product Search  Cutom */
+
+.conexi-parts-search-box-form {
+    padding: 30px;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 8px;
+    background-color: #f5f8fc;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    gap: 30px;
+}
+.conexi-parts-search-box-form select {
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    /* background: white; */
+    /* color: black; */
+}
+.conexi-parts-search-box-form button {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+    background: red;
+    border: 2px solid var(--color-high-dark);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    height: 52px;
+    text-transform: capitalize;
+    transition: 0.3s;
+}
+.conexi-parts-search-box-form button:hover {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+    background: black;
+    border: 2px solid var(--color-high-dark);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    height: 52px;
+    text-transform: capitalize;
+    transition: 0.3s;
+}

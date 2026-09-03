@@ -1,0 +1,638 @@
+{
+  "nodes": [
+    {
+      "id": "taxi2_project",
+      "label": "Taxi2 Project",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\README.md",
+      "description": "Taxi2 is an intercity taxi/ride-hailing platform with server backend, WordPress site, and Nuxt 3 frontend",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "server_database_readme",
+      "label": "Taxi2 Database Schema",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Database schema documentation covering 12 core tables for drivers, passengers, rides, payments with PostGIS geospatial support",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "taxi2_db_tables",
+      "label": "Database Core Tables",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "12 core tables: drivers, vehicles, driver_locations, passengers, passenger_locations, ride_requests, ride_request_offers, rides, ride_locations, ratings, payments, favorite_locations",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "taxi2_driver_status",
+      "label": "Driver Status Enum",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Driver states: offline, online, busy",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "taxi2_ride_request_status",
+      "label": "Ride Request Status Enum",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Ride request states: pending, accepted, expired, cancelled",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "taxi2_ride_status",
+      "label": "Ride Status Enum",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "Ride states: accepted, arriving, in_progress, completed, cancelled",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "taxi2_db_features",
+      "label": "Database Design Features",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Server\\app\\database\\README.md",
+      "description": "PostGIS geospatial queries, UUID primary keys, automatic timestamps, soft deletion with is_active flags, CHECK constraint enums",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "pooyesh_taxi_wp",
+      "label": "Pooyesh Taxi WordPress Site",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\WP\\index.html",
+      "description": "Current WordPress website at pooyeshtak30.ir for Pooyesh Taxi intercity ride-hailing service, RTL Persian, Elementor-based",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "pooyesh_taxi_brand",
+      "label": "Pooyesh Taxi Brand",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\WP\\index.html",
+      "description": "Intercity taxi service (دربستی بین شهری) offering airport transfer, corporate service, VIP/Economy vehicles with online booking",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "web_agents_md",
+      "label": "Web AGENTS.md Coding Guidelines",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\AGENTS.md",
+      "description": "Ponytail lazy senior dev mode guidelines - YAGNI, reuse existing patterns, minimize code, understand before simplifying",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "web_readme",
+      "label": "Web Frontend README",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\README.md",
+      "description": "Nuxt 3 SPA setup with login page, meta tags in nuxt.config.ts, dev server on localhost:3000",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "web_nuxt3_frontend",
+      "label": "Nuxt 3 Frontend",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\README.md",
+      "description": "Nuxt 3 SPA with Vue 3, SSR/SEO, login page converted from old HTML, app.vue root component",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "web_design_doc",
+      "label": "Web Design Specification",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Comprehensive design spec for Pooyesh Taxi website redesign: Nuxt 3, RTL, cinematic journey narrative, design tokens, accessibility requirements, 8-phase implementation plan",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "design_color_tokens",
+      "label": "Design Color Tokens",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "road-950 #071A23, asphalt-800 #16252D, dawn-500 #6FA8C9, amber-500 #F6B73C, safe-600 #1E7A65, mist-50 #F3F7F6, error-600 #C93C37",
+      "confidence_score": 0.99
+    },
+    {
+      "id": "design_journey_narrative",
+      "label": "Cinematic Journey Narrative",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "6-chapter homepage: before departure, journey forms, vehicle selection, visible security, road companionship, arrival - with journey line as identity element",
+      "confidence_score": 0.96
+    },
+    {
+      "id": "design_motion_system",
+      "label": "Design Motion System",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Micro 180-220ms, interface 240-320ms, chapter 600-900ms, ambient 8-16s. ease-out natural, reduced-motion support required",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "design_page_architecture",
+      "label": "Proposed Page Architecture",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Routes: /, /book-a-ride, /services/*, /fleet, /safety, /routes/[slug], /destinations/[slug], /magazine, /membership, /corporate, /drivers/join, /passenger-rights, /rules, /faq, /contact, /payment/[orderId]",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "design_vehicle_classes",
+      "label": "Vehicle Class Categories",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "ECO (Samand/Peugeot 405), ECO+ (Ario/Brilliance), VIP (Accent/Prius/Fluence), VIP+ (Camry/Corolla/Sonata), VIP SUV (Toyota RAV4)",
+      "confidence_score": 0.96
+    },
+    {
+      "id": "design_brand_problems",
+      "label": "Brand Problem Areas",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "No proper insurance coverage for intercity passengers, subjective pricing, mismatched vehicles, unreliable drivers, poor post-booking support",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "design_traveler_rights",
+      "label": "Traveler Rights",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\design.md",
+      "description": "Explicit traveler rights and legal documentation must be professionally rewritten while maintaining legal meaning",
+      "confidence_score": 0.90
+    },
+    {
+      "id": "customizer_component",
+      "label": "Admin Customizer Component",
+      "type": "document",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\assets\\customizer.101.txt",
+      "description": "Offcanvas customizer for admin panel with sidebar options (vertical/horizontal/dark), layout (LTR/RTL/box), color themes, text sizes",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_admin_template",
+      "label": "Axelit Admin Dashboard Template",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Premium Bootstrap 5 admin template (Axelit) by la-themes, RTL Persian, multi-purpose with 100+ pages covering dashboard, apps, UI kits, charts, forms, tables, auth pages, error pages",
+      "confidence_score": 0.98
+    },
+    {
+      "id": "template_accordion",
+      "label": "Accordion UI Pattern",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Collapsible accordion component for progressive content disclosure",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_add_blog",
+      "label": "Blog Post Creation Form",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\add_blog.html",
+      "description": "Admin page for creating blog posts with rich text editor (Trumbowyg), FilePond file upload, and Slick carousel",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_add_product",
+      "label": "Product Creation Form",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\add_product.html",
+      "description": "Admin e-commerce product creation form with FilePond uploads, Trumbowyg editor, Select2 dropdowns, DataTable integration",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_advance_table",
+      "label": "Advanced Data Table",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\advance_table.html",
+      "description": "Advanced data table with jQuery DataTables plugin, sortable columns, pagination, search functionality",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_alert",
+      "label": "Alert Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\alert.html",
+      "description": "Bootstrap alert/notification components with various styles and dismissible options, uses PrismJS for code highlighting",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_alignment",
+      "label": "Alignment Utilities",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\alignment.html",
+      "description": "Text and element alignment utility classes demonstration (left, right, center, justify)",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_animated_icon",
+      "label": "Animated Icon Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\animated_icon.html",
+      "description": "Animated icons using Animate.css, weather icons, Font Awesome, Iconoir, Phosphor icon sets with Toastify notifications",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_animation",
+      "label": "CSS Animation Examples",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\animation.html",
+      "description": "Animate.css based animation demonstrations with various entrance and attention effects",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_api",
+      "label": "API Management Page",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\api.html",
+      "description": "API endpoints management dashboard with ApexCharts visualization and DataTables for endpoint listing",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_area_chart",
+      "label": "Area Chart Component",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\area.html",
+      "description": "ApexCharts area chart demonstration for data visualization with gradient fills and multi-series support",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_avatar",
+      "label": "Avatar Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\avtar.html",
+      "description": "User avatar display components with various sizes, shapes, status indicators, and group arrangements",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_background",
+      "label": "Background Utilities",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\background.html",
+      "description": "Background color, gradient, image, and overlay utility classes for card and section styling",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_badges",
+      "label": "Badge Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\badges.html",
+      "description": "Badge/status indicator components with multiple color variants, sizes, and pill shapes using Animate.css",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_bar_chart",
+      "label": "Bar Chart Component",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\bar.html",
+      "description": "ApexCharts bar/column chart demonstration for categorical data visualization",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_base_inputs",
+      "label": "Base Form Input Fields",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\base_inputs.html",
+      "description": "Basic HTML form input field demonstrations including text, email, password, number, search, and textarea variants",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "template_basic_table",
+      "label": "Basic Table Component",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\basic_table.html",
+      "description": "Standard HTML table with jQuery DataTables plugin for sorting, searching, and pagination",
+      "confidence_score": 0.95
+    },
+    {
+      "id": "axelit_ui_components",
+      "label": "Axelit UI Component Library",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Full UI kit: alerts, badges, buttons, cards, dropdowns, grid, avatars, tabs, accordions, progress bars, notifications, lists, backgrounds, dividers, ribbons, editors, collapse, shadows, placeholders, alignment",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_advanced_ui",
+      "label": "Advanced UI Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Modals, offcanvas, SweetAlert, scrollbar, spinners, animations, video embeds, tour, sliders (Slick/Bootstrap), scrollspy, tooltips, ratings, PrismJS, countdown, draggable, tree-view, block UI",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_chart_library",
+      "label": "Chart Library Integration",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Chart.js and ApexCharts with 15 chart types: line, area, column, bar, mixed, timeline, candlestick, boxplot, bubble, scatter, heatmap, treemap, pie, radialbar, radar",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_form_components",
+      "label": "Form Components",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Form validation, base inputs, checkbox/radio, input groups, masks, floating labels, date/time pickers, Jalali date picker, Select2, switches, range sliders, typeahead, textarea, clipboard, file upload, dual listboxes, form wizards",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_auth_pages",
+      "label": "Authentication Pages",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Sign in/up pages with and without background images, password reset, password create, lock screen, two-step verification - 12 auth page variants",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_icon_sets",
+      "label": "Icon Libraries",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Font Awesome, Flag Icons, Tabler Icons, Weather Icons, Animated Icons, Iconoir, Phosphor - 7 icon libraries",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_map_integration",
+      "label": "Map Integrations",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Three map providers: Neshan (Iranian), Google Maps, Leaflet",
+      "confidence_score": 0.97
+    },
+    {
+      "id": "axelit_e_commerce",
+      "label": "E-commerce Module",
+      "type": "concept",
+      "source_file": "E:\\Jobs\\Taxi2\\Web\\public\\template\\accordions.html",
+      "description": "Complete e-commerce admin: cart, product management, add/list/detail products, orders management, checkout, wishlist",
+      "confidence_score": 0.97
+    }
+  ],
+  "edges": [
+    {
+      "source": "taxi2_project",
+      "target": "server_database_readme",
+      "relationship": "has_component",
+      "description": "Taxi2 project contains server with database schema"
+    },
+    {
+      "source": "taxi2_project",
+      "target": "pooyesh_taxi_wp",
+      "relationship": "has_component",
+      "description": "Taxi2 project has existing WordPress website"
+    },
+    {
+      "source": "taxi2_project",
+      "target": "web_nuxt3_frontend",
+      "relationship": "has_component",
+      "description": "Taxi2 project has Nuxt 3 frontend under development"
+    },
+    {
+      "source": "server_database_readme",
+      "target": "taxi2_db_tables",
+      "relationship": "documents",
+      "description": "README documents the 12 core database tables"
+    },
+    {
+      "source": "server_database_readme",
+      "target": "taxi2_db_features",
+      "relationship": "describes",
+      "description": "Database uses PostGIS, UUIDs, soft deletion, timestamps"
+    },
+    {
+      "source": "taxi2_db_tables",
+      "target": "taxi2_driver_status",
+      "relationship": "contains_enum",
+      "description": "Driver table has status enum: offline/online/busy"
+    },
+    {
+      "source": "taxi2_db_tables",
+      "target": "taxi2_ride_request_status",
+      "relationship": "contains_enum",
+      "description": "Ride requests have status: pending/accepted/expired/cancelled"
+    },
+    {
+      "source": "taxi2_db_tables",
+      "target": "taxi2_ride_status",
+      "relationship": "contains_enum",
+      "description": "Rides have status: accepted/arriving/in_progress/completed/cancelled"
+    },
+    {
+      "source": "pooyesh_taxi_wp",
+      "target": "pooyesh_taxi_brand",
+      "relationship": "represents",
+      "description": "WordPress site represents Pooyesh Taxi brand online"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_color_tokens",
+      "relationship": "defines",
+      "description": "Design spec defines 7 color tokens for the visual system"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_journey_narrative",
+      "relationship": "specifies",
+      "description": "Homepage follows 6-chapter cinematic journey narrative"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_motion_system",
+      "relationship": "defines",
+      "description": "Motion system with 4 tiers from micro to ambient animations"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_page_architecture",
+      "relationship": "proposes",
+      "description": "Proposed route structure for the redesigned website"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_vehicle_classes",
+      "relationship": "defines",
+      "description": "5 vehicle classes from ECO to VIP SUV with sample models"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_brand_problems",
+      "relationship": "identifies",
+      "description": "Design doc identifies brand pain points to address"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "design_traveler_rights",
+      "relationship": "requires",
+      "description": "Traveler rights legal documentation must be rewritten"
+    },
+    {
+      "source": "web_design_doc",
+      "target": "pooyesh_taxi_brand",
+      "relationship": "redesigns_for",
+      "description": "Design specification is for redesigning Pooyesh Taxi website"
+    },
+    {
+      "source": "web_nuxt3_frontend",
+      "target": "web_design_doc",
+      "relationship": "implements",
+      "description": "Nuxt 3 frontend will implement the design specification"
+    },
+    {
+      "source": "web_agents_md",
+      "target": "web_nuxt3_frontend",
+      "relationship": "governs",
+      "description": "Coding guidelines govern how frontend code is written"
+    },
+    {
+      "source": "customizer_component",
+      "target": "axelit_admin_template",
+      "relationship": "part_of",
+      "description": "Customizer is part of the Axelit admin dashboard template"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_ui_components",
+      "relationship": "includes",
+      "description": "Admin template includes comprehensive UI component library"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_advanced_ui",
+      "relationship": "includes",
+      "description": "Admin template includes advanced UI component set"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_chart_library",
+      "relationship": "includes",
+      "description": "Admin template integrates Chart.js and ApexCharts"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_form_components",
+      "relationship": "includes",
+      "description": "Admin template has extensive form component library"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_auth_pages",
+      "relationship": "includes",
+      "description": "Admin template ships with 12 authentication page variants"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_icon_sets",
+      "relationship": "includes",
+      "description": "Admin template integrates 7 icon libraries"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_map_integration",
+      "relationship": "includes",
+      "description": "Admin template supports 3 map providers"
+    },
+    {
+      "source": "axelit_admin_template",
+      "target": "axelit_e_commerce",
+      "relationship": "includes",
+      "description": "Admin template includes complete e-commerce management module"
+    },
+    {
+      "source": "template_accordion",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Accordions page demonstrates collapsible UI pattern"
+    },
+    {
+      "source": "template_add_blog",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "Add blog page is part of the admin template"
+    },
+    {
+      "source": "template_add_product",
+      "target": "axelit_e_commerce",
+      "relationship": "page_of",
+      "description": "Add product page is part of e-commerce module"
+    },
+    {
+      "source": "template_advance_table",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "Advance table page demonstrates advanced data tables"
+    },
+    {
+      "source": "template_alert",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Alert page demonstrates notification/alert components"
+    },
+    {
+      "source": "template_alignment",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Alignment page demonstrates utility classes"
+    },
+    {
+      "source": "template_animated_icon",
+      "target": "axelit_icon_sets",
+      "relationship": "demonstrates",
+      "description": "Animated icon page demonstrates icon animation capabilities"
+    },
+    {
+      "source": "template_animation",
+      "target": "axelit_advanced_ui",
+      "relationship": "demonstrates",
+      "description": "Animation page demonstrates CSS animation effects"
+    },
+    {
+      "source": "template_api",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "API management page for backend API endpoint tracking"
+    },
+    {
+      "source": "template_area_chart",
+      "target": "axelit_chart_library",
+      "relationship": "demonstrates",
+      "description": "Area chart page demonstrates ApexCharts area visualization"
+    },
+    {
+      "source": "template_avatar",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Avatar page demonstrates user avatar components"
+    },
+    {
+      "source": "template_background",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Background page demonstrates background utility classes"
+    },
+    {
+      "source": "template_badges",
+      "target": "axelit_ui_components",
+      "relationship": "demonstrates",
+      "description": "Badges page demonstrates badge/status indicator components"
+    },
+    {
+      "source": "template_bar_chart",
+      "target": "axelit_chart_library",
+      "relationship": "demonstrates",
+      "description": "Bar chart page demonstrates ApexCharts bar visualization"
+    },
+    {
+      "source": "template_base_inputs",
+      "target": "axelit_form_components",
+      "relationship": "demonstrates",
+      "description": "Base inputs page demonstrates fundamental form field types"
+    },
+    {
+      "source": "template_basic_table",
+      "target": "axelit_admin_template",
+      "relationship": "page_of",
+      "description": "Basic table page demonstrates standard table component"
+    }
+  ]
+}

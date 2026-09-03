@@ -1,0 +1,16 @@
+/* Fix sidebar menu arrows - Phosphor font files missing */
+nav .app-nav .main-nav > li:not(.menu-title) > a::after {
+  font-family: "tabler-icons" !important;
+  content: "\eb12" !important;
+  font-size: 0.8rem;
+}
+nav .app-nav .main-nav > li:not(.menu-title) > a[aria-expanded=false]::after {
+  font-family: "tabler-icons" !important;
+  content: "\eb12" !important;
+  transform: rotate(0deg);
+}
+nav .app-nav .main-nav > li:not(.menu-title) > a[aria-expanded=true]::after {
+  font-family: "tabler-icons" !important;
+  content: "\eb12" !important;
+  transform: rotate(90deg);
+}

@@ -1,0 +1,1558 @@
+.site-header.header-three {
+  position: relative;
+}
+
+.site-header.header-three .top-bar {
+  background-color: #f2f2f2;
+  height: 71px;
+}
+.site-header.header-three .top-bar .container {
+  padding: 0;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  position: relative;
+}
+.site-header.header-three .top-bar .logo-block a img{ 
+  width: 75%;
+}
+.site-header.header-three .top-bar .left-block {
+  padding: 23px 0px 23px 0px;
+}
+.site-header.header-three .top-bar .left-block a {
+  color: #717171;
+}
+.site-header.header-three .top-bar .logo-block a {
+  font-weight: 600;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  color: #111111;
+}
+.site-header.header-three .top-bar .social-block {
+  padding: 23px 0px 23px 0px;
+}
+.site-header.header-three .top-bar .social-block a {
+  color: #717171;
+}
+.site-header.header-three .header-navigation .container {
+  background-color: #ffffff;
+  box-shadow: none;
+  border-radius: 0px;
+  padding-left: 0px;
+}
+.site-header.header-three .header-navigation .container .right-side-box {
+  position: absolute;
+  top: 0%;
+  right: -77px;
+}
+.site-header.header-three
+  .header-navigation
+  .right-side-box
+  .contact-btn-block {
+  background-color: #ffffff;
+}
+.site-header.header-three
+  .header-navigation
+  .right-side-box
+  .contact-btn-block
+  .icon-block {
+  color: #ffffff;
+  background-color: #ffc000;
+}
+.site-header.header-three
+  .header-navigation
+  .right-side-box
+  .contact-btn-block
+  .text-block {
+  color: #111111;
+}
+.site-header.header-three
+  .header-navigation
+  .right-side-box
+  .contact-btn-block
+  .tag-line {
+  color: #717171;
+  margin-top: 1px;
+}
+.site-header.header-three .header-navigation.stricky-fixed {
+  background-color: #ffffff;
+}
+.site-header.header-three .header-navigation.stricky-fixed .container:after {
+  background-color: #ffffff;
+}
+
+/* header end */
+
+/* banner start */
+
+.main-banner-wrapper.bakker .banner-title {
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 90px;
+  color: #ffffff;
+}
+.main-banner-wrapper.bakker p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #ffffff;
+  margin: 9px 0px 50px 0px;
+}
+.main-banner-wrapper.bakker .banner-form {
+    width: 490px;
+    /* height: 622px; */
+    background: #ffffff;
+    border-radius: 5px;
+}
+.main-banner-wrapper.bakker .banner-form h3 {
+  font-weight: 600;
+  font-size: 30px;
+  color: #111111;
+  margin: 0px;
+  padding: 30px 0px 18px 0px;
+}
+.main-banner-wrapper.bakker .banner-form p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #979797;
+  margin: 0px;
+}
+.main-banner-wrapper.bakker .banner-form form {
+    padding: 30px 50px 50px 50px;
+}
+.main-banner-wrapper.bakker .banner-form .box-1 {
+    height: 60px;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #e4e7e9;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.main-banner-wrapper.bakker .banner-form form input {
+  height: 60px;
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #e4e7e9;
+  border-radius: 5px;
+  padding-left: 20px;
+}
+.btn-block .banner-form-btn {
+    /* width: 100%; */
+	position: relative;
+    display: inline-block;
+	overflow: hidden;
+    vertical-align: middle;
+    font-weight: 600;
+    background-color: #ffc000;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 38.5px;
+    padding: 16px 49px;
+    transition: all 0.4s ease;
+    border: unset;
+    cursor: pointer;
+	z-index: 1;
+}
+.btn-block .banner-form-btn:hover {
+  color: #ffc000;
+}
+
+.btn-block .banner-form-btn:before{
+	position: absolute;
+	content: '';
+	background-color: #111111;
+	border-radius: 38.5px;
+	width: 0%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	z-index: -1;
+	transition: all 500ms ease;
+}
+
+.btn-block .banner-form-btn:hover:before{
+	width: 100%;
+}
+
+/* banner end */
+
+/* benefits start */
+
+.benefits-three {
+    padding-bottom: 120px;
+}
+.benefits-three .card-body {
+    padding: 0px 25px 0px 25px;
+}
+.benefits-three .container i {
+  font-size: 70px;
+  padding-top: 65px;
+  padding-bottom: 47px;
+  color: #ffc000;
+	transition: all 500ms ease;
+}
+.benefits-three .container .card {
+  position: relative;
+}
+.benefits-three .container .card-title {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  color: #111111;
+	transition: all 500ms ease;
+}
+.benefits-three .container .card h1 {
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 36px;
+  color: #ffffff;
+  position: absolute;
+  top: 88px;
+  left: 35px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(255, 192, 0, 0.54);
+	transition: all 500ms ease;
+}
+
+.benefits-three .container .card-text {
+  padding-bottom: 76px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  text-align: center;
+  color: #717171;
+	transition: all 500ms ease;
+}
+.benefits-three .container .card {
+  /* width: 370px;
+  height: 387px; */
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+	transition: all 500ms ease;
+	z-index: 1;
+}
+.benefits-three .container .card:hover {
+  border-color: #ffc000;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+.benefits-three .container .card:before{
+	position: absolute;
+	content: '';
+	background: #ffc000;
+	width: 100%;
+	height: 0%;
+	left: 0px;
+	top: 0px;
+	z-index: -1;
+	transition: all 500ms ease;
+}
+.benefits-three .container .card:hover:before{
+	height: 100%;
+}
+.benefits-three .container .card:hover h1 {
+  color: rgba(255, 192, 0, 0.54);
+  -webkit-text-stroke-color: #ffffff;
+}
+.benefits-three .container .card:hover i {
+  color: #ffffff;
+}
+.benefits-three .container .card:hover .card-title {
+  color: #ffffff;
+}
+.benefits-three .container .card:hover .card-text {
+  color: #ffffff;
+}
+
+/* benefits stop */
+
+/* why chooses us start */
+
+.chooseus-three .image {
+  position: relative;
+}
+.chooseus-three .image .choose-1 {
+  position: absolute;
+  top: -36px;
+  left: -32px;
+  z-index: -1;
+}
+.chooseus-three .image .choose-3 {
+  position: absolute;
+  bottom: 30px;
+  right: 65px;
+}
+
+.chooseus-three .content .block-title {
+  margin-bottom: 30px;
+}
+.chooseus-three .content .block-title h3 {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+}
+.chooseus-three .content .block-title h2 {
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 72px;
+  color: #111111;
+}
+.chooseus-three .content .block-title p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: #717171;
+  padding: 25px 0px 0px 0px;
+}
+.chooseus-three .accordion {
+  width: 470px;
+}
+.chooseus-three .accordion .label {
+  font-size: 30px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: #111111;
+  background: #f3f3f3;
+  padding: 14px 0px 13px 20px;
+  margin-bottom: 10px;
+}
+.chooseus-three .accordion .content {
+  background: white;
+  height: 0;
+  font-size: 20px;
+  text-align: justify;
+  width: 450px;
+  overflow: hidden;
+  transition: 0.5s;
+  padding-top: 20px;
+  padding-left: 14px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: #717171;
+}
+.chooseus-three .accordion .containers.active .content {
+  height: 100px;
+}
+.chooseus-three .accordion .containers.active .label {
+  background-color: #111111;
+  color: #ffffff;
+}
+.chooseus-three .accordion i {
+  color: #111111;
+  padding-right: 23px;
+}
+
+
+/* .accordion-box {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.accordion-box .block {
+  position: relative;
+  padding-top: 0px;
+  margin-bottom: 30px;
+}
+
+.accordion-box .block:last-child {
+  margin-bottom: 0px;
+}
+
+.accordion-box .block .acc-btn {
+  position: relative;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1.2em;
+  font-weight: 600;
+  padding-right: 60px;
+  transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -webkit-transition: all 500ms ease;
+  color: #181614;
+  padding: 21px 0;
+  padding-left: 40px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
+
+.accordion-box .block .icon-outer {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 20px;
+  transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -webkit-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  text-align: center;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #555;
+}
+
+.accordion-box .block.active-block .icon-outer {
+  transform: rotate(90deg);
+  color: #fff;
+  background: transparent;
+}
+
+.accordion-box .block .icon-outer .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1em;
+  transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.accordion-box .block .acc-content {
+  position: relative;
+  display: none;
+  border-top: 0;
+}
+
+.accordion-box .block .acc-content .content-text {
+  padding-bottom: 6px;
+}
+
+.accordion-box .block .acc-content.current {
+  display: block;
+}
+
+.accordion-box .block .content {
+  position: relative;
+  font-size: 14px;
+  padding: 15px 40px 25px;
+}
+
+.accordion-box .block .content .text {
+  color: #565872;
+  margin-bottom: 0;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.accordion-box .block .acc-btn strong {
+  font-size: 24px;
+  color: #c2c0bb;
+  width: 76px;
+  text-align: center;
+  border-right: 1px solid #e9e5df;
+  margin-right: 30px;
+  display: inline-block;
+  line-height: 75px;
+}
+
+.accordion-box .block .acc-btn.active {
+  color: #fff;
+}
+
+.accordion-box .block.active-block {
+  box-shadow: 0px 3px 21.06px 5.94px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-box .block .acc-btn.active .icon-outer {
+  color: #fff;
+}
+ */
+
+
+
+/* why chooses us end */
+
+/* looking-for-taxi-start */
+
+.looking-for-taxi-three {
+    padding-top: 100px;
+    padding-bottom: 265px;
+    overflow: hidden;
+}
+.looking-for-taxi-three .block-title h3 {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+}
+.looking-for-taxi-three .block-title h2 {
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 72px;
+  color: #111111;
+}
+.looking-for-taxi-three .block-title p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: #717171;
+  padding: 40px 0px;
+}
+.looking-for-taxi-three .block-title ul {
+  list-style: none;
+  padding: 0px;
+}
+.looking-for-taxi-three .block-title ul li {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: #717171;
+}
+.looking-for-taxi-three .block-title ul li:nth-child(2) {
+  padding: 20px 0px;
+}
+.looking-for-taxi-three .block-title ul li i {
+  color: #ffc000;
+  padding-right: 5px;
+}
+
+.looking-for-taxi-three .image-box::before {
+  background-image: url(../images/resources/zigzag-box.png);
+  animation: bgSlideReverse 20s linear infinite;
+  content: "";
+  position: absolute;
+  left: -691px;
+  top: 335px;
+  width: 100%;
+  height: 38px;
+  background-color: #111111;
+  transform: rotate(90deg);
+}
+.looking-for-taxi-three .image-box .overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+.looking-for-taxi-three .image-box {
+  position: relative;
+}
+.looking-for-taxi-three .image-box .overlay {
+  position: absolute;
+  top: 0px;
+  left: -360px;
+  z-index: -1;
+}
+.looking-for-taxi-three .image-box .image-form {
+  width: 674px;
+  height: 472px;
+  margin: 120px 74px 120px 0px;
+  background: #ffffff;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: absolute;
+  left: -74px;
+  padding: 55px;
+}
+.looking-for-taxi-three .image-box .image-form input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+.looking-for-taxi-three .image-box .image-form .form-select {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: none !important;
+  padding: 10px 113px 40px 10px;
+}
+.looking-for-taxi-three .image-box .image-form textarea {
+  padding: 5px 0px 0px 10px;
+  margin-top: 10px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 35px;
+  margin-top: 35px;
+}
+
+.looking-for-taxi-three .btn-block .form-btn {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 600;
+  background-color: #ffc000;
+  color: #ffffff;
+  font-size: 18px;
+  border-radius: 50px;
+  padding: 16px 49px;
+  transition: all 0.4s ease;
+}
+.looking-for-taxi-three .btn-block .form-btn:hover {
+  color: #ffc000;
+  background-color: #111111;
+}
+/* looking-for-taxi-end */
+
+/* welcome-three star */
+
+.welcome-three .block-title h3 {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+}
+.welcome-three .block-title h2 {
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 72px;
+  text-align: center;
+  color: #111111;
+}
+.welcome-three .left-box .content {
+  background: #f3f3f3;
+  border-radius: 0px 10px 10px 0px;
+}
+.welcome-three .left-box .content h2 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 34px;
+  color: #111111;
+}
+.welcome-three .left-box p {
+  padding: 50px 0px 60px 0px;
+  text-align: justify;
+}
+.welcome-three .about-style-one .call-block .icon-block {
+  margin-top: -15px;
+}
+.welcome-three .about-style-one .call-block .icon-block {
+  background-color: #ffc000;
+}
+.welcome-three .about-style-one .call-block .icon-block i {
+  color: #ffffff;
+}
+.welcome-three .right-box {
+  position: relative;
+}
+.welcome-three .right-box .right-image {
+  position: absolute;
+  top: 0px;
+  right: -360px;
+}
+.welcome-three .right-box .right-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+.welcome-three .right-box .player-body {
+  position: absolute;
+  top: 297px;
+  left: 420px;
+  z-index: 2;
+}
+.welcome-three .right-box .player-bg {
+  position: absolute;
+  top: 288px;
+  left: 411px;
+  z-index: 2;
+}
+.welcome-three .right-box .player-center {
+  position: absolute;
+  top: 330px;
+  left: 456px;
+  z-index: 3;
+}
+.welcome-three .right-box .player-circle {
+  position: absolute;
+  top: 279px;
+  left: 402px;
+  z-index: 3;
+}
+.welcome-three .video-player {
+  cursor: pointer;
+}
+.welcome-three .right-box::before {
+  background-image: url(../images/resources/zigzag-box.png);
+  animation: bgSlideReverse 20s linear infinite;
+  content: "";
+  position: absolute;
+  right: -641px;
+  top: 282px;
+  width: 100%;
+  height: 38px;
+  background-color: #111111;
+  transform: rotate(90deg);
+  z-index: 3;
+}
+/* welcome-three end */
+
+/* taxi-fares-three start */
+
+.taxi-fares-three {
+    margin-bottom: 0;
+    padding-top: 50px;
+    padding-bottom: 90px;
+}
+.taxi-fares-three .fare-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 50px;
+  width: 370px;
+  height: 623px;
+  padding: 30px;
+  transition: all 500ms ease;
+}
+.taxi-fares-three .fare-card .top {
+  padding-top: 20px;
+}
+.taxi-fares-three .fare-card .top i {
+  color: #ffc000;
+}
+.taxi-fares-three .fare-card h2 {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 32px;
+  text-align: center;
+  color: #111111;
+  padding: 30px 0px;
+}
+.taxi-fares-three .fare-card p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  text-align: center;
+  color: #717171;
+}
+.taxi-fares-three .fare-card hr {
+  margin: 40px 0px;
+}
+.taxi-fares-three .fare-card ul {
+  padding: 0;
+}
+.taxi-fares-three .fare-card ul li:nth-child(2) {
+  margin: 10px 0px;
+}
+.taxi-fares-three .fare-card .rate {
+  font-weight: 600;
+  color: #111111;
+}
+.order-btn a {
+  padding: 16px 49px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 18px;
+  background: #ffffff;
+  color: #ffc000;
+  border: 1px solid #ffc000;
+}
+.order-btn:hover a {
+  background: #ffc000;
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.taxi-fares-three .fare-card:hover{
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+.taxi-fares-three .order-btn{
+  padding: 40px 0px 52px 0px;
+}
+.taxi-fares-three .row .middle{
+ margin: 0px 30px;
+}
+.taxi-fares-three p{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  text-align: center;
+  color: #111111;
+  }
+/* taxi-fares-three end */
+
+/* testimonials-three start */
+
+.testimonials-three {
+    /* background: url(../images/resources/testimonial-3.png) center center no-repeat; */
+    /* height: 690px; */
+    /* width: 100%; */
+    /* margin-bottom: 150px; */
+    padding: 120px 350px 120px 350px;
+    background-size: cover;
+	background-attachment: fixed;
+}
+.testimonials-three .inner {
+    /* width: 1170px; */
+    /* height: 487px; */
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    position: relative;
+    padding: 50px 0px 0px 0px;
+    /* margin: 100px 350px; */
+}
+
+.testimonials-three .owl-controls {
+    display: none;
+}
+
+
+
+
+
+.testimonials-three .inner img {
+    width: unset;
+    padding-top: 0;
+    text-align: center;
+    display: inline-block;
+    margin-top: 0;
+}
+.testimonials-three .inner .inner-quote {
+    position: absolute;
+    bottom: 0;
+    right: -18px;
+    max-width: 100%;
+    width: unset;
+}
+
+.testimonials-three .img-box {position: relative;display: inline-block;}
+
+
+.testimonials-three .inner p{
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 38px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 30px 0px 0px 0px;
+margin: 30px 0px;}
+.testimonials-three .inner h2{
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 35px;
+  color: #FFFFFF;
+}
+.testimonials-three .inner h3{
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #FFFFFF;
+  padding-bottom: 73px;
+}
+/* testimonials-three end */
+
+/* news-three start */
+.news-three .main-card{
+position: relative;
+border: none;
+}
+.news-three .main-card h2{
+  position: absolute !important;
+  top: 266px !important;
+  left: 197px !important;
+  border-radius: 20px !important;
+}
+/* news-three end */
+
+
+/* responsive */
+
+@media (max-width: 991px) {  
+.site-header.header-three .top-bar .logo-block{
+  z-index: 1;
+}
+.site-header.header-three .top-bar .logo-block a{
+  margin-top: -5px;
+  margin-right: 115px;
+}
+.main-banner-wrapper.bakker .text-left{
+  text-align: center !important;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+.main-banner-wrapper.bakker .banner-form-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.benefits-three .container .card {
+    /* width: 215px; */
+    /* height: 320px; */
+    margin-bottom: 30px;
+}
+.benefits-three .container i{
+  font-size: 50px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+}
+.benefits-three .container .card-title {
+    /* font-size: 18px; */
+    /* line-height: 10px; */
+}
+.benefits-three .container .card-text {
+    /* font-weight: 400; */
+    /* font-size: 9px; */
+    /* line-height: 18px; */
+    /* text-align: center; */
+    padding-bottom: 20px;
+}
+.benefits-three .container .card h1 {
+    top: 0;
+    left: 0;
+    position: relative;
+    margin-top: 20px;
+}
+.chooseus-three .image{
+  text-align: center;
+}
+.chooseus-three .image .choose-1{
+left: 70px;
+}
+.chooseus-three .image .choose-3{
+  bottom: -45px;
+  right: 0px;
+}
+.chooseus-three .content{
+ margin-top: 100px;
+}
+.chooseus-three .content .text-left{
+  text-align: center !important;
+}
+.chooseus-three .accordion .containers.active .content {
+  height: 90px;
+  margin: 0px;
+  padding: 0px;
+}
+.chooseus-three .accordion{
+  width: 100%;
+}
+.looking-for-taxi-three {
+  margin-top: 150px !important;
+  margin-bottom: 180px;
+}
+.looking-for-taxi-three .image-box .image-form{
+  width: 400px;
+  height: 472px;
+  left: -110px;
+  padding: 10px 38px 40px 10px;
+}
+.looking-for-taxi-three .image-box .image-form input{
+  margin: 20px 0px 10px 0px;
+  width: 160px;
+}
+.looking-for-taxi-three .image-box .image-form textarea{
+  width: 332px;
+}
+.looking-for-taxi-three .image-box .image-form .one{
+  padding: 10px 56px 40px 10px;
+}
+.looking-for-taxi-three .image-box .image-form .two{
+  padding: 10px 28px 40px 10px;
+}
+.welcome-three .block-title{
+  margin-bottom: 25px;
+}
+.welcome-three .left-box p{
+  padding: 25px 0px 30px 0px;
+}
+.welcome-three .left-box img{
+  width: 100%;
+  border-radius: 10px;
+}
+.welcome-three .left-box .content{
+  border-radius: 10px;
+}
+.welcome-three .about-style-one .call-block{
+ flex-direction: row;
+}
+.welcome-three .about-style-one .call-block .phone-number{
+  vertical-align: super;
+}
+.welcome-three .right-box .right-image{
+  right: 0px;
+}
+.welcome-three .right-image img{
+  width: 100%;
+  height: 100%
+}
+.welcome-three .video-player{
+  position: absolute;
+  top: 0px;
+  left: -105px;
+}
+.taxi-fares-three{
+  margin-top: 500px;
+}
+.taxi-fares-three .fare-card{
+  height: 100%;
+  width: 100%;
+  margin-top: 50px;
+}
+.taxi-fares-three .row .middle{
+  margin: 0px;
+}
+.testimonials-three{
+  margin-bottom: 10px;
+}
+.testimonials-three .inner .inner-quote {
+  top: 60px;
+  left: 535px;
+}
+.application-four{
+  text-align: center;
+}
+.news-four .main-card h2{
+  position: absolute !important;
+  left: 80px !important;
+  top: 150px !important;
+}
+}
+
+@media (max-width: 1250px) {
+  .site-header.header-three .top-bar {
+    padding: 0px 50px 0px 50px;
+}
+.site-header.header-three .header-navigation ul.navigation-box{
+  padding: 0px 15px 0px 10px;
+}
+.site-header.header-three .header-navigation ul.navigation-box > li + li {
+  margin-left: 55px;
+}
+.site-header.header-three .header-navigation .container .right-side-box {
+  position: absolute;
+  top: 0%;
+  right: -30px;
+}
+}
+
+@media (max-width: 1450px) {  
+  .main-banner-wrapper.bakker .banner-form-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 767px) { 
+.banner-btn{
+  font-size: 14px !important;
+  padding: 10px 30px !important;
+}
+.main-banner-wrapper.bakker .banner-form h3{
+  font-size: 24px;
+}
+.main-banner-wrapper.bakker .banner-form p{
+  font-size: 12px !important;
+  line-height: 20px !important;
+}
+.site-header.header-three .header-navigation .container {
+  border-radius: 25px;
+}
+.site-header.header-three .top-bar .logo-block a{
+  margin-top: -5px;
+  margin-right: 115px;
+}
+.main-banner-wrapper.bakker .banner-title{
+  font-size: 32px !important;
+  line-height: 42px !important;
+}
+.main-banner-wrapper.bakker p{
+  font-size: 16px !important;
+  line-height: 32px !important;
+}
+.main-banner-wrapper.bakker .text-left{
+  text-align: center !important;
+}
+.benefits-three .block-title p{
+  font-size: 12px;
+}
+.benefits-three .block-title h2{
+  font-size: 32px;
+}
+.benefits-three .container .card{
+  width: 100%;
+  height: 320px;
+  margin-bottom: 50px;
+}
+.benefits-three .container .card-title{
+  font-size: 24px;
+  line-height: 20px;
+}
+.benefits-three .container .card-text{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+}
+.benefits-three .container .card h1{
+  top: 50px;
+  left: 70px;
+  font-size: 48px;
+}
+.chooseus-three .image .choose-1{
+  left: -21px;
+}
+.chooseus-three .image .choose-3{
+  bottom: -45px;
+  right: 0px;
+}
+.chooseus-three .content{
+ margin-top: 100px;
+}
+.chooseus-three .content .text-left{
+  text-align: center !important;
+}
+.chooseus-three .content .text-left h3{
+  font-size: 12px;
+}
+.chooseus-three .content .text-left h2{
+  font-size: 32px;
+  line-height: 42px;
+}
+.chooseus-three .content .text-left p{
+  font-size: 12px;
+  line-height: 26px;
+}
+.chooseus-three .accordion .containers .label{
+  font-size: 12px;
+}
+.chooseus-three .accordion .containers.active .content {
+  height: 50px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.chooseus-three .accordion{
+  width: 100%;
+}
+.looking-for-taxi-three {
+  margin-top: 150px !important;
+  margin-bottom: 800px;
+}
+.looking-for-taxi-three .image-box .overlay{
+position: absolute;
+top: 375px;
+} 
+.looking-for-taxi-three .image-box .image-form{
+  height: 615px;
+  top: 300px;
+  left: 76px;
+  text-align: center;
+  padding-left: 38px;
+}
+.looking-for-taxi-three .image-box .image-form input{
+  width: 100%;
+}
+.looking-for-taxi-three .image-box .image-form textarea{
+  width: 292px;
+}
+.looking-for-taxi-three .image-box .image-form .one{
+  padding: 10px 192px 40px 10px;
+}
+.looking-for-taxi-three .image-box .image-form .two{
+  margin-top: 15px;
+  padding: 10px 163px 40px 10px;
+}
+.looking-for-taxi-three .text-left{
+  text-align: center !important;
+}
+.looking-for-taxi-three .block-title h3{
+  font-size: 12px;
+}
+.looking-for-taxi-three .block-title h2{
+  font-size: 32px;
+  line-height: 30px;
+}
+.looking-for-taxi-three .block-title p{
+  font-size: 12px;
+  line-height: 24px;
+}
+.looking-for-taxi-three .block-title ul li{
+  font-size: 12px;
+  line-height: 24px;
+}
+.welcome-three .block-title{
+  margin-bottom: 25px;
+}
+.welcome-three .block-title h3{
+  font-size: 12px;
+}
+.welcome-three .block-title h2{
+  font-size: 32px;
+  line-height: 50px;
+}
+.welcome-three .about-style-one{
+  padding-top: 30px;
+}
+.welcome-three .left-box p{
+  font-size: 12px;
+}
+.welcome-three .about-style-one .call-block .phone-number{
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+.welcome-three .video-player{
+  top: -140px;
+  right: 0;
+  left: -180px;
+}
+.taxi-fares-three{
+  margin-top: 420px;
+}
+.testimonials-three{
+  margin-bottom: 0px;
+}
+.testimonials-three .inner img {
+  padding-top: 0px;
+  margin-bottom: 40px;
+}
+.testimonials-three .inner .inner-quote{
+  top: 40px;
+  left: 220px;
+}
+.testimonials-three .inner{
+  height: 50%;
+  width: 50%;
+}
+.testimonials-three .inner h2{
+  font-size: 18px;
+}
+.testimonials-three .inner h3{
+  font-size: 12px;
+}
+.testimonials-three .inner p{
+  font-size: 12px;
+  line-height: 24px;
+  padding: 0px 50px 0px 50px;
+}
+.application-four{
+  text-align: center;
+}
+.application-four .content .block-title h3{
+  font-size: 12px;
+}
+.application-four .content .block-title h1{
+  font-size: 32px;
+  line-height: 40px;
+  padding-bottom: 25px;
+}
+.application-four .content .block-title p{
+  font-size: 12px;
+}
+.call-now-four-2 .call-now-content h3{
+  font-size: 12px;
+}
+.call-now-four-2 .call-now-content h1{
+  font-size: 32px;
+  line-height: 50px;
+}
+.call-now-four-2 .btn-block .banner-btn-3{
+  font-size: 14px !important;
+  padding: 12px 38px !important;
+}
+.news-four .content h3{
+  font-size: 12px !important;
+}
+.news-four .content h1{
+  font-size: 32px !important;
+  line-height: 30px !important;
+}
+.news-four .main-card h2{
+  top: 250px !important;
+  left: 170px !important;
+}
+.news-four .main-card .card-text{
+  font-size: 12px !important;
+}
+}
+
+@media (max-width: 535px) {
+  .site-header.header-three .header-navigation .container {
+    border-radius: 0px;
+  }
+  .welcome-three .left-box .content{
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 0;
+  }
+  .welcome-three .about-style-one .call-block{
+    padding: 0px 10px 0px 10px;
+  }
+  .welcome-three .about-style-one .call-block .content-block p {
+    font-size: 14px;
+    line-height: 20px;
+}
+.taxi-fares-three .fare-card{
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px !important;
+}
+.taxi-fares-three .row .middle{
+  margin: auto;
+}
+.testimonials-three .inner img{
+  margin-bottom: 15px;
+}
+.testimonials-three .inner .inner-quote {
+  top: 25px;
+  left: 168px;
+}
+.chooseus-three .image .choose-1{
+  left: 15px;
+}
+
+}
+
+@media (max-width: 375px) {
+  .site-header.header-one .top-bar .left-block a{
+    font-size: 12px;
+  }
+  .site-header.header-three .top-bar .left-block{
+    padding: 0px;
+    text-align: center;
+  }
+  .site-header.header-three .top-bar .logo-block{
+    position: relative !important;
+    top: 15px !important;
+    left: 35px !important;
+  }
+  .main-banner-wrapper.bakker .banner-form .box-1,
+  .main-banner-wrapper.bakker .banner-form form input{
+    font-size: 12px !important;
+  }
+  .main-banner-wrapper.bakker .banner-form{
+    width: 90%;
+  }
+  .main-banner-wrapper.bakker .banner-form p{
+    padding: 0px 25px 0px 25px;
+  }
+  .main-banner-wrapper.bakker .banner-form .box-1,
+  .main-banner-wrapper.bakker .banner-form form input{
+    width: 210px;
+  }
+  .btn-block .banner-form-btn{
+    padding: 10px 40px;
+    font-size: 14px;
+  }
+  .benefits-three{
+    margin-bottom: 100px;
+  }
+  .looking-for-taxi-three{
+    margin-top: 0px !important;
+    margin-bottom: 560px;
+  }
+  .looking-for-taxi-three .block-title ul li{
+    font-size: 12px;
+    line-height: 20px;
+  }
+  .looking-for-taxi-three .image-box .overlay{
+    top: 415px;
+    left: 0px;
+    display: none;
+  }
+  .looking-for-taxi-three .image-box .image-form{
+    height: 545px;
+    top: 300px;
+    left: 0px;
+    box-shadow: none;
+  }
+  .looking-for-taxi-three .image-box .image-form input{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 12px;
+  }
+  .looking-for-taxi-three .image-box .image-form .one{
+    font-size: 12px !important;
+    padding: 10px 213px 40px 10px;
+  }
+  .looking-for-taxi-three .image-box .image-form .two{
+    font-size: 12px !important;
+    padding: 10px 190px 40px 10px;
+    margin-top: 8px;
+  }
+  .looking-for-taxi-three .image-box .image-form textarea{
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  .looking-for-taxi-three .btn-block .form-btn{
+    font-size: 14px;
+    padding: 8px 35px;
+  }
+  .welcome-three .about-style-one .call-block{
+    flex-direction: column;
+    width: 65%;
+    margin: auto;
+    padding: 0px;
+  }
+  .welcome-three .about-style-one .call-block .left-block{
+    margin-bottom: 0px;
+  }
+  .welcome-three .about-style-one .call-block .phone-number{
+    font-size: 18px;
+  }
+  .welcome-three .about-style-one .call-block .icon-block{
+    width: 50px;
+    height: 35px;
+  }
+  .welcome-three .about-style-one .call-block .icon-block i {
+    line-height: 36px;
+    font-size: 16px;
+}
+.welcome-three .video-player{
+  top: -180px;
+  left: -280px;
+}
+.taxi-fares-three{
+  margin-top: 300px;
+  margin-bottom: 100px;
+}
+.taxi-fares-three .fare-card h2{
+  font-size: 24px;
+  line-height: 32px;
+  padding: 10px 0px;
+}
+.taxi-fares-three .fare-card p {
+  font-size: 12px;
+  line-height: 24px;
+}
+.taxi-fares-three .fare-card ul{
+  font-size: 12px;
+}
+.taxi-fares-three .order-btn a{
+  padding: 10px 40px;
+  font-size: 14px;
+}
+.taxi-fares-three p{
+  font-size: 10px;
+}
+.testimonials-three .inner{
+  height: 44%;
+  width: 85%;
+  margin-top: -170px;
+}
+.testimonials-three .inner .inner-quote{
+  left: 193px;
+}
+.news-four .main-card h2{
+  left: 80px !important;
+  top: 180px !important;
+}
+.header-four .logo-box img{
+  padding-left: 25px;
+  width: 80%;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-banner-wrapper.bakker .slide.slide-one {
+    padding: 120px 0px 120px;
+}
+.main-banner-wrapper.bakker .text-left {
+    padding-top: 150px;
+}
+
+
+.main-banner-wrapper.bakker .banner-btn {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  font-weight: 600;
+  background-color: #FFC000;
+  color: #111111;
+  font-size: 18px;
+  border-radius: 38.5px;
+  padding:16px 49px;
+  z-index: 1;
+  transition: all .4s ease;
+}
+.main-banner-wrapper.bakker .banner-btn:hover {
+  color: #111111;
+}
+
+.main-banner-wrapper.bakker .banner-btn:before{
+	position: absolute;
+	content: '';
+	background-color: #fff;
+	width: 0%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	border-radius: 38.5px;
+	z-index: -1;
+	transition: all 500ms ease;
+}
+
+.main-banner-wrapper.bakker .banner-btn:hover:before{
+	width: 100%;
+}
+
+
+
+
+
+
+
+.brand-carousel-wrapper.h3 {
+    padding: 120px 0px 100px 0px;
+    margin-bottom: 0;
+}
+
+.brand-carousel-wrapper.h3 .brand-carousel-one {
+    padding: 0;
+}
+
+.welcome-three.container .about-style-one {
+        padding-top: 0;
+    padding-bottom: 0;
+}
+.taxi-fares-three.welcome-three.container {
+    padding-top: 50px;
+    margin-bottom: 0;
+    padding-bottom: 90px;
+}
+
+
+
+
+
+
+
+.application-four .cta-style-three .content-block {
+    padding: 0;
+}

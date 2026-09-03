@@ -1,0 +1,27 @@
+﻿{
+    "total_chunks":  27,
+    "chunk_path":  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\graphify-out\\.graphify_chunk_07.json",
+    "files":  [
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\read_email.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\ready_to_use_form.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\ready_to_use_table.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\ribbons.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\scatter.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\scrollbar.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\scrollpy.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\select.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\setting.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\shadow.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\sign_in.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\sign_in_1.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\sign_up.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\sign_up_1.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\sitemap.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\slick.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\spinners.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\sweetalert.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\switch.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\tabler_icons.html\r"
+              ],
+    "chunk_num":  7
+}

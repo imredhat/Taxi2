@@ -1,0 +1,27 @@
+﻿{
+    "total_chunks":  27,
+    "chunk_path":  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\graphify-out\\.graphify_chunk_04.json",
+    "files":  [
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\error_500.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\error_503.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\faq.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\file_upload.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\filemanager.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\flag_icons.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\floating_labels.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\fontawesome.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\footer-page.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\form_validation.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\form_wizard_1.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\form_wizard_2.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\form_wizards.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\gallery.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\google-map.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\grid.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\heatmap.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\helper_classes.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\iconoir_icon.html\r",
+                  "C:\\Users\\Saber\\Desktop\\Jobs\\Taxi2\\Web\\public\\template\\index.html\r"
+              ],
+    "chunk_num":  4
+}

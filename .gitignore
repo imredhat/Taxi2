@@ -1,0 +1,25 @@
+# Dependencies and generated package output
+**/node_modules/
+**/.expo/
+**/.nuxt/
+**/dist/
+**/web-build/
+
+# Local environment and credentials
+**/.env
+**/.env.*
+!**/.env.example
+**/*.jks
+**/*.keystore
+**/*.p8
+**/*.p12
+**/*.pem
+**/*.key
+**/*.mobileprovision
+
+# Logs and operating-system files
+**/*.log
+**/.DS_Store
+
+# Temporary name used while importing nested repository contents
+**/.git.embedded-backup/
