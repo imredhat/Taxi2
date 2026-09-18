@@ -18,10 +18,10 @@ const Stack = createNativeStackNavigator();
 function AppContent() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Landing" component={LandingScreen} />
+      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Otp" component={OtpScreen} />
+        <Stack.Screen name="Landing" component={LandingScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Booking" component={BookingScreen} />
         <Stack.Screen name="Tracking" component={TrackingScreen} />
@@ -45,6 +45,15 @@ export default function App() {
     if (!I18nManager.isRTL) {
       I18nManager.allowRTL(true);
       I18nManager.forceRTL(true);
+    }
+    // Inject Leaflet CSS for web maps
+    if (Platform.OS === 'web') {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+      link.crossOrigin = '';
+      document.head.appendChild(link);
     }
   }, []);
 

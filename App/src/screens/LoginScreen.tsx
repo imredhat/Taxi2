@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -18,6 +18,15 @@ export default function LoginScreen({ navigation }: any) {
   const [password, setPassword] = useState('');
   const [usePassword, setUsePassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const token = await storage.getItem('auth_token');
+      if (token) {
+        navigation.replace('Home');
+      }
+    })();
+  }, []);
 
   const fullPhone = phone;
 

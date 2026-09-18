@@ -8,11 +8,20 @@
     "platforms": ["ios", "android", "web"],
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "این برنامه برای نمایش نقشه به دسترسی موقعیت مکانی شما نیاز دارد.",
+        "NSLocationAlwaysUsageDescription": "این برنامه برای نمایش نقشه به دسترسی موقعیت مکانی شما نیاز دارد."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#03151e"
+      },
+      "config": {
+        "neshan": {
+          "apiKey": "service.9c50629218df44e6bd12b34e4e6e8545"
+        }
       }
     },
     "web": {}

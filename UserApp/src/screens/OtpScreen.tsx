@@ -12,6 +12,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../components/Icon';
 import { colors, fonts } from '../theme';
+import { storage } from '../storage';
 
 const BG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB15KVyMJFMr8W79nmqanmfoucTsNf7hXv5MWVfrVA1w4qm3WQx7ZQAg1LPu6LrVKk-UHTY8GOq7Lmm8aqWf-OXOfkHsDGH1PXWrzOFoQ6wefpYhLNieAX64kZCAqkeAQrkLKxGB4L9OhZSH7MzfIODRo0frVDnibpxu4OY1YdzRJ16PmF1yZih9JAP9NybZaS4v10_M77DYBIgNOVFif81ggkBX5dkeWUvlO33e5ma7BNOSUh1GO6-OA';
 
@@ -19,7 +20,9 @@ const OTP_LENGTH = 5;
 const RESEND_SECONDS = 119;
 
 export default function OtpScreen({ route, navigation }: any) {
-  const phone = route?.params?.phone || '0912 345 6789';
+  const phone = route?.params?.phone || '';
+  // Strip non-digits, keep plain ASCII for display (Estedad has no Arabic-Indic glyph)
+  const phoneDisplay = phone.replace(/\D/g, '');
   const [code, setCode] = useState<string[]>(Array(OTP_LENGTH).fill(''));
   const [timeLeft, setTimeLeft] = useState(RESEND_SECONDS);
   const [success, setSuccess] = useState(false);
@@ -47,8 +50,10 @@ export default function OtpScreen({ route, navigation }: any) {
     }
   };
 
-  const verify = () => {
+  const verify = async () => {
     if (code.join('').length < OTP_LENGTH) return;
+    // Store a dummy auth token so HomeScreen auth guard passes
+    await storage.setItem('auth_token', 'otp-session-' + Date.now());
     setSuccess(true);
     Animated.timing(fade, { toValue: 1, duration: 500, useNativeDriver: true }).start();
     setTimeout(() => {
@@ -78,7 +83,7 @@ export default function OtpScreen({ route, navigation }: any) {
         <View style={styles.body}>
           <Text style={styles.title}>کد تایید را وارد کنید</Text>
           <Text style={styles.sub}>
-            کد ۵ رقمی به شماره <Text style={styles.subBold}>{phone}</Text> ارسال شد
+            کد ۵ رقمی به شماره <Text style={styles.subBold}>{phoneDisplay}</Text> ارسال شد
           </Text>
 
           <View style={styles.otpRow}>
@@ -181,9 +186,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 12,
   },
-  subBold: { fontFamily: fonts.bold, color: colors.onSurface },
+  subBold: { fontFamily: fonts.bold },
   otpRow: {
-    flexDirection: 'row-reverse',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     maxWidth: 360,

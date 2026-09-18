@@ -43,9 +43,19 @@ const vehicles = [
   },
 ];
 
-export default function BookingScreen({ navigation }: any) {
+export default function BookingScreen({ route, navigation }: any) {
+  const tripData = route?.params || {};
+  const starts = tripData.starts || [];
+  const ends = tripData.ends || [];
+  const date = tripData.date || '';
+  const time = tripData.time || '09:00';
+  const personCount = tripData.personCount || 1;
+  const luggageCount = tripData.luggageCount || 1;
+  const bagCount = tripData.bagCount || 0;
+  const hasAnimals = tripData.hasAnimals || false;
+
   const [selected, setSelected] = useState(0);
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(personCount);
   const price = vehicles[selected].price;
 
   return (
@@ -69,8 +79,8 @@ export default function BookingScreen({ navigation }: any) {
         <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
           <View style={styles.journeyCard}>
             <View style={styles.journeyTop}>
-              <Text style={styles.journeyEnd}>مبدأ: تهران، ونک</Text>
-              <Text style={styles.journeyEnd}>مقصد: اصفهان، میدان نقش جهان</Text>
+              <Text style={styles.journeyEnd}>مبدأ: {starts.length > 0 ? starts.map((p: any) => p.label).join(' • ') : '—'}</Text>
+              <Text style={styles.journeyEnd}>مقصد: {ends.length > 0 ? ends.map((p: any) => p.label).join(' • ') : '—'}</Text>
             </View>
             <View style={styles.progressTrack}>
               <View style={[styles.progressFill, { width: '35%' }]} />
@@ -81,11 +91,11 @@ export default function BookingScreen({ navigation }: any) {
             <View style={styles.journeyMeta}>
               <View style={styles.metaItem}>
                 <Icon name="schedule" size={16} color={colors.primary} />
-                <Text style={styles.metaText}>۴ ساعت و ۳۰ دقیقه</Text>
+                <Text style={styles.metaText}>{time}</Text>
               </View>
               <View style={styles.metaItem}>
-                <Icon name="distance" size={16} color={colors.onSurfaceVariant} />
-                <Text style={styles.metaText}>۴۴۰ کیلومتر</Text>
+                <Icon name="calendar_month" size={16} color={colors.onSurfaceVariant} />
+                <Text style={styles.metaText}>{date || 'تاریخ انتخاب نشده'}</Text>
               </View>
             </View>
           </View>
@@ -125,7 +135,7 @@ export default function BookingScreen({ navigation }: any) {
             <View style={styles.detailCard}>
               <Text style={styles.detailLabel}>تاریخ و ساعت حرکت</Text>
               <View style={styles.detailRow}>
-                <Text style={styles.detailValue}>۱۴ آذر - ساعت ۰۹:۳۰</Text>
+                <Text style={styles.detailValue}>{date ? `${date} - ${time}` : time}</Text>
                 <Icon name="calendar_month" size={20} color={colors.primary} />
               </View>
             </View>
@@ -147,6 +157,22 @@ export default function BookingScreen({ navigation }: any) {
                 </TouchableOpacity>
               </View>
             </View>
+            {(luggageCount > 0 || bagCount > 0 || hasAnimals) && (
+              <View style={styles.detailCard}>
+                <Text style={styles.detailLabel}>مشخصات بار و حیوان</Text>
+                <Text style={styles.detailValue}>
+                  {luggageCount > 0 && `بار دستی: ${luggageCount}`}
+                  {luggageCount > 0 && bagCount > 0 && ' | '}
+                  {bagCount > 0 && `چمدان: ${bagCount}`}
+                  {hasAnimals && (
+                    <>
+                      {luggageCount > 0 || bagCount > 0 ? ' | ' : ''}
+                      {`حیوان همراه`}
+                    </>
+                  )}
+                </Text>
+              </View>
+            )}
           </View>
 
           <View style={styles.safetyBanner}>

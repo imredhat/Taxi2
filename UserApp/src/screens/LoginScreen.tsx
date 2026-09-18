@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,11 +12,19 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../components/Icon';
 import { colors, fonts } from '../theme';
+import { storage } from '../storage';
 
 const BG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCrPnFxCPWTFJ3aAkuWGHR57egnTjwvOlW94Q5ZF28C9rqSv2kxyy8WZbBLb_4OB_dqx-q_RnFBBmWJHkbgjgWzDaCpjyBjL8dKIi2oVWeqapPEldC5gHNN2HrGNXP_MKpSxq25HiXFdBngq6T32Cgk-8i7xvtCb-ocKHMEbfSKbhvT52dKtqUW41SDpSmlZHw6rFUWyqTaG5WLU3d1Gf4UpEq7ayB0skAaRr2HLAci2q649DsRkK4Zsg';
 
 export default function LoginScreen({ navigation }: any) {
   const [phone, setPhone] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      const token = await storage.getItem('auth_token');
+      if (token) navigation.replace('Home');
+    })();
+  }, []);
 
   return (
     <View style={styles.root}>
@@ -50,12 +58,12 @@ export default function LoginScreen({ navigation }: any) {
                 <TextInput
                   style={styles.input}
                   value={phone}
-                  onChangeText={setPhone}
-                  placeholder="۰۹۱۲۳۴۵۶۷۸۹"
+                  onChangeText={(t) => setPhone(t.replace(/\D/g, ''))}
+                  placeholder="09123456789"
                   placeholderTextColor="rgba(212,196,174,0.4)"
                   keyboardType="phone-pad"
-                  textAlign="right"
                   maxLength={11}
+                  textAlign="right"
                 />
               </View>
             </View>

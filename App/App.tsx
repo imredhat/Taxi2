@@ -3,7 +3,6 @@ import { I18nManager, Platform, View, StyleSheet, ActivityIndicator } from 'reac
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-import SplashScreen from './src/screens/SplashScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import OtpScreen from './src/screens/OtpScreen';
 import HomeScreen from './src/screens/HomeScreen';
@@ -22,8 +21,7 @@ const Stack = createNativeStackNavigator();
 function AppContent() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Otp" component={OtpScreen} />
         <Stack.Screen name="SignupStep1" component={SignupStep1Screen} />
