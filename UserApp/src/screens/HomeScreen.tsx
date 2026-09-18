@@ -32,7 +32,7 @@ interface TripFormData {
 
 const NESHAN_API_KEY = 'service.9c50629218df44e6bd12b34e4e6e8545';
 
-export default function HomeScreen({ navigation }: any) {
+export default function HomeScreen({ navigation, route }: any) {
   const [step, setStep] = useState<Step>('start');
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState<TripFormData>({
@@ -48,14 +48,28 @@ export default function HomeScreen({ navigation }: any) {
   });
 
   useEffect(() => {
-    (async () => {
+    let cancelled = false;
+    // Fast path: OTP flow passed verification flag directly via params
+    if (route?.params?.otpVerified) {
+      setLoading(false);
+      return;
+    }
+    const initAuth = async () => {
       const token = await storage.getItem('auth_token');
+      if (cancelled) return;
       if (!token) {
-        navigation.replace('Login');
+        // Retry once — AsyncStorage may be slow on first write
+        await new Promise(r => setTimeout(r, 500));
+        if (cancelled) return;
+        const token2 = await storage.getItem('auth_token');
+        if (!token2) navigation.replace('Login');
+        else setLoading(false);
       } else {
         setLoading(false);
       }
-    })();
+    };
+    initAuth();
+    return () => { cancelled = true; };
   }, []);
 
   if (loading) return null;

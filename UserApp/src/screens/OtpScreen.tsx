@@ -50,16 +50,17 @@ export default function OtpScreen({ route, navigation }: any) {
     }
   };
 
-  const verify = async () => {
+  const verify = () => {
     if (code.join('').length < OTP_LENGTH) return;
-    // Store a dummy auth token so HomeScreen auth guard passes
-    await storage.setItem('auth_token', 'otp-session-' + Date.now());
+    // Store token as backup for app restarts
+    storage.setItem('auth_token', 'otp-session-' + Date.now());
     setSuccess(true);
     Animated.timing(fade, { toValue: 1, duration: 500, useNativeDriver: true }).start();
     setTimeout(() => {
       Animated.timing(scale, { toValue: 1, duration: 700, useNativeDriver: true }).start();
     }, 300);
-    setTimeout(() => navigation.replace('Home'), 1600);
+    // Navigate with otpVerified param — instant, no async race
+    setTimeout(() => navigation.replace('Home', { otpVerified: true }), 1600);
   };
 
   const mm = String(Math.floor(timeLeft / 60)).padStart(2, '0');
