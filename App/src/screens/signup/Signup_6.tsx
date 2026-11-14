@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
-import {driverApi} from '../../driverApi';
 import { API_URL, showToast } from '../../utils';
 import JalaliDatePicker from '../../components/JalaliDatePicker';
 import styles from './styles/Step6.styles';
@@ -160,10 +159,11 @@ function ModelPickerModal({ visible, models, selected, loading, onSelect, onClos
   );
 }
 
+const latin = (value: string) => value.trim().replace(/[۰-۹٠-٩]/g, digit => String(digit.charCodeAt(0) & 15));
+
 export default function SignupStep6Screen({ route, navigation }: any) {
   const prev = route.params || {};
   const standalone = !!prev.standalone;
-  const [saving, setSaving] = useState(false);
   const [modelId, setModelId] = useState<string|null>(null);
 
   const [brands, setBrands] = useState<any[]>([]);
@@ -204,9 +204,11 @@ export default function SignupStep6Screen({ route, navigation }: any) {
   };
 
   const handleNext = async () => {
-    if (saving) return;
     if (!selectedBrand) { showToast('برند خودرو را انتخاب کنید'); return; }
     if (!plate1 || !plate2 || !plate3 || !plateLetter) { showToast('پلاک خودرو را کامل وارد کنید'); return; }
+    if (!/^\d{2}$/.test(plate1) || !/^\d{2}$/.test(plate2) || !/^\d{3}$/.test(plate3)) {
+      showToast('کد ایران و بخش سمت چپ باید ۲ رقم باشند و بخش میانی ۳ رقم'); return;
+    }
 
     const vehicle = {
       brand: selectedBrand,
@@ -223,11 +225,13 @@ export default function SignupStep6Screen({ route, navigation }: any) {
       owner_name: ownerName.trim() || null,
     };
     if (!standalone) { navigation.navigate('SignupStep7', {...prev,...vehicle}); return; }
-    if (!modelId || !year || !color.trim()) { showToast('مدل، سال و رنگ خودرو را وارد کنید'); return; }
-    setSaving(true);
-    try { await driverApi.addVehicle(vehicle); navigation.goBack(); }
-    catch { /* The shared interceptor displays the API error. */ }
-    finally { setSaving(false); }
+
+    const normalizedYear = latin(year);
+    if (!modelId || !color.trim()) { showToast('مدل و رنگ خودرو را وارد کنید'); return; }
+    if (!/^\d{4}$/.test(normalizedYear) || Number(normalizedYear)<1350 || Number(normalizedYear)>1500) {
+      showToast('سال ساخت شمسی باید بین ۱۳۵۰ و ۱۵۰۰ باشد'); return;
+    }
+    navigation.navigate('AddVehicleDocuments',{...vehicle,standalone:true,year:normalizedYear});
   };
 
   return (
@@ -269,7 +273,7 @@ export default function SignupStep6Screen({ route, navigation }: any) {
           <TextInput
             style={styles.input}
             value={year}
-            onChangeText={(t) => setYear(t.replace(/\D/g, ''))}
+            onChangeText={(t) => setYear(latin(t).replace(/\D/g, ''))}
             keyboardType="number-pad"
             maxLength={4}
             placeholder="مثلاً ۱۴۰۲"
@@ -288,38 +292,22 @@ export default function SignupStep6Screen({ route, navigation }: any) {
           {/* Plate */}
           <Text style={styles.label}>شماره پلاک</Text>
           <View style={styles.plateRow}>
-            <TextInput
-              style={[styles.plateInput, styles.platePart]}
-              value={plate3}
-              onChangeText={(t) => setPlate3(t.replace(/\D/g, '').slice(0, 2))}
-              keyboardType="number-pad"
-              maxLength={2}
-              placeholder="۳"
-              placeholderTextColor="#aaa"
-            />
-            <TouchableOpacity style={[styles.plateInput, styles.plateLetter]} onPress={() => setModalField('plate')}>
-              <Text style={[styles.plateLetterText, !plateLetter && styles.placeholder]}>
-                {plateLetter || ' ح'}
-              </Text>
+            <View style={styles.plateRegion}>
+              <Text style={styles.plateRegionLabel}>ایران</Text>
+              <TextInput accessibilityLabel="کد دو رقمی ایران" style={styles.plateInput}
+                value={plate2} onChangeText={t=>setPlate2(latin(t).replace(/\D/g,'').slice(0,2))}
+                keyboardType="number-pad" maxLength={2} placeholder="۱۱" placeholderTextColor="#aaa"/>
+            </View>
+            <TextInput accessibilityLabel="بخش سه رقمی پلاک" style={[styles.plateInput,styles.platePart]}
+              value={plate3} onChangeText={t=>setPlate3(latin(t).replace(/\D/g,'').slice(0,3))}
+              keyboardType="number-pad" maxLength={3} placeholder="۳۶۵" placeholderTextColor="#aaa"/>
+            <TouchableOpacity accessibilityRole="button" accessibilityLabel="حرف پلاک"
+              style={[styles.plateInput,styles.plateLetter]} onPress={()=>setModalField('plate')}>
+              <Text style={[styles.plateLetterText,!plateLetter&&styles.placeholder]}>{plateLetter||'ب'}</Text>
             </TouchableOpacity>
-            <TextInput
-              style={[styles.plateInput, styles.platePart]}
-              value={plate2}
-              onChangeText={(t) => setPlate2(t.replace(/\D/g, '').slice(0, 2))}
-              keyboardType="number-pad"
-              maxLength={2}
-              placeholder="۲"
-              placeholderTextColor="#aaa"
-            />
-            <TextInput
-              style={[styles.plateInput, styles.platePart]}
-              value={plate1}
-              onChangeText={(t) => setPlate1(t.replace(/\D/g, '').slice(0, 3))}
-              keyboardType="number-pad"
-              maxLength={3}
-              placeholder="۱۲۳"
-              placeholderTextColor="#aaa"
-            />
+            <TextInput accessibilityLabel="بخش دو رقمی پلاک" style={[styles.plateInput,styles.platePart]}
+              value={plate1} onChangeText={t=>setPlate1(latin(t).replace(/\D/g,'').slice(0,2))}
+              keyboardType="number-pad" maxLength={2} placeholder="۱۲" placeholderTextColor="#aaa"/>
           </View>
 
           <Text style={styles.label}>رنگ خودرو</Text>
@@ -357,8 +345,8 @@ export default function SignupStep6Screen({ route, navigation }: any) {
             placeholderTextColor="#aaa"
           />
 
-          <TouchableOpacity style={styles.primaryBtn} disabled={saving} onPress={handleNext}>
-            <Text style={styles.primaryBtnText}>{saving?'در حال ثبت…':standalone?'ثبت خودرو':'مرحله بعد'}</Text>
+          <TouchableOpacity style={styles.primaryBtn} onPress={handleNext}>
+            <Text style={styles.primaryBtnText}>{standalone?'مرحله بعد، مدارک خودرو':'مرحله بعد'}</Text>
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>

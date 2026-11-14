@@ -1,5 +1,5 @@
 import React,{useCallback,useRef,useState} from 'react';
-import {ActivityIndicator,Linking,Modal,ScrollView,StyleSheet,Text,TouchableOpacity,View} from 'react-native';
+import {ActivityIndicator,Linking,Modal,ScrollView,StyleSheet,Text,TextInput,TouchableOpacity,View} from 'react-native';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import * as Location from 'expo-location';
 import OfferMap from '../components/OfferMap';
@@ -33,15 +33,48 @@ export default function DriverTripsScreen({navigation}:any){
    {!data&&!error&&<ActivityIndicator color="#07846c"/>}
    {!!error&&<View style={ui.card}><Text accessibilityRole="alert" style={ui.error}>{error}</Text><TouchableOpacity onPress={()=>setAttempt(value=>value+1)}><Text style={ui.link}>تلاش مجدد</Text></TouchableOpacity></View>}
    {data&&!data.items.length&&<View style={ui.card}><Text style={ui.title}>سفری ثبت نشده است</Text><TouchableOpacity onPress={()=>navigation.navigate('Home',undefined,{pop:true})}><Text style={ui.link}>مشاهده سفرهای نزدیک</Text></TouchableOpacity></View>}
-   {data?.items.map(trip=>{const [label,color,background]=statuses[trip.status]||['در حال بررسی','#52615e','#eef3f1'];return <TouchableOpacity key={trip.id} accessibilityRole="button" style={ui.card} onPress={()=>navigation.navigate('DriverTripDetails',{id:trip.id})}>
-    <View style={{...row,justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:6}}><Text style={[ui.muted,{color,backgroundColor:background,borderRadius:9,paddingHorizontal:9,paddingVertical:3}]}>{label}</Text><Text style={ui.muted}>{tripTime(trip.scheduled_at||trip.created_at)}</Text></View>
-    <Text style={ui.text}>{trip.pickup_address||'مبدأ ثبت نشده'} ← {trip.dropoff_address||'مقصد ثبت نشده'}</Text>
-    <Text style={ui.muted}>{trip.fare==null?'کرایه تعیین نشده':`${toman(trip.fare)} تومان کرایه`}</Text>
-   </TouchableOpacity>;})}
+   {data?.items.map(trip=>{
+    const [label,color,backgroundColor]=statuses[trip.status]||['در حال بررسی','#52615e','#eef3f1'];
+    const cancelled=trip.status==='cancelled';
+    return <View key={trip.id} style={listStyles.card}>
+     <View style={listStyles.header}>
+      <Text style={[listStyles.badge,{color,backgroundColor}]}>{label}</Text>
+      <Text style={ui.muted}>{tripTime(trip.scheduled_at||trip.created_at)}</Text>
+     </View>
+     <View style={listStyles.route}>
+      <View style={listStyles.stop}>
+       <Icon name="map-marker-outline" size={20} color="#086d58"/>
+       <View style={listStyles.address}><Text style={listStyles.stopLabel}>مبدأ</Text><Text style={ui.text}>{trip.pickup_address||'ثبت نشده'}</Text></View>
+      </View>
+      <View style={listStyles.stop}>
+       <Icon name="flag-variant-outline" size={20} color="#92510f"/>
+       <View style={listStyles.address}><Text style={listStyles.stopLabel}>مقصد</Text><Text style={ui.text}>{trip.dropoff_address||'ثبت نشده'}</Text></View>
+      </View>
+     </View>
+     <View style={listStyles.footer}>
+      <Text style={ui.title}>{trip.fare==null?'کرایه تعیین نشده':`${toman(trip.fare)} تومان`}</Text>
+      {!cancelled&&<TouchableOpacity accessibilityRole="button" style={listStyles.details} onPress={()=>navigation.navigate('DriverTripDetails',{id:trip.id})}>
+       <Text style={ui.link}>جزئیات سفر</Text><Icon name="chevron-left" size={18} color="#07846c"/>
+      </TouchableOpacity>}
+     </View>
+    </View>;
+   })}
    {data&&<View style={{...row,gap:16}}>{page>1&&<TouchableOpacity onPress={()=>setPage(page-1)}><Text style={ui.link}>صفحهٔ قبل</Text></TouchableOpacity>}{data.has_more&&<TouchableOpacity onPress={()=>setPage(page+1)}><Text style={ui.link}>صفحهٔ بعد</Text></TouchableOpacity>}</View>}
   </ScrollView>
  </DriverShell>;
 }
+
+const listStyles=StyleSheet.create({
+ card:{...ui.card,padding:0,gap:0,overflow:'hidden',borderRadius:20},
+ header:{...row,alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:6,backgroundColor:'#f0f6f3',paddingHorizontal:14,paddingVertical:10},
+ badge:{...ui.muted,fontFamily:'Estedad-Bold',borderRadius:9,paddingHorizontal:9,paddingVertical:3},
+ route:{padding:14,gap:10},
+ stop:{...row,alignItems:'center',gap:9},
+ address:{flex:1},
+ stopLabel:{...ui.muted,fontFamily:'Estedad-Bold'},
+ footer:{...row,alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:6,borderTopWidth:1,borderTopColor:'#e1ebe7',paddingHorizontal:14,minHeight:52},
+ details:{...row,alignItems:'center',gap:3,minHeight:44},
+});
 
 export function DriverTripDetailsScreen({navigation,route}:any){
  const [trip,setTrip]=useState<DriverTripDetails|null>(null),[error,setError]=useState(''),[attempt,setAttempt]=useState(0);
@@ -96,8 +129,8 @@ export function DriverTripDetailsScreen({navigation,route}:any){
   try{
    await driverApi.cancelTrip(trip.id,reason);
    revision.current++;
-   setTrip({...trip,status:'cancelled',can_contact:false,passenger_name:null,passenger_notes:null,cancellation_options:[],cancellation_label:trip.cancellation_options.find(option=>option.id===reason)?.label??null});
    setChoosing(false);
+   navigation.navigate('Trips',undefined,{pop:true});
   }catch(err){setCancelError(errorText(err));}
   finally{mutation.current=false;setCancelling(false);}
  };
@@ -108,13 +141,21 @@ export function DriverTripDetailsScreen({navigation,route}:any){
   const load=()=>{
    const current=++sequence;
    const requestedRevision=revision.current;
-   void driverApi.trip(id).then(({trip})=>{if(live&&current===sequence&&requestedRevision===revision.current){setTrip(trip);setError('');}})
+   void driverApi.trip(id).then(({trip})=>{
+    if(!live||current!==sequence||requestedRevision!==revision.current)return;
+    if(trip.status==='cancelled'){
+     setTrip(null);
+     navigation.navigate('Trips',undefined,{pop:true});
+     return;
+    }
+    setTrip(trip);setError('');
+   })
     .catch(err=>{if(live&&current===sequence)setError(errorText(err));});
   };
   load();
   const unsubscribe=onDriverChatMessage(rideId=>{if(live&&(rideId===null||rideId===id))load();});
   return()=>{live=false;unsubscribe();};
- },[id,attempt]));
+ },[id,attempt,navigation]));
  const [label,color,background]=statuses[trip?.status||'']||['در حال بررسی','#52615e','#eef3f1'];
  const [paymentLabel,paymentColor,paymentBackground]=(trip?.payment_status&&paymentStatuses[trip.payment_status])||['نامشخص','#52615e','#eef3f1'];
  const stops=trip?[
@@ -123,6 +164,7 @@ export function DriverTripDetailsScreen({navigation,route}:any){
   ...trip.ends.map((point,index)=>({point,kind:'destination',label:trip.ends.length>1?`مقصد ${numberFa(index+1)}`:'مقصد'})),
  ]:[];
  const activeIndex=trip?.can_contact?trip.stops_reached:-1;
+ const showStopMetrics=trip?.status!=='completed'&&trip?.status!=='cancelled';
  const nextStop=stops[activeIndex];
  const canNavigate=nextStop&&Number.isFinite(nextStop.point.lat)&&Number.isFinite(nextStop.point.lng)
   &&Math.abs(nextStop.point.lat)<=90&&Math.abs(nextStop.point.lng)<=180;
@@ -144,7 +186,7 @@ export function DriverTripDetailsScreen({navigation,route}:any){
  return <DriverShell navigation={navigation} title="جزئیات سفر" active="Trips" back
   onCancel={!reaching&&trip?.cancellation_options?.length?()=>setChoosing(true):undefined}>
   <ScrollView style={detailStyles.scroll} contentContainerStyle={detailStyles.body}>
-   {!!trip&&<View style={detailStyles.map}><OfferMap position={position} offer={nextStop?{
+   {!!trip&&<View pointerEvents="none" style={detailStyles.map}><OfferMap fixed position={position} offer={nextStop?{
     starts:nextStop.kind==='pickup'?[nextStop.point]:[],
     ends:nextStop.kind==='destination'?[nextStop.point]:[],
     waypoints:nextStop.kind==='waypoint'?[nextStop.point]:[],coordinates:[],activeStopLabel:nextStop.label,
@@ -201,8 +243,8 @@ export function DriverTripDetailsScreen({navigation,route}:any){
         <Text style={[detailStyles.stopLabel,destination&&detailStyles.endLabel]}>{label}</Text>
         <Text style={ui.text}>
          {point.address||'آدرس ثبت نشده'}
-         {minutes!=null&&<Text style={detailStyles.stopMetric}>{` (${numberFa(minutes)} دقیقه)`}</Text>}
-         {meters!=null&&<Text style={detailStyles.stopMetric}>{` (${numberFa(Math.round(meters/10)/100)} کیلومتر)`}</Text>}
+         {showStopMetrics&&minutes!=null&&<Text style={detailStyles.stopMetric}>{` (${numberFa(minutes)} دقیقه)`}</Text>}
+         {showStopMetrics&&meters!=null&&<Text style={detailStyles.stopMetric}>{` (${numberFa(Math.round(meters/10)/100)} کیلومتر)`}</Text>}
         </Text>
        </View>
       </View>;
@@ -216,6 +258,7 @@ export function DriverTripDetailsScreen({navigation,route}:any){
      {trip.distance_km!=null&&<TripFact icon="map-marker-distance" label={`${numberFa(Number(trip.distance_km))} کیلومتر`}/>}
     </View>
     {!!trip.passenger_notes&&<View style={ui.card}><Text style={ui.muted}>توضیحات مسافر</Text><Text style={ui.text}>{trip.passenger_notes}</Text></View>}
+    {trip.status==='completed'&&<PassengerRating key={trip.id} trip={trip}/>}
     {!!trip.cancellation_label&&<View style={ui.card}><Text style={ui.text}>دلیل لغو · {trip.cancellation_label}</Text></View>}
     <Modal visible={choosing&&!!trip.cancellation_options?.length} transparent animationType="fade"
      onRequestClose={()=>{if(!cancelling){setChoosing(false);setReason('');setCancelError('');}}}>
@@ -267,6 +310,40 @@ export function DriverTripDetailsScreen({navigation,route}:any){
  </DriverShell>;
 }
 
+function PassengerRating({trip}:{trip:DriverTripDetails}){
+ const [savedScore,setSavedScore]=useState(trip.my_rating?.score);
+ const [score,setScore]=useState(trip.my_rating?.score??5);
+ const [tags,setTags]=useState(trip.my_rating?.tags??[]);
+ const [comment,setComment]=useState(trip.my_rating?.comment??'');
+ const [feedback,setFeedback]=useState('');
+ const [saving,setSaving]=useState(false);
+ const pending=useRef(false);
+ const save=async()=>{
+  if(pending.current)return;
+  pending.current=true;setSaving(true);setFeedback('');
+  try{await driverApi.rateTrip(trip.id,score,comment,tags);setSavedScore(score);setFeedback('امتیاز ثبت شد.');}
+  catch(err){setFeedback(errorText(err));}
+  finally{pending.current=false;setSaving(false);}
+ };
+ return <View style={[ui.card,detailStyles.ratingCard]}>
+  <View style={detailStyles.ratingHeader}>
+   <Text style={detailStyles.ratingTitle}>امتیاز به مسافر</Text>
+   {savedScore!=null&&<Text style={ui.muted}>{numberFa(savedScore)} از ۵</Text>}
+  </View>
+  <View style={detailStyles.facts}>{[1,2,3,4,5].map(value=><TouchableOpacity key={value} accessibilityRole="radio" accessibilityLabel={`${numberFa(value)} ستاره`}
+   accessibilityState={{checked:value===score}} disabled={saving} style={detailStyles.ratingStar} onPress={()=>setScore(value)}>
+   <Icon name={value<=score?'star':'star-outline'} color="#92510f" size={22}/>
+  </TouchableOpacity>)}</View>
+  <View style={detailStyles.facts}>{trip.rating_options?.map(tag=><TouchableOpacity key={tag} accessibilityRole="checkbox" accessibilityState={{checked:tags.includes(tag)}}
+   disabled={saving} style={[detailStyles.ratingChoice,tags.includes(tag)&&{backgroundColor:'#c8eddb'}]}
+   onPress={()=>setTags(current=>current.includes(tag)?current.filter(item=>item!==tag):[...current,tag])}><Text style={ui.muted}>{tag}</Text></TouchableOpacity>)}</View>
+  <TextInput style={detailStyles.ratingInput} accessibilityLabel="توضیحات سفر" placeholder="توضیحات اختیاری" multiline maxLength={2000}
+   editable={!saving} value={comment} onChangeText={setComment}/>
+  <TouchableOpacity accessibilityRole="button" style={[ui.button,detailStyles.ratingSubmit]} disabled={saving} onPress={save}><Text style={ui.buttonText}>{saving?'در حال ثبت…':'ثبت امتیاز'}</Text></TouchableOpacity>
+  {!!feedback&&<Text style={ui.text} accessibilityRole="alert">{feedback}</Text>}
+ </View>;
+}
+
 function TripFact({icon,label}:{icon:React.ComponentProps<typeof Icon>['name'];label:string}){
  return <View style={detailStyles.fact}><Icon name={icon} size={15} color="#08745e"/><Text style={ui.muted}>{label}</Text></View>;
 }
@@ -302,6 +379,13 @@ const detailStyles=StyleSheet.create({
  modalCard:{width:'100%',maxWidth:400,maxHeight:'90%',backgroundColor:'#fff',borderRadius:20,overflow:'hidden'},
  modalBody:{gap:8,padding:14},
  facts:{...row,flexWrap:'wrap',gap:5},
+ ratingStar:{minHeight:44,minWidth:44,alignItems:'center',justifyContent:'center'},
+ ratingChoice:{minHeight:36,minWidth:44,paddingHorizontal:7,borderRadius:8,backgroundColor:'#edf6ef',alignItems:'center',justifyContent:'center'},
+ ratingCard:{padding:9,gap:5},
+ ratingHeader:{...row,alignItems:'center',gap:5},
+ ratingTitle:{...ui.text,flex:1,fontFamily:'Estedad-Bold'},
+ ratingInput:{...ui.text,minHeight:48,paddingHorizontal:8,paddingVertical:5,borderWidth:1,borderColor:'#e0ebe4',borderRadius:8,textAlignVertical:'top'},
+ ratingSubmit:{alignSelf:'flex-end',paddingHorizontal:12,minHeight:44,borderRadius:9},
  fact:{...row,alignItems:'center',gap:4,backgroundColor:'#e9f3ed',paddingHorizontal:8,paddingVertical:4,borderRadius:9},
  actionError:{...ui.error,paddingHorizontal:12,paddingTop:4},
  footer:{backgroundColor:'#fff',borderTopWidth:1,borderTopColor:'#e0ebe4',paddingHorizontal:12,paddingBottom:8,gap:3},

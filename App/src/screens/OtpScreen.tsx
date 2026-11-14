@@ -64,8 +64,8 @@ export default function OtpScreen({ route, navigation }: any) {
       await storage.setItem('user_role', 'driver');
       showToast('ورود موفق — خوش آمدید', 'success');
       navigation.replace('Home');
-    } catch {
-      // interceptor handles error toast
+    } catch (error) {
+      if (!axios.isAxiosError(error)) showToast('ذخیرهٔ نشست انجام نشد. دوباره تلاش کنید.');
     } finally {
       setLoading(false);
     }

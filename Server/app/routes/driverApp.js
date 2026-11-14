@@ -1,4 +1,8 @@
 const router = require('express').Router();
+const {options,ratingColumn,rateTrip}=require('../services/rideRating');
+const fs=require('node:fs/promises');
+const path=require('node:path');
+const {randomUUID}=require('node:crypto');
 const pool = require('../models/db');
 const { verifyToken } = require('../middleware/auth');
 const { handler, fail, uuid, text, page, transaction } = require('../middleware/passenger');
@@ -11,7 +15,7 @@ const basket=require('../services/offerBasket');
 
 router.use(verifyToken, handler(async (req, res, next) => {
   if (req.user.role !== 'driver' || !uuid(req.user.userId)) fail(403, 'با حساب راننده وارد شوید.');
-  const result = await pool.query(`SELECT dp.id, dp.is_verified, dp.active_vehicle_id, v.car_class AS active_class, u.first_name, u.last_name
+  const result = await pool.query(`SELECT dp.id, dp.is_verified, COALESCE(dp.rating,5)::float AS rating, dp.active_vehicle_id, v.car_class AS active_class, u.first_name, u.last_name
     FROM driver_profiles dp JOIN users u ON u.id=dp.user_id
     LEFT JOIN vehicles v ON v.id=dp.active_vehicle_id AND v.driver_id=dp.id AND v.is_active
     WHERE u.id=$1 AND u.role='driver' AND u.is_active AND NOT u.is_blocked`, [req.user.userId]);
@@ -24,9 +28,27 @@ const {registerDevice,removeDevice}=require('../controllers/passengerController'
 router.post('/devices',handler(registerDevice));
 router.delete('/devices/:id',handler(removeDevice));
 
+router.get('/profile-photo',handler(async (req,res)=>{
+  const {rows:[photo]}=await pool.query(`SELECT avatar_url,(SELECT file_url FROM driver_documents WHERE driver_id=$2
+    AND document_type='selfie' ORDER BY created_at DESC,id DESC LIMIT 1) AS selfie FROM users WHERE id=$1`,[req.user.userId,req.driver.id]);
+  if(/^data:image\/(jpeg|png);base64,/.test(photo?.avatar_url??''))return res.json({image:photo.avatar_url});
+  const file=photo?.avatar_url?.match(localUploadImage)??photo?.selfie?.match(localUploadImage);
+  if(!file)return res.json({image:null});
+  return sendDriverImage(res,path.resolve(__dirname,'../../uploads'),file);
+}));
+
+router.put('/profile-photo',handler(async (req,res)=>{
+  const {bytes,extension}=uploadedImage(req.body?.base64);
+  const image=`data:image/${extension==='jpg'?'jpeg':extension};base64,${bytes.toString('base64')}`;
+  await pool.query('UPDATE users SET avatar_url=$1 WHERE id=$2',[image,req.user.userId]);
+  res.json({image});
+}));
+
 router.get('/dashboard', handler(async (req, res) => {
-  const vehicles = await pool.query(`SELECT v.id,v.license_plate,v.car_class,v.color,v.year,v.is_active,
-    COALESCE(m.name_fa,m.name) AS model, COALESCE(b.name_fa,b.name) AS brand
+  const vehicles = await pool.query(`SELECT v.id,v.license_plate,v.car_class,v.color,v.year,v.is_active,v.approval_pending,
+    COALESCE(m.name_fa,m.name) AS model, COALESCE(b.name_fa,b.name) AS brand,
+    (SELECT d.id FROM driver_documents d WHERE ${vehicleDocumentScope} AND d.document_type='vehicle_front'
+      ORDER BY (d.vehicle_id IS NOT NULL) DESC,d.created_at DESC,d.id LIMIT 1) AS front_document_id
     FROM vehicles v LEFT JOIN car_models m ON m.id=v.model_id LEFT JOIN car_brands b ON b.id=m.brand_id
     WHERE v.driver_id=$1 ORDER BY v.created_at DESC,v.id`, [req.driver.id]);
   const assigned = await pool.query(`SELECT r.id,r.status,r.pickup_address,r.dropoff_address,r.fare,q.scheduled_at
@@ -54,6 +76,7 @@ const reachedCount = `COALESCE(r.driver_stops_reached,CASE WHEN r.status IN ('ar
 router.get('/trips/:id', handler(async (req, res) => {
   if(!uuid(req.params.id))fail(400,'شناسه سفر معتبر نیست.');
   const {rows}=await pool.query(`SELECT r.id,r.status,r.pickup_address,r.dropoff_address,r.fare::text,${reachedCount} AS stops_reached,
+    ${ratingColumn('passenger','$3')},
     ${paidDeposit} AS deposit_paid,
     r.created_at,r.car_class,r.distance_km,r.duration_minutes,r.payment_status,r.cancellation_reason,q.scheduled_at,q.passenger_count,
     EXISTS(SELECT 1 FROM payment_gateway_transactions WHERE ride_id=r.id AND ${activeGatewayPayment}) AS has_active_payment,
@@ -82,10 +105,11 @@ router.get('/trips/:id', handler(async (req, res) => {
   const deposit=BigInt(deposit_paid);
   const driver_share=payment_status!=='completed'&&payment_status!=='refunded'&&deposit>0n&&deposit<fare
     ?(fare-companyPortion(fare)).toString():null;
-  res.json({trip:{...trip,payment_status:displayedPaymentStatus,driver_share,starts,ends,coordinates,waypoints:intermediate,route_metrics,...cancellationDetails(rows[0])}});
+  res.json({trip:{...trip,rating_options:options.passenger,payment_status:displayedPaymentStatus,driver_share,starts,ends,coordinates,waypoints:intermediate,route_metrics,...cancellationDetails(rows[0])}});
 }));
 
 router.post('/trips/:id/cancel', handler(cancelDriverTrip));
+router.put('/trips/:id/rating',handler(rateTrip('passenger')));
 
 router.get('/trips/:id/pickup-metrics',handler(async (req,res)=>{
   if(!uuid(req.params.id))fail(400,'شناسه سفر معتبر نیست.');
@@ -164,6 +188,19 @@ router.post('/trips/:id/messages', handler(async (req,res)=>{
 
 router.post('/trips/:id/messages/read',handler(require('../services/chatReceipts').markRead));
 
+router.get('/reviews',handler(async(req,res)=>{
+  const {limit,offset}=page(req.query);
+  const user=req.user.userId;
+  const [tags,comments]=await Promise.all([
+    pool.query(`SELECT tag,count(*)::int AS count FROM ratings
+      CROSS JOIN LATERAL jsonb_array_elements_text(CASE WHEN jsonb_typeof(tags)='array' THEN tags ELSE '[]'::jsonb END) AS items(tag)
+      WHERE ratee_id=$1 AND target='driver' GROUP BY tag ORDER BY count DESC,tag LIMIT 12`,[user]),
+    pool.query(`SELECT id,score,comment,created_at FROM ratings WHERE ratee_id=$1 AND target='driver'
+      AND NULLIF(btrim(comment),'') IS NOT NULL ORDER BY created_at DESC,id DESC LIMIT $2 OFFSET $3`,[user,limit+1,offset]),
+  ]);
+  res.json({tags:tags.rows,comments:comments.rows.slice(0,limit),has_more:comments.rows.length>limit});
+}));
+
 router.get('/finance', handler(async (req, res) => {
   const shares = await pool.query(`SELECT rs.id,rs.ride_id,rs.driver_share::text,rs.created_at,
     SUM(rs.driver_share) OVER ()::text AS total FROM revenue_shares rs JOIN rides r ON r.id=rs.ride_id
@@ -178,18 +215,94 @@ router.get('/finance', handler(async (req, res) => {
     balance:wallet.rows[0]?.balance||'0',transactions:wallet.rows[0]?.transactions||[]});
 }));
 
+const vehicleDocumentTypes=['vehicle_registration_front','vehicle_registration_back','insurance','insurance_addendum',
+  'vehicle_front','vehicle_back','vehicle_interior_front','vehicle_interior_back'];
+const privateDocuments=path.resolve(__dirname,'../../vehicle-documents');
+const localUploadImage=/^(?:https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?)?\/uploads\/([\w.-]+\.(jpe?g|png|webp|gif))$/i;
+const vehicleDocumentScope=`d.driver_id=v.driver_id AND d.file_url IS NOT NULL
+  AND d.document_type IN (${vehicleDocumentTypes.map(type=>`'${type}'`).join(',')})
+  AND (d.vehicle_id=v.id OR (d.vehicle_id IS NULL AND
+    NOT EXISTS(SELECT 1 FROM vehicles other WHERE other.driver_id=v.driver_id AND other.id<>v.id)))`;
+
+router.get('/vehicles/:id',handler(async (req,res)=>{
+  if(!uuid(req.params.id))fail(400,'شناسه خودرو معتبر نیست.');
+  const {rows:[vehicle]}=await pool.query(`SELECT v.vin,v.owner_name,v.fuel_type,v.insurance_expiry::text,
+    COALESCE((SELECT json_agg(json_build_object('id',d.id,'type',d.document_type) ORDER BY d.document_type,d.id)
+      FROM driver_documents d WHERE ${vehicleDocumentScope}), '[]'::json) AS documents
+    FROM vehicles v WHERE v.id=$1 AND v.driver_id=$2`,[req.params.id,req.driver.id]);
+  if(!vehicle)fail(404,'خودرو پیدا نشد.');
+  res.json({vehicle});
+}));
+
+router.get('/vehicles/:id/documents/:documentId',handler(async (req,res)=>{
+  const {id,documentId}=req.params;
+  if(!uuid(id)||!uuid(documentId))fail(400,'شناسه مدرک معتبر نیست.');
+  const {rows:[document]}=await pool.query(`SELECT d.file_url FROM vehicles v JOIN driver_documents d ON ${vehicleDocumentScope}
+    WHERE v.id=$1 AND v.driver_id=$2 AND d.id=$3`,[id,req.driver.id,documentId]);
+  const privateFile=document?.file_url.match(/^vehicle-document:([0-9a-f-]+\.(jpg|png))$/i);
+  const file=privateFile??document?.file_url.match(localUploadImage);
+  if(!file)fail(404,'تصویر مدرک در دسترس نیست.');
+  const root=privateFile?privateDocuments:path.resolve(__dirname,'../../uploads');
+  return sendDriverImage(res,root,file);
+}));
+
+async function sendDriverImage(res,root,file){
+  const content=await fs.readFile(path.join(root,file[1])).catch(error=>{
+    if(error.code==='ENOENT')fail(404,'تصویر مدرک در دسترس نیست.');
+    throw error;
+  });
+  const extension=file[2].toLowerCase();
+  return res.set('Cache-Control','no-store').json({image:`data:image/${extension==='jpg'?'jpeg':extension};base64,${content.toString('base64')}`});
+}
+
+function uploadedImage(base64){
+  if(typeof base64!=='string'||base64.length>1_200_000||!(/^[A-Za-z0-9+/]+={0,2}$/.test(base64)))fail(400,'تصویر معتبر نیست.');
+  const bytes=Buffer.from(base64,'base64');
+  const jpeg=bytes.subarray(0,3).toString('hex')==='ffd8ff';
+  const png=bytes.subarray(0,8).toString('hex')==='89504e470d0a1a0a';
+  if(!jpeg&&!png)fail(400,'فرمت تصویر باید JPEG یا PNG باشد.');
+  return {bytes,extension:png?'png':'jpg'};
+}
+
 router.post('/vehicles', handler(async (req, res) => {
-  const {model_id,year,color,plate_part1,plate_part2,plate_part3,plate_letter,vin,owner_name,fuel_type,insurance_expiry_date} = req.body || {};
+  const {model_id,year,color,plate_part1,plate_part2,plate_part3,plate_letter,vin,owner_name,fuel_type,insurance_expiry_date,documents=[]} = req.body || {};
   if (!uuid(model_id) || !Number.isInteger(Number(year)) || Number(year)<1350 || Number(year)>1500 || !text(color,1,30)
       || !/^\d{2}$/.test(plate_part1) || !/^\d{2}$/.test(plate_part2) || !/^\d{3}$/.test(plate_part3) || !text(plate_letter,1,10)
       || ![ [vin,50], [owner_name,200], [fuel_type,50] ].every(([value,max]) => value == null || text(value,0,max))
       || (insurance_expiry_date && (typeof insurance_expiry_date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(insurance_expiry_date)))) fail(400, 'اطلاعات خودرو و پلاک را کامل و صحیح وارد کنید.');
   const plate = [plate_part1,plate_part2,plate_letter.trim(),plate_part3].join(' ');
-  const result = await pool.query(`INSERT INTO vehicles(driver_id,model_id,year,color,license_plate,car_class,vin,owner_name,fuel_type,insurance_expiry,plate_letter)
-    SELECT $1,m.id,$3,$4,$5,m.vehicle_class,$6,$7,$8,$9,$10 FROM car_models m WHERE m.id=$2 AND m.is_active RETURNING id`,
+  if(!Array.isArray(documents)||documents.length>vehicleDocumentTypes.length)fail(400,'مدارک خودرو معتبر نیستند.');
+  const seen=new Set();
+  const images=documents.map(doc=>{
+    if(!vehicleDocumentTypes.includes(doc?.type)||seen.has(doc.type))fail(400,'نوع مدرک معتبر نیست.');
+    const {bytes,extension}=uploadedImage(doc.base64);
+    seen.add(doc.type);
+    return {type:doc.type,bytes,name:`${randomUUID()}.${extension}`};
+  });
+  const written=[];
+  try{
+  const vehicle=await transaction(async client=>{
+  await client.query('SELECT id FROM driver_profiles WHERE id=$1 FOR UPDATE',[req.driver.id]);
+  const result = await client.query(`INSERT INTO vehicles(driver_id,model_id,year,color,license_plate,car_class,vin,owner_name,fuel_type,insurance_expiry,plate_letter,is_active,approval_pending)
+    SELECT $1,m.id,$3,$4,$5,m.vehicle_class,$6,$7,$8,$9,$10,FALSE,TRUE FROM car_models m WHERE m.id=$2 AND m.is_active RETURNING id`,
     [req.driver.id,model_id,Number(year),color.trim(),plate,vin||null,owner_name||null,fuel_type||null,insurance_expiry_date||null,plate_letter.trim()]);
   if (!result.rowCount) fail(400,'مدل خودرو معتبر نیست.');
-  res.status(201).json({ vehicle: result.rows[0] });
+  if(images.length)await fs.mkdir(privateDocuments,{recursive:true});
+  for(const image of images){
+    const filename=path.join(privateDocuments,image.name);
+    written.push(filename);
+    await fs.writeFile(filename,image.bytes,{flag:'wx'});
+    await client.query('INSERT INTO driver_documents(driver_id,vehicle_id,document_type,file_url) VALUES($1,$2,$3,$4)',
+      [req.driver.id,result.rows[0].id,image.type,`vehicle-document:${image.name}`]);
+  }
+  return result.rows[0];
+  });
+  res.status(201).json({vehicle});
+  }catch(error){
+    await Promise.allSettled(written.map(filename=>fs.unlink(filename)));
+    if(error.code==='23505')fail(409,'این پلاک قبلاً ثبت شده است.');
+    throw error;
+  }
 }));
 
 router.put('/vehicles/:id/active', handler(async (req, res) => {

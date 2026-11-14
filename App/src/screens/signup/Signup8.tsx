@@ -162,8 +162,11 @@ export default function SignupStep8Screen({ route, navigation }: any) {
 
       showToast('ثبت‌نام با موفقیت انجام شد', 'success');
       navigation.navigate('Login');
-    } catch {
-      // interceptor handles toast
+    } catch (error) {
+      if (!axios.isAxiosError(error)) {
+        showToast('ثبت‌نام انجام شد. برای ورود دوباره وارد حساب شوید.');
+        navigation.navigate('Login');
+      }
     } finally {
       setLoading(false);
     }

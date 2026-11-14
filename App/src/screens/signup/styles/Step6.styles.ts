@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
+import {row} from '../../../driverStyles';
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: '#f8faf9' },
@@ -48,15 +49,17 @@ const styles = StyleSheet.create({
   },
   dropdownText: { fontSize: 15, fontFamily: 'Estedad-Regular', color: '#17212a', textAlign: 'right' },
   plateRow: {
-    flexDirection: 'row-reverse', gap: 6, alignItems: 'center',
+    ...row, gap: 6, alignItems: 'flex-end',
   },
   plateInput: {
     height: 48, borderWidth: 1, borderColor: '#dfe8e4', borderRadius: 12,
     backgroundColor: '#fff', fontSize: 16, fontFamily: 'Estedad-Bold',
     color: '#17212a', textAlign: 'center',
   },
-  platePart: { width: 62 },
-  plateLetter: { width: 52, alignItems: 'center', justifyContent: 'center' },
+  platePart: { flex: 1, minWidth: 0 },
+  plateRegion: {width:54,gap:3},
+  plateRegionLabel: {fontFamily:'Estedad-Bold',fontSize:12,textAlign:'center',color:'#52615e'},
+  plateLetter: { width: 46, alignItems: 'center', justifyContent: 'center' },
   plateLetterText: { fontSize: 16, fontFamily: 'Estedad-Bold', color: '#17212a' },
   primaryBtn: {
     minHeight: 54, borderRadius: 18, alignItems: 'center', justifyContent: 'center',

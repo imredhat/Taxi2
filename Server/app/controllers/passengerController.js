@@ -1,9 +1,10 @@
+const {options,ratingColumn,rateTrip}=require('../services/rideRating');
 const pool=require('../models/db');
 const {fail,uuid,text,page,transaction}=require('../middleware/passenger');
 const own=(req)=>req.user.userId;
 const found=result=>{if(!result.rowCount)fail(404,'موردی پیدا نشد.');return result.rows[0];};
 const profileColumns='id,phone,phone_verified,first_name,last_name,email,gender,birth_date::text AS birth_date,avatar_url,created_at';
-exports.profile=async(req,res)=>res.json({profile:found(await pool.query(`SELECT ${profileColumns} FROM users WHERE id=$1`,[own(req)]))});
+exports.profile=async(req,res)=>res.json({profile:found(await pool.query(`SELECT ${profileColumns},COALESCE((SELECT AVG(score) FROM ratings WHERE ratee_id=$1 AND target='passenger'),5)::float AS rating FROM users WHERE id=$1`,[own(req)]))});
 exports.updateProfile=async(req,res)=>{
  const fields=['first_name','last_name','email','gender','birth_date'];const body=req.body||{};const keys=Object.keys(body);
  if(!keys.length||keys.some(key=>!fields.includes(key)))fail(400,'فیلدهای پروفایل معتبر نیست.');
@@ -52,7 +53,7 @@ exports.cancelReservation=async(req,res)=>{
 };
 exports.trips=async(req,res)=>{const p=page(req.query);const statuses=['pending','searching','accepted','arriving','arrived','in_progress','completed','cancelled','expired'];if(req.query.status&&!statuses.includes(req.query.status))fail(400,'وضعیت سفر معتبر نیست.');
  const result=await pool.query(`SELECT id,request_id,status,ride_type,car_class,pickup_address,dropoff_address,fare,payment_status,payment_method,started_at,completed_at,created_at FROM rides WHERE passenger_id=$1 ${req.query.status?'AND status=$4':''} ORDER BY created_at DESC,id DESC LIMIT $2 OFFSET $3`,[own(req),p.limit,p.offset,...(req.query.status?[req.query.status]:[])]);res.json({items:result.rows,page:p.page,limit:p.limit});};
-exports.trip=async(req,res)=>res.json({trip:found(await pool.query(`SELECT r.id,r.request_id,r.status,r.ride_type,r.car_class,r.pickup_address,r.dropoff_address,r.fare,
+exports.trip=async(req,res)=>res.json({rating_options:options.driver,trip:found(await pool.query(`SELECT ${ratingColumn('driver','$2')},r.id,r.request_id,r.status,r.ride_type,r.car_class,r.pickup_address,r.dropoff_address,r.fare,
  (${require('./passengerPaymentController').paidDeposit})::text AS deposit_paid,
  r.payment_status,r.payment_method,r.started_at,r.completed_at,r.distance_km,r.duration_minutes,r.route_polyline,u.first_name AS driver_first_name,u.last_name AS driver_last_name,v.color_fa,v.license_plate FROM rides r LEFT JOIN driver_profiles dp ON dp.id=r.driver_id LEFT JOIN users u ON u.id=dp.user_id LEFT JOIN vehicles v ON v.id=r.vehicle_id WHERE r.id=$1 AND r.passenger_id=$2`,[req.params.id,own(req)]))});
 exports.notifications=async(req,res)=>{const p=page(req.query);if(req.query.unread!==undefined&&!['true','false'].includes(req.query.unread))fail(400,'فیلتر اعلانات معتبر نیست.');const result=await pool.query(`SELECT id,type,title_fa,title,body_fa,body,data,is_read,created_at FROM notifications WHERE user_id=$1 ${req.query.unread==='true'?'AND is_read=false':''} ORDER BY created_at DESC,id DESC LIMIT $2 OFFSET $3`,[own(req),p.limit,p.offset]);const count=await pool.query('SELECT COUNT(*)::int AS count FROM notifications WHERE user_id=$1 AND is_read=false',[own(req)]);res.json({items:result.rows,unread_count:count.rows[0].count,page:p.page,limit:p.limit});};
@@ -76,11 +77,7 @@ exports.ticketMessage=async(req,res)=>{if(!text(req.body?.message,1,5000))fail(4
 exports.closeTicket=async(req,res)=>res.json({ticket:found(await pool.query("UPDATE support_tickets SET status='closed',updated_at=NOW(),resolved_at=COALESCE(resolved_at,NOW()) WHERE id=$1 AND user_id=$2 RETURNING id,status",[req.params.id,own(req)]))});
 exports.content=async(req,res)=>{const types=['faq','terms','about','page'];const type=req.query.type||'faq';if(!types.includes(type))fail(400,'نوع محتوا معتبر نیست.');const p=page(req.query);res.json({items:(await pool.query('SELECT slug,title_fa,title,content_fa,content,type FROM cms_pages WHERE is_published=true AND (published_at IS NULL OR published_at<=NOW()) AND type=$1 ORDER BY sort_order,id LIMIT $2 OFFSET $3',[type,p.limit,p.offset])).rows});};
 exports.config=async(req,res)=>res.json({settings:(await pool.query('SELECT key,value,type FROM settings WHERE is_public=true ORDER BY key')).rows,currency:'IRR',timezone:'Asia/Tehran'});
-exports.rating=async(req,res)=>{
- const {score,comment}=req.body||{};if(!Number.isInteger(score)||score<1||score>5||(comment!==undefined&&!text(comment,0,2000)))fail(400,'امتیاز معتبر نیست.');
- const ride=found(await pool.query("SELECT dp.user_id AS driver_user_id FROM rides r JOIN driver_profiles dp ON dp.id=r.driver_id WHERE r.id=$1 AND r.passenger_id=$2 AND r.status='completed'",[req.params.id,own(req)]));
- res.json({rating:found(await pool.query("INSERT INTO ratings(ride_id,rater_id,ratee_id,target,score,comment) VALUES($1,$2,$3,'driver',$4,$5) ON CONFLICT(ride_id,rater_id,target) DO UPDATE SET score=EXCLUDED.score,comment=EXCLUDED.comment RETURNING id,score,comment",[req.params.id,own(req),ride.driver_user_id,score,comment?.trim()||null]))});
-};
+exports.rating=rateTrip('driver');
 exports.tripMessages=async(req,res)=>{found(await pool.query('SELECT id FROM rides WHERE id=$1 AND passenger_id=$2',[req.params.id,own(req)]));const p=page(req.query);res.json({items:(await pool.query('SELECT id,message,created_at,COALESCE(is_read,false) AS is_read,(sender_id=$2) AS is_mine FROM ride_messages WHERE ride_id=$1 ORDER BY created_at,id LIMIT $3 OFFSET $4',[req.params.id,own(req),p.limit,p.offset])).rows,page:p.page,limit:p.limit});};
 exports.sendTripMessage=async(req,res)=>{if(!text(req.body?.message,1,2000))fail(400,'پیام معتبر نیست.');const result=await pool.query("INSERT INTO ride_messages(ride_id,sender_id,message,message_type) SELECT id,$2,$3,'text' FROM rides WHERE id=$1 AND passenger_id=$2 AND status IN ('accepted','arriving','arrived','in_progress') FOR SHARE RETURNING id,message,created_at",[req.params.id,own(req),req.body.message.trim()]);res.status(201).json({message:found(result)});};
 exports.registerDevice=async(req,res)=>{

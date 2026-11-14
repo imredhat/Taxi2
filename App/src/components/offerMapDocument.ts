@@ -4,7 +4,7 @@ const configuredMapKey=process.env.EXPO_PUBLIC_NESHAN_MAP_KEY;
 export const mapKey=configuredMapKey?.trim()||'';
 const validPoint=([lat,lng]:number[])=>Number.isFinite(lat)&&Number.isFinite(lng)&&Math.abs(lat)<=90&&Math.abs(lng)<=180;
 const json=(value:unknown)=>JSON.stringify(value).replace(/</g,'\\u003c');
-export function offerMapDocument(position:Coordinates|null,offer:MapRoute|undefined,fitRoute:boolean){
+export function offerMapDocument(position:Coordinates|null,offer:MapRoute|undefined,fitRoute:boolean,fixed=false){
  const starts=offer?.starts.map(({lat,lng})=>[lat,lng]).filter(validPoint)||[];
  const ends=offer?.ends.map(({lat,lng})=>[lat,lng]).filter(validPoint)||[];
  const waypoints=offer?.waypoints?.map(({lat,lng})=>[lat,lng]).filter(validPoint)||[];
@@ -13,7 +13,7 @@ export function offerMapDocument(position:Coordinates|null,offer:MapRoute|undefi
  function fail(){document.getElementById('error').style.display='grid';}
  function init(){try{
   const driver=${json(position?[position.lat,position.lng]:null)},center=driver||[35.7219,51.3347],starts=${json(starts)},ends=${json(ends)},waypoints=${json(waypoints)},route=${json(route)};
-  const map=new L.Map('map',{key:${json(mapKey)},maptype:'dreamy',center,zoom:13,maxZoom:18,poi:false,traffic:false,attributionControl:false});
+  const map=new L.Map('map',{key:${json(mapKey)},maptype:'dreamy',center,zoom:13,maxZoom:18,poi:false,traffic:false,attributionControl:false,${fixed?"zoomControl:false,dragging:false,touchZoom:false,scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,tapHold:false":""}});
   let loaded=false; const attach=layer=>{if(layer.on)layer.on('tileload',()=>{loaded=true;document.getElementById('error').style.display='none';});};map.eachLayer(attach);map.on('layeradd',event=>attach(event.layer));setTimeout(()=>{if(!loaded)fail();},12000);
   const activeStopLabel=${json(offer?.activeStopLabel??null)};
   function stopMarker(point,index,pickup){

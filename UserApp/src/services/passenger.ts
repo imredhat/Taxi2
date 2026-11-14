@@ -36,7 +36,7 @@ export const passengerApi = {
  closeTicket: (id:string) => apiPost(`${root}/support/tickets/${id}/close`,{},true),
  registerDevice: (token:string,platform:'android'|'ios'|'web') => apiPost(`${root}/devices`,{token,platform},true),
  removeDevice: (id:string) => apiDelete(`${root}/devices/${id}`),
- rating: (id:string,score:number,comment?:string) => apiPut(`${root}/trips/${id}/rating`,{score,comment}),
+ rating: (id:string,score:number,comment?:string,tags:string[]=[]) => apiPut(`${root}/trips/${id}/rating`,{score,comment,tags}),
  messages: (id:string,number=1) => apiGet(`${root}/trips/${id}/messages${page(number)}`),
  markMessagesRead: (id:string,ids:string[]) => apiPost(`${root}/trips/${id}/messages/read`,{ids},true),
  sendMessage: (id:string,message:string) => apiPost(`${root}/trips/${id}/messages`,{message},true),

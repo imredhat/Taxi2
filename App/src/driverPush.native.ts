@@ -1,13 +1,15 @@
-import * as Notifications from 'expo-notifications';
+import {isRunningInExpoGo} from 'expo';
+import type {NotificationResponse} from 'expo-notifications';
 import {Platform} from 'react-native';
 import {storage} from './storage';
 import {driverApi} from './driverApi';
 
 export function connectDriverPush(open:(id:string)=>void,receive:(event:{rideId:string;messageId:string})=>void){
- if(Platform.OS!=='android')return ()=>{};
+ if(Platform.OS!=='android'||isRunningInExpoGo())return ()=>{};
+ const Notifications:typeof import('expo-notifications')=require('expo-notifications');
  let live=true;
  const seen=new Set<string>();
- const handle=(response:Notifications.NotificationResponse|null)=>{
+ const handle=(response:NotificationResponse|null)=>{
   const data=response?.notification.request.content.data;
   if(!live||data?.kind!=='ride_chat'||typeof data.rideId!=='string'||typeof data.messageId!=='string'||seen.has(data.messageId))return;
   seen.add(data.messageId);

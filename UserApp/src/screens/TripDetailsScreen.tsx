@@ -98,6 +98,7 @@ export default function TripDetailsScreen({navigation,route}:any){
    {reserved?<>
     <ApiFeedback loading={false} error={pollError} retry={()=>{setPollError('');reloadReservation.current();}} navigation={navigation}/>
     <ReservationStatus status={status} ride={ride} vehicle={trip.vehicle} onTrack={()=>navigation.navigate('DriverChat',{rideId:ride?.id})} onCall={()=>{if(!/^\+?[0-9]{8,15}$/.test(ride?.driver_phone||''))return;Linking.openURL(`tel:${ride.driver_phone}`).catch(()=>setError('شماره‌گیر باز نشد؛ دوباره تلاش کنید.'));}}/>
+    {ride?.status==='completed'&&<TouchableOpacity accessibilityRole="button" style={ui.button} onPress={()=>navigation.push('Tracking',{rideId:ride.id})}><Text style={ui.buttonText}>امتیاز به راننده</Text></TouchableOpacity>}
     {hasFare&&<View style={ui.card}>
      <View style={styles.metaRow}><Text style={ui.title}>کرایه سفر</Text><Text style={ui.title}>{toman(rideFare)} تومان</Text></View>
      {status==='awaiting_deposit'&&reservation?.deposit_due&&<>

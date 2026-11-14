@@ -66,8 +66,8 @@ export default function LoginScreen({ navigation }: any) {
       await storage.setItem('user_role', role || 'passenger');
       showToast(`خوش آمدید ${res.data.firstName || ''}`, 'success');
       navigation.replace('Home');
-    } catch {
-      // interceptor handles error toast
+    } catch (error) {
+      if (!axios.isAxiosError(error)) showToast('ذخیرهٔ نشست انجام نشد. دوباره تلاش کنید.');
     } finally {
       setLoading(false);
     }

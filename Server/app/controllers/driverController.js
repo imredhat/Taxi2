@@ -566,7 +566,7 @@ exports.getVehicles = async (req, res) => {
 
     let query = `
       SELECT v.id, v.color, v.color_fa, v.license_plate, v.year, v.car_class,
-             v.is_active, v.insurance_expiry, v.inspection_expiry, v.created_at,
+             v.is_active, v.approval_pending, v.insurance_expiry, v.inspection_expiry, v.created_at,
              u.first_name, u.last_name, u.phone,
              cm.name AS model_name, cm.name_fa AS model_name_fa,
              cb.name AS brand_name, cb.name_fa AS brand_name_fa
@@ -764,7 +764,7 @@ exports.updateVehicle = async (req, res) => {
     const { driver_id, model_id, license_plate, color, year, car_class, is_active, insurance_expiry, inspection_expiry } = req.body;
     if (!driver_id || !license_plate) return res.status(400).json({ error: 'driver_id and license_plate required' });
     const result = await pool.query(
-      `UPDATE vehicles SET driver_id = $1, model_id = $2, license_plate = $3, color = $4, year = $5, car_class = $6, is_active = $7, insurance_expiry = $8, inspection_expiry = $9, updated_at = NOW() WHERE id = $10 RETURNING *`,
+      `UPDATE vehicles SET driver_id = $1, model_id = $2, license_plate = $3, color = $4, year = $5, car_class = $6, is_active = $7 AND NOT approval_pending, insurance_expiry = $8, inspection_expiry = $9, updated_at = NOW() WHERE id = $10 RETURNING *`,
       [driver_id, model_id || null, license_plate, color || null, year || null, car_class || 'eco_intercity', is_active !== undefined ? is_active : true, insurance_expiry || null, inspection_expiry || null, id]
     );
     if (!result.rowCount) return res.status(404).json({ error: 'Vehicle not found' });

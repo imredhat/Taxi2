@@ -74,6 +74,15 @@ router.post('/api/driver-schedules', ctrl.createDriverSchedule);
 router.get('/api/vehicles', ctrl.getVehicles);
 router.post('/api/vehicles', ctrl.createVehicle);
 router.put('/api/vehicles/:id', ctrl.updateVehicle);
+router.patch('/api/vehicles/:id/approve', require('../middleware/auth').verifyAdmin, require('../middleware/passenger').handler(async (req,res)=>{
+  const {id}=req.params;
+  const {uuid,fail}=require('../middleware/passenger');
+  if(!uuid(id))fail(400,'شناسه خودرو معتبر نیست.');
+  const {rows:[vehicle]}=await require('../models/db').query(`UPDATE vehicles SET approval_pending=FALSE,is_active=TRUE,updated_at=NOW()
+    WHERE id=$1 AND approval_pending RETURNING id,is_active,approval_pending`,[id]);
+  if(!vehicle)fail(404,'خودروی در انتظار تأیید پیدا نشد.');
+  res.json({vehicle});
+}));
 router.delete('/api/vehicles/:id', ctrl.deleteVehicle);
 
 // Drivers list (for vehicle assignment)

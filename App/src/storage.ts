@@ -18,8 +18,9 @@ export const storage = {
   setItem: async (key: string, value: string): Promise<void> => {
     try {
       await AsyncStorage.setItem(key, value);
-    } catch {
-      webStorage?.setItem(key, value);
+    } catch (error) {
+      if (!webStorage) throw error;
+      webStorage.setItem(key, value);
     }
   },
   removeItem: async (key: string): Promise<void> => {

@@ -4,7 +4,7 @@ import { showToast } from './components/Toast';
 
 export { showToast };
 
-export const API_URL = (process.env.EXPO_PUBLIC_API_URL || (Platform.OS==='android'?'http://10.0.2.2:3001':'http://localhost:3001')).replace(/\/$/,'');
+export const API_URL = (process.env.EXPO_PUBLIC_API_URL || (Platform.OS==='android'?'http://172.20.10.11:3001':'http://localhost:3001')).replace(/\/$/,'');
 
 axios.interceptors.response.use(
   (res) => res,

@@ -4,12 +4,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {driverWorkingKey,storage} from '../storage';
 import {driverApi} from '../driverApi';
-import {row, ui} from '../driverStyles';
+import {rightAligned,row,ui} from '../driverStyles';
 
 const tabs = [
   {route:'Home', label:'خانه', icon:'home-outline'},
   {route:'Trips', label:'سفرهای من', icon:'routes'},
   {route:'Finance', label:'مالی', icon:'wallet-outline'},
+  {route:'Profile', label:'پروفایل', icon:'account-circle-outline'},
 ] as const;
 const destinations = [...tabs,
   {route:'Vehicles', label:'خودروهای من', icon:'car-outline'},
@@ -17,11 +18,7 @@ const destinations = [...tabs,
 const green = '#07846c';
 const muted = '#52615e';
 
-type Props = {navigation:any; title:string; active?:typeof tabs[number]['route']; back?:boolean; onCancel?:()=>void; children:React.ReactNode};
-export default function DriverShell({navigation,title,active,back,onCancel,children}:Props) {
-  const [open,setOpen] = useState(false);
-  const go = (route:string) => {setOpen(false);navigation.navigate(route,undefined,{pop:true});};
-  const logout = async () => {
+export async function logoutDriver(navigation:any){
     const device=await storage.getItem('driver_push_device');
     if(device)await driverApi.removeDevice(device).catch(()=>{});
     await storage.removeItem('driver_push_device');
@@ -29,7 +26,12 @@ export default function DriverShell({navigation,title,active,back,onCancel,child
     await storage.removeItem('auth_token');
     await storage.removeItem('user_role');
     navigation.reset({index:0,routes:[{name:'Login'}]});
-  };
+  }
+
+type Props = {navigation:any; title:string; active?:typeof tabs[number]['route']; back?:boolean; onCancel?:()=>void; children:React.ReactNode};
+export default function DriverShell({navigation,title,active,back,onCancel,children}:Props) {
+  const [open,setOpen] = useState(false);
+  const go = (route:string) => {setOpen(false);navigation.navigate(route,undefined,{pop:true});};
   return <SafeAreaView style={ui.root}>
     <View style={ui.header}>
       <TouchableOpacity accessibilityRole="button" accessibilityLabel="باز کردن منو" style={styles.iconButton} onPress={()=>setOpen(true)}>
@@ -55,7 +57,7 @@ export default function DriverShell({navigation,title,active,back,onCancel,child
             {destinations.map(item=><TouchableOpacity key={item.route} accessibilityRole="button" style={[styles.menuItem,item.route===active&&styles.selected]} onPress={()=>go(item.route)}>
               <MaterialCommunityIcons name={item.icon} size={22} color={green}/><Text style={[ui.text,styles.menuLabel]}>{item.label}</Text><MaterialCommunityIcons name="chevron-left" size={18} color={muted}/>
             </TouchableOpacity>)}
-            <TouchableOpacity accessibilityRole="button" style={[styles.menuItem,styles.logout]} onPress={logout}><MaterialCommunityIcons name="logout" size={21} color="#b42318"/><Text style={ui.error}>خروج از حساب</Text></TouchableOpacity>
+            <TouchableOpacity accessibilityRole="button" style={[styles.menuItem,styles.logout]} onPress={()=>logoutDriver(navigation)}><MaterialCommunityIcons name="logout" size={21} color="#b42318"/><Text style={ui.error}>خروج از حساب</Text></TouchableOpacity>
           </SafeAreaView>
         </View>
       </View>
@@ -63,7 +65,7 @@ export default function DriverShell({navigation,title,active,back,onCancel,child
   </SafeAreaView>;
 }
 const styles = StyleSheet.create({
-  content:{flex:1,minHeight:0},heading:{flex:1,paddingHorizontal:10},brand:{fontFamily:'Estedad-ExtraBold',fontSize:18,color:green,textAlign:'right'},
+  content:{flex:1,minHeight:0},heading:{flex:1,paddingHorizontal:10},brand:{fontFamily:'Estedad-ExtraBold',fontSize:18,color:green,...rightAligned},
   iconButton:{width:44,height:44,borderRadius:15,borderWidth:1,borderColor:'#e1ebe7',alignItems:'center',justifyContent:'center',backgroundColor:'#fff'},
   bottom:{...row,flexShrink:0,backgroundColor:'#fff',borderTopWidth:1,borderTopColor:'#e1ebe7',paddingHorizontal:12,paddingVertical:7,gap:6},
   tab:{flex:1,minHeight:50,alignItems:'center',justifyContent:'center',gap:3,borderRadius:14},selected:{backgroundColor:'#eaf8f4'},tabLabel:{fontFamily:'Estedad-Medium',fontSize:11,color:muted},selectedLabel:{fontFamily:'Estedad-Bold',color:green},

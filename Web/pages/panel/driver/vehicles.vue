@@ -87,8 +87,9 @@
                     <td><span class="badge bg-info">{{ classLabel(r.car_class) }}</span></td>
                     <td class="f-s-13" :class="isExpired(r.insurance_expiry) ? 'text-danger' : ''">{{ formatDate(r.insurance_expiry) }}</td>
                     <td class="f-s-13" :class="isExpired(r.inspection_expiry) ? 'text-danger' : ''">{{ formatDate(r.inspection_expiry) }}</td>
-                    <td><span :class="r.is_active ? 'bg-success' : 'bg-secondary'" class="badge">{{ r.is_active ? 'فعال' : 'غیرفعال' }}</span></td>
+                    <td><span :class="r.approval_pending ? 'bg-warning text-dark' : r.is_active ? 'bg-success' : 'bg-secondary'" class="badge">{{ r.approval_pending ? 'در انتظار تأیید' : r.is_active ? 'فعال' : 'غیرفعال' }}</span></td>
                     <td class="text-center">
+                      <button v-if="r.approval_pending" class="btn btn-sm btn-outline-success me-1" :disabled="approvingId !== null" @click="approveVehicle(r)">تأیید خودرو</button>
                       <button class="btn btn-sm btn-outline-primary me-1" @click="openEditModal(r)" :disabled="deletingId === r.id || saving">
                         <i class="ti ti-edit"></i>
                       </button>
@@ -268,6 +269,19 @@
 <script setup>
 import { vehicleClassOptions, vehiclePackageLabel } from '~/utils/vehicleClasses'
 const { apiFetch } = useApi()
+const approvingId = ref(null)
+async function approveVehicle(vehicle) {
+  if (approvingId.value !== null) return
+  approvingId.value = vehicle.id
+  try {
+    const result = await apiFetch(`/api/vehicles/${vehicle.id}/approve`, { method: 'PATCH' })
+    Object.assign(vehicle, result.vehicle)
+  } catch (error) {
+    window.alert(error.message || 'تأیید خودرو انجام نشد.')
+  } finally {
+    approvingId.value = null
+  }
+}
 definePageMeta({ layout: 'admin' })
 useHead({
   title: 'پویش تاکسی | خودروها',

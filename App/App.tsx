@@ -7,6 +7,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import OtpScreen from './src/screens/OtpScreen';
 import OffersScreen from './src/screens/OffersScreen';
 import VehiclesScreen from './src/screens/VehiclesScreen';
+import DriverProfileScreen,{DriverReviewsScreen} from './src/screens/DriverProfileScreen';
 import DriverTripsScreen, {DriverTripDetailsScreen} from './src/screens/DriverTripsScreen';
 import PassengerChatScreen from './src/screens/PassengerChatScreen';
 import FinanceScreen from './src/screens/FinanceScreen';
@@ -24,7 +25,7 @@ import {useDriverChatEvents} from './src/driverChatEvents';
 const Stack = createNativeStackNavigator();
 
 const driverNavigation=createNavigationContainerRef<any>();
-const driverRoutes=new Set(['Home','Trips','DriverTripDetails','PassengerChat','Finance','Vehicles','AddVehicle']);
+const driverRoutes=new Set(['Home','Trips','DriverTripDetails','PassengerChat','Finance','Vehicles','Profile','DriverReviews','AddVehicle','AddVehicleDocuments']);
 function AppContent() {
   const [active,setActive]=useState(false);
   const update=()=>setActive(driverRoutes.has(driverNavigation.getCurrentRoute()?.name||''));
@@ -43,7 +44,10 @@ function AppContent() {
         <Stack.Screen name="SignupStep7" component={SignupStep7Screen} />
         <Stack.Screen name="SignupStep8" component={SignupStep8Screen} />
         <Stack.Screen name="Vehicles" component={VehiclesScreen} />
+        <Stack.Screen name="Profile" component={DriverProfileScreen} />
+        <Stack.Screen name="DriverReviews" component={DriverReviewsScreen} />
         <Stack.Screen name="AddVehicle" component={SignupStep6Screen} initialParams={{standalone:true}} />
+        <Stack.Screen name="AddVehicleDocuments" component={SignupStep7Screen} />
         <Stack.Screen name="Trips" component={DriverTripsScreen} />
         <Stack.Screen name="DriverTripDetails" component={DriverTripDetailsScreen} />
         <Stack.Screen name="PassengerChat" component={PassengerChatScreen} />
