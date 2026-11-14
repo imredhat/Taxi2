@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { I18nManager, Platform, View, StyleSheet, ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import LoginScreen from './src/screens/LoginScreen';
 import OtpScreen from './src/screens/OtpScreen';
-import HomeScreen from './src/screens/HomeScreen';
+import OffersScreen from './src/screens/OffersScreen';
+import VehiclesScreen from './src/screens/VehiclesScreen';
+import DriverTripsScreen, {DriverTripDetailsScreen} from './src/screens/DriverTripsScreen';
+import PassengerChatScreen from './src/screens/PassengerChatScreen';
+import FinanceScreen from './src/screens/FinanceScreen';
 import SignupStep1Screen from './src/screens/signup/Signup_1';
 import SignupStep2Screen from './src/screens/signup/Signup_2';
 import SignupStep3Screen from './src/screens/signup/Signup_3';
@@ -15,12 +19,18 @@ import SignupStep6Screen from './src/screens/signup/Signup_6';
 import SignupStep7Screen from './src/screens/signup/Signup_7';
 import SignupStep8Screen from './src/screens/signup/Signup8';
 import Toast from './src/components/Toast';
+import {useDriverChatEvents} from './src/driverChatEvents';
 
 const Stack = createNativeStackNavigator();
 
+const driverNavigation=createNavigationContainerRef<any>();
+const driverRoutes=new Set(['Home','Trips','DriverTripDetails','PassengerChat','Finance','Vehicles','AddVehicle']);
 function AppContent() {
+  const [active,setActive]=useState(false);
+  const update=()=>setActive(driverRoutes.has(driverNavigation.getCurrentRoute()?.name||''));
+  useDriverChatEvents(active,driverNavigation);
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={driverNavigation} onReady={update} onStateChange={update}>
       <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Otp" component={OtpScreen} />
@@ -32,7 +42,13 @@ function AppContent() {
         <Stack.Screen name="SignupStep6" component={SignupStep6Screen} />
         <Stack.Screen name="SignupStep7" component={SignupStep7Screen} />
         <Stack.Screen name="SignupStep8" component={SignupStep8Screen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Vehicles" component={VehiclesScreen} />
+        <Stack.Screen name="AddVehicle" component={SignupStep6Screen} initialParams={{standalone:true}} />
+        <Stack.Screen name="Trips" component={DriverTripsScreen} />
+        <Stack.Screen name="DriverTripDetails" component={DriverTripDetailsScreen} />
+        <Stack.Screen name="PassengerChat" component={PassengerChatScreen} />
+        <Stack.Screen name="Finance" component={FinanceScreen} />
+        <Stack.Screen name="Home" component={OffersScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

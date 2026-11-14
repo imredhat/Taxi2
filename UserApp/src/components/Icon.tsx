@@ -35,9 +35,10 @@ const MAP: Record<string, string> = {
   trending_flat: 'trending-up',
   home: 'home',
   distance: 'ruler',
-  luggage: 'luggage',
+  luggage: 'bag-personal',
+  badge: 'bag-suitcase',
   calendar_month: 'calendar-month',
-  verified: 'check-decil-circle',
+  verified: 'check-decagram',
   chat: 'chat',
   shield_with_heart: 'shield-heart',
   share: 'share',
@@ -48,16 +49,16 @@ const MAP: Record<string, string> = {
   trip: 'map-marker-route',
   security: 'shield-check',
   date_range: 'calendar-range',
-  paw: 'paw-print',
+  paw: 'paw',
   timer_sand: 'timer-sand-full',
   calendar_clock: 'calendar-clock',
-  luggage_check: 'luggage-perfect',
+  luggage_check: 'bag-suitcase',
 };
 
 export function Icon({
   name,
   size = 24,
-  color = '#ffffff',
+  color = '#17212a',
   style,
 }: {
   name: string;

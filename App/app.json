@@ -7,6 +7,8 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "plugins": [
+      "expo-notifications",
+      ["expo-location", {"locationWhenInUsePermission": "برای پیدا کردن سفرهای نزدیک، موقعیت فعلی شما لازم است."}],
       [
         "expo-image-picker",
         {

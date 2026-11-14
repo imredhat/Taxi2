@@ -173,6 +173,7 @@
 </template>
 
 <script setup>
+import { isAdminRole, saveAdminSession } from '~/utils/adminSession'
 import { AnimatePresence, motion } from 'motion-v'
 
 useHead({
@@ -197,7 +198,7 @@ const password = ref('')
 const loading = ref(false)
 const errorMsg = ref('')
 
-const roleDashboardMap = { super_admin: '/admin/dashboard', admin: '/admin/dashboard', support: '/support/dashboard', driver: '/driver/dashboard', passenger: '/passenger/dashboard' }
+const roleDashboardMap = { super_admin: '/panel/dashboard', admin: '/panel/dashboard', support: '/support/dashboard', driver: '/driver/dashboard', passenger: '/passenger/dashboard' }
 
 async function handleLogin() {
   errorMsg.value = ''
@@ -206,6 +207,7 @@ async function handleLogin() {
     const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: username.value, password: password.value }) })
     const data = await res.json()
     if (!res.ok) throw new Error(data.error === 'Invalid credentials' ? 'نام کاربری یا رمز عبور اشتباه است.' : data.error || 'ورود انجام نشد.')
+    if (isAdminRole(data.role)) saveAdminSession(data)
     localStorage.setItem('token', data.token)
     localStorage.setItem('user', JSON.stringify({ userId: data.userId, role: data.role, firstName: data.firstName, lastName: data.lastName, phone: data.phone, email: data.email }))
     localStorage.setItem('name', data.firstName || '')

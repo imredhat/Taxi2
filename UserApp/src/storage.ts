@@ -14,7 +14,8 @@ export const storage = {
     try {
       await AsyncStorage.setItem(key, value);
     } catch {
-      webStorage?.setItem(key, value);
+      if (webStorage) webStorage.setItem(key, value);
+      else if (key === 'auth_token') throw new Error('ذخیرهٔ نشست روی دستگاه انجام نشد. نسخهٔ اپ را به‌روز کنید و دوباره وارد شوید.');
     }
   },
   removeItem: async (key: string): Promise<void> => {
@@ -25,3 +26,15 @@ export const storage = {
     }
   },
 };
+
+export function isSessionToken(value:string|null):value is string {
+  return typeof value==='string' && /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(value);
+}
+
+export async function saveSessionToken(token:string) {
+  if (!isSessionToken(token)) throw new Error('پاسخ ورود معتبر نیست.');
+  await storage.setItem('auth_token', token);
+  if (await storage.getItem('auth_token') !== token) {
+    throw new Error('نشست روی دستگاه ذخیره نشد؛ دوباره تلاش کنید.');
+  }
+}

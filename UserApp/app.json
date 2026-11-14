@@ -4,9 +4,15 @@
     "slug": "userapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "dark",
-    "platforms": ["ios", "android", "web"],
-    "assetBundlePatterns": ["**/*"],
+    "userInterfaceStyle": "light",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -16,14 +22,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#03151e"
+        "backgroundColor": "#f8faf9"
       },
-      "config": {
-        "neshan": {
-          "apiKey": "service.9c50629218df44e6bd12b34e4e6e8545"
-        }
-      }
+      "package": "com.pooyeshtaxi.passenger"
     },
-    "web": {}
+    "web": {},
+    "plugins": [
+      ["expo-location", {"locationWhenInUsePermission": "برای نمایش موقعیت فعلی روی نقشه، دسترسی موقعیت مکانی لازم است."}],
+      "expo-notifications"
+    ]
   }
 }

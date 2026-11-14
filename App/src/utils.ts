@@ -1,9 +1,10 @@
+import {Platform} from 'react-native';
 import axios from 'axios';
 import { showToast } from './components/Toast';
 
 export { showToast };
 
-export const API_URL = 'http://192.168.1.106:3001';
+export const API_URL = (process.env.EXPO_PUBLIC_API_URL || (Platform.OS==='android'?'http://10.0.2.2:3001':'http://localhost:3001')).replace(/\/$/,'');
 
 axios.interceptors.response.use(
   (res) => res,

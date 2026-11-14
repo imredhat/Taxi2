@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Text, StyleSheet, Platform, StatusBar } from 'react-native';
+import { Animated, Text, StyleSheet, Platform } from 'react-native';
 
 type ToastType = 'error' | 'success' | 'info';
 
@@ -20,12 +20,12 @@ const BG: Record<ToastType, string> = {
   info: '#3b82f6',
 };
 
-const TOP_OFFSET = Platform.OS === 'ios' ? 100 : (StatusBar.currentHeight ?? 0) + 20;
+const BOTTOM_OFFSET = Platform.OS === 'ios' ? 108 : 96;
 
 export default function Toast() {
   const [msg, setMsg] = useState<ToastMessage | null>(null);
   const opacity = useRef(new Animated.Value(0)).current;
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     _show = (m: ToastMessage) => {
@@ -48,7 +48,7 @@ export default function Toast() {
       style={[
         styles.container,
         {
-          bottom: TOP_OFFSET,
+          bottom: BOTTOM_OFFSET,
           opacity,
           backgroundColor: BG[msg.type],
           transform: [{

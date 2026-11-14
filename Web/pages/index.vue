@@ -225,7 +225,10 @@
 </template>
 
 <script setup>
+import { isAdminRole, saveAdminSession } from '~/utils/adminSession'
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'motion-v'
+
+definePageMeta({ alias: ['/login'] })
 
 useHead({
   title: 'پویش تاکسی | سواری دربست بین‌شهری امن و راحت',
@@ -247,7 +250,9 @@ const luxuryCarX = useTransform(luxuryProgress, [0, 1], ['4%', '-4%'])
 const luxuryCarScale = useTransform(luxuryProgress, [0, 0.5, 1], [1.08, 1, 1.08])
 const lightX = useTransform(luxuryProgress, [0, 1], ['65%', '-65%'])
 const menuOpen = ref(false)
-const loginOpen = ref(false)
+const route = useRoute()
+const loginOpen = ref(route.path === '/login')
+watch(() => route.path, path => { loginOpen.value = path === '/login' })
 const activeVehicle = ref(1)
 const quoteMessage = ref('')
 const trip = reactive({ origin: '', destination: '', date: '', passengers: 1 })
@@ -263,11 +268,13 @@ const story = [
 ]
 
 const vehicles = [
-  { code: 'ECO', name: 'اقتصادی', short: 'ساده و کاربردی', description: 'انتخابی منطقی برای سفرهای روزمره بین‌شهری؛ با خودروی سالم و شرایط قانونی سفر.', features: ['مناسب تا ۴ مسافر', 'تهویه مناسب', 'هزینه متعادل'], examples: 'سمند، پژو ۴۰۵ یا هم‌رده' },
+  { code: 'ECO شهری', name: 'اقتصادی شهری', short: 'سفر روزمره', description: 'خودروی اقتصادی برای رفت‌وآمد درون شهر.', features: ['مناسب مسیرهای شهری', 'خودروی اقتصادی'], examples: 'تیبا، کوییک یا هم‌رده' },
+  { code: 'ECO بین‌شهری', name: 'اقتصادی بین‌شهری', short: 'ساده و کاربردی', description: 'انتخابی منطقی برای سفرهای روزمره بین‌شهری؛ با خودروی سالم و شرایط قانونی سفر.', features: ['مناسب تا ۴ مسافر', 'تهویه مناسب', 'هزینه متعادل'], examples: 'سمند، پژو ۴۰۵ یا هم‌رده' },
   { code: 'ECO+', name: 'اقتصادی پلاس', short: 'فضای بهتر', description: 'فضای کابین و آسایش بیشتر، بدون عبور از بودجه یک سفر اقتصادی.', features: ['کابین جادارتر', 'مناسب مسیرهای متوسط', 'تعادل هزینه و راحتی'], examples: 'آریو، برلیانس یا هم‌رده' },
   { code: 'VIP', name: 'وی‌آی‌پی', short: 'آرامش مسیر بلند', description: 'برای مسیرهای طولانی، سفر کاری یا زمانی که کیفیت کابین اولویت بیشتری دارد.', features: ['کابین آرام و راحت', 'رانندگان منتخب', 'هماهنگی اختصاصی'], examples: 'اکسنت، پریوس، فلوئنس یا هم‌رده' },
   { code: 'VIP+', name: 'وی‌آی‌پی پلاس', short: 'سفر ممتاز', description: 'سطح بالاتر آسایش و کیفیت برای سفر تشریفاتی یا مسیرهای طولانی.', features: ['خودروهای سطح بالاتر', 'مناسب سفر تشریفاتی', 'آسایش بیشتر'], examples: 'کمری، کرولا، سفران یا هم‌رده' },
-  { code: 'SUV', name: 'شاسی‌بلند', short: 'فضا و توان بیشتر', description: 'برای بار بیشتر، خانواده یا نیازهای خاص مسیر با هماهنگی قبلی.', features: ['فضای بار بیشتر', 'کابین جادار', 'رزرو با هماهنگی'], examples: 'RAV4 یا هم‌رده' }
+  { code: 'SUV', name: 'شاسی‌بلند', short: 'فضا و توان بیشتر', description: 'برای بار بیشتر، خانواده یا نیازهای خاص مسیر با هماهنگی قبلی.', features: ['فضای بار بیشتر', 'کابین جادار', 'رزرو با هماهنگی'], examples: 'RAV4 یا هم‌رده' },
+  { code: 'ون', name: 'ون', short: 'سفر گروهی', description: 'برای سفرهای گروهی و خانواده‌هایی که فضای بیشتری نیاز دارند.', features: ['فضای بیشتر برای مسافر و بار'], examples: 'ون مسافری' }
 ]
 
 const evidence = [
@@ -285,7 +292,7 @@ const process = [
   { title: 'با خیال راحت برس', text: 'همراهی تا پایان' }
 ]
 
-const roleDashboardMap = { super_admin: '/admin/dashboard', admin: '/admin/dashboard', support: '/support/dashboard', driver: '/driver/dashboard', passenger: '/passenger/dashboard' }
+const roleDashboardMap = { super_admin: '/panel/dashboard', admin: '/panel/dashboard', support: '/support/dashboard', driver: '/driver/dashboard', passenger: '/passenger/dashboard' }
 const toFa = value => new Intl.NumberFormat('fa-IR', { useGrouping: false }).format(value)
 const closeMenu = () => { menuOpen.value = false }
 
@@ -300,6 +307,7 @@ async function handleLogin() {
     const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: username.value, password: password.value }) })
     const data = await res.json()
     if (!res.ok) throw new Error(data.error === 'Invalid credentials' ? 'نام کاربری یا رمز عبور اشتباه است.' : data.error || 'ورود انجام نشد.')
+    if (isAdminRole(data.role)) saveAdminSession(data)
     localStorage.setItem('token', data.token)
     localStorage.setItem('user', JSON.stringify({ userId: data.userId, role: data.role, firstName: data.firstName, lastName: data.lastName, phone: data.phone, email: data.email }))
     localStorage.setItem('name', data.firstName || '')

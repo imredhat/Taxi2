@@ -1,17 +1,11 @@
+import { readAdminSession, clearAdminSession } from '~/utils/adminSession'
 // Auth composable — check login state and role
 export const useAuth = () => {
   const user = useState('auth_user', () => null)
 
   const loadUser = () => {
     if (import.meta.client) {
-      const stored = localStorage.getItem('user')
-      if (stored) {
-        try {
-          user.value = JSON.parse(stored)
-        } catch {
-          user.value = null
-        }
-      }
+      user.value = readAdminSession()?.user || null
     }
   }
 
@@ -23,7 +17,7 @@ export const useAuth = () => {
   })
 
   const logout = () => {
-    localStorage.removeItem('user')
+    clearAdminSession()
     user.value = null
     navigateTo('/login')
   }

@@ -17,17 +17,6 @@
 </template>
 
 <script setup>
-// Auth check - redirect to login if no token
-onMounted(() => {
-  if (process.client) {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      navigateTo('/')
-      return
-    }
-  }
-})
-
 useHead({
   htmlAttrs: { lang: 'fa', dir: 'rtl' },
   bodyAttrs: { class: 'rtl' },

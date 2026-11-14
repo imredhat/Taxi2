@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { storage } from '../storage';
+import { driverWorkingKey, storage } from '../storage';
 import axios from 'axios';
 import { API_URL, showToast } from '../utils';
 import styles from '../styles/OtpScreen.styles';
@@ -56,10 +56,12 @@ export default function OtpScreen({ route, navigation }: any) {
       const res = await axios.post(`${API_URL}/api/otp/verify`, {
         userId,
         code: otp,
+        purpose: 'driver',
       });
       const { token } = res.data;
+      await storage.removeItem(driverWorkingKey);
       await storage.setItem('auth_token', token);
-      await storage.setItem('user_role', 'passenger');
+      await storage.setItem('user_role', 'driver');
       showToast('ورود موفق — خوش آمدید', 'success');
       navigation.replace('Home');
     } catch {

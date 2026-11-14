@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3001;
-const { verifyToken } = require('./middleware/auth');
+const { verifyToken, verifyStaff } = require('./middleware/auth');
 
 app.disable('x-powered-by');
 
@@ -58,12 +58,24 @@ const driverCtrl = require('./controllers/driverController');
 app.get('/api/car-brands', driverCtrl.getCarBrands);
 app.get('/api/car-models', driverCtrl.getCarModels);
 
-app.use('/', verifyToken, userRoutes);
-app.use('/', verifyToken, rideRoutes);
-app.use('/', verifyToken, driverRoutes);
-app.use('/', verifyToken, uploadRoutes);
-app.use('/', verifyToken, pricingRoutes);
+const { handler } = require('./middleware/passenger');
+const sepPayments = require('./controllers/passengerPaymentController');
+app.get('/api/payments/sep/callback/:id', handler(sepPayments.callback));
+app.post('/api/payments/sep/callback/:id', handler(sepPayments.callback));
+app.use('/api/passenger', require('./routes/passenger'));
+app.use('/api/driver', require('./routes/driverApp'));
 
-app.listen(port, () => {
+app.use('/', verifyToken, verifyStaff, userRoutes, rideRoutes, driverRoutes, uploadRoutes, pricingRoutes);
+
+app.use((error, req, res, next) => {
+  if(error.type==='entity.parse.failed')return res.status(400).json({error:'بدنه JSON معتبر نیست.'});
+  if(error.type==='entity.too.large')return res.status(413).json({error:'حجم درخواست بیش از حد مجاز است.'});
+  console.error('Unhandled API error:',error.code||error.name);res.status(500).json({error:'خطای سرور'});
+});
+
+const server=require('node:http').createServer(app);
+require('./services/dispatchSocket')(server);
+require('./services/chatPush')();
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

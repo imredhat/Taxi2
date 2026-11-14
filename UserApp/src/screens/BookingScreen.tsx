@@ -1,411 +1,193 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Image,
-} from 'react-native';
+import LoadingState from '../components/LoadingState';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Platform } from 'react-native';
+import { BlurView, BlurTargetView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '../components/Icon';
 import BottomNav from '../components/BottomNav';
-import { colors, fonts } from '../theme';
+import PointAddress from '../components/PointAddress';
+import type { MapPoint } from '../components/NeshanMapPicker';
+import AppHeader from '../components/AppHeader';
+import { useAppData } from '../state/AppData';
+import {colors, fonts, ltrLayout, rightAlignedText} from '../theme';
+import { displayJalaliDate, persianDigits } from '../utils/tripDateTime';
 
-const vehicles = [
-  {
-    name: 'ECO',
-    price: '۱,۲۵۰,۰۰۰',
-    persons: 4,
-    luggage: 2,
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBVpTSbAhhyKSVDZmztAvPo50BKNznwW2uMtwYsr7j5u6vaQAiXALUxoCfhZmwDJ2loYspd_SEbK1HKUYmaMZwizTAJzfVBdShcrE0RRK1WaZ-0eV4jtlYbyJZ8WPAdmyjpjnuAUg3pAfSdNV22bU6xButZ284yfZwI67RwljMePSBqziwZ3u5aRAFZZmH048nvbove0YVwS6vgcK5o8BlRx05SeoThe4C1anH2VQiDbwqyeiW4do2jPQ',
-  },
-  {
-    name: 'ECO+',
-    price: '۱,۴۸۰,۰۰۰',
-    persons: 4,
-    luggage: 3,
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuArrS5ruMhnkdgBKVqTmuPhfvNsSZi2LhMGLJwT33u9pYbpzQL6d4K8GHcSJvxvRX5GtrWvlSHNv8QL8l2NpXT1hWxUsRmIqpavWD3X7av55dowQd5axMtKRIQjPDcvlsbsiw0c2Ud7-olVjdGk-gqisriyYJ2YF6_6lnBACkPtQQTxzl8CH2TJR9HQDOhy2wFrPk9J_RRKQshVQVRKTcPfs27uNCKSX4ANGILYpdNvvyxVc8MVDKD25Q',
-  },
-  {
-    name: 'VIP',
-    price: '۲,۱۰۰,۰۰۰',
-    persons: 3,
-    luggage: 3,
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD8TeK__1xKSVmDmuXeKUSctG99WmcrlWSu0ALuqPr9-mdCgGp8md6s35zCitwtxf6N9E4aqYlr82NjrylxaElOPvxdh1KSSiQnf87R524PZDwQNkXATZ8suJZWBJNAYwg6zDE09fcYViSTcVdgCddJZ--X3ud58jzx0OO1fXnvYVVyMePH0-zplWx1MCmpIFjfRr16F2lcYv1xdz-QlF1VYTJuC_XHwZXnELD8i_lFfYYxOU55BekMNA',
-  },
-  {
-    name: 'VIP SUV',
-    price: '۳,۵۰۰,۰۰۰',
-    persons: 6,
-    luggage: 5,
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCzWZ5iqkSMYD8doB0ElymGt88ogJZi1F7nKhAiIVLxKcbvj_CXqDMvXG9hlHYB2zJ4QmyLDu8oaoCGJ6Xc5tRFhWlWt-wPahFn8xMxbwdtJucjh-_iE-bhs5Uoc2xVNe5k2UKCm8MkK6IQMhGlTGx77G4Bf486hACkp786B6MZdtLwKj18XXWlmkBnsw0nFIT-EYr5XU5yAVzzCKznomACo3jRCiKOtrkaQX9-jRM9fnhfyDozB_bcYA',
-  },
-];
+import { passengerQuote, packageLabel, packageIcon, packagePrice, type FarePackage, type FareQuote } from '../services/packages';
+import { formatRouteDuration } from '../utils/tripRoute';
 
 export default function BookingScreen({ route, navigation }: any) {
+  const { saveTrip, syncDraft, registerTrip, loaded } = useAppData();
   const tripData = route?.params || {};
-  const starts = tripData.starts || [];
-  const ends = tripData.ends || [];
+  const draftId = useRef<string | undefined>(tripData.id);
+  const blurTarget = useRef<View | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  useEffect(() => { draftId.current=tripData.id;setSubmitError(''); },[tripData.id]);
+  const starts: MapPoint[] = tripData.starts || [];
+  const ends: MapPoint[] = tripData.ends || [];
   const date = tripData.date || '';
   const time = tripData.time || '09:00';
   const personCount = tripData.personCount || 1;
-  const luggageCount = tripData.luggageCount || 1;
+  const luggageCount = tripData.luggageCount || 0;
   const bagCount = tripData.bagCount || 0;
-  const hasAnimals = tripData.hasAnimals || false;
-
   const [selected, setSelected] = useState(0);
-  const [count, setCount] = useState(personCount);
-  const price = vehicles[selected].price;
+  const [packages, setPackages] = useState<FarePackage[]>([]);
+  const [packageError, setPackageError] = useState('');
+  const [packageAttempt, setPackageAttempt] = useState(0);
+  const [loadingPackages, setLoadingPackages] = useState(true);
+  const [quote,setQuote]=useState<(FareQuote & {key:string})|null>(null);
+  const quoteKey=JSON.stringify({starts,ends,date,time,personCount,luggageCount,bagCount,hasAnimals:!!tripData.hasAnimals,animalType:tripData.animalType||''});
+  useEffect(()=>{
+    let live=true;setLoadingPackages(true);setPackageError('');setQuote(null);
+    passengerQuote({...tripData,starts,ends,date,time,personCount,luggageCount,bagCount}).then(result=>{if(live){setQuote({...result,key:quoteKey});setPackages(result.packages);const saved=result.packages.findIndex(item=>item.id===tripData.packageId&&item.available);setSelected(saved>=0?saved:Math.max(0,result.packages.findIndex(item=>item.available)));}})
+      .catch(error=>{if(live){setPackages([]);setPackageError(error instanceof Error?error.message:'محاسبه قیمت انجام نشد.');}}).finally(()=>{if(live)setLoadingPackages(false);});
+    return()=>{live=false;};
+  },[quoteKey,packageAttempt]);
+  useEffect(()=>{if(!quote)return;const timer=setTimeout(()=>setPackageError('اعتبار قیمت تمام شده است؛ قیمت را دوباره دریافت کنید.'),Math.max(0,Date.parse(quote.expiresAt)-Date.now()));return()=>clearTimeout(timer);},[quote?.quoteId]);
+  const validQuote=!!quote&&quote.key===quoteKey&&Date.parse(quote.expiresAt)>Date.now()&&!packageError;
+  const routeEstimate = quote?.key === quoteKey ? quote.route : undefined;
 
-  return (
-    <View style={styles.root}>
+  const saveCurrentDraft = () => {
+    const draft = { ...tripData, id: draftId.current, starts, ends, date, time, personCount, luggageCount, bagCount, hasAnimals: !!tripData.hasAnimals, vehicle: packages[selected] ? packageLabel(packages[selected]) : tripData.vehicle || '', packageId: packages[selected]?.id, quoteId:quote?.quoteId, quoteExpiresAt:quote?.expiresAt, fare:packages[selected]?.amount?{amount:packages[selected].amount!,currency:'IRR',breakdown:packages[selected].breakdown||[],warnings:packages[selected].warnings||[]}:undefined };
+    const id = saveTrip(draft); draftId.current = id;
+    return { ...draft, id, createdAt: tripData.createdAt || new Date().toISOString() };
+  };
+  const reserve = async (purpose:'deposit'|'full') => {
+    if (submitting || !validQuote || !packages[selected]?.available) return;
+    setSubmitting(true); setSubmitError('');
+    const draft = saveCurrentDraft();
+    try {
+      const requestId=await registerTrip(draft);
+      navigation.navigate('TripDetails', { tripId: draft.id });
+      navigation.push('Payment',{purpose,requestId,autoCheckout:true});
+    }
+    catch (error) { setSubmitError(error instanceof Error ? error.message : 'ثبت رزرو انجام نشد.'); }
+    finally { setSubmitting(false); }
+  };
+  const editTrip = () => navigation.navigate('Home', { editTrip: tripData });
+  const vehicle = packages[selected];
+  const price = vehicle?.amount ? persianDigits(packagePrice(vehicle)!.toLocaleString('en-US')) : null;
+  const disabled = !loaded || submitting || !validQuote || !vehicle?.available || !starts.length || !ends.length;
+  const saveDraft = async () => {
+    if (disabled) return;
+    setSubmitting(true);
+    setSubmitError('');
+    const draft = saveCurrentDraft();
+    try {
+      await syncDraft(draft);
+      navigation.navigate('TripDetails', { tripId: draft.id });
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'ذخیرهٔ پیش‌نویس انجام نشد.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return <View style={styles.root}>
+    <BlurTargetView ref={blurTarget} style={styles.flex} accessibilityElementsHidden={loadingPackages} importantForAccessibility={loadingPackages?'no-hide-descendants':'auto'}>
       <SafeAreaView style={styles.flex}>
-        <View style={styles.header}>
-          <View style={styles.headerRight}>
-            <View style={styles.avatar}>
-              <Icon name="person" size={20} color={colors.primary} />
-            </View>
-            <TouchableOpacity>
-              <Icon name="notifications" size={24} color={colors.primary} />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.brand}>پویش تاکسی</Text>
-          <TouchableOpacity>
-            <Icon name="menu" size={24} color={colors.primary} />
-          </TouchableOpacity>
-        </View>
-
+        <AppHeader navigation={navigation} title="انتخاب ناوگان" onBack={editTrip}/>
         <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-          <View style={styles.journeyCard}>
-            <View style={styles.journeyTop}>
-              <Text style={styles.journeyEnd}>مبدأ: {starts.length > 0 ? starts.map((p: any) => p.label).join(' • ') : '—'}</Text>
-              <Text style={styles.journeyEnd}>مقصد: {ends.length > 0 ? ends.map((p: any) => p.label).join(' • ') : '—'}</Text>
-            </View>
-            <View style={styles.progressTrack}>
-              <View style={[styles.progressFill, { width: '35%' }]} />
-              <View style={[styles.progressDot, { right: 0 }]} />
-              <View style={[styles.progressPulse, { right: '35%' }]} />
-              <View style={[styles.progressDot, { left: 0 }]} />
-            </View>
-            <View style={styles.journeyMeta}>
-              <View style={styles.metaItem}>
-                <Icon name="schedule" size={16} color={colors.primary} />
-                <Text style={styles.metaText}>{time}</Text>
-              </View>
-              <View style={styles.metaItem}>
-                <Icon name="calendar_month" size={16} color={colors.onSurfaceVariant} />
-                <Text style={styles.metaText}>{date || 'تاریخ انتخاب نشده'}</Text>
-              </View>
+          <TouchableOpacity style={styles.backAction} onPress={editTrip}>
+            <Icon name="arrow_back" size={18} color={colors.primary}/><Text style={styles.link}>بازگشت به اطلاعات سفر</Text>
+          </TouchableOpacity>
+          <View style={styles.card}>
+            <Text style={styles.title}>خلاصه سفر</Text>
+            {([{label:'مبدأ',point:starts[0],icon:'arrow_back'},{label:'مقصد',point:ends.at(-1),icon:'flag'}]).map(item=><View key={item.label} style={styles.addressRow}>
+              <Icon name={item.icon} size={20} color={colors.primary}/>
+              <View style={styles.flex}><Text style={styles.label}>{item.label}</Text><PointAddress point={item.point}/></View>
+            </View>)}
+            <View style={styles.infoRow}><Icon name="calendar_month" size={18} color={colors.primary}/><Text style={styles.text}>{date?displayJalaliDate(date):'تاریخ انتخاب نشده'} · {persianDigits(time)}</Text></View>
+            <View style={styles.estimate}>
+              <Text style={styles.label}>زمان برآوردی مسیر با ترافیک فعلی</Text>
+              {!starts.length||!ends.length?<Text style={styles.text}>ابتدا مبدأ و مقصد را انتخاب کنید.</Text>:routeEstimate&&<>
+                <Text style={styles.duration}>{formatRouteDuration(routeEstimate.seconds)}</Text>
+                <Text style={styles.text}>مسافت: {persianDigits((routeEstimate.meters/1000).toFixed(1)).replace('.','٫')} کیلومتر</Text>
+              </>}
             </View>
           </View>
-
-          <View style={styles.section}>
-            <View style={styles.sectionHead}>
-              <Text style={styles.sectionTitle}>انتخاب ناوگان</Text>
-              <Text style={styles.sectionUnit}>واحد: تومان</Text>
-            </View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.fleet}>
-              {vehicles.map((v, i) => (
-                <TouchableOpacity
-                  key={v.name}
-                  style={[styles.vehicle, selected === i && styles.vehicleActive]}
-                  activeOpacity={0.9}
-                  onPress={() => setSelected(i)}
-                >
-                  <Image source={{ uri: v.img }} style={styles.vehicleImg} resizeMode="contain" />
-                  <Text style={styles.vehicleName}>{v.name}</Text>
-                  <View style={styles.vehicleSpecs}>
-                    <View style={styles.spec}>
-                      <Icon name="person" size={14} color={colors.onSurfaceVariant} />
-                      <Text style={styles.specText}>{v.persons}</Text>
-                    </View>
-                    <View style={styles.spec}>
-                      <Icon name="luggage" size={14} color={colors.onSurfaceVariant} />
-                      <Text style={styles.specText}>{v.luggage}</Text>
-                    </View>
-                  </View>
-                  <Text style={styles.vehiclePrice}>{v.price}</Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
+          <View style={styles.sectionHead}><Text style={styles.title}>ناوگان</Text><Text style={styles.label}>قیمت‌ها به تومان</Text></View>
+          {!!packageError&&<View>
+            <Text accessibilityRole="alert" style={styles.text}>{packageError}</Text>
+            <TouchableOpacity onPress={()=>setPackageAttempt(value=>value+1)}><Text style={styles.link}>تلاش مجدد</Text></TouchableOpacity>
+            {/وارد|نشست|پیامکی/.test(packageError)&&<TouchableOpacity onPress={()=>navigation.navigate('Login')}><Text style={styles.link}>ورود به حساب</Text></TouchableOpacity>}
+          </View>}
+          {!loadingPackages&&!packageError&&!packages.length&&<Text style={styles.text}>پکیج فعال برای انتخاب وجود ندارد.</Text>}
+          <View style={styles.fleet}>
+            {packages.map((item,index)=>{
+              const active=selected===index&&item.available;
+              return <TouchableOpacity key={item.car_class} disabled={!item.available||submitting} accessibilityRole="button"
+                accessibilityLabel={`انتخاب ${packageLabel(item)}`} accessibilityState={{selected:active,disabled:!item.available||submitting}}
+                style={[styles.vehicle,active&&styles.vehicleActive]} onPress={()=>setSelected(index)}>
+                <View style={styles.infoRow}><Icon name={packageIcon(item)} size={26} color={active?colors.primary:colors.onSurfaceVariant}/><Text style={styles.vehicleName}>{packageLabel(item)}</Text></View>
+                <Text style={styles.spec}>{routeEstimate?.ride_type==='normal'?'سفر شهری':'سفر بین‌شهری'}</Text>
+                <Text style={styles.vehiclePrice}>{item.amount?`${persianDigits(packagePrice(item)!.toLocaleString('en-US'))} تومان`:(item.warnings?.[0]||'نرخ فعال ندارد')}</Text>
+              </TouchableOpacity>;
+            })}
           </View>
-
-          <View style={styles.details}>
-            <View style={styles.detailCard}>
-              <Text style={styles.detailLabel}>تاریخ و ساعت حرکت</Text>
-              <View style={styles.detailRow}>
-                <Text style={styles.detailValue}>{date ? `${date} - ${time}` : time}</Text>
-                <Icon name="calendar_month" size={20} color={colors.primary} />
-              </View>
-            </View>
-            <View style={styles.detailCard}>
-              <Text style={styles.detailLabel}>تعداد مسافران</Text>
-              <View style={styles.detailRow}>
-                <TouchableOpacity
-                  style={styles.countBtn}
-                  onPress={() => setCount((c) => Math.max(1, c - 1))}
-                >
-                  <Text style={styles.countSign}>-</Text>
-                </TouchableOpacity>
-                <Text style={styles.countValue}>{count}</Text>
-                <TouchableOpacity
-                  style={styles.countBtn}
-                  onPress={() => setCount((c) => Math.min(8, c + 1))}
-                >
-                  <Text style={styles.countSign}>+</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            {(luggageCount > 0 || bagCount > 0 || hasAnimals) && (
-              <View style={styles.detailCard}>
-                <Text style={styles.detailLabel}>مشخصات بار و حیوان</Text>
-                <Text style={styles.detailValue}>
-                  {luggageCount > 0 && `بار دستی: ${luggageCount}`}
-                  {luggageCount > 0 && bagCount > 0 && ' | '}
-                  {bagCount > 0 && `چمدان: ${bagCount}`}
-                  {hasAnimals && (
-                    <>
-                      {luggageCount > 0 || bagCount > 0 ? ' | ' : ''}
-                      {`حیوان همراه`}
-                    </>
-                  )}
-                </Text>
-              </View>
-            )}
-          </View>
-
-          <View style={styles.safetyBanner}>
-            <View style={styles.safetyIcon}>
-              <Icon name="verified_user" size={20} color={colors.white} />
-            </View>
-            <View style={styles.safetyText}>
-              <Text style={styles.safetyTitle}>امنیت شما اولویت ماست</Text>
-              <Text style={styles.safetySub}>
-                تمامی رانندگان احراز هویت شده و خودروها دارای بیمه کامل سفر هستند.
-              </Text>
-            </View>
+          <View style={styles.card}>
+            <Text style={styles.title}>اطلاعات مسافران و بار</Text>
+            <View style={styles.infoRow}><Icon name="person" size={20} color={colors.primary}/><Text style={styles.text}>تعداد مسافران: {persianDigits(personCount)} نفر</Text></View>
+            <View style={styles.infoRow}><Icon name="luggage" size={20} color={colors.onSurfaceVariant}/><Text style={styles.text}>بار دستی: {persianDigits(luggageCount)}</Text></View>
+            <View style={styles.infoRow}><Icon name="badge" size={20} color={colors.onSurfaceVariant}/><Text style={styles.text}>چمدان: {persianDigits(bagCount)}</Text></View>
+            {!!tripData.hasAnimals&&<View style={styles.infoRow}><Icon name="paw" size={20} color={colors.onSurfaceVariant}/><Text style={styles.text}>حیوان همراه{tripData.animalType?`: ${tripData.animalType}`:''}</Text></View>}
+            {!!tripData.notes?.trim()&&<View style={styles.addressRow}>
+              <Icon name="note-text-outline" size={18} color={colors.onSurfaceVariant}/>
+              <View style={styles.flex}><Text style={styles.label}>توضیحات سفر</Text><Text style={styles.text}>{tripData.notes.trim()}</Text></View>
+            </View>}
+            <TouchableOpacity onPress={editTrip}><Text style={styles.link}>ویرایش در صفحه اطلاعات سفر</Text></TouchableOpacity>
           </View>
         </ScrollView>
-
-        <View style={styles.reserveFooter}>
-          <View style={styles.reservePrice}>
-            <Text style={styles.reserveLabel}>مبلغ نهایی</Text>
-            <View style={styles.reserveAmount}>
-              <Text style={styles.reserveValue}>{price}</Text>
-              <Text style={styles.reserveUnit}>تومان</Text>
-            </View>
+        <View style={styles.footer}>
+          <View><Text style={styles.label}>برآورد کرایه طبق قوانین</Text><Text style={styles.price}>{price?`${price} تومان`:'—'}</Text></View>
+          <View style={styles.footerActions}>
+            {!!submitError&&<Text accessibilityRole="alert" style={styles.label}>{submitError} پیش‌نویس شما محفوظ است.</Text>}
+            {!!submitError&&/وارد|نشست|پیامکی/.test(submitError)&&<TouchableOpacity onPress={()=>navigation.navigate('Login')}><Text style={styles.link}>ورود مجدد برای ثبت رزرو</Text></TouchableOpacity>}
+            <TouchableOpacity accessibilityRole="button" style={[styles.reserve,disabled&&styles.disabled]} disabled={disabled} onPress={()=>reserve('deposit')}>
+              <Text style={styles.reserveText}>{submitting?'در حال آماده‌سازی…':'پرداخت ۲۰٪ و ثبت رزرو'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity accessibilityRole="button" disabled={disabled} onPress={()=>reserve('full')}><Text style={styles.link}>پرداخت کل کرایه و ثبت رزرو</Text></TouchableOpacity>
+            <TouchableOpacity accessibilityRole="button" disabled={disabled} onPress={saveDraft}><Text style={styles.link}>ذخیره پیش‌نویس</Text></TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.reserveBtn}
-            activeOpacity={0.9}
-            onPress={() => navigation.navigate('Tracking')}
-          >
-            <Text style={styles.reserveText}>تایید و رزرو</Text>
-            <Icon name="chevron_left" size={22} color={colors.onPrimary} />
-          </TouchableOpacity>
         </View>
-
-        <BottomNav navigation={navigation} active="trips" />
       </SafeAreaView>
-    </View>
-  );
+      <BottomNav navigation={navigation} active="home" inFlow/>
+    </BlurTargetView>
+    {loadingPackages&&<View style={styles.loadingOverlay} accessibilityViewIsModal>
+      <BlurView {...(Platform.OS==='android'?{blurTarget,blurMethod:'dimezisBlurView' as const}:{})} intensity={55} tint="light" style={StyleSheet.absoluteFill}/>
+      <View style={styles.loadingCard}><LoadingState label="در حال دریافت اطلاعات"/></View>
+    </View>}
+  </View>;
 }
 
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.background },
-  flex: { flex: 1 },
-  header: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    height: 64,
-    backgroundColor: 'rgba(3,21,30,0.5)',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.05)',
-  },
-  headerRight: { flexDirection: 'row-reverse', alignItems: 'center', gap: 8 },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.surfaceContainerHighest,
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-  },
-  brand: { fontFamily: fonts.bold, fontSize: 24, color: colors.primary, letterSpacing: -0.5 },
-  body: { paddingTop: 20, paddingBottom: 200, paddingHorizontal: 20 },
-  journeyCard: {
-    backgroundColor: colors.asphaltSurface,
-    borderRadius: 12,
-    padding: 24,
-    gap: 16,
-    marginBottom: 32,
-  },
-  journeyTop: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    fontFamily: fonts.regular,
-  },
-  journeyEnd: { fontFamily: fonts.regular, fontSize: 12, color: colors.onSurfaceVariant },
-  progressTrack: {
-    position: 'relative',
-    height: 8,
-    width: '100%',
-    backgroundColor: colors.surfaceVariant,
-    borderRadius: 4,
-    marginTop: 8,
-  },
-  progressFill: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    height: '100%',
-    backgroundColor: colors.primary,
-    borderRadius: 4,
-  },
-  progressDot: {
-    position: 'absolute',
-    top: -4,
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: colors.primary,
-    borderWidth: 2,
-    borderColor: colors.background,
-  },
-  progressPulse: {
-    position: 'absolute',
-    top: -6,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: colors.primary,
-    borderWidth: 4,
-    borderColor: colors.background,
-  },
-  journeyMeta: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    marginTop: 8,
-  },
-  metaItem: { flexDirection: 'row-reverse', alignItems: 'center', gap: 4 },
-  metaText: { fontFamily: fonts.regular, fontSize: 16, color: colors.onSurface },
-  section: { marginBottom: 32 },
-  sectionHead: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    marginBottom: 16,
-  },
-  sectionTitle: { fontFamily: fonts.bold, fontSize: 24, color: colors.onSurface },
-  sectionUnit: { fontFamily: fonts.regular, fontSize: 12, color: colors.onSurfaceVariant },
-  fleet: { gap: 16, paddingHorizontal: 4 },
-  vehicle: {
-    width: 160,
-    backgroundColor: colors.asphaltSurface,
-    borderRadius: 12,
-    padding: 16,
-    gap: 12,
-    borderWidth: 1,
-    borderColor: 'transparent',
-  },
-  vehicleActive: {
-    borderColor: colors.primary,
-    backgroundColor: 'rgba(246,183,60,0.08)',
-  },
-  vehicleImg: { height: 96, width: '100%' },
-  vehicleName: { fontFamily: fonts.bold, fontSize: 16, color: colors.onSurface },
-  vehicleSpecs: { flexDirection: 'row-reverse', gap: 8 },
-  spec: { flexDirection: 'row-reverse', alignItems: 'center', gap: 2 },
-  specText: { fontFamily: fonts.regular, fontSize: 12, color: colors.onSurfaceVariant },
-  vehiclePrice: { fontFamily: fonts.bold, fontSize: 16, color: colors.primary },
-  details: { flexDirection: 'row-reverse', gap: 16, marginBottom: 32 },
-  detailCard: {
-    flex: 1,
-    backgroundColor: colors.asphaltSurface,
-    borderRadius: 12,
-    padding: 16,
-    gap: 8,
-  },
-  detailLabel: { fontFamily: fonts.regular, fontSize: 12, color: colors.onSurfaceVariant },
-  detailRow: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  detailValue: {
-    fontFamily: fonts.regular,
-    fontSize: 16,
-    color: colors.onSurface,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,216,153,0.3)',
-    paddingBottom: 8,
-  },
-  countBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: colors.outline,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  countSign: { fontFamily: fonts.bold, fontSize: 18, color: colors.primary },
-  countValue: { fontFamily: fonts.bold, fontSize: 24, color: colors.onSurface },
-  safetyBanner: {
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    gap: 12,
-    backgroundColor: 'rgba(30,122,101,0.1)',
-    borderWidth: 1,
-    borderColor: 'rgba(30,122,101,0.3)',
-    borderRadius: 12,
-    padding: 16,
-  },
-  safetyIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.safetyTeal,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  safetyText: { flex: 1 },
-  safetyTitle: { fontFamily: fonts.bold, fontSize: 16, color: colors.onSurface },
-  safetySub: { fontFamily: fonts.regular, fontSize: 12, color: colors.onSurfaceVariant },
-  reserveFooter: {
-    position: 'absolute',
-    bottom: 80,
-    left: 0,
-    right: 0,
-    height: 96,
-    backgroundColor: colors.asphaltSurface,
-    paddingHorizontal: 20,
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(255,255,255,0.05)',
-    zIndex: 50,
-  },
-  reservePrice: { flexDirection: 'column' },
-  reserveLabel: { fontFamily: fonts.regular, fontSize: 12, color: colors.onSurfaceVariant },
-  reserveAmount: { flexDirection: 'row-reverse', alignItems: 'baseline', gap: 4 },
-  reserveValue: { fontFamily: fonts.bold, fontSize: 24, color: colors.primary },
-  reserveUnit: { fontFamily: fonts.regular, fontSize: 12, color: colors.primaryFixedDim },
-  reserveBtn: {
-    backgroundColor: colors.primary,
-    borderRadius: 999,
-    paddingVertical: 12,
-    paddingHorizontal: 28,
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    gap: 8,
-  },
-  reserveText: { fontFamily: fonts.bold, fontSize: 18, color: colors.onPrimary },
+const row={...ltrLayout,flexDirection:'row-reverse' as const,alignItems:'center' as const};
+const styles=StyleSheet.create({
+  root:{flex:1,backgroundColor:colors.background},
+  flex:{flex:1,minWidth:0},
+  body:{padding:24,gap:18},
+  backAction:{...row,gap:8},
+  card:{backgroundColor:colors.surfaceContainerLow,borderRadius:22,padding:16,gap:14,borderWidth:1,borderColor:colors.outlineVariant},
+  title:{fontFamily:fonts.bold,fontSize:17,color:colors.onSurface,...rightAlignedText},
+  label:{fontFamily:fonts.medium,fontSize:12,lineHeight:22,color:colors.onSurfaceVariant,...rightAlignedText},
+  text:{fontFamily:fonts.regular,fontSize:14,lineHeight:24,color:colors.onSurface,...rightAlignedText,flexShrink:1},
+  addressRow:{...row,alignItems:'flex-start',gap:10},
+  infoRow:{...row,gap:8},
+  estimate:{borderTopWidth:1,borderTopColor:colors.outlineVariant,paddingTop:12,gap:6},
+  duration:{fontFamily:fonts.bold,fontSize:19,color:colors.primary,...rightAlignedText},
+  link:{fontFamily:fonts.medium,fontSize:13,color:colors.primary,paddingVertical:8,...rightAlignedText},
+  sectionHead:{...row,justifyContent:'space-between'},
+  fleet:{...row,alignItems:'stretch',flexWrap:'wrap',gap:10},
+  vehicle:{width:'48%',flexGrow:1,backgroundColor:colors.surfaceContainerLow,borderRadius:18,padding:12,gap:6,borderWidth:1,borderColor:colors.outlineVariant},
+  vehicleActive:{borderColor:colors.primary,backgroundColor:colors.secondaryContainer},
+  vehicleName:{fontFamily:fonts.bold,fontSize:14,color:colors.onSurface},
+  spec:{fontFamily:fonts.regular,fontSize:11,color:colors.onSurfaceVariant,...rightAlignedText},
+  vehiclePrice:{fontFamily:fonts.bold,fontSize:14,color:colors.primary,...rightAlignedText},
+  footer:{...row,justifyContent:'space-between',flexWrap:'wrap',gap:12,padding:16,backgroundColor:colors.surface,borderTopWidth:1,borderTopColor:colors.outlineVariant,borderTopLeftRadius:28,borderTopRightRadius:28,flexShrink:0},
+  footerActions:{flex:1,gap:8},
+  price:{fontFamily:fonts.bold,fontSize:21,color:colors.primary,...rightAlignedText},
+  reserve:{backgroundColor:colors.primary,paddingHorizontal:20,paddingVertical:14,borderRadius:18},
+  reserveText:{fontFamily:fonts.bold,color:colors.onPrimary,fontSize:16},
+  disabled:{opacity:0.4},
+  loadingOverlay:{...StyleSheet.absoluteFill,zIndex:100,alignItems:'center',justifyContent:'center',padding:24,backgroundColor:'rgba(248,250,249,0.18)'},
+  loadingCard:{width:'100%',maxWidth:340,minHeight:310,justifyContent:'center',backgroundColor:'rgba(255,255,255,0.86)',borderWidth:1,borderColor:'rgba(255,255,255,0.95)',borderRadius:28,padding:24},
 });

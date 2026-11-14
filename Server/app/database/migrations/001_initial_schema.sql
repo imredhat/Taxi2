@@ -65,13 +65,7 @@ CREATE TYPE transaction_type AS ENUM (
 
 -- Vehicle type (7 car classes)
 CREATE TYPE vehicle_class AS ENUM (
-    'eco',           -- اقتصادی
-    'economy',       -- اکونومی
-    'comfort',       -- کامفورت
-    'premium',       -- پریمیوم
-    'van',           -- ون
-    'motorcycle',    -- موتور
-    'tuk_tuk'        -- توک‌توک
+    'eco_city', 'eco_intercity', 'eco_plus', 'vip', 'vip_plus', 'suv', 'van', 'all'
 );
 
 -- Ride type
@@ -299,7 +293,7 @@ CREATE TABLE vehicles (
     license_plate VARCHAR(20) UNIQUE NOT NULL,   -- پلاک خودرو
     year INTEGER NOT NULL CHECK (year >= 1350 AND year <= 1500), -- Iranian calendar year
     vin VARCHAR(50),
-    car_class vehicle_class NOT NULL DEFAULT 'economy',
+    car_class vehicle_class NOT NULL DEFAULT 'eco_intercity',
     car_image_url TEXT,
     is_active BOOLEAN DEFAULT TRUE,
     insurance_expiry DATE,
@@ -394,7 +388,7 @@ CREATE TABLE ride_requests (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     passenger_id UUID NOT NULL,
     ride_type ride_type NOT NULL DEFAULT 'normal',
-    car_class vehicle_class NOT NULL DEFAULT 'economy',
+    car_class vehicle_class NOT NULL DEFAULT 'eco_intercity',
     pickup_location GEOGRAPHY(POINT, 4326) NOT NULL,
     pickup_address TEXT,
     pickup_poi VARCHAR(255),                   -- point of interest name
@@ -1206,43 +1200,42 @@ INSERT INTO car_brands (name, name_fa) VALUES
 
 -- Default car models (popular in Iran)
 INSERT INTO car_models (brand_id, name, name_fa, vehicle_class) VALUES
-((SELECT id FROM car_brands WHERE name = 'Iran Khodro'), 'Samand', 'سمند', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'Iran Khodro'), 'Runna', 'رونا', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'Iran Khodro'), 'Dena', 'دنا', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'SAIPA'), 'Tiba', 'تیبا', 'eco'),
-((SELECT id FROM car_brands WHERE name = 'SAIPA'), 'Quick', 'کوییک', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'SAIPA'), 'Saina', 'ساینا', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'SAIPA Kodro'), 'Rira', 'ری‌را', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Pars Khodro'), 'Arizo', 'آریزو', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Peugeot'), '206', 'پژو ۲۰۶', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'Peugeot'), '207', 'پژو ۲۰۷', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Peugeot'), 'Pars', 'پژو پارس', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'Renault'), 'L90 (Tondar)', 'رنو ال‌۹۰ (تندر)', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Renault'), 'Logan', 'رنو لوگان', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Toyota'), 'Corolla', 'تویوتا کرولا', 'premium'),
-((SELECT id FROM car_brands WHERE name = 'Toyota'), 'Camry', 'تویوتا کمری', 'premium'),
-((SELECT id FROM car_brands WHERE name = 'Hyundai'), 'Accent', 'هیوندای اکسنت', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Hyundai'), 'Elantra', 'هیوندای الانترا', 'premium'),
-((SELECT id FROM car_brands WHERE name = 'Kia'), 'Cerato', 'کیا سراتو', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Kia'), 'Rio', 'کیا ریو', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'MVM'), '315', 'ام‌وی‌ام ۳۱۵', 'eco'),
-((SELECT id FROM car_brands WHERE name = 'MVM'), 'X33', 'ام‌وی‌ام ایکس۳۳', 'comfort'),
-((SELECT id FROM car_brands WHERE name = 'Chery'), 'Arrizo 5', 'چری آریزو ۵', 'economy'),
-((SELECT id FROM car_brands WHERE name = 'BYD'), 'F3', 'بی‌یو‌دی اف۳', 'economy');
+((SELECT id FROM car_brands WHERE name = 'Iran Khodro'), 'Samand', 'سمند', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'Iran Khodro'), 'Runna', 'رونا', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'Iran Khodro'), 'Dena', 'دنا', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'SAIPA'), 'Tiba', 'تیبا', 'eco_city'),
+((SELECT id FROM car_brands WHERE name = 'SAIPA'), 'Quick', 'کوییک', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'SAIPA'), 'Saina', 'ساینا', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'SAIPA Kodro'), 'Rira', 'ری‌را', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Pars Khodro'), 'Arizo', 'آریزو', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Peugeot'), '206', 'پژو ۲۰۶', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'Peugeot'), '207', 'پژو ۲۰۷', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Peugeot'), 'Pars', 'پژو پارس', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'Renault'), 'L90 (Tondar)', 'رنو ال‌۹۰ (تندر)', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Renault'), 'Logan', 'رنو لوگان', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Toyota'), 'Corolla', 'تویوتا کرولا', 'vip'),
+((SELECT id FROM car_brands WHERE name = 'Toyota'), 'Camry', 'تویوتا کمری', 'vip'),
+((SELECT id FROM car_brands WHERE name = 'Hyundai'), 'Accent', 'هیوندای اکسنت', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Hyundai'), 'Elantra', 'هیوندای الانترا', 'vip'),
+((SELECT id FROM car_brands WHERE name = 'Kia'), 'Cerato', 'کیا سراتو', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Kia'), 'Rio', 'کیا ریو', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'MVM'), '315', 'ام‌وی‌ام ۳۱۵', 'eco_city'),
+((SELECT id FROM car_brands WHERE name = 'MVM'), 'X33', 'ام‌وی‌ام ایکس۳۳', 'eco_plus'),
+((SELECT id FROM car_brands WHERE name = 'Chery'), 'Arrizo 5', 'چری آریزو ۵', 'eco_intercity'),
+((SELECT id FROM car_brands WHERE name = 'BYD'), 'F3', 'بی‌یو‌دی اف۳', 'eco_intercity');
 
 -- Default base fares (Toman → converted to Rial, 1 Toman = 10 Rial)
 INSERT INTO base_fares (car_class, ride_type, base_fare, per_km_rate, per_minute_rate, min_fare) VALUES
-('eco', 'normal', 150000, 35000, 5000, 200000),
-('economy', 'normal', 200000, 45000, 7000, 250000),
-('comfort', 'normal', 300000, 60000, 10000, 350000),
-('premium', 'normal', 500000, 90000, 15000, 600000),
+('eco_city', 'normal', 150000, 35000, 5000, 200000),
+('eco_plus', 'normal', 300000, 60000, 10000, 350000),
+('vip', 'normal', 500000, 90000, 15000, 600000),
+('vip_plus', 'normal', 687500, 123750, 20625, 825000),
+('suv', 'normal', 770000, 138600, 23100, 924000),
 ('van', 'normal', 400000, 70000, 12000, 450000),
-('motorcycle', 'normal', 100000, 25000, 3000, 120000),
-('tuk_tuk', 'normal', 120000, 30000, 4000, 150000),
 -- Intercity base fares
-('economy', 'intercity', 500000, 55000, 8000, 600000),
-('comfort', 'intercity', 800000, 80000, 12000, 900000),
-('premium', 'intercity', 1200000, 120000, 18000, 1400000);
+('eco_intercity', 'intercity', 500000, 55000, 8000, 600000),
+('eco_plus', 'intercity', 800000, 80000, 12000, 900000),
+('vip', 'intercity', 1200000, 120000, 18000, 1400000);
 
 -- Default weather pricing rules
 INSERT INTO weather_pricing_rules (name, weather_condition, multiplier) VALUES

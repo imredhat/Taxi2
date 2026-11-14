@@ -68,7 +68,7 @@
                   <span class="badge bg-white-300 text-success-dark ms-2">+۱۲٪</span>
                 </p>
               </div>
-              <a class="bg-danger h-35 w-35 d-flex-center b-r-50 product-sold-icon" href="/admin/transactions">
+              <a class="bg-danger h-35 w-35 d-flex-center b-r-50 product-sold-icon" href="/panel/transactions">
                 <i class="iconoir-arrow-right f-w-600 f-s-18"></i>
               </a>
             </div>

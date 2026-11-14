@@ -1,0 +1,4 @@
+export const statusLabel=(value:string)=>({awaiting_deposit:'در انتظار پیش‌پرداخت',pending:'در انتظار',initializing:'آماده‌سازی',unknown:'نیازمند بررسی',accepted:'پذیرفته‌شده',searching:'در جستجوی راننده',arriving:'راننده در مسیر',arrived:'راننده رسیده',in_progress:'در حال انجام',completed:'تکمیل‌شده',cancelled:'لغوشده',expired:'منقضی‌شده',failed:'ناموفق',paid:'پرداخت‌شده',unpaid:'پرداخت‌نشده',open:'باز',closed:'بسته‌شده',resolved:'پاسخ داده‌شده'}[value]||'در حال بررسی');
+export const toman=(value:string|number)=>new Intl.NumberFormat('fa-IR').format(BigInt(String(value||0).split('.')[0])/10n);
+export const localDate=(value:string)=>value?new Date(value).toLocaleString('fa-IR',{timeZone:'Asia/Tehran',dateStyle:'medium',timeStyle:'short'}):'';
+export const asciiDigits=(value:string)=>value.replace(/[۰-۹٠-٩]/g,char=>String(char.charCodeAt(0)-(char>='۰'?1776:1632)));

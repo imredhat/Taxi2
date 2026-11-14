@@ -7,19 +7,24 @@ import {
   StyleSheet,
   Animated,
   Easing,
-  ImageBackground,
+  ScrollView,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AppHeader from '../components/AppHeader';
 import { Icon } from '../components/Icon';
-import { colors, fonts } from '../theme';
-import { storage } from '../storage';
+import {colors, fonts, ltrLayout} from '../theme';
+import { useAppData } from '../state/AppData';
+import { apiPost } from '../services/api';
+import { saveSessionToken } from '../storage';
 
-const BG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB15KVyMJFMr8W79nmqanmfoucTsNf7hXv5MWVfrVA1w4qm3WQx7ZQAg1LPu6LrVKk-UHTY8GOq7Lmm8aqWf-OXOfkHsDGH1PXWrzOFoQ6wefpYhLNieAX64kZCAqkeAQrkLKxGB4L9OhZSH7MzfIODRo0frVDnibpxu4OY1YdzRJ16PmF1yZih9JAP9NybZaS4v10_M77DYBIgNOVFif81ggkBX5dkeWUvlO33e5ma7BNOSUh1GO6-OA';
 
 const OTP_LENGTH = 5;
 const RESEND_SECONDS = 119;
 
 export default function OtpScreen({ route, navigation }: any) {
+  const { openAccount } = useAppData();
+  const [userId,setUserId]=useState(route?.params?.userId || '');
+  const [busy,setBusy]=useState(false);const [error,setError]=useState('');
   const phone = route?.params?.phone || '';
   // Strip non-digits, keep plain ASCII for display (Estedad has no Arabic-Indic glyph)
   const phoneDisplay = phone.replace(/\D/g, '');
@@ -50,17 +55,21 @@ export default function OtpScreen({ route, navigation }: any) {
     }
   };
 
-  const verify = () => {
-    if (code.join('').length < OTP_LENGTH) return;
-    // Store token as backup for app restarts
-    storage.setItem('auth_token', 'otp-session-' + Date.now());
-    setSuccess(true);
-    Animated.timing(fade, { toValue: 1, duration: 500, useNativeDriver: true }).start();
-    setTimeout(() => {
-      Animated.timing(scale, { toValue: 1, duration: 700, useNativeDriver: true }).start();
-    }, 300);
-    // Navigate with otpVerified param — instant, no async race
-    setTimeout(() => navigation.replace('Home', { otpVerified: true }), 1600);
+  const verify = async () => {
+    if(busy)return;if(code.join('').length!==OTP_LENGTH){setError('کد تأیید را کامل وارد کنید.');return;}
+    setBusy(true);setError('');
+    try{
+      const result=await apiPost('/api/otp/verify',{userId,code:code.join('')});
+      if(typeof result.token!=='string')throw new Error('پاسخ ورود معتبر نیست.');
+      await saveSessionToken(result.token);
+      await openAccount(phone);
+      navigation.replace('Home');
+    }catch(err){setError(err instanceof Error?err.message:'تأیید کد انجام نشد.');}finally{setBusy(false);}
+  };
+  const resend = async () => {
+    if(busy)return;setBusy(true);setError('');
+    try{const result=await apiPost('/api/otp/send',{phone});setUserId(result.userId);setTimeLeft(RESEND_SECONDS);setCode(Array(OTP_LENGTH).fill(''));}
+    catch(err){setError(err instanceof Error?err.message:'ارسال مجدد انجام نشد.');}finally{setBusy(false);}
   };
 
   const mm = String(Math.floor(timeLeft / 60)).padStart(2, '0');
@@ -68,20 +77,14 @@ export default function OtpScreen({ route, navigation }: any) {
 
   return (
     <View style={styles.root}>
-      <ImageBackground source={{ uri: BG }} style={styles.bg} blurRadius={2}>
-        <View style={styles.bgOverlay} />
-      </ImageBackground>
 
       <SafeAreaView style={styles.flex}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.iconBtn} onPress={() => navigation.goBack()}>
-            <Icon name="arrow_forward" size={24} color={colors.primary} />
-          </TouchableOpacity>
-          <Text style={styles.brand}>پویش تاکسی</Text>
-          <View style={{ width: 40 }} />
-        </View>
+        <AppHeader navigation={navigation} title="تأیید شماره همراه" guest onBack={() => navigation.goBack()} />
 
+        <ScrollView contentContainerStyle={styles.scrollBody} keyboardShouldPersistTaps="handled">
         <View style={styles.body}>
+          <View style={styles.codeTile}><Icon name="smartphone" size={36} color={colors.primary} /></View>
+          <Text style={styles.eyebrow}>تأیید شماره همراه</Text>
           <Text style={styles.title}>کد تایید را وارد کنید</Text>
           <Text style={styles.sub}>
             کد ۵ رقمی به شماره <Text style={styles.subBold}>{phoneDisplay}</Text> ارسال شد
@@ -91,6 +94,7 @@ export default function OtpScreen({ route, navigation }: any) {
             {Array.from({ length: OTP_LENGTH }).map((_, i) => (
               <TextInput
                 key={i}
+                accessibilityLabel={`رقم ${i + 1} کد تأیید`}
                 ref={(el) => { inputs.current[i] = el; }}
                 style={[styles.otpInput, code[i] && styles.otpInputFilled]}
                 value={code[i]}
@@ -112,7 +116,7 @@ export default function OtpScreen({ route, navigation }: any) {
                 <Text style={styles.timer}>{`${mm}:${ss}`}</Text>
               </View>
             ) : (
-              <TouchableOpacity onPress={() => setTimeLeft(RESEND_SECONDS)}>
+              <TouchableOpacity onPress={resend} disabled={busy}>
                 <Text style={styles.resend}>ارسال مجدد</Text>
               </TouchableOpacity>
             )}
@@ -120,11 +124,13 @@ export default function OtpScreen({ route, navigation }: any) {
         </View>
 
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.continue} activeOpacity={0.9} onPress={verify}>
-            <Text style={styles.continueText}>تایید و ادامه</Text>
-            <Icon name="chevron_left" size={22} color={colors.black} />
+          {!!error&&<Text accessibilityRole="alert" style={[styles.sub,{color:colors.errorRed}]}>{error}</Text>}
+          <TouchableOpacity style={styles.continue} activeOpacity={0.9} onPress={verify} disabled={busy}>
+            <Text style={styles.continueText}>{busy?'لطفاً صبر کنید...':'تأیید و ادامه'}</Text>
+            <Icon name="chevron_left" size={22} color={colors.onPrimary} />
           </TouchableOpacity>
         </View>
+        </ScrollView>
       </SafeAreaView>
 
       {success && (
@@ -141,9 +147,12 @@ export default function OtpScreen({ route, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+  scrollBody: { flexGrow: 1 },
+  codeTile: { width: 80, height: 80, borderRadius: 26, backgroundColor: colors.secondaryContainer, alignItems: 'center', justifyContent: 'center', marginBottom: 20 },
+  eyebrow: { fontFamily: fonts.bold, fontSize: 12, color: colors.primary, backgroundColor: colors.primaryFixed, paddingHorizontal: 12, paddingVertical: 7, borderRadius: 20, overflow: 'hidden', marginBottom: 16 },
   root: { flex: 1, backgroundColor: colors.background },
   bg: StyleSheet.absoluteFill,
-  bgOverlay: { ...StyleSheet.absoluteFill, backgroundColor: 'rgba(3,21,30,0.8)' },
+  bgOverlay: { ...StyleSheet.absoluteFill, backgroundColor: colors.background },
   flex: { flex: 1 },
   header: {
     flexDirection: 'row-reverse',
@@ -151,9 +160,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     height: 64,
-    backgroundColor: 'rgba(3,21,30,0.5)',
+    backgroundColor: colors.background,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.05)',
+    borderBottomColor: colors.outlineVariant,
   },
   iconBtn: {
     width: 40,
@@ -171,8 +180,9 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 48,
+    paddingHorizontal: 24,
+    paddingTop: 42,
+    paddingBottom: 32,
   },
   title: {
     fontFamily: fonts.bold,
@@ -193,22 +203,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     maxWidth: 360,
+    gap: 8,
+    ...ltrLayout,
     marginTop: 40,
     marginBottom: 32,
   },
   otpInput: {
-    width: 56,
+    flex: 1,
+    maxWidth: 56,
     height: 64,
-    borderRadius: 12,
+    borderRadius: 18,
     backgroundColor: colors.asphaltSurface,
+    borderWidth: 1,
+    borderColor: colors.outlineVariant,
     borderBottomWidth: 2,
-    borderBottomColor: 'rgba(255,255,255,0.1)',
+    borderBottomColor: colors.outlineVariant,
     color: colors.primary,
     fontSize: 24,
     fontFamily: fonts.bold,
     textAlign: 'center',
   },
-  otpInputFilled: { borderBottomColor: colors.primary },
+  otpInputFilled: { borderColor: colors.primary, borderBottomColor: colors.primary, backgroundColor: colors.secondaryContainer },
   timerRow: {
     flexDirection: 'row-reverse',
     alignItems: 'center',
@@ -226,13 +241,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 56,
     backgroundColor: colors.primary,
-    borderRadius: 12,
+    borderRadius: 18,
     flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
   },
-  continueText: { fontFamily: fonts.bold, fontSize: 20, color: colors.black },
+  continueText: { fontFamily: fonts.bold, fontSize: 16, color: colors.onPrimary },
   successOverlay: {
     ...StyleSheet.absoluteFill,
     backgroundColor: colors.surface,

@@ -90,9 +90,18 @@ exports.getRideRequests = async (req, res) => {
              rr.distance_km, rr.duration_minutes, rr.surge_multiplier,
              rr.passenger_count, rr.notes, rr.scheduled_at, rr.created_at,
              rr.pickup_address, rr.dropoff_address, rr.pickup_poi, rr.dropoff_poi,
+             rr.updated_at, rr.booking_details, md5(to_jsonb(rr)::text) AS edit_version,
+             assigned.ride_id, assigned.driver_id, assigned.vehicle_id, assigned.ride_status,
+             assigned.driver_first_name, assigned.driver_last_name, assigned.driver_phone, assigned.license_plate,
              u.first_name, u.last_name, u.phone
       FROM ride_requests rr
       LEFT JOIN users u ON rr.passenger_id = u.id
+      LEFT JOIN LATERAL (
+        SELECT r.id AS ride_id,r.driver_id,r.vehicle_id,r.status AS ride_status,
+               du.first_name AS driver_first_name,du.last_name AS driver_last_name,du.phone AS driver_phone,v.license_plate
+        FROM rides r JOIN driver_profiles dp ON dp.id=r.driver_id JOIN users du ON du.id=dp.user_id JOIN vehicles v ON v.id=r.vehicle_id
+        WHERE r.request_id=rr.id AND r.status NOT IN ('cancelled','expired') ORDER BY r.created_at DESC LIMIT 1
+      ) assigned ON true
     `;
     let countQuery = `SELECT COUNT(*) FROM ride_requests rr LEFT JOIN users u ON rr.passenger_id = u.id`;
 
@@ -355,8 +364,8 @@ exports.createRide = async (req, res) => {
       [
         passenger_id,
         driver_id,
-        ride_type || 'pending',
-        car_class || 'economy',
+        ride_type || 'normal',
+        car_class || (ride_type==='intercity'?'eco_intercity':'eco_city'),
         status || 'pending',
         fare || 0,
         distance_km || 0,

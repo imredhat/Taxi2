@@ -1,5 +1,7 @@
 const pool = require('../models/db');
 
+function validScope(origin,destination){return [origin,destination].every(v=>v===undefined||v===null||(typeof v==='string'&&v.length<=100))&&!!String(origin||'').trim()===!!String(destination||'').trim();}
+
 function nullIfEmpty(val) { return val === '' || val === undefined ? 'all' : val; }
 
 // ─── BASE FARES (نرخ پایه) ──────────────────────────────
@@ -237,11 +239,12 @@ exports.getRoadConditionPricing = async (req, res) => {
 
 exports.createRoadConditionPricing = async (req, res) => {
   try {
-    const { name, condition_type, multiplier, is_active } = req.body;
+    const { name, condition_type, multiplier, is_active, origin_city, destination_city } = req.body;
+    if(!validScope(origin_city,destination_city))return res.status(400).json({error:'شهر مبدا و مقصد را با هم و به صورت متنی وارد کنید.'});
     if (!name || !condition_type || !multiplier) return res.status(400).json({ error: 'name, condition_type, multiplier required' });
     const result = await pool.query(
-      `INSERT INTO road_condition_pricing (name, condition_type, multiplier, is_active) VALUES ($1, $2, $3, $4) RETURNING *`,
-      [name, condition_type, multiplier, is_active !== false]
+      `INSERT INTO road_condition_pricing (name, condition_type, multiplier, is_active, origin_city, destination_city) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [name, condition_type, multiplier, is_active !== false, origin_city?.trim()||null, destination_city?.trim()||null]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Server error' }); }
@@ -250,10 +253,11 @@ exports.createRoadConditionPricing = async (req, res) => {
 exports.updateRoadConditionPricing = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, condition_type, multiplier, is_active } = req.body;
+    const { name, condition_type, multiplier, is_active, origin_city, destination_city } = req.body;
+    if(!validScope(origin_city,destination_city))return res.status(400).json({error:'شهر مبدا و مقصد را با هم و به صورت متنی وارد کنید.'});
     const result = await pool.query(
-      `UPDATE road_condition_pricing SET name=COALESCE($1, name), condition_type=COALESCE($2, condition_type), multiplier=COALESCE($3, multiplier), is_active=$4 WHERE id=$5 RETURNING *`,
-      [name, condition_type, multiplier, is_active, id]
+      `UPDATE road_condition_pricing SET name=COALESCE($1, name), condition_type=COALESCE($2, condition_type), multiplier=COALESCE($3, multiplier), is_active=$4, origin_city=$5, destination_city=$6 WHERE id=$7 RETURNING *`,
+      [name, condition_type, multiplier, is_active, origin_city?.trim()||null, destination_city?.trim()||null, id]
     );
     if (!result.rowCount) return res.status(404).json({ error: 'Not found' });
     res.json(result.rows[0]);
@@ -279,11 +283,12 @@ exports.getTollRules = async (req, res) => {
 
 exports.createTollRule = async (req, res) => {
   try {
-    const { name, name_fa, amount, toll_type, is_active } = req.body;
+    const { name, name_fa, amount, toll_type, is_active, origin_city, destination_city } = req.body;
+    if(!validScope(origin_city,destination_city))return res.status(400).json({error:'شهر مبدا و مقصد را با هم و به صورت متنی وارد کنید.'});
     if (!name || !amount || !toll_type) return res.status(400).json({ error: 'name, amount, toll_type required' });
     const result = await pool.query(
-      `INSERT INTO toll_rules (name, name_fa, amount, toll_type, is_active) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [name, name_fa || name, amount, toll_type, is_active !== false]
+      `INSERT INTO toll_rules (name, name_fa, amount, toll_type, is_active, origin_city, destination_city) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+      [name, name_fa || name, amount, toll_type, is_active !== false, origin_city?.trim()||null, destination_city?.trim()||null]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Server error' }); }
@@ -292,10 +297,11 @@ exports.createTollRule = async (req, res) => {
 exports.updateTollRule = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, name_fa, amount, toll_type, is_active } = req.body;
+    const { name, name_fa, amount, toll_type, is_active, origin_city, destination_city } = req.body;
+    if(!validScope(origin_city,destination_city))return res.status(400).json({error:'شهر مبدا و مقصد را با هم و به صورت متنی وارد کنید.'});
     const result = await pool.query(
-      `UPDATE toll_rules SET name=COALESCE($1, name), name_fa=COALESCE($2, name_fa), amount=COALESCE($3, amount), toll_type=COALESCE($4, toll_type), is_active=$5 WHERE id=$6 RETURNING *`,
-      [name, name_fa, amount, toll_type, is_active, id]
+      `UPDATE toll_rules SET name=COALESCE($1, name), name_fa=COALESCE($2, name_fa), amount=COALESCE($3, amount), toll_type=COALESCE($4, toll_type), is_active=$5, origin_city=$6, destination_city=$7 WHERE id=$8 RETURNING *`,
+      [name, name_fa, amount, toll_type, is_active, origin_city?.trim()||null, destination_city?.trim()||null, id]
     );
     if (!result.rowCount) return res.status(404).json({ error: 'Not found' });
     res.json(result.rows[0]);

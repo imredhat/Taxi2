@@ -748,7 +748,7 @@ exports.createVehicle = async (req, res) => {
     if (!driver_id || !license_plate) return res.status(400).json({ error: 'driver_id and license_plate required' });
     const result = await pool.query(
       `INSERT INTO vehicles (driver_id, model_id, license_plate, color, year, car_class) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [driver_id, model_id || null, license_plate, color || null, year || null, car_class || 'economy']
+      [driver_id, model_id || null, license_plate, color || null, year || null, car_class || 'eco_intercity']
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -765,7 +765,7 @@ exports.updateVehicle = async (req, res) => {
     if (!driver_id || !license_plate) return res.status(400).json({ error: 'driver_id and license_plate required' });
     const result = await pool.query(
       `UPDATE vehicles SET driver_id = $1, model_id = $2, license_plate = $3, color = $4, year = $5, car_class = $6, is_active = $7, insurance_expiry = $8, inspection_expiry = $9, updated_at = NOW() WHERE id = $10 RETURNING *`,
-      [driver_id, model_id || null, license_plate, color || null, year || null, car_class || 'economy', is_active !== undefined ? is_active : true, insurance_expiry || null, inspection_expiry || null, id]
+      [driver_id, model_id || null, license_plate, color || null, year || null, car_class || 'eco_intercity', is_active !== undefined ? is_active : true, insurance_expiry || null, inspection_expiry || null, id]
     );
     if (!result.rowCount) return res.status(404).json({ error: 'Vehicle not found' });
     res.json(result.rows[0]);

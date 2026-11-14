@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { storage } from '../storage';
+import { driverWorkingKey, storage } from '../storage';
 import axios from 'axios';
 import { API_URL, showToast } from '../utils';
 import styles from '../styles/LoginScreen.styles';
@@ -22,7 +22,7 @@ export default function LoginScreen({ navigation }: any) {
   useEffect(() => {
     (async () => {
       const token = await storage.getItem('auth_token');
-      if (token) {
+      if (token && await storage.getItem('user_role') === 'driver') {
         navigation.replace('Home');
       }
     })();
@@ -60,6 +60,8 @@ export default function LoginScreen({ navigation }: any) {
         password,
       });
       const { token, role } = res.data;
+      if (role !== 'driver') { showToast('با حساب راننده وارد شوید'); return; }
+      await storage.removeItem(driverWorkingKey);
       await storage.setItem('auth_token', token);
       await storage.setItem('user_role', role || 'passenger');
       showToast(`خوش آمدید ${res.data.firstName || ''}`, 'success');

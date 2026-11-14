@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-3">
           <div class="footer-text text-end">
-            <a href="/admin/support-tickets">
+            <a href="/panel/support-tickets">
               <i class="ti ti-headset"></i>
               نیاز به کمک دارید؟
             </a>

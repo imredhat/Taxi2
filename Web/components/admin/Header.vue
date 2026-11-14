@@ -132,20 +132,20 @@
                       </div>
                     </li>
                     <li>
-                      <a class="f-w-500" href="/admin/profile">
+                      <a class="f-w-500" href="/panel/profile">
                         <i class="iconoir-user-star pe-1 f-s-20"></i>
                         پروفایل من
                       </a>
                     </li>
                     <li>
-                      <a class="f-w-500" href="/admin/settings">
+                      <a class="f-w-500" href="/panel/settings">
                         <i class="iconoir-settings pe-1 f-s-20"></i>
                         تنظیمات
                       </a>
                     </li>
                     <li class="app-divider-v dotted py-1"></li>
                     <li>
-                      <a class="f-w-500" href="/admin/support-tickets">
+                      <a class="f-w-500" href="/panel/support-tickets">
                         <i class="iconoir-chat-bubble-question pe-1 f-s-20"></i>
                         پشتیبانی
                       </a>
@@ -168,6 +168,7 @@
 </template>
 
 <script setup>
+import { readAdminSession, clearAdminSession } from '~/utils/adminSession'
 const config = useRuntimeConfig()
 const WEATHER_API_KEY = config.public.weatherApiKey
 const CITY = 'Tehran'

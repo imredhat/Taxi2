@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="app-logo">
-      <a class="logo d-inline-block" href="/admin/dashboard">
+      <a class="logo d-inline-block" href="/panel/dashboard">
         <img alt="پویش تاکسی" src="/assets/images/logo/1.png" />
       </a>
       <span class="bg-light-primary toggle-semi-nav">
@@ -15,7 +15,7 @@
           <span>منوی اصلی</span>
         </li>
         <li class="no-sub">
-          <a class="" href="/admin/dashboard">
+          <a class="" href="/panel/dashboard">
             <i class="iconoir-home-alt"></i>
             داشبورد
           </a>
@@ -23,93 +23,93 @@
 
         <!-- مدیریت سفرها -->
         <li>
-          <a :class="{ 'active': isActive('/admin/dashboard') }" @click="toggleMenu('rides-menu')" href="#rides-menu" aria-expanded="false" data-bs-toggle="collapse">
+          <a :class="{ 'active': isActive('/panel/dashboard') }" @click="toggleMenu('rides-menu')" href="#rides-menu" aria-expanded="false" data-bs-toggle="collapse">
             <i class="iconoir-pin-alt"></i>
             مدیریت سفرها
           </a>
           <ul :class="{ 'show': openMenus.has('rides-menu'), 'collapse': true }" id="rides-menu">
-            <li><a :class="{ 'active': isActive('/admin/rides') }" @click="linkClick('/admin/rides')" href="/admin/rides">لیست سفرها</a></li>
-            <li><a :class="{ 'active': isActive('/admin/ride-requests') }" @click="linkClick('/admin/ride-requests')" href="/admin/ride-requests">درخواست‌های سفر</a></li>
-            <li><a :class="{ 'active': isActive('/admin/ride-locations') }" @click="linkClick('/admin/ride-locations')" href="/admin/ride-locations">موقعیت‌های سفر</a></li>
-            <li><a :class="{ 'active': isActive('/admin/ride-stops') }" @click="linkClick('/admin/ride-stops')" href="/admin/ride-stops">توقف‌های سفر</a></li>
-            <li><a :class="{ 'active': isActive('/admin/ride-schedules') }" @click="linkClick('/admin/ride-schedules')" href="/admin/ride-schedules">برنامه‌ریزی سفرها</a></li>
-            <li><a :class="{ 'active': isActive('/admin/ride-messages') }" @click="linkClick('/admin/ride-messages')" href="/admin/ride-messages">پیام‌های سفر</a></li>
+            <li><a :class="{ 'active': isActive('/panel/rides') }" @click="linkClick('/panel/rides')" href="/panel/rides">لیست سفرها</a></li>
+            <li><a :class="{ 'active': isActive('/panel/ride-requests') }" @click="linkClick('/panel/ride-requests')" href="/panel/ride-requests">درخواست‌های سفر</a></li>
+            <li><a :class="{ 'active': isActive('/panel/ride-locations') }" @click="linkClick('/panel/ride-locations')" href="/panel/ride-locations">موقعیت‌های سفر</a></li>
+            <li><a :class="{ 'active': isActive('/panel/ride-stops') }" @click="linkClick('/panel/ride-stops')" href="/panel/ride-stops">توقف‌های سفر</a></li>
+            <li><a :class="{ 'active': isActive('/panel/ride-schedules') }" @click="linkClick('/panel/ride-schedules')" href="/panel/ride-schedules">برنامه‌ریزی سفرها</a></li>
+            <li><a :class="{ 'active': isActive('/panel/ride-messages') }" @click="linkClick('/panel/ride-messages')" href="/panel/ride-messages">پیام‌های سفر</a></li>
           </ul>
         </li>
 
         <!-- مدیریت رانندگان -->
         <li>
-          <a :class="{ 'active': isActive('/admin/driver-profiles') }" @click="toggleMenu('drivers-menu')" href="#drivers-menu" aria-expanded="false" data-bs-toggle="collapse">
+          <a :class="{ 'active': isActive('/panel/driver-profiles') }" @click="toggleMenu('drivers-menu')" href="#drivers-menu" aria-expanded="false" data-bs-toggle="collapse">
             <i class="iconoir-user"></i>
             مدیریت رانندگان
           </a>
           <ul :class="{ 'show': openMenus.has('drivers-menu'), 'collapse': true }" id="drivers-menu">
-            <li><a :class="{ 'active': isActive('/admin/driver/profiles') }" @click="linkClick('/admin/driver/profiles')" href="/admin/driver/profiles"> رانندگان</a></li>
-            <li><a :class="{ 'active': isActive('/admin/driver/documents') }" @click="linkClick('/admin/driver/documents')" href="/admin/driver/documents">مدارک رانندگان</a></li>
-            <li><a :class="{ 'active': isActive('/admin/driver/locations') }" @click="linkClick('/admin/driver/locations')" href="/admin/driver/locations">موقعیت رانندگان</a></li>
-            <li><a :class="{ 'active': isActive('/admin/driver/schedules') }" @click="linkClick('/admin/driver/schedules')" href="/admin/driver/schedules">رانندگان در سفر</a></li>
-            <li><a :class="{ 'active': isActive('/admin/driver/vehicles') }" @click="linkClick('/admin/driver/vehicles')" href="/admin/driver/vehicles">خودروها</a></li>
-            <li><a :class="{ 'active': isActive('/admin/driver/car-brands') }" @click="linkClick('/admin/driver/car-brands')" href="/admin/driver/car-brands">برندهای خودرو</a></li>
-            <li><a :class="{ 'active': isActive('/admin/driver/car-models') }" @click="linkClick('/admin/driver/car-models')" href="/admin/driver/car-models">مدل‌های خودرو</a></li>
+            <li><a :class="{ 'active': isActive('/panel/driver/profiles') }" @click="linkClick('/panel/driver/profiles')" href="/panel/driver/profiles"> رانندگان</a></li>
+            <li><a :class="{ 'active': isActive('/panel/driver/documents') }" @click="linkClick('/panel/driver/documents')" href="/panel/driver/documents">مدارک رانندگان</a></li>
+            <li><a :class="{ 'active': isActive('/panel/driver/locations') }" @click="linkClick('/panel/driver/locations')" href="/panel/driver/locations">موقعیت رانندگان</a></li>
+            <li><a :class="{ 'active': isActive('/panel/driver/schedules') }" @click="linkClick('/panel/driver/schedules')" href="/panel/driver/schedules">رانندگان در سفر</a></li>
+            <li><a :class="{ 'active': isActive('/panel/driver/vehicles') }" @click="linkClick('/panel/driver/vehicles')" href="/panel/driver/vehicles">خودروها</a></li>
+            <li><a :class="{ 'active': isActive('/panel/driver/car-brands') }" @click="linkClick('/panel/driver/car-brands')" href="/panel/driver/car-brands">برندهای خودرو</a></li>
+            <li><a :class="{ 'active': isActive('/panel/driver/car-models') }" @click="linkClick('/panel/driver/car-models')" href="/panel/driver/car-models">مدل‌های خودرو</a></li>
           </ul>
         </li>
 
         <!-- مدیریت مسافران -->
         <li>
-          <a :class="{ 'active': isActive('/admin/users') }" @click="toggleMenu('passengers-menu')" href="#passengers-menu" aria-expanded="false" data-bs-toggle="collapse">
+          <a :class="{ 'active': isActive('/panel/users') }" @click="toggleMenu('passengers-menu')" href="#passengers-menu" aria-expanded="false" data-bs-toggle="collapse">
             <i class="iconoir-group"></i>
             مدیریت مسافران
           </a>
           <ul :class="{ 'show': openMenus.has('passengers-menu'), 'collapse': true }" id="passengers-menu">
-            <li><a :class="{ 'active': isActive('/admin/users') }" @click="linkClick('/admin/users')" href="/admin/users">لیست مسافران</a></li>
-            <li><a :class="{ 'active': isActive('/admin/passenger-locations') }" @click="linkClick('/admin/passenger-locations')" href="/admin/passenger-locations">موقعیت مسافران</a></li>
-            <li><a :class="{ 'active': isActive('/admin/favorite-locations') }" @click="linkClick('/admin/favorite-locations')" href="/admin/favorite-locations">مکان‌های مورد علاقه</a></li>
+            <li><a :class="{ 'active': isActive('/panel/users') }" @click="linkClick('/panel/users')" href="/panel/users">لیست مسافران</a></li>
+            <li><a :class="{ 'active': isActive('/panel/passenger-locations') }" @click="linkClick('/panel/passenger-locations')" href="/panel/passenger-locations">موقعیت مسافران</a></li>
+            <li><a :class="{ 'active': isActive('/panel/favorite-locations') }" @click="linkClick('/panel/favorite-locations')" href="/panel/favorite-locations">مکان‌های مورد علاقه</a></li>
           </ul>
         </li>
 
         <!-- مالی -->
         <li>
-          <a :class="{ 'active': isActive('/admin/wallets') }" @click="toggleMenu('finance-menu')" href="#finance-menu" aria-expanded="false" data-bs-toggle="collapse">
+          <a :class="{ 'active': isActive('/panel/wallets') }" @click="toggleMenu('finance-menu')" href="#finance-menu" aria-expanded="false" data-bs-toggle="collapse">
             <i class="iconoir-wallet"></i>
             مالی
           </a>
           <ul :class="{ 'show': openMenus.has('finance-menu'), 'collapse': true }" id="finance-menu">
-            <li><a :class="{ 'active': isActive('/admin/wallets') }" @click="linkClick('/admin/wallets')" href="/admin/wallets">کیف پول‌ها</a></li>
-            <li><a :class="{ 'active': isActive('/admin/transactions') }" @click="linkClick('/admin/transactions')" href="/admin/transactions">تراکنش‌ها</a></li>
-            <li><a :class="{ 'active': isActive('/admin/withdrawals') }" @click="linkClick('/admin/withdrawals')" href="/admin/withdrawals">برداشت‌ها</a></li>
-            <li><a :class="{ 'active': isActive('/admin/payment-gateway') }" @click="linkClick('/admin/payment-gateway')" href="/admin/payment-gateway">درگاه پرداخت</a></li>
-            <li><a :class="{ 'active': isActive('/admin/revenue-shares') }" @click="linkClick('/admin/revenue-shares')" href="/admin/revenue-shares">سهم درآمد</a></li>
+            <li><a :class="{ 'active': isActive('/panel/wallets') }" @click="linkClick('/panel/wallets')" href="/panel/wallets">کیف پول‌ها</a></li>
+            <li><a :class="{ 'active': isActive('/panel/transactions') }" @click="linkClick('/panel/transactions')" href="/panel/transactions">تراکنش‌ها</a></li>
+            <li><a :class="{ 'active': isActive('/panel/withdrawals') }" @click="linkClick('/panel/withdrawals')" href="/panel/withdrawals">برداشت‌ها</a></li>
+            <li><a :class="{ 'active': isActive('/panel/payment-gateway') }" @click="linkClick('/panel/payment-gateway')" href="/panel/payment-gateway">درگاه پرداخت</a></li>
+            <li><a :class="{ 'active': isActive('/panel/revenue-shares') }" @click="linkClick('/panel/revenue-shares')" href="/panel/revenue-shares">سهم درآمد</a></li>
           </ul>
         </li>
 
         <!-- قیمت‌گذاری -->
         <li>
-          <a :class="{ 'active': isActive('/admin/pricing/base-fares') }" @click="toggleMenu('pricing-menu')" href="#pricing-menu" aria-expanded="false" data-bs-toggle="collapse">
+          <a :class="{ 'active': isActive('/panel/pricing/base-fares') }" @click="toggleMenu('pricing-menu')" href="#pricing-menu" aria-expanded="false" data-bs-toggle="collapse">
             <i class="iconoir-dollar"></i>
             قیمت‌گذاری
           </a>
           <ul :class="{ 'show': openMenus.has('pricing-menu'), 'collapse': true }" id="pricing-menu">
-            <li><a :class="{ 'active': isActive('/admin/pricing/base-fares') }" @click="linkClick('/admin/pricing/base-fares')" href="/admin/pricing/base-fares">نرخ پایه</a></li>
-            <li><a :class="{ 'active': isActive('/admin/pricing/intercity') }" @click="linkClick('/admin/pricing/intercity')" href="/admin/pricing/intercity">قیمت بین شهری</a></li>
-            <li><a :class="{ 'active': isActive('/admin/pricing/surge') }" @click="linkClick('/admin/pricing/surge')" href="/admin/pricing/surge">قوانین افزایش قیمت</a></li>
-            <li><a :class="{ 'active': isActive('/admin/pricing/time-pricing') }" @click="linkClick('/admin/pricing/time-pricing')" href="/admin/pricing/time-pricing">قیمت زمانی</a></li>
-            <li><a :class="{ 'active': isActive('/admin/pricing/toll-rules') }" @click="linkClick('/admin/pricing/toll-rules')" href="/admin/pricing/toll-rules">قوانین عوارض</a></li>
-            <li><a :class="{ 'active': isActive('/admin/pricing/weather') }" @click="linkClick('/admin/pricing/weather')" href="/admin/pricing/weather">قیمت آب و هوا</a></li>
-            <li><a :class="{ 'active': isActive('/admin/pricing/road-condition') }" @click="linkClick('/admin/pricing/road-condition')" href="/admin/pricing/road-condition">قیمت وضعیت جاده</a></li>
+            <li><a :class="{ 'active': isActive('/panel/pricing/base-fares') }" @click="linkClick('/panel/pricing/base-fares')" href="/panel/pricing/base-fares">نرخ پایه</a></li>
+            <li><a :class="{ 'active': isActive('/panel/pricing/intercity') }" @click="linkClick('/panel/pricing/intercity')" href="/panel/pricing/intercity">قیمت بین شهری</a></li>
+            <li><a :class="{ 'active': isActive('/panel/pricing/surge') }" @click="linkClick('/panel/pricing/surge')" href="/panel/pricing/surge">قوانین افزایش قیمت</a></li>
+            <li><a :class="{ 'active': isActive('/panel/pricing/time-pricing') }" @click="linkClick('/panel/pricing/time-pricing')" href="/panel/pricing/time-pricing">قیمت زمانی</a></li>
+            <li><a :class="{ 'active': isActive('/panel/pricing/toll-rules') }" @click="linkClick('/panel/pricing/toll-rules')" href="/panel/pricing/toll-rules">قوانین عوارض</a></li>
+            <li><a :class="{ 'active': isActive('/panel/pricing/weather') }" @click="linkClick('/panel/pricing/weather')" href="/panel/pricing/weather">قیمت آب و هوا</a></li>
+            <li><a :class="{ 'active': isActive('/panel/pricing/road-condition') }" @click="linkClick('/panel/pricing/road-condition')" href="/panel/pricing/road-condition">قیمت وضعیت جاده</a></li>
           </ul>
         </li>
 
         <!-- پشتیبانی -->
         <li>
-          <a :class="{ 'active': isActive('/admin/support-tickets') }" @click="toggleMenu('support-menu')" href="#support-menu" aria-expanded="false" data-bs-toggle="collapse">
+          <a :class="{ 'active': isActive('/panel/support-tickets') }" @click="toggleMenu('support-menu')" href="#support-menu" aria-expanded="false" data-bs-toggle="collapse">
             <i class="iconoir-chat-bubble-question"></i>
             پشتیبانی
           </a>
           <ul :class="{ 'show': openMenus.has('support-menu'), 'collapse': true }" id="support-menu">
-            <li><a :class="{ 'active': isActive('/admin/support-tickets') }" @click="linkClick('/admin/support-tickets')" href="/admin/support-tickets">تیکت‌های پشتیبانی</a></li>
-            <li><a :class="{ 'active': isActive('/admin/ratings') }" @click="linkClick('/admin/ratings')" href="/admin/ratings">امتیازدهی‌ها</a></li>
-            <li><a :class="{ 'active': isActive('/admin/feedback-questions') }" @click="linkClick('/admin/feedback-questions')" href="/admin/feedback-questions">سوالات بازخورد</a></li>
-            <li><a :class="{ 'active': isActive('/admin/feedback-responses') }" @click="linkClick('/admin/feedback-responses')" href="/admin/feedback-responses">پاسخ‌های بازخورد</a></li>
+            <li><a :class="{ 'active': isActive('/panel/support-tickets') }" @click="linkClick('/panel/support-tickets')" href="/panel/support-tickets">تیکت‌های پشتیبانی</a></li>
+            <li><a :class="{ 'active': isActive('/panel/ratings') }" @click="linkClick('/panel/ratings')" href="/panel/ratings">امتیازدهی‌ها</a></li>
+            <li><a :class="{ 'active': isActive('/panel/feedback-questions') }" @click="linkClick('/panel/feedback-questions')" href="/panel/feedback-questions">سوالات بازخورد</a></li>
+            <li><a :class="{ 'active': isActive('/panel/feedback-responses') }" @click="linkClick('/panel/feedback-responses')" href="/panel/feedback-responses">پاسخ‌های بازخورد</a></li>
           </ul>
         </li>
 
@@ -120,9 +120,9 @@
             بازاریابی
           </a>
           <ul class="collapse" id="marketing-menu">
-            <li><a href="/admin/promotions">کدهای تخفیف</a></li>
-            <li><a href="/admin/user-promotions">تخفیف‌های کاربران</a></li>
-            <li><a href="/admin/packages">بسته‌ها</a></li>
+            <li><a href="/panel/promotions">کدهای تخفیف</a></li>
+            <li><a href="/panel/user-promotions">تخفیف‌های کاربران</a></li>
+            <li><a href="/panel/packages">بسته‌ها</a></li>
           </ul>
         </li>
 
@@ -133,9 +133,9 @@
             محتوا
           </a>
           <ul class="collapse" id="cms-menu">
-            <li><a href="/admin/cms-banners">بنرها</a></li>
-            <li><a href="/admin/cms-pages">صفحات</a></li>
-            <li><a href="/admin/cms-translations">ترجمه‌ها</a></li>
+            <li><a href="/panel/cms-banners">بنرها</a></li>
+            <li><a href="/panel/cms-pages">صفحات</a></li>
+            <li><a href="/panel/cms-translations">ترجمه‌ها</a></li>
           </ul>
         </li>
 
@@ -146,12 +146,12 @@
             تنظیمات
           </a>
           <ul class="collapse" id="settings-menu">
-            <li><a href="/admin/settings">تنظیمات عمومی</a></li>
-            <li><a href="/admin/app-configs">تنظیمات اپلیکیشن</a></li>
-            <li><a href="/admin/banks">بانک‌ها</a></li>
-            <li><a href="/admin/companies">شرکت‌ها</a></li>
-            <li><a href="/admin/company-drivers">رانندگان شرکت</a></li>
-            <li><a href="/admin/notifications">اعلان‌ها</a></li>
+            <li><a href="/panel/settings">تنظیمات عمومی</a></li>
+            <li><a href="/panel/app-configs">تنظیمات اپلیکیشن</a></li>
+            <li><a href="/panel/banks">بانک‌ها</a></li>
+            <li><a href="/panel/companies">شرکت‌ها</a></li>
+            <li><a href="/panel/company-drivers">رانندگان شرکت</a></li>
+            <li><a href="/panel/notifications">اعلان‌ها</a></li>
           </ul>
         </li>
 

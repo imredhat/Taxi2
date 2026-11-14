@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const webStorage =
   typeof localStorage !== 'undefined' ? localStorage : null;
 
+export const driverWorkingKey = 'driver_working';
+
 export const storage = {
   getItem: async (key: string): Promise<string | null> => {
     try {

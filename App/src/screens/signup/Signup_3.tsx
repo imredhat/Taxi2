@@ -218,7 +218,6 @@ export default function SignupStep3Screen({ route, navigation }: any) {
             keyboardType="phone-pad"
             placeholder="09xxxxxxxxx"
             placeholderTextColor="#aaa"
-            writingDirection="ltr"
           />
 
           <Text style={styles.label}>رمز عبور</Text>

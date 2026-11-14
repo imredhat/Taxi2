@@ -1,0 +1,2700 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "پویش تاکسی — API مسافر",
+    "version": "1.0.0",
+    "description": "واحد پول IRR؛ شناسه کاربر از JWT. عملیات مالی موفق تنها پس از تأیید معتبر سامان."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "درگاه توسعه، در صورت proxy به سرور API"
+    },
+    {
+      "url": "http://localhost:3001",
+      "description": "سرور Node پیش‌فرض"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Point": {
+        "type": "object",
+        "required": [
+          "lat",
+          "lng",
+          "address"
+        ],
+        "properties": {
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lng": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "ProfileUpdate": {
+        "type": "object",
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "last_name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other"
+            ],
+            "nullable": true
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "ReservationInput": {
+        "type": "object",
+        "required": [
+          "clientReference",
+          "packageId",
+          "starts",
+          "ends",
+          "date",
+          "time",
+          "scheduledAt",
+          "personCount",
+          "luggageCount",
+          "bagCount",
+          "hasAnimals",
+          "quoteId"
+        ],
+        "properties": {
+          "clientReference": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{8,100}$"
+          },
+          "packageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "starts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            }
+          },
+          "ends": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            }
+          },
+          "date": {
+            "type": "string",
+            "description": "تاریخ شمسی YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+          },
+          "scheduledAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO متناظر تاریخ و ساعت تهران، در آینده"
+          },
+          "personCount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "luggageCount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "bagCount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "hasAnimals": {
+            "type": "boolean"
+          },
+          "animalType": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "quoteId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "استعلام متعلق به همین مسافر و همین سفر؛ اعتبار ۱۰ دقیقه"
+          }
+        }
+      },
+      "PaymentInput": {
+        "type": "object",
+        "required": [
+          "purpose",
+          "client_reference"
+        ],
+        "properties": {
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "topup",
+              "ride"
+            ]
+          },
+          "client_reference": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{8,100}$"
+          },
+          "amount": {
+            "type": "string",
+            "pattern": "^[0-9]{1,12}$",
+            "description": "فقط topup؛ ریال، مثبت"
+          },
+          "ride_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "برای purpose=ride اجباری است؛ مبلغ از سرور گرفته می‌شود"
+          }
+        }
+      },
+      "FavoriteInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "address",
+          "lat",
+          "lng"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lng": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          }
+        }
+      },
+      "DraftInput": {
+        "type": "object",
+        "required": [
+          "client_reference",
+          "trip_data"
+        ],
+        "properties": {
+          "client_reference": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{8,100}$"
+          },
+          "trip_data": {
+            "type": "object",
+            "description": "حداکثر ۶۴ کیلوبایت؛ فقط مشخصات فرم سفر نگه‌داری می‌شود"
+          }
+        }
+      },
+      "TicketInput": {
+        "type": "object",
+        "required": [
+          "subject",
+          "message"
+        ],
+        "properties": {
+          "subject": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 5000
+          },
+          "ride_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "Preferences": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "activity_notifications"
+        ],
+        "properties": {
+          "activity_notifications": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DeviceInput": {
+        "type": "object",
+        "required": [
+          "token",
+          "platform"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 512
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "android",
+              "ios",
+              "web"
+            ]
+          }
+        }
+      },
+      "QuoteInput": {
+        "type": "object",
+        "required": [
+          "starts",
+          "ends",
+          "scheduledAt",
+          "personCount",
+          "luggageCount",
+          "bagCount",
+          "hasAnimals"
+        ],
+        "properties": {
+          "starts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            }
+          },
+          "ends": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            }
+          },
+          "scheduledAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO متناظر تاریخ و ساعت تهران، در آینده"
+          },
+          "personCount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "luggageCount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "bagCount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "hasAnimals": {
+            "type": "boolean"
+          },
+          "animalType": {
+            "type": "string",
+            "maxLength": 200
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/passenger/config": {
+      "get": {
+        "operationId": "get_api_passenger_config",
+        "summary": "config",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        }
+      }
+    },
+    "/api/passenger/content": {
+      "get": {
+        "operationId": "get_api_passenger_content",
+        "summary": "content",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/devices": {
+      "post": {
+        "operationId": "post_api_passenger_devices",
+        "summary": "registerDevice",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/devices/{id}": {
+      "delete": {
+        "operationId": "delete_api_passenger_devices_id",
+        "summary": "removeDevice",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "204": {
+            "description": "حذف شد؛ بدون بدنه"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/payments/{id}/refund-request": {
+      "post": {
+        "operationId": "post_api_passenger_payments_id_refund_request",
+        "summary": "requestRefund",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reason"
+                ],
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/profile": {
+      "get": {
+        "operationId": "get_api_passenger_profile",
+        "summary": "profile",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patch_api_passenger_profile",
+        "summary": "updateProfile",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileUpdate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/packages": {
+      "get": {
+        "operationId": "get_api_passenger_packages",
+        "summary": "getPackages",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        }
+      }
+    },
+    "/api/passenger/drafts": {
+      "get": {
+        "operationId": "get_api_passenger_drafts",
+        "summary": "drafts",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_api_passenger_drafts",
+        "summary": "saveDraft",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/drafts/{id}": {
+      "delete": {
+        "operationId": "delete_api_passenger_drafts_id",
+        "summary": "deleteDraft",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "204": {
+            "description": "حذف شد؛ بدون بدنه"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/reservations": {
+      "get": {
+        "operationId": "get_api_passenger_reservations",
+        "summary": "getReservations",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_api_passenger_reservations",
+        "summary": "createReservation",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/reservations/{id}": {
+      "get": {
+        "operationId": "get_api_passenger_reservations_id",
+        "summary": "reservation",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/reservations/{id}/cancel": {
+      "post": {
+        "operationId": "post_api_passenger_reservations_id_cancel",
+        "summary": "cancelReservation",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/trips": {
+      "get": {
+        "operationId": "get_api_passenger_trips",
+        "summary": "trips",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/trips/{id}": {
+      "get": {
+        "operationId": "get_api_passenger_trips_id",
+        "summary": "trip",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/trips/{id}/messages": {
+      "get": {
+        "operationId": "get_api_passenger_trips_id_messages",
+        "summary": "tripMessages",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_api_passenger_trips_id_messages",
+        "summary": "sendTripMessage",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "message"
+                ],
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "maxLength": 5000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/trips/{id}/rating": {
+      "put": {
+        "operationId": "put_api_passenger_trips_id_rating",
+        "summary": "rating",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "score"
+                ],
+                "properties": {
+                  "score": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  },
+                  "comment": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/trips/{id}/wallet-payment": {
+      "post": {
+        "operationId": "post_api_passenger_trips_id_wallet_payment",
+        "summary": "walletPay",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/wallet": {
+      "get": {
+        "operationId": "get_api_passenger_wallet",
+        "summary": "wallet",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        }
+      }
+    },
+    "/api/passenger/wallet/transactions": {
+      "get": {
+        "operationId": "get_api_passenger_wallet_transactions",
+        "summary": "transactions",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/payments": {
+      "get": {
+        "operationId": "get_api_passenger_payments",
+        "summary": "payments",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_api_passenger_payments",
+        "summary": "create",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/payments/{id}": {
+      "get": {
+        "operationId": "get_api_passenger_payments_id",
+        "summary": "payment",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/payments/{id}/verify": {
+      "post": {
+        "operationId": "post_api_passenger_payments_id_verify",
+        "summary": "verify",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/notifications": {
+      "get": {
+        "operationId": "get_api_passenger_notifications",
+        "summary": "notifications",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/notifications/read-all": {
+      "post": {
+        "operationId": "post_api_passenger_notifications_read_all",
+        "summary": "readAll",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/notifications/{id}/read": {
+      "post": {
+        "operationId": "post_api_passenger_notifications_id_read",
+        "summary": "readNotification",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/preferences": {
+      "get": {
+        "operationId": "get_api_passenger_preferences",
+        "summary": "preferences",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patch_api_passenger_preferences",
+        "summary": "updatePreferences",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Preferences"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/favorites": {
+      "get": {
+        "operationId": "get_api_passenger_favorites",
+        "summary": "favorites",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_api_passenger_favorites",
+        "summary": "saveFavorite",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/favorites/{id}": {
+      "put": {
+        "operationId": "put_api_passenger_favorites_id",
+        "summary": "saveFavorite",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteInput"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete_api_passenger_favorites_id",
+        "summary": "deleteFavorite",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "204": {
+            "description": "حذف شد؛ بدون بدنه"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/support/tickets": {
+      "get": {
+        "operationId": "get_api_passenger_support_tickets",
+        "summary": "tickets",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_api_passenger_support_tickets",
+        "summary": "createTicket",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/support/tickets/{id}": {
+      "get": {
+        "operationId": "get_api_passenger_support_tickets_id",
+        "summary": "ticket",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/passenger/support/tickets/{id}/messages": {
+      "post": {
+        "operationId": "post_api_passenger_support_tickets_id_messages",
+        "summary": "ticketMessage",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "message"
+                ],
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "maxLength": 5000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/support/tickets/{id}/close": {
+      "post": {
+        "operationId": "post_api_passenger_support_tickets_id_close",
+        "summary": "closeTicket",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق JSON"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "نشست نامعتبر"
+          },
+          "403": {
+            "description": "نقش یا مالکیت غیرمجاز"
+          },
+          "404": {
+            "description": "پیدا نشد"
+          },
+          "409": {
+            "description": "تعارض وضعیت یا کلید درخواست"
+          },
+          "503": {
+            "description": "سرویس یا تنظیمات آماده نیست"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/sep/callback/{id}": {
+      "get": {
+        "operationId": "get_api_payments_sep_callback_id",
+        "summary": "بازگشت بانک؛ موفقیت فقط بعد از VerifyTransaction",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "secret",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 64,
+              "maxLength": 64
+            }
+          },
+          {
+            "name": "ResNum",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TerminalId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "State",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RefNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "نتیجه تأیید سرور"
+          },
+          "202": {
+            "description": "هنوز تأیید نشده"
+          },
+          "403": {
+            "description": "راز بازگشت معتبر نیست"
+          },
+          "409": {
+            "description": "مبلغ یا رسید تأیید نشد"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_api_payments_sep_callback_id",
+        "summary": "بازگشت بانک؛ موفقیت فقط بعد از VerifyTransaction",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "secret",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 64,
+              "maxLength": 64
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "نتیجه تأیید سرور"
+          },
+          "202": {
+            "description": "هنوز تأیید نشده"
+          },
+          "403": {
+            "description": "راز بازگشت معتبر نیست"
+          },
+          "409": {
+            "description": "مبلغ یا رسید تأیید نشد"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "ResNum",
+                  "TerminalId",
+                  "State",
+                  "Status"
+                ],
+                "properties": {
+                  "ResNum": {
+                    "type": "string"
+                  },
+                  "TerminalId": {
+                    "type": "string"
+                  },
+                  "State": {
+                    "type": "string"
+                  },
+                  "Status": {
+                    "type": "string"
+                  },
+                  "RefNum": {
+                    "type": "string"
+                  },
+                  "Token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/send": {
+      "post": {
+        "operationId": "post_api_otp_send",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "phone"
+                ],
+                "properties": {
+                  "phone": {
+                    "type": "string",
+                    "example": "09123456789"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "کد یا ورودی معتبر نیست"
+          }
+        }
+      }
+    },
+    "/api/otp/verify": {
+      "post": {
+        "operationId": "post_api_otp_verify",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "userId",
+                  "code"
+                ],
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "code": {
+                    "type": "string",
+                    "pattern": "^[0-9]{5}$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "پاسخ موفق"
+          },
+          "201": {
+            "description": "رکورد ساخته شد"
+          },
+          "400": {
+            "description": "کد یا ورودی معتبر نیست"
+          }
+        }
+      }
+    },
+    "/api/passenger/fare-quotes": {
+      "post": {
+        "operationId": "post_api_passenger_fare_quotes",
+        "summary": "استعلام کرایه همه کلاس‌ها با قوانین دیتابیس و مسیر نشان",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "quoteId, expiresAt, currency=IRR, route, context, packages with amount/breakdown/warnings"
+          },
+          "400": {
+            "description": "ورودی نامعتبر"
+          },
+          "401": {
+            "description": "ورود لازم است"
+          },
+          "502": {
+            "description": "مسیر یا شهرها دریافت نشد"
+          },
+          "503": {
+            "description": "تنظیمات سرویس یا نرخ‌ها معتبر نیست"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
   runtimeConfig: {
+    paymentApiOrigin: 'http://127.0.0.1:3001',
     public: {
       weatherApiKey: process.env.NUXT_PUBLIC_WEATHER_API_KEY || ''
     }

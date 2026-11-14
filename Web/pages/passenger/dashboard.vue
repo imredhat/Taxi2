@@ -280,7 +280,7 @@ const otp = ref(['', '', '', ''])
 const searchOpen = ref(false)
 const addressQuery = ref('')
 const destination = ref('')
-const selectedVehicleId = ref('eco-city')
+const selectedVehicleId = ref('eco_city')
 const rideMode = ref('normal')
 
 const onboardingSlides = [
@@ -290,11 +290,11 @@ const onboardingSlides = [
 ]
 
 const vehicleClasses = [
-  { id: 'eco-city', name: 'ECO شهری', subtitle: 'اقتصادی برای سفرهای روزمره', price: '۸۵,۰۰۰ تومان', eta: '۳ دقیقه', note: 'پیشنهاد محبوب امروز', symbol: 'E' },
-  { id: 'eco-road', name: 'ECO بین‌شهری', subtitle: 'گزینه اقتصادی مسیرهای خارج شهر', price: '۴۸۰,۰۰۰ تومان', eta: '۹ دقیقه', note: 'مناسب رزرو و سفر جاده‌ای', symbol: 'R' },
-  { id: 'eco-plus', name: 'ECO+', subtitle: 'خودروی تمیزتر با راننده منتخب', price: '۱۰۸,۰۰۰ تومان', eta: '۴ دقیقه', note: 'تعادل قیمت و کیفیت', symbol: '+' },
+  { id: 'eco_city', name: 'ECO شهری', subtitle: 'اقتصادی برای سفرهای روزمره', price: '۸۵,۰۰۰ تومان', eta: '۳ دقیقه', note: 'پیشنهاد محبوب امروز', symbol: 'E' },
+  { id: 'eco_intercity', name: 'ECO بین‌شهری', subtitle: 'گزینه اقتصادی مسیرهای خارج شهر', price: '۴۸۰,۰۰۰ تومان', eta: '۹ دقیقه', note: 'مناسب رزرو و سفر جاده‌ای', symbol: 'R' },
+  { id: 'eco_plus', name: 'ECO+', subtitle: 'خودروی تمیزتر با راننده منتخب', price: '۱۰۸,۰۰۰ تومان', eta: '۴ دقیقه', note: 'تعادل قیمت و کیفیت', symbol: '+' },
   { id: 'vip', name: 'VIP', subtitle: 'سدان راحت با سرویس ممتاز', price: '۱۷۵,۰۰۰ تومان', eta: '۶ دقیقه', note: 'مناسب جلسه و فرودگاه', symbol: 'V' },
-  { id: 'vip-plus', name: 'VIP+', subtitle: 'خودروی لوکس و تجربه آرام‌تر', price: '۲۴۵,۰۰۰ تومان', eta: '۸ دقیقه', note: 'بالاترین امتیاز رانندگان', symbol: 'P' },
+  { id: 'vip_plus', name: 'VIP+', subtitle: 'خودروی لوکس و تجربه آرام‌تر', price: '۲۴۵,۰۰۰ تومان', eta: '۸ دقیقه', note: 'بالاترین امتیاز رانندگان', symbol: 'P' },
   { id: 'suv', name: 'SUV', subtitle: 'فضای بیشتر برای خانواده و بار', price: '۲۲۵,۰۰۰ تومان', eta: '۷ دقیقه', note: 'ظرفیت و راحتی بیشتر', symbol: 'S' },
   { id: 'van', name: 'ون', subtitle: 'گروهی تا ۱۰ نفر', price: '۳۴۰,۰۰۰ تومان', eta: '۱۲ دقیقه', note: 'بهترین گزینه برای گروه‌ها', symbol: 'W' }
 ]

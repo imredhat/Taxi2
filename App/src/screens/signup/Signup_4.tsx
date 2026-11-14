@@ -124,7 +124,6 @@ export default function SignupStep4Screen({ route, navigation }: any) {
             keyboardType="phone-pad"
             placeholder="0xxxxxxxxx"
             placeholderTextColor="#aaa"
-            writingDirection="ltr"
           />
 
           <DocField label="عکس گواهی سوء پیشینه" image={backgroundImg} onPick={() => pick(setBackgroundImg)} />

@@ -1,0 +1,147 @@
+const test=require('node:test'),assert=require('node:assert/strict');require('dotenv').config();
+test('Admin dispatch matches vehicle class, assigns once, edits and reassigns atomically',{skip:process.env.RUN_PASSENGER_DB_TESTS!=='1'},async(t)=>{
+ const pool=require('../app/models/db'),client=await pool.connect();let server,savepoint=0;
+ const fake={query:(...args)=>client.query(...args),connect:async()=>{let point;return{query:(sql,args)=>{if(sql==='BEGIN'){point=`dispatch_${++savepoint}`;return client.query(`SAVEPOINT ${point}`);}if(sql==='COMMIT')return client.query(`RELEASE SAVEPOINT ${point}`);if(sql==='ROLLBACK')return client.query(`ROLLBACK TO SAVEPOINT ${point}`);return client.query(sql,args);},release(){}};}};
+ require.cache[require.resolve('../app/models/db')].exports=fake;
+ for(const file of ['../app/middleware/passenger','../app/controllers/dispatchController','../app/controllers/rideController','../app/routes/rides'])delete require.cache[require.resolve(file)];
+ try{
+  await client.query('BEGIN');
+  await client.query(require('node:fs').readFileSync(require('node:path').join(__dirname,'../app/database/migrations/008_driver_active_vehicle.sql'),'utf8'));
+  await client.query(require('node:fs').readFileSync(require('node:path').join(__dirname,'../app/database/migrations/009_dispatch_outbox.sql'),'utf8'));
+  await client.query(require('node:fs').readFileSync(require('node:path').join(__dirname,'../app/database/migrations/010_dispatch_route_cache.sql'),'utf8'));
+  const tag=`d-${Date.now()}`;
+  const users=(await client.query("INSERT INTO users(phone,role,is_active,is_blocked) VALUES($1,'passenger',true,false),($2,'driver',true,false),($3,'driver',true,false),($4,'driver',true,false) RETURNING id",[tag+'p',tag+'a',tag+'b',tag+'c'])).rows;
+  const drivers=[];for(const u of users.slice(1))drivers.push((await client.query('INSERT INTO driver_profiles(user_id) VALUES($1) RETURNING id',[u.id])).rows[0].id);
+  const brand=(await client.query('INSERT INTO car_brands(name) VALUES($1) RETURNING id',[tag])).rows[0].id;
+  const model=(await client.query("INSERT INTO car_models(brand_id,name,vehicle_class) VALUES($1,'test','eco_intercity') RETURNING id",[brand])).rows[0].id;
+  const vehicles=[];for(let i=0;i<3;i++)vehicles.push((await client.query('INSERT INTO vehicles(driver_id,model_id,color,license_plate,year,car_class) VALUES($1,$2,$3,$4,1405,$5) RETURNING id',[drivers[i],model,'white',tag+i,i===2?'van':'eco_intercity'])).rows[0].id);
+  const details={starts:[{lat:35,lng:51,address:'شروع'},{lat:35.1,lng:51.1,address:'مبدا دوم'}],ends:[{lat:36,lng:52,address:'مقصد'}],date:'1405-09-01',time:'09:00',personCount:1,luggageCount:0,bagCount:0,hasAnimals:false,animalType:''};
+  const request=(await client.query("INSERT INTO ride_requests(passenger_id,ride_type,car_class,pickup_location,dropoff_location,pickup_address,dropoff_address,scheduled_at,booking_details) VALUES($1,'intercity','eco_intercity',ST_SetSRID(ST_MakePoint(51,35),4326)::geography,ST_SetSRID(ST_MakePoint(52,36),4326)::geography,'شروع','مقصد',NOW()+INTERVAL '2 day',$2::jsonb) RETURNING id,updated_at",[users[0].id,JSON.stringify(details)])).rows[0];
+  const express=require('express'),app=express(),jwt=require('jsonwebtoken'),{verifyToken,denyPassenger}=require('../app/middleware/auth');app.use(express.json());app.use('/api/driver',require('../app/routes/driverApp'));app.use(verifyToken,denyPassenger,require('../app/routes/rides'));
+  server=await new Promise(resolve=>{const s=app.listen(0,'127.0.0.1',()=>resolve(s));});const base=`http://127.0.0.1:${server.address().port}`,secret=process.env.JWT_SECRET||'pooyesh_taxi_jwt_secret_2026';
+  async function call(path,method='GET',body,expected=200,role='super_admin',userId=users[0].id){const token=jwt.sign({userId,role},secret),response=await fetch(base+path,{method,headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});const data=await response.json();assert.equal(response.status,expected,JSON.stringify(data));return data;}
+  const root=`/api/ride-requests/${request.id}`;
+  await call(root+'/drivers','GET',null,403,'driver');await call(root+'/drivers','GET',null,403,'passenger');
+  const eligible=await call(root+'/drivers');assert.ok(eligible.items.some(x=>x.vehicle_id===vehicles[0]));assert.ok(!eligible.items.some(x=>x.vehicle_id===vehicles[2]));
+  const input={driver_id:drivers[0],vehicle_id:vehicles[0],expected_ride_id:null,expected_driver_id:null};
+  await call(root+'/assignment','PUT',{...input,driver_id:drivers[2],vehicle_id:vehicles[2]},409);
+  await client.query('UPDATE vehicles SET is_active=false WHERE id=$1',[vehicles[0]]);await call(root+'/assignment','PUT',input,409);await client.query('UPDATE vehicles SET is_active=true WHERE id=$1',[vehicles[0]]);
+  const first=await call(root+'/assignment','PUT',input,201),again=await call(root+'/assignment','PUT',input);assert.equal(first.ride.id,again.ride.id);
+  assert.equal((await client.query('SELECT COUNT(*)::int AS n FROM rides WHERE request_id=$1',[request.id])).rows[0].n,1);
+  assert.equal((await client.query('SELECT COUNT(*)::int AS n FROM ride_stops WHERE ride_id=$1',[first.ride.id])).rows[0].n,1);
+  const listed=await call('/api/ride-requests');const row=listed.requests.find(x=>x.id===request.id);assert.equal(row.driver_id,drivers[0]);assert.equal(row.status,'accepted');
+  const edit={passenger_count:3,scheduled_at:new Date(Date.now()+3*86400000).toISOString(),notes:'توقف کوتاه',expected_version:row.edit_version};await call(root,'PATCH',edit);
+  const saved=(await client.query('SELECT booking_details,passenger_count FROM ride_requests WHERE id=$1',[request.id])).rows[0];assert.equal(saved.booking_details.personCount,3);assert.equal(saved.passenger_count,3);
+  await call(root,'PATCH',edit,409);
+  await call(root+'/assignment','PUT',{driver_id:drivers[1],vehicle_id:vehicles[1],expected_ride_id:null,expected_driver_id:null},409);
+  const changed=await call(root+'/assignment','PUT',{driver_id:drivers[1],vehicle_id:vehicles[1],expected_ride_id:first.ride.id,expected_driver_id:drivers[0]},201);assert.equal(changed.ride.id,first.ride.id);assert.equal(changed.ride.driver_id,drivers[1]);
+  const other=(await client.query("INSERT INTO ride_requests(passenger_id,car_class,pickup_location) VALUES($1,'eco_intercity',ST_SetSRID(ST_MakePoint(51,35),4326)::geography) RETURNING id",[users[0].id])).rows[0];
+  assert.ok(!(await call(`/api/ride-requests/${other.id}/drivers`)).items.some(x=>x.driver_id===drivers[1]));
+  await call(`/api/ride-requests/${other.id}/assignment`,'PUT',{driver_id:drivers[1],vehicle_id:vehicles[1],expected_ride_id:null,expected_driver_id:null},409);
+  await client.query("UPDATE ride_requests SET booking_details=jsonb_set(booking_details,'{fare}',$2::jsonb) WHERE id=$1",[request.id,JSON.stringify({amount:'5000',breakdown:[],warnings:[]})]);
+  require('../app/services/fareContext').route=async(points,scheduledAt)=>({meters:10000,seconds:600,origin_city:'تهران',destination_city:'اصفهان',weather_available:true,weather_conditions:[],geometry:null,polyline:null,scheduledAt});
+  const proposal={passenger_count:4,scheduled_at:new Date(Date.now()+4*86400000).toISOString()};
+  const preview=await call(root+'/fare-preview','POST',proposal);
+  const current=(await call('/api/ride-requests')).requests.find(x=>x.id===request.id);
+  await call(root,'PATCH',{...proposal,notes:'تغییر زمان',expected_version:current.edit_version},409);
+  const repriced=await call(root,'PATCH',{...proposal,notes:'تغییر زمان',expected_version:current.edit_version,quoteId:preview.quoteId,packageId:preview.packageId});
+  assert.equal(repriced.request.estimated_fare,preview.amount);
+  assert.equal((await client.query('SELECT fare FROM rides WHERE id=$1',[first.ride.id])).rows[0].fare,preview.amount);
+  await client.query("UPDATE rides SET status='in_progress' WHERE id=$1",[first.ride.id]);await call(root+'/assignment','PUT',{...input,expected_ride_id:first.ride.id,expected_driver_id:drivers[1]},409);
+  const driverCall=(path,method='GET',body=null,expected=200)=>call(`/api/driver${path}`,method,body,expected,'driver',users[1].id);
+  await client.query('UPDATE driver_profiles SET is_verified=true WHERE id=$1',[drivers[0]]);
+  await driverCall(`/vehicles/${vehicles[1]}/active`,'PUT',null,404);
+  const added=await driverCall('/vehicles','POST',{model_id:model,year:1405,color:'سفید',plate_part1:'12',plate_part2:'34',plate_part3:'567',plate_letter:'ب'},201);
+  await driverCall(`/vehicles/${added.vehicle.id}/active`,'PUT');
+  assert.equal((await driverCall('/dashboard')).driver.active_vehicle_id,added.vehicle.id);
+  await client.query("UPDATE ride_requests SET car_class='eco_city',ride_type='intercity',scheduled_at=NOW()+INTERVAL '1 day',estimated_fare=9000000 WHERE id=$1",[other.id]);
+  assert.ok((await driverCall('/offers?lat=35&lng=51')).items.some(item=>item.id===other.id));
+  assert.ok(!(await driverCall('/offers?lat=36&lng=52')).items.some(item=>item.id===other.id));
+  await client.query("UPDATE vehicles SET car_class='eco_city' WHERE id=$1",[added.vehicle.id]);
+  await client.query("UPDATE ride_requests SET car_class='eco_intercity' WHERE id=$1",[other.id]);
+  assert.ok((await driverCall('/offers?lat=35&lng=51')).items.some(item=>item.id===other.id));
+  await client.query("UPDATE vehicles SET car_class='eco_intercity' WHERE id=$1",[added.vehicle.id]);
+  await client.query("UPDATE ride_requests SET car_class='eco_city' WHERE id=$1",[other.id]);
+  await client.query("UPDATE ride_requests SET booking_details=$2::jsonb WHERE id=$1",[other.id,JSON.stringify({
+   ...details,ends:[{lat:35.2,lng:51.2,address:'مقصد اول'},...details.ends],
+   routeLegs:[{seconds:360,meters:2468},{seconds:420,meters:3702},{seconds:480,meters:4936}],
+  })]);
+  await client.query("UPDATE ride_requests SET notes=$2,booking_details=jsonb_set(booking_details,'{notes}',to_jsonb($2::text)) WHERE id=$1",[other.id,'توضیح خصوصی مسافر']);
+  await client.query("UPDATE ride_requests SET scheduled_at=NOW()-INTERVAL '1 minute' WHERE id=$1",[other.id]);
+  const publicOffer=(await driverCall('/offers?lat=35&lng=51')).items.find(item=>item.id===other.id);
+  assert.ok(Date.parse(publicOffer.scheduled_at)<Date.now());
+  assert.equal(Date.parse(publicOffer.offer_expires_at)-Date.parse(publicOffer.scheduled_at),30*60*1000);
+  assert.ok(Date.parse(publicOffer.offer_expires_at)>Date.now());
+  assert.equal(publicOffer.notes,null);
+  const upstream=global.fetch;
+  let directionCalls=0;
+  t.mock.method(global,'fetch',async(url,options)=>{
+   const address=new URL(url);
+   if(address.hostname!=='api.neshan.org')return upstream(url,options);
+   assert.equal(address.searchParams.get('origin'),'35.01,51.01');
+   directionCalls++;
+   assert.equal(address.searchParams.get('waypoints'),null);
+   assert.equal(address.searchParams.get('destination'),'35,51');
+   return Response.json({routes:[{legs:[{duration:{value:241},distance:{value:1234}}]}]});
+  });
+  const previousNeshanKey=process.env.NESHAN_SERVICE_KEY;
+  process.env.NESHAN_SERVICE_KEY='test';
+  try{
+   const times=await driverCall(`/offers/${other.id}/stop-times?lat=35.01&lng=51.01`);
+   assert.deepEqual(times,{minutes:[5,6,7,8],meters:[1234,2468,3702,4936]});
+   assert.deepEqual(await driverCall(`/offers/${other.id}/stop-times?lat=35.0101&lng=51.0101`),times);
+   assert.equal(directionCalls,1);
+   await driverCall(`/offers/${other.id}/stop-times?lat=36&lng=52`,'GET',null,404);
+  }finally{
+   if(previousNeshanKey===undefined)delete process.env.NESHAN_SERVICE_KEY;
+   else process.env.NESHAN_SERVICE_KEY=previousNeshanKey;
+  }
+  const selection={vehicle_id:added.vehicle.id,lat:35,lng:51};
+  await driverCall(`/offers/${other.id}/accept`,'POST',{...selection,lat:36},409);
+  const accepted=await driverCall(`/offers/${other.id}/accept`,'POST',selection,201);
+  assert.equal((await driverCall(`/offers/${other.id}/accept`,'POST',selection)).ride.id,accepted.ride.id);
+  const booked=(await client.query('SELECT car_class,fare::text FROM rides WHERE id=$1',[accepted.ride.id])).rows[0];
+  assert.equal(booked.car_class,'eco_city');assert.equal(booked.fare,'9000000');
+  const events=await client.query('SELECT passenger_id,previous_class FROM dispatch_outbox WHERE request_id=$1',[other.id]);
+  assert.ok(events.rows.length>1);
+  assert.ok(events.rows.every(event=>event.passenger_id===users[0].id));
+  assert.ok(events.rows.some(event=>event.previous_class==='eco_city'));
+  assert.ok(!(await driverCall('/offers?lat=35&lng=51')).items.some(item=>item.id===other.id));
+  assert.equal((await client.query("SELECT count(*)::int AS count FROM notifications WHERE user_id=$1 AND data->>'ride_id'=$2",[users[0].id,accepted.ride.id])).rows[0].count,1);
+  await call(`/api/ride-requests/${other.id}/assignment`,'PUT',{...input,driver_id:drivers[1],vehicle_id:vehicles[1]},409);
+  const myTrips=await driverCall('/trips');
+  assert.ok(myTrips.items.some(trip=>trip.id===accepted.ride.id));
+  const detailsResponse=await driverCall(`/trips/${accepted.ride.id}`);
+  assert.equal(detailsResponse.trip.id,accepted.ride.id);
+  assert.equal(detailsResponse.trip.starts.length,2);
+  assert.equal(detailsResponse.trip.ends.length,2);
+  assert.equal(detailsResponse.trip.passenger_notes,'توضیح خصوصی مسافر');
+  assert.ok(!Object.keys(detailsResponse.trip).some(key=>key!=='can_contact'&&/phone|email|passenger_id|contact/i.test(key)));
+  await driverCall(`/trips/${first.ride.id}`,'GET',null,404);
+  const another=(await client.query(`INSERT INTO ride_requests(passenger_id,ride_type,car_class,pickup_location,dropoff_location,
+    scheduled_at,estimated_fare) SELECT passenger_id,ride_type,car_class,pickup_location,dropoff_location,scheduled_at,estimated_fare
+    FROM ride_requests WHERE id=$1 RETURNING id`,[other.id])).rows[0];
+  const occupied=await driverCall(`/offers/${another.id}/accept`,'POST',selection,409);
+  assert.match(occupied.error,/سفر باز دارد/);
+  assert.ok(!myTrips.items.some(trip=>trip.id===first.ride.id));
+  assert.equal((await driverCall('/finance')).total,'0');
+  await client.query("UPDATE rides SET status='completed' WHERE id=$1",[accepted.ride.id]);
+  await client.query('INSERT INTO revenue_shares(ride_id,driver_id,total_fare,platform_commission,driver_share,commission_rate) VALUES($1,$2,10000,1500,8500,15)',[accepted.ride.id,drivers[0]]);
+  const finance=await driverCall('/finance');
+  assert.equal(finance.total,'8500');assert.equal(finance.items[0].ride_id,accepted.ride.id);
+  const otherFinance=await call('/api/driver/finance','GET',null,200,'driver',users[2].id);
+  assert.equal(otherFinance.total,'0');
+  await driverCall(`/trips/${accepted.ride.id}/cancel`,'POST',{reason:'vehicle_issue'},409);
+  const next=await driverCall(`/offers/${another.id}/accept`,'POST',selection,201);
+  const cancelPath=`/trips/${next.ride.id}/cancel`;
+  assert.ok((await driverCall(`/trips/${next.ride.id}`)).trip.cancellation_options.length>=5);
+  await driverCall(cancelPath,'POST',{reason:'made_up'},400);
+  await call('/api/driver'+cancelPath,'POST',{reason:'vehicle_issue'},404,'driver',users[2].id);
+  assert.equal((await driverCall(cancelPath,'POST',{reason:'vehicle_issue'})).trip.status,'cancelled');
+  await driverCall(cancelPath,'POST',{reason:'vehicle_issue'});
+  const cancelled=(await client.query('SELECT status,cancelled_by,cancellation_reason FROM rides WHERE id=$1',[next.ride.id])).rows[0];
+  assert.deepEqual(cancelled,{status:'cancelled',cancelled_by:users[1].id,cancellation_reason:'vehicle_issue'});
+  assert.equal((await client.query('SELECT status FROM ride_requests WHERE id=$1',[another.id])).rows[0].status,'searching');
+  assert.equal((await client.query("SELECT count(*)::int AS count FROM notifications WHERE user_id=$1 AND data->>'ride_id'=$2 AND title='لغو سفر توسط راننده'",[users[0].id,next.ride.id])).rows[0].count,1);
+ }finally{if(server)await new Promise(resolve=>server.close(resolve));await client.query('ROLLBACK');client.release();require.cache[require.resolve('../app/models/db')].exports=pool;await pool.end();}
+});

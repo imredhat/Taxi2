@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
+import {driverApi} from '../../driverApi';
 import { API_URL, showToast } from '../../utils';
 import JalaliDatePicker from '../../components/JalaliDatePicker';
 import styles from './styles/Step6.styles';
@@ -160,7 +161,10 @@ function ModelPickerModal({ visible, models, selected, loading, onSelect, onClos
 }
 
 export default function SignupStep6Screen({ route, navigation }: any) {
-  const prev = route.params;
+  const prev = route.params || {};
+  const standalone = !!prev.standalone;
+  const [saving, setSaving] = useState(false);
+  const [modelId, setModelId] = useState<string|null>(null);
 
   const [brands, setBrands] = useState<any[]>([]);
   const [models, setModels] = useState<any[]>([]);
@@ -187,6 +191,7 @@ export default function SignupStep6Screen({ route, navigation }: any) {
   const selectBrand = async (b: any) => {
     setSelectedBrand(b.name_fa || b.name);
     setSelectedModel('');
+    setModelId(null);
     setLoadingModels(true);
     try {
       const res = await axios.get(`${API_URL}/api/car-models`, { params: { brand_id: b.id } });
@@ -198,14 +203,14 @@ export default function SignupStep6Screen({ route, navigation }: any) {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    if (saving) return;
     if (!selectedBrand) { showToast('برند خودرو را انتخاب کنید'); return; }
     if (!plate1 || !plate2 || !plate3 || !plateLetter) { showToast('پلاک خودرو را کامل وارد کنید'); return; }
 
-    navigation.navigate('SignupStep7', {
-      ...prev,
+    const vehicle = {
       brand: selectedBrand,
-      model_id: selectedModel || null,
+      model_id: modelId,
       year: year || null,
       vin: vin.trim() || null,
       plate_part1: plate1,
@@ -216,7 +221,13 @@ export default function SignupStep6Screen({ route, navigation }: any) {
       fuel_type: fuelType || null,
       insurance_expiry_date: insuranceDate || null,
       owner_name: ownerName.trim() || null,
-    });
+    };
+    if (!standalone) { navigation.navigate('SignupStep7', {...prev,...vehicle}); return; }
+    if (!modelId || !year || !color.trim()) { showToast('مدل، سال و رنگ خودرو را وارد کنید'); return; }
+    setSaving(true);
+    try { await driverApi.addVehicle(vehicle); navigation.goBack(); }
+    catch { /* The shared interceptor displays the API error. */ }
+    finally { setSaving(false); }
   };
 
   return (
@@ -230,9 +241,9 @@ export default function SignupStep6Screen({ route, navigation }: any) {
             <Text style={styles.backText}>{'→'}</Text>
           </TouchableOpacity>
 
-          <View style={styles.stepBadge}>
+          {!standalone&&<View style={styles.stepBadge}>
             <Text style={styles.stepBadgeText}>مرحله ۶ از ۸</Text>
-          </View>
+          </View>}
 
           <Text style={styles.heading}>اطلاعات خودرو</Text>
 
@@ -346,8 +357,8 @@ export default function SignupStep6Screen({ route, navigation }: any) {
             placeholderTextColor="#aaa"
           />
 
-          <TouchableOpacity style={styles.primaryBtn} onPress={handleNext}>
-            <Text style={styles.primaryBtnText}>مرحله بعد</Text>
+          <TouchableOpacity style={styles.primaryBtn} disabled={saving} onPress={handleNext}>
+            <Text style={styles.primaryBtnText}>{saving?'در حال ثبت…':standalone?'ثبت خودرو':'مرحله بعد'}</Text>
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -364,7 +375,7 @@ export default function SignupStep6Screen({ route, navigation }: any) {
         models={models}
         selected={selectedModel}
         loading={loadingModels}
-        onSelect={(m) => setSelectedModel(m.name_fa || m.name)}
+        onSelect={(m) => {setSelectedModel(m.name_fa || m.name);setModelId(m.id);}}
         onClose={() => setModalField(null)}
       />
       <PickerModal

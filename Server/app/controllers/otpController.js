@@ -1,5 +1,6 @@
 const otpService = require('../services/otpService');
 const jwt = require('jsonwebtoken');
+const pool = require('../models/db');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'pooyesh_taxi_jwt_secret_2026';
 const JWT_EXPIRES = '24h';
@@ -47,9 +48,15 @@ exports.verifyOtp = async (req, res) => {
   try {
     await otpService.verifyOTP(userId, code);
 
+    let role = 'passenger';
+    if (req.body.purpose === 'driver') {
+      const result = await pool.query("SELECT id FROM users WHERE id=$1 AND role='driver' AND is_active AND NOT is_blocked", [userId]);
+      if (!result.rowCount) return res.status(403).json({ error: 'حساب راننده فعال نیست.' });
+      role = 'driver';
+    }
     // Generate JWT after successful verification
     const token = jwt.sign(
-      { userId, role: 'passenger' },
+      { userId, role },
       JWT_SECRET,
       { expiresIn: JWT_EXPIRES }
     );
@@ -57,6 +64,7 @@ exports.verifyOtp = async (req, res) => {
     return res.json({
       message: 'تایید موفقیت‌آمیز',
       token,
+      role,
       userId
     });
   } catch (err) {

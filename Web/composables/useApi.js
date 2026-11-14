@@ -1,8 +1,14 @@
 // fetch با timeout — جلوی اسپینر بی‌پایان رو می‌گیره
 // اگه سرور پایین باشه یا دیر جواب بده، بعد از timeoutMs AbortController می‌زنه
+import { readAdminSession, clearAdminSession } from '~/utils/adminSession'
+
 export const useApi = () => {
   async function apiFetch(url, opts = {}, timeoutMs = 15000) {
-    const token = localStorage.getItem('token')
+    const token = readAdminSession()?.token
+    if (!token) {
+      window.location.href = '/login'
+      throw new Error('برای استفاده از پنل با حساب مدیر وارد شوید.')
+    }
     const headers = { ...opts.headers }
     if (token) {
       headers['Authorization'] = `Bearer ${token}`
@@ -17,8 +23,7 @@ export const useApi = () => {
       const res = await fetch(url, { ...opts, headers, signal: ctrl.signal })
       // If 401, redirect to login
       if (res.status === 401) {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
+        clearAdminSession(localStorage, token)
         window.location.href = '/login'
         return res
       }
@@ -30,6 +35,7 @@ export const useApi = () => {
 
   // تبدیل خطای fetch به پیام فارسی خوانا
   function errorMessage(err) {
+    if (err?.message === 'برای استفاده از پنل با حساب مدیر وارد شوید.') return err.message
     if (err?.name === 'AbortError') {
       return 'پاسخی از سرور دریافت نشد. مطمئن شوید سرور روی پورت ۳۰۰۱ در حال اجراست.'
     }

@@ -1,47 +1,65 @@
+import { Platform, type TextStyle, type ViewStyle } from 'react-native';
+
+// React Native Web maps writingDirection to CSS direction; native layouts use direction.
+export const ltrLayout: ViewStyle & TextStyle = Platform.OS === 'web'
+  ? { writingDirection: 'ltr' }
+  : { direction: 'ltr' };
+
+export const rtlLayout: ViewStyle & TextStyle = Platform.OS === 'web'
+  ? { writingDirection: 'rtl' }
+  : { direction: 'rtl' };
+
+// Android resolves left/right text alignment against the paragraph layout direction.
+export const rightAlignedText: ViewStyle & TextStyle = {
+  ...(Platform.OS === 'android' ? { direction: 'ltr' } : {}),
+  writingDirection: 'rtl',
+  textAlign: 'right',
+};
+
 export const colors = {
-  background: '#03151e',
-  surface: '#03151e',
-  surfaceDim: '#03151e',
-  surfaceContainerLowest: '#001019',
-  surfaceContainerLow: '#0b1e27',
-  surfaceContainer: '#0f222b',
-  surfaceContainerHigh: '#1a2c36',
-  surfaceContainerHighest: '#253741',
-  surfaceVariant: '#253741',
-  surfaceBright: '#2a3b45',
-  asphaltSurface: '#16252D',
-  midnightRoad: '#071A23',
+  background: '#f8faf9',
+  surface: '#ffffff',
+  surfaceDim: '#f4f7f5',
+  surfaceContainerLowest: '#ffffff',
+  surfaceContainerLow: '#ffffff',
+  surfaceContainer: '#ffffff',
+  surfaceContainerHigh: '#eef3f1',
+  surfaceContainerHighest: '#e9efed',
+  surfaceVariant: '#dfe8e4',
+  surfaceBright: '#ffffff',
+  asphaltSurface: '#ffffff',
+  midnightRoad: '#f8faf9',
 
-  primary: '#ffd899',
-  onPrimary: '#422c00',
-  primaryContainer: '#f6b73c',
-  onPrimaryContainer: '#6a4900',
-  primaryFixed: '#ffdeaa',
-  primaryFixedDim: '#fbbc40',
-  inversePrimary: '#7d5700',
-  surfaceTint: '#fbbc40',
+  primary: '#07846c',
+  onPrimary: '#ffffff',
+  primaryContainer: '#07846c',
+  onPrimaryContainer: '#ffffff',
+  primaryFixed: '#e1f6f0',
+  primaryFixedDim: '#c6eade',
+  inversePrimary: '#05a987',
+  surfaceTint: '#07846c',
 
-  onSurface: '#d2e5f2',
-  onSurfaceVariant: '#d4c4ae',
-  onBackground: '#d2e5f2',
+  onSurface: '#17212a',
+  onSurfaceVariant: '#71817d',
+  onBackground: '#14211f',
 
-  secondary: '#95cef0',
-  secondaryContainer: '#014f6c',
-  onSecondary: '#00354a',
+  secondary: '#07846c',
+  secondaryContainer: '#eaf8f4',
+  onSecondary: '#075b4b',
 
-  tertiary: '#b6e5ff',
-  tertiaryContainer: '#63ceff',
+  tertiary: '#6e4b00',
+  tertiaryContainer: '#fff1cf',
 
-  safetyTeal: '#1E7A65',
+  safetyTeal: '#07846c',
 
-  error: '#ffb4ab',
-  errorRed: '#C93C37',
-  errorContainer: '#93000a',
-  onError: '#690005',
-  onErrorContainer: '#ffdad6',
+  error: '#b42318',
+  errorRed: '#b42318',
+  errorContainer: '#fff1f0',
+  onError: '#ffffff',
+  onErrorContainer: '#b42318',
 
-  outline: '#9d8f7b',
-  outlineVariant: '#504535',
+  outline: '#c6d4d0',
+  outlineVariant: '#e1ebe7',
 
   white: '#ffffff',
   black: '#000000',
